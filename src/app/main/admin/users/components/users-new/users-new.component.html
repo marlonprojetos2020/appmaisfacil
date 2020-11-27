@@ -1,0 +1,7 @@
+<app-users-form
+    title="Novo usuário"
+    [breadcrumb]="breadcrumb"
+    cancel="/admin/usuarios"
+    [save]="save.bind(this)"
+    [saveService]="userService.save.bind(userService)"
+></app-users-form>

@@ -1,0 +1,31 @@
+<div class="po-row" [formGroup]="form" (submit)="form.markAllAsTouched()">
+    <po-divider class="po-md-12" p-label="Dados da Loja"></po-divider>
+
+    <po-input
+        class="po-md-6"
+        formControlName="socialReason"
+        p-label="Razão Social"
+        p-placeholder="Digite a razão social"
+        p-clean
+        p-required
+    ></po-input>
+
+    <ng-container formGroupName="storeCategory">
+        <po-select
+            class="po-md-6"
+            formControlName="id"
+            p-label="Categoria"
+            p-placeholder="Selecione a categoria da loja"
+            [p-options]="storeCategories"
+        ></po-select>
+    </ng-container>
+
+    <po-textarea
+        class="po-md-12"
+        formControlName="openingHours"
+        p-label="Horários de funcionamento"
+        p-placeholder="Exemplo: de Segunda a Sexta, das 09:00 - 22:00"
+        p-required="true"
+    ></po-textarea>
+    
+</div>

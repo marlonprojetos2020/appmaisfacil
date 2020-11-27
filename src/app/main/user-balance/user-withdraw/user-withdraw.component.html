@@ -1,0 +1,30 @@
+<po-page-edit
+    p-title="Sacar"
+    [p-breadcrumb]="breadcrumb"
+    (p-cancel)="handleCancel()"
+    (p-save)="handleSave(getUserWithdraw())"
+>
+    <po-loading-overlay *ngIf="loading" [p-screen-lock]="true" p-text="Solicitando saque"></po-loading-overlay>
+
+    <form [formGroup]="form" (submit)="enterSubmit(getUserWithdraw.bind(this))">
+        <button type="submit" style="visibility: hidden; position: absolute; left: -9999px"></button>
+
+        <po-decimal
+            p-auto-focus
+            formControlName="value"
+            p-label="Valor do saque"
+            [p-help]="helpValue"
+            p-placeholder="R$ 50,00"
+            p-icon="po-icon-finance"
+            p-clean
+        ></po-decimal>
+    </form>
+
+    <app-alert type="INFO" [message]="bankAccountMessage"></app-alert>
+    
+    <po-divider [p-label]="userBalanceTitle"></po-divider>
+
+    <ng-container *ngFor="let userTransaction of userBalance.userTransactions">
+        <app-user-transaction [userTransaction]="userTransaction"></app-user-transaction>
+    </ng-container>
+</po-page-edit>

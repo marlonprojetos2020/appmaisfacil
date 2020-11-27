@@ -1,0 +1,53 @@
+<po-page-edit
+    p-title="Conta Bancária"
+    [p-breadcrumb]="breadcrumb"
+    (p-cancel)="handleCancel()"
+    (p-save)="handleSave(getBankAccount())"
+>
+    <po-loading-overlay *ngIf="loading" [p-screen-lock]="true" p-text="Salvando conta bancária"></po-loading-overlay>
+    <form [formGroup]="form" (submit)="enterSubmit(getBankAccount.bind(this))">
+        <button type="submit" style="visibility: hidden; position: absolute; left: -9999px"></button>
+
+        <div class="po-row">
+            <ng-container formGroupName="bank">
+                <po-combo
+                    class="po-lg-6"
+                    p-auto-focus
+                    p-label="Banco"
+                    formControlName="id"
+                    p-placeholder="Selecione o banco"
+                    [p-options]="banksOptions"
+                    [p-filter-mode]="bankFilterMode"
+                ></po-combo>
+            </ng-container>
+
+            <po-radio-group
+                class="po-lg-6"
+                formControlName="accountType"
+                p-label="Tipo de conta"
+                [p-options]="accountTypesOptions"
+            ></po-radio-group>
+
+            <po-input
+                class="po-md-6"
+                formControlName="agency"
+                p-label="Número da agência"
+                p-help="Sem dígito"
+                p-placeholder="0000"
+                p-clean
+                p-mask="9999"
+                p-maxlength="10"
+            ></po-input>
+            <po-input
+                class="po-md-6"
+                formControlName="accountNumber"
+                p-label="Número da conta"
+                p-help="Com dígito"
+                p-placeholder="00000-0"
+                p-mask="9?9?9?9?9?9?9?9?9?9-9"
+                p-clean
+            ></po-input>
+        </div>
+
+    </form>
+</po-page-edit>

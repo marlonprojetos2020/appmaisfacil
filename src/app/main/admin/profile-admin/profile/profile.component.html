@@ -1,0 +1,61 @@
+<po-page-detail
+    p-title="Perfil"
+    (p-back)="back()"
+    (p-edit)="edit()"
+>
+    <po-loading-overlay *ngIf="loading"></po-loading-overlay>
+
+    <div class="profile-details" *ngIf="!loading">
+        <app-avatar-edit
+            size="xl"
+            [src]="user.userPhoto?.lg"
+            [deleteUserPhoto]="deleteUserPhoto.bind(this)"
+            [success]="onUpdateProfilePhoto.bind(this)"
+            [urlEditProfilePhoto]="urlEditProfilePhoto"
+        ></app-avatar-edit>
+
+        <div>
+            <po-info p-label="Código" [p-value]="user.id" p-orientation="horizontal"></po-info>
+            <po-info p-label="Nome" [p-value]="user.name" p-orientation="horizontal"></po-info>
+            <po-info p-label="E-mail" [p-value]="user.email" p-orientation="horizontal"></po-info>
+
+            <po-info
+                *ngIf="user.userExtraData" p-label="Celular"
+                [p-value]="user.userExtraData?.phone"
+                p-orientation="horizontal"
+            ></po-info>
+            <po-info
+                *ngIf="user.userExtraData"
+                [p-label]="user.userExtraData?.personType === 'PF' ? 'CPF' : 'CNPJ'"
+                [p-value]="user.userExtraData?.document"
+                p-orientation="horizontal"
+            ></po-info>
+
+            <po-info
+                *ngIf="user.store"
+                p-label="Razão Social"
+                [p-value]="user.store?.socialReason"
+                p-orientation="horizontal"
+            ></po-info>
+            <po-info
+                *ngIf="user.store"
+                p-label="Categoria"
+                [p-value]="user.store?.storeCategory?.name"
+                p-orientation="horizontal"
+            ></po-info>
+            <po-info
+                *ngIf="user.store"
+                p-label="Horários de funcionamento"
+                [p-value]="user.store?.openingHours"
+                p-orientation="horizontal"
+            ></po-info>
+
+            <po-info
+                *ngIf="user.address"
+                p-label="Endereço"
+                [p-value]="addressToString()"
+                p-orientation="horizontal"
+            ></po-info>
+        </div>
+    </div>
+</po-page-detail>

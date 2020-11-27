@@ -1,0 +1,32 @@
+.user-transaction {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-transaction-description {
+    flex-grow: 1;
+
+    p, po-tag {
+        display: inline-block;
+        margin-left: 1em;
+    }
+
+    .user-transaction-created-at {
+        color: var(--color-primary);
+        font-size: .75rem;
+
+        @media (max-width: 1366px) {
+            display: block;
+        }
+    }
+}
+
+.in {
+    color: var(--color-11);
+}
+
+.out {
+    color: var(--color-07);
+}

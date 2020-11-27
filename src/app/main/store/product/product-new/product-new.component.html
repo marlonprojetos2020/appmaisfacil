@@ -1,0 +1,7 @@
+<app-product-form
+    title="Novo produto"
+    [breadcrumb]="breadcrumb"
+    cancel="/loja/produtos"
+    [save]="save.bind(this)"
+    [saveService]="productService.save.bind(productService)"
+></app-product-form>

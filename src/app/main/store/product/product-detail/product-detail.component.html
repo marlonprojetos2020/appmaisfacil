@@ -1,0 +1,60 @@
+<po-page-detail
+    p-title = "Anúncio"
+    [p-breadcrumb]="breadcrumb"
+    (p-back)="back()"
+    (p-edit)="edit()"
+>
+    <app-alert
+        *ngIf="!product.registrationCompleted"
+        type="WARNING"
+        message="O cadastro desse produto não foi finalizado. É obrigatório haver ao menos uma foto."
+    ></app-alert>
+    <app-alert
+        *ngIf="product.outOfDate"
+        type="WARNING"
+        message="Esse produto não está no prazo de validade"
+    ></app-alert>
+    <app-alert
+        *ngIf="product.outOfStock"
+        type="WARNING"
+        message="Esse produto está fora de estoque"
+    ></app-alert>
+    <app-alert
+        *ngIf="product.readyForSale"
+        type="SUCCESS"
+        message="Tudo certo com esse produto. Ele já está sendo vendido pelos nossos vendedores!"
+    ></app-alert>
+    <app-alert
+        *ngIf="!product.enabled"
+        type="DANGER"
+        message="Esse produto foi desabilitado e não aparecerá para os usuários."
+    ></app-alert>
+
+    <po-divider></po-divider>
+    <div class="container">
+        <app-product-ad *ngIf="userDetails.userPhoto" [product]="product" [storeName]="userDetails.name" [storePhoto]="!userDetails.userPhoto ? '' : userDetails.userPhoto.sm"></app-product-ad>
+        <div class="po-ml-1">
+            <po-switch
+                p-label="Habilitado"
+                name="enabled"
+                [(ngModel)]="enabledInitialValue"
+                (p-change)="updateEnable($event)"
+                p-label-on="Sim"
+                p-label-off="Não"
+            ></po-switch>
+        </div>
+        <div class="po-row po-mt-4">
+            <div class="po-sm-6">
+                <div class="total-sales">
+                    <h2>{{product.soldAmount}}<span>Vendas</span></h2>
+                </div>
+            </div>
+            <div class="po-sm-6">
+                <div class="total-receipt">
+                    <h2>{{(product.soldAmount * product.finalPrice) | currency}}<span>Valor Bruto</span></h2>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+</po-page-detail>

@@ -1,0 +1,22 @@
+<po-page-edit
+    p-title="Horários de funcionamento"
+    (p-cancel)="handleCancel()"
+    (p-save)="handleSave(getOpeningHours())"
+>
+
+    <po-loading-overlay *ngIf="loading" [p-screen-lock]="true" p-text="Salvando horários de funcionamento"></po-loading-overlay>
+    <form [formGroup]="form" (submit)="enterSubmit(getOpeningHours.bind(this))">
+        <button type="submit" style="visibility: hidden; position: absolute; left: -9999px"></button>
+
+        <div class="po-row">
+            <po-textarea
+                class="po-md-12"
+                formControlName="openingHours"
+                p-label="Horários de funcionamento"
+                p-placeholder="Digite os horários de funcionamento"
+                p-rows="7"
+            ></po-textarea>
+        </div>
+    </form>
+
+</po-page-edit>

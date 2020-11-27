@@ -1,0 +1,9 @@
+<app-users-form
+    title="Novo vendedor"
+    [breadcrumb]="breadcrumb"
+    [saveService]="userService.save.bind(userService)"
+    cancel="/admin/vendedores"
+    [save]="save.bind(this)"
+    [user]="user"
+    [hiddenRoles]="true"
+></app-users-form>

@@ -1,0 +1,98 @@
+/* You can add global styles to this file, and also import other style files */
+
+$colorPrimary: #0800a0;
+$colorSecondary: #0069db;
+$colorTertiary: #36b49c;
+$colorDanger: #C11926;
+$colorText: #4b4b4b;
+
+:root {
+    --color-primary-light-95: #{lighten($colorPrimary, 65%)};
+    --color-primary-light-80: #{lighten($colorPrimary, 50%)};
+    --color-primary-alpha-50: #{rgba($colorPrimary, 0.5)};
+    --color-primary: #{$colorPrimary};
+    --color-primary-dark-20: #{darken($colorPrimary, 5%)};
+    --color-primary-dark-40: #{darken($colorPrimary, 10%)};
+
+    --color-secondary: #{$colorSecondary};
+    --color-secondary-dark-20: #{darken($colorSecondary, 5%)};
+    --color-secondary-dark-40: #{darken($colorSecondary, 10%)};
+    --color-secondary-dark-60-alpha-70: #{rgba($colorSecondary, 0.7)};
+    --color-secondary-dark-60: #{darken($colorSecondary, 15%)};
+
+    --color-tertiary-light-90: #{lighten($colorTertiary, 65%)};
+    --color-tertiary: #{$colorTertiary};
+    --color-tertiary-dark-5: #{darken($colorTertiary, 5%)};
+    --color-tertiary-dark-40: #{darken($colorTertiary, 10%)};
+    --color-tertiary-dark-60: #{darken($colorTertiary, 15%)};
+
+    --color-danger: #{$colorDanger};
+    
+    --color-text: #{$colorText};
+
+    // Menu
+    --color-menu-color-menu-sub-item-text: #{lighten($colorPrimary, 10%)};
+    --color-menu-border-color-menu-item-selected: #{$colorPrimary};
+    --color-menu-background-color-menu-responsive-overlay: #{rgba($colorPrimary, 0.5)};
+
+    // button primary
+    --color-button-color-primary: var(--color-white);
+    --color-button-color-primary-hover: var(--color-white);
+    --color-button-color-primary-pressed: var(--color-white);
+
+    // filters badge
+    --color-disclaimer-color-text: var(--color-white);
+
+    // datepicker
+    --color-calendar-color-box-foreground-selected: var(--color-white);
+}
+
+.loading-bar .po-progress-bar {
+    height: 4px !important;
+}
+
+.po-slide-outer,
+.po-slide-wrapper {
+    border-radius: 0;
+}
+
+.po-slide-wrapper {
+    box-shadow: none;
+}
+
+.po-slide-circles {
+    bottom: -16px;
+}
+
+.po-slide-circle {
+    margin-right: 4px;
+    height: 4px;
+    width: 4px;
+    background-color: var(--color-secondary-dark-60-alpha-70);
+}
+
+.po-slide-active-circle {
+    background-color: var(--color-primary);
+}
+
+.custom-toolbar {
+    .po-toolbar { 
+       box-shadow: 0px 1px 24px -12px rgba(0,0,0,0.75);
+       margin-left: 0;
+       width: 100%;
+       padding-left: 50px;
+   }
+
+   .po-menu-mobile {
+       z-index: 3;
+   }
+}
+
+.ng-touched.ng-invalid {
+    input, textarea, .textarea, .po-select-button{
+        border-color: red !important; /* red */
+    }
+    .ng-valid input, .ng-valid textarea { 
+        border-color: unset !important;
+    }
+ }

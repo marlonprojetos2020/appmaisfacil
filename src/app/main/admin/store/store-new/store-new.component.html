@@ -1,0 +1,9 @@
+<app-users-form
+    title="Nova loja"
+    [breadcrumb]="breadcrumb"
+    [saveService]="userService.save.bind(userService)"
+    cancel="/admin/lojas"
+    [save]="save.bind(this)"
+    [user]="user"
+    [hiddenRoles]="true"
+></app-users-form>

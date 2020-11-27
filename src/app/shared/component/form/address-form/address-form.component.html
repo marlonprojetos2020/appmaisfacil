@@ -1,0 +1,81 @@
+<div class="po-row" [formGroup]="form">
+    <po-divider class="po-md-12" p-label="Endereço"></po-divider>
+
+    <div class="po-lg-3">
+
+    <po-input
+        formControlName="zipcode"
+        p-label="CEP"
+        p-placeholder="00000-000"
+        p-clean
+        p-required
+        p-mask="99999-999"
+        p-pattern="^[0-9]{8}$"
+        p-error-pattern="Digite um cep válido"
+    ></po-input>
+        <app-invalid-feedback [hasError]="zipcodeError === true">
+            CEP não encontrado
+        </app-invalid-feedback>
+    </div>
+
+    <ng-container *ngIf="form.get('zipcode').valid && zipcodeError !== true">
+        <po-input
+            #streetInput
+            class="po-md-8 po-lg-6"
+            formControlName="street"
+            p-label="Logradouro"
+            p-placeholder="Rua, Avenida, Alameda..."
+            p-clean
+            p-required
+        ></po-input>
+
+        <po-input
+            #numberInput
+            class="po-md-4 po-lg-3"
+            formControlName="number"
+            p-label="Número"
+            p-placeholder="0000"
+            p-clean
+            p-required
+        ></po-input>
+
+        <po-input
+            class="po-md-8 po-lg-3"
+            formControlName="neighborhood"
+            p-label="Bairro"
+            p-placeholder="Digite o bairro"
+            p-clean
+            p-required
+        ></po-input>
+
+        <po-input
+            class="po-md-4 po-lg-3"
+            formControlName="complement"
+            p-label="Complemento"
+            p-placeholder="Ap. 10"
+            p-clean
+        ></po-input>
+
+        <ng-container formGroupName="city">
+
+            <po-input
+                class="po-md-8 po-lg-3"
+                formControlName="name"
+                p-label="Cidade"
+                p-placeholder="Digite a cidade"
+                p-required
+                p-readonly
+            ></po-input>
+
+            <po-input
+                class="po-md-4 po-lg-3"
+                formControlName="stateProvince"
+                p-label="Estado"
+                p-placeholder="Digite o estado"
+                p-required
+                p-readonly
+            ></po-input>
+
+        </ng-container>
+    </ng-container>
+</div>

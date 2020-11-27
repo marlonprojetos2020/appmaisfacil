@@ -1,0 +1,107 @@
+.container { 
+    padding: 1rem;
+    padding-bottom: 4rem;
+    font-family: Arial;
+}
+
+.store-row {
+    display: flex;
+    align-items: center;
+}
+
+.store-img {
+    height: 40px;
+    width: 40px;
+    margin-right: 0.5rem;
+}
+
+.store-name{ 
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--color-secondary);
+}
+
+.widget {
+    border-radius: 8px;
+    padding: 1rem;
+    cursor: pointer;
+
+    &-primary {
+        background: var(--color-tertiary);
+        color: white;
+        justify-content: space-between;
+        align-items: center;
+        h1{
+            display: flex;
+            align-items: center;
+        }
+    }
+    
+    &-secondary {
+        color: white;
+        background: var(--color-secondary);
+    }
+
+    &-tertiary {
+        color: white;
+        background: var(--color-secondary-dark-60-alpha-70);
+    }
+
+}
+
+.saldo-title {
+    color: white;
+    font-family: Arial;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 0;
+    &-value {
+        @media(min-width: 480px) {
+            font-size: 1.2rem;
+        }
+    }
+}
+
+span {
+    &::before{
+        font-size: 24px; 
+        margin-bottom: 0;
+        margin-right: 0.5rem;
+    }
+}
+
+.card-title {
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    margin-bottom: 0;
+
+    span {
+        display: block;
+        font-size: 1rem;
+    }
+}
+
+hr {
+    margin: 0.5rem 0;
+}
+
+.latest-orders { 
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-primary);
+    @media(max-width: 480px) {
+        font-size: 1.2rem;
+    }
+}
+
+.no-product {
+    color: var(--color-secondary-dark-60-alpha-70);
+    font-size: 16px;
+    text-align: center;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% - 32px);
+}

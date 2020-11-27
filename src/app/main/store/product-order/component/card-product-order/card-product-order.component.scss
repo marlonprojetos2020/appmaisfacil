@@ -1,0 +1,47 @@
+article {
+    background: #deeaee;
+    border-radius: 8px;
+    padding: 1rem;
+    font-family: Arial;
+    margin-top: 1rem;
+    
+    .po-row {
+        align-items: center;
+    }
+
+    .product-image {
+        margin-right: 1rem;
+        border-radius: 8px;
+        height: 5rem;
+        width: 5rem;
+    }
+    
+    .product-title {
+        font-size: 1.25rem;
+        color: var(--color-primary);
+        font-weight: bold;
+    }
+    
+    .product-subtitle {
+        color: var(--color-tertiary);
+        font-size: 0.8rem;
+        // font-weight: bold;
+        margin-bottom: 0.5rem;
+    }
+
+    .client-name,
+    .order-date {
+        font-size: 0.75rem;
+        color: var(--color-text);
+        font-weight: normal;
+    }
+    
+    .client-name {
+        font-weight: bold;
+    }
+
+    .po-button {
+        margin-left: auto;
+        border: none;
+    }
+}

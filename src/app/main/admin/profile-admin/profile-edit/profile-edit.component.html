@@ -1,0 +1,45 @@
+<po-page-edit
+    p-title="Editar perfil"
+    [p-breadcrumb]="breadcrumb"
+    (p-cancel)="handleCancel()"
+    (p-save)="handleSave(getUserDetails())"
+>
+
+    <po-loading-overlay *ngIf="loading" [p-screen-lock]="true" p-text="Salvando dados do perfil"></po-loading-overlay>
+    <form [formGroup]="form" (submit)="enterSubmit(getUserDetails.bind(this))">
+        <button type="submit" style="visibility: hidden; position: absolute; left: -9999px"></button>
+
+        <div class="po-row">
+            <po-divider class="po-sm-12" p-label="Dados do usuário"></po-divider>
+
+            <po-input
+                class="po-md-6"
+                p-auto-focus
+                name="name"
+                formControlName="name"
+                p-label="Nome"
+                p-placeholder="Digite o nome"
+                p-clean
+                p-required
+                p-minlength="4"
+                p-maxlength="100"
+            ></po-input>
+
+            <div class="po-md-6">
+                <po-email
+                    name="email"
+                    formControlName="email"
+                    p-label="E-mail"
+                    p-placeholder="Digite o e-mail"
+                    p-clean
+                    p-required
+                    p-maxlength="100"
+                ></po-email>
+                <app-invalid-feedback [formCtrl]="form.get('email')" errorCode="uniqueEmail">
+                    Esse e-mail já foi utilizado por outro usuário
+                </app-invalid-feedback>
+            </div>
+        </div>
+    </form>
+
+</po-page-edit>

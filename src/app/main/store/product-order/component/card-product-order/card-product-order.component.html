@@ -1,0 +1,33 @@
+<article>
+    <div class="po-row">
+        <img class="product-image" *ngIf="productOrder.product.productPhotos" [src]="productOrder.product.productPhotos[0]" alt="">
+        <img class="product-image" *ngIf="!productOrder.product.productPhotos" src="../../../../../../assets/images/img-placeholder.svg" alt="">
+        <div>
+          <h1 class="product-title">#{{productOrder.id}} - {{productOrder.quantity}}x {{productOrder.product.title}}</h1>   
+          <h2 class="product-subtitle"> 
+            <span *ngIf="productOrder.paymentStatus=='paid' && productOrder.delivered==false">Pago</span>
+            <span *ngIf="productOrder.paymentStatus=='waiting_payment' && productOrder.delivered==false">Não Pago</span>
+            <span *ngIf="productOrder.paymentStatus=='paid' && productOrder.delivered==true">Entregue</span>
+              - {{productOrder.productFinalPriceSnapshot * productOrder.quantity | currency}}</h2>
+          <p class="client-name"> {{productOrder.voucher}} </p>
+          <p class="client-name"> {{productOrder.client.name}} - {{productOrder.client.document }}</p>
+          <p class="order-date">{{productOrder.createdAt | date:'EEEE, d MMMM HH:mm'}}</p>
+        </div>
+        <po-button 
+        (click)="openModal()"
+        *ngIf="productOrder.paymentStatus=='paid' && productOrder.delivered==false"
+        p-label ="Entregar"
+        class="po-button"
+        >
+      </po-button>
+    </div>
+</article>
+
+  <po-modal #modal 
+    p-title="Confirmar Entrega"
+    [p-primary-action]="confirm" 
+    [p-secondary-action]="close"
+    >
+      <p>Tem certeza que quer dar baixa no produto?</p>
+  </po-modal>
+  

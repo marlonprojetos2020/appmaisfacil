@@ -1,0 +1,12 @@
+<po-page-login
+    p-logo="/assets/images/logo.svg"
+    p-product-name="Administração"
+    [p-contact-email]="supportEmail"
+    [p-loading]="loadingSubmit"
+    p-secondary-logo="/assets/images/logo-3r.svg"
+    [p-recovery]="loginRecovery"
+    (p-login-submit)="handleSubmit($event)"
+    [p-exceeded-attempts-warning]="exceededAttemptsWarning"
+    p-register-url="/acessar/cadastrar-se"
+    [p-literals]="literals"
+></po-page-login>

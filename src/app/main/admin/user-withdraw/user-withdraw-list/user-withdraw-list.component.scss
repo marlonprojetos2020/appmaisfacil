@@ -1,0 +1,55 @@
+.user-transaction {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+po-widget {
+    display: block;
+    margin-bottom: .2rem;
+}
+
+.user-transaction-description {
+    flex-grow: 1;
+
+    p, po-tag {
+        display: inline-block;
+        margin-left: 1em;
+    }
+
+    .user-transaction-created-at {
+        color: var(--color-primary);
+        font-size: .75rem;
+
+        @media (max-width: 1366px) {
+            display: block;
+        }
+    }
+
+    .bank-account {
+        color: var(--color-secondary);
+        font-size: .75rem;
+    }
+}
+
+.in {
+    color: var(--color-11);
+}
+
+.out {
+    color: var(--color-07);
+}
+
+.custom-border { 
+    border: 1px solid #e4e4e4;
+}
+
+.consolidated { 
+    border-left: 8px solid #9aad9a;
+}
+
+.refunded {
+    border-left: 8px solid #ba7771;
+}
+

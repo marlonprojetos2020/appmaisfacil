@@ -1,0 +1,17 @@
+.no-product {
+    color: var(--color-secondary-dark-60-alpha-70);
+    font-size: 16px;
+    text-align: center;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% - 32px);
+}
+
+.button-show-more { 
+    display: block;
+    margin: 1.5rem auto;
+    padding: 0.5rem 1rem;
+    text-align: center;
+}

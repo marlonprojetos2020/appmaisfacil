@@ -1,0 +1,23 @@
+<po-page-edit
+    [p-title]="title"
+    [p-breadcrumb]="breadcrumb"
+    (p-cancel)="handleCancel()"
+    (p-save)="handleSave(getStoreCategory())"
+>
+    <po-loading-overlay *ngIf="loading" [p-screen-lock]="true" p-text="Salvando dados da categoria"></po-loading-overlay>
+    <form [formGroup]="form" (submit)="enterSubmit(getStoreCategory.bind(this))">
+        <button type="submit" style="visibility: hidden; position: absolute; left: -9999px"></button>
+
+        <po-input
+            p-auto-focus
+            name="name"
+            formControlName="name"
+            p-label="Nome da categoria"
+            p-placeholder="Digite o nome da categoria"
+            p-clean
+            p-required
+            p-maxlength="100"
+        ></po-input>
+
+    </form>
+</po-page-edit>

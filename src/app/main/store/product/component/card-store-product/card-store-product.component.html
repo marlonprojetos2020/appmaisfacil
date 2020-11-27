@@ -1,0 +1,15 @@
+<article (click)=acessarProduto()>
+    <img class="" [src]="produto.productPhotos[0].url" *ngIf="produto.productPhotos.length>0">
+    <img class="" src="assets/images/img-placeholder.svg" *ngIf="produto.productPhotos.length==0">
+    <div>
+        <h1>{{produto.title}}</h1>
+        <h3><span *ngIf="produto.enabled">Ativa</span><span *ngIf="!produto.enabled">Inativa</span> •
+            {{produto.startDateTime | date:'dd/MM HH:mm'}} até
+            {{produto.endDateTime | date:'dd/MM HH:mm'}}</h3>
+        <p>5 unidades</p>
+        <p>Comissão de {{produto.moneyCommission | currency}}</p>
+    </div>
+    <div class="ml-auto">
+        <h2><span>{{produto.price | currency}}</span>{{produto.finalPrice | currency}}</h2>
+    </div>
+</article>

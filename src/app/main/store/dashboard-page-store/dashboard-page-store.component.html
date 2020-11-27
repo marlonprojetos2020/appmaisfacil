@@ -1,0 +1,45 @@
+<po-page-default p-title="">
+    <div  class="container">
+        <ng-container *ngIf="dashboard">
+            <div class="store-row">
+                <img class="store-img" [src]="dashboard.storePhotoSm" alt="">
+                <h1 class="store-name">{{dashboard.storeName}}</h1>
+            </div>
+            <article class="po-row aling-items-center widget widget-primary po-mt-2 po-mb-2 po-sm-12" [routerLink]="['extrato']">
+                <h1>
+                    <span class="po-icon po-icon-money"></span> 
+                    <span class="saldo-title">Saldo</span>
+                </h1>
+                <h2 class="saldo-title saldo-title-value">{{dashboard.balance | currency}}</h2>
+            </article>
+            <div class="po-row">
+                <div class="po-sm-6 po-pl-0 po-pr-1">
+                    <article class="widget widget-secondary" [routerLink]="['produtos']">
+                        <span class="po-icon po-icon-document-filled"></span> 
+                        <h1 class="card-title">{{dashboard.countProductsEnabled}}<br><span>Anúncios<br>Ativos</span></h1>
+                        <hr>
+                        <p>Ver Anúncios</p>
+                    </article>
+                </div>
+                <div class="po-sm-6 po-pr-0 po-pl-1">
+                    <article class="widget widget-tertiary" [routerLink]="['pedidos']">
+                        <span class="po-icon po-icon-gift"></span> 
+                        <h1 class="card-title">{{dashboard.countCanBeDeliveredProductOrders}}<br><span>Pedidos<br>Pendentes</span></h1>
+                        <hr>
+                        <p>Ver Pedidos</p>
+                    </article>
+                </div>
+            </div>
+            <h2 class="latest-orders po-mt-4 po-mb-2">
+                Últimos pedidos
+            </h2>
+            <ng-container *ngFor="let item of dashboard.lastPaidProductOrders" >
+                <app-card-product-order [productOrder] = "item" [routerLink]="['pedidos']"></app-card-product-order>
+            </ng-container>
+            <p *ngIf="dashboard.lastPaidProductOrders && dashboard.lastPaidProductOrders.length == 0">sem pedidos aprovados</p>
+        </ng-container>
+        <ng-container *ngIf="!dashboard">
+            <h1 class="no-product">Carregando...</h1>
+        </ng-container>
+    </div>    
+</po-page-default>

@@ -1,0 +1,43 @@
+<po-page-dynamic-search 
+    p-title="Anúncios" 
+    [p-breadcrumb]="breadcrumb" 
+    [p-actions]="pageActions"
+    (p-quick-search)="handleQuickSearch($event)"
+    (p-change-disclaimers)="handleChangeDisclaimers($event)">
+    <po-tabs>
+        <po-tab p-label="ATIVOS" p-active (p-click)='toggleEnabled(true)'>
+            <ng-container *ngIf="items && items.length>0">
+                <app-card-store-product 
+                    *ngFor="let item of items" 
+                    [produto]="item">
+                </app-card-store-product>
+                <po-button 
+                    class="po-mt-3 po-offset-xl-4 po-offset-lg-4 po-offset-md-3 po-lg-4 po-md-6" 
+                    p-label="carregar mais resultados"
+                    [p-loading]="isLoadingBtn"
+                    [p-disabled]="showMoreDisabled"
+                    (p-click)="showMore()" 
+                ></po-button>
+            </ng-container>
+        </po-tab>
+        <po-tab p-label="INATIVOS" (p-click)='toggleEnabled(false)'>
+            <ng-container *ngIf="items && items.length>0">
+                <app-card-store-product *ngFor="let item of items" [produto]="item">
+                </app-card-store-product>
+                 <po-button 
+                    class="po-mt-3 po-offset-xl-4 po-offset-lg-4 po-offset-md-3 po-lg-4 po-md-6" 
+                    p-label="carregar mais resultados"
+                    [p-loading]="isLoadingBtn"
+                    [p-disabled]="showMoreDisabled"
+                    (p-click)="showMore()" 
+                ></po-button>
+            </ng-container>
+        </po-tab>
+    </po-tabs>
+    <ng-container *ngIf="items && items.length==0">
+        <h1 class="no-product">Nenhum produto encontrado</h1>
+    </ng-container>
+    <ng-container *ngIf="!items">
+        <h1 class="no-product">Carregando...</h1>
+    </ng-container>
+</po-page-dynamic-search>

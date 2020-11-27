@@ -1,0 +1,15 @@
+<div class="po-wrapper">
+
+    <app-loading-bar></app-loading-bar>
+
+    <po-toolbar
+        [p-profile]="pProfile"
+        [p-profile-actions]="profileActions"
+        p-title="WeHoo - Lojista"
+        class="custom-toolbar"
+    ></po-toolbar>
+
+    <po-menu class="custom-toolbar" [p-filter]="false" [p-menus]="menus" p-logo="/assets/images/logo.svg"></po-menu>
+
+    <router-outlet></router-outlet>
+</div>

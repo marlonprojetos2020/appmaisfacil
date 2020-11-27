@@ -1,0 +1,10 @@
+<app-product-form
+    title="Editar produto"
+    [breadcrumb]="breadcrumb"
+    [cancel]="detailPage"
+    [save]="detailPage"
+    [saveService]="productService.update.bind(productService)"
+    [product]="product"
+>
+    <app-product-photos></app-product-photos>
+</app-product-form>

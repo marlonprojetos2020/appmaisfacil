@@ -1,0 +1,23 @@
+<po-widget p-no-shadow [p-disabled]="userTransaction.refund">
+    <div class="user-transaction">
+                <span
+                    *ngIf="!userTransaction.consolidated"
+                    class="po-icon po-icon-info"
+                    p-tooltip="Não consolidado"
+                ></span>
+        <span
+            *ngIf="userTransaction.consolidated"
+            class="po-icon po-icon-ok"
+            p-tooltip="Consolidado"
+        ></span>
+        <div class="user-transaction-description">
+            <p>#{{userTransaction.id}} {{userTransaction.description}}</p>
+
+            <po-tag p-color="color-03" [p-value]="userTransactionReason(userTransaction)"></po-tag>
+
+            <p class="user-transaction-created-at">{{userTransaction.createdAt|date:'EEEE, dd/MM/yyyy HH:mm:ss'}}</p>
+        </div>
+
+        <p [ngClass]="{in: isIn(userTransaction), out: isOut(userTransaction)}">{{userTransaction.finalValue|currency}}</p>
+    </div>
+</po-widget>

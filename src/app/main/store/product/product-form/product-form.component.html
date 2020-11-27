@@ -1,0 +1,116 @@
+<po-page-edit
+    [p-title]="title"
+    [p-breadcrumb]="breadcrumb"
+    (p-cancel)="handleCancel()"
+    (p-save)="handleSave(getProduct())"
+>
+    <po-loading-overlay *ngIf="loading" [p-screen-lock]="true" p-text="Salvando dados do produto"></po-loading-overlay>
+
+    <form [formGroup]="form" (submit)="enterSubmit(getProduct.bind(this))">
+        <button type="submit" style="visibility: hidden; position: absolute; left: -9999px"></button>
+
+        <div class="po-row">
+            <po-divider class="po-sm-12" p-label="Dados do produto"></po-divider>
+
+            <po-input
+                class="po-sm-12 po-mb-1 po-mb-md-2"
+                p-auto-focus
+                formControlName="title"
+                p-label="Título do produto"
+                p-placeholder="Digite o título do produto"
+                p-clean
+                p-maxlength="100"
+            ></po-input>
+
+            <po-decimal
+                class="po-md-6 po-mb-1 po-mb-md-2"
+                formControlName="price"
+                p-label="Preço"
+                p-help="Sem desconto"
+                p-placeholder="R$ 0,00"
+                p-clean
+            ></po-decimal>
+
+            <po-decimal
+                class="po-md-6 po-mb-1 po-mb-md-2"
+                formControlName="percentageDiscount"
+                p-label="Desconto"
+                p-help="Em porcentagem (%)"
+                p-placeholder="0%"
+                p-thousand-maxlength="3"
+                p-clean
+                p-optional
+            ></po-decimal>
+
+            <po-decimal
+                class="po-md-6 po-mb-1 po-mb-md-2"
+                formControlName="percentageCommission"
+                p-label="Comissão"
+                p-help="Em porcentagem (%) - Mínimo 5%"
+                p-placeholder="5%"
+                p-thousand-maxlength="3"
+                p-clean
+            ></po-decimal>
+
+            <po-number
+                class="po-md-6 po-mb-1 po-mb-md-2"
+                formControlName="totalAmount"
+                p-label="Quantidade total"
+                p-help="Vendas encerram quando essa quantidade for vendida"
+                p-placeholder="0"
+                p-min="0"
+                p-clean
+            ></po-number>
+
+            <po-datepicker
+                class="po-md-3 po-mb-1 po-mb-md-2"
+                formControlName="startDate"
+                p-label="Data de início"
+                p-placeholder="00/00/0000"
+                p-clean
+                p-optional
+            ></po-datepicker>
+
+            <po-input
+                class="po-md-3 po-mb-1 po-mb-md-2"
+                formControlName="startTime"
+                p-label="Horário de início"
+                p-placeholder="00:00"
+                p-mask="99:99"
+                p-mask-format-model="true"
+                p-clean
+                p-optional
+            ></po-input>
+
+            <po-datepicker
+                class="po-md-3 po-mb-1 po-mb-md-2"
+                formControlName="endDate"
+                p-label="Data de fim"
+                p-placeholder="00/00/0000"
+                p-clean
+            ></po-datepicker>
+
+            <po-input
+                class="po-md-3 po-mb-1 po-mb-md-2"
+                formControlName="endTime"
+                p-label="Horário de fim"
+                p-placeholder="00:00"
+                p-mask="99:99"
+                p-mask-format-model="true"
+                p-clean
+            ></po-input>
+
+            <po-textarea
+                class="po-md-12 po-mb-1 po-mb-md-2"
+                formControlName="description"
+                p-label="Descrição"
+                p-placeholder="Digite uma breve descrição para o produto"
+                p-maxlength="1000"
+                [p-rows]="5"
+            ></po-textarea>
+        </div>
+
+    </form>
+
+    <ng-content></ng-content>
+</po-page-edit>

@@ -3,7 +3,7 @@
     "version": 1,
     "newProjectRoot": "projects",
     "projects": {
-        "agencia3r-wehoo-frontend-admin": {
+        "agencia3r-maisfacil-frontend-admin": {
             "projectType": "application",
             "schematics": {
                 "@schematics/angular:component": {
@@ -17,7 +17,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "outputPath": "dist/agencia3r-wehoo-frontend-admin",
+                        "outputPath": "dist/agencia3r-maisfacil-frontend-admin",
                         "index": "src/index.html",
                         "main": "src/main.ts",
                         "polyfills": "src/polyfills.ts",
@@ -73,18 +73,18 @@
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                        "browserTarget": "agencia3r-wehoo-frontend-admin:build"
+                        "browserTarget": "agencia3r-maisfacil-frontend-admin:build"
                     },
                     "configurations": {
                         "production": {
-                            "browserTarget": "agencia3r-wehoo-frontend-admin:build:production"
+                            "browserTarget": "agencia3r-maisfacil-frontend-admin:build:production"
                         }
                     }
                 },
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "agencia3r-wehoo-frontend-admin:build"
+                        "browserTarget": "agencia3r-maisfacil-frontend-admin:build"
                     }
                 },
                 "test": {
@@ -122,18 +122,18 @@
                     "builder": "@angular-devkit/build-angular:protractor",
                     "options": {
                         "protractorConfig": "e2e/protractor.conf.js",
-                        "devServerTarget": "agencia3r-wehoo-frontend-admin:serve"
+                        "devServerTarget": "agencia3r-maisfacil-frontend-admin:serve"
                     },
                     "configurations": {
                         "production": {
-                            "devServerTarget": "agencia3r-wehoo-frontend-admin:serve:production"
+                            "devServerTarget": "agencia3r-maisfacil-frontend-admin:serve:production"
                         }
                     }
                 }
             }
         }
     },
-    "defaultProject": "agencia3r-wehoo-frontend-admin",
+    "defaultProject": "agencia3r-maisfacil-frontend-admin",
     "cli": {
         "analytics": "4fdd3cf7-093b-4057-bc7a-c2e6894040bd"
     }

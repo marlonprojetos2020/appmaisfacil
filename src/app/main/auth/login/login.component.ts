@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PoFieldModule } from '@po-ui/ng-components';
 
 @Component({
@@ -6,12 +7,14 @@ import { PoFieldModule } from '@po-ui/ng-components';
 })
 export class LoginComponent implements OnInit {
 
-    constructor() { }
+    constructor(
+        private router: Router
+    ) { }
 
     ngOnInit(): void {
     }
 
     login(): void {
-        alert('oi');
+        this.router.navigate(['/cliente']);
     }
 }

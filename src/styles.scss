@@ -108,3 +108,15 @@ body {
         border-color: unset !important;
     }
 }
+
+.po-toolbar { 
+    background-color: var(--color-primary);
+    .po-avatar{
+        box-shadow: none;
+        border: solid 1px #fff;
+    }
+    .po-icon {
+        color: #fff !important;
+        stroke: #fff;
+    }
+}

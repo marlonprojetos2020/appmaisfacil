@@ -7,6 +7,7 @@ import {PoModule} from '@po-ui/ng-components';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {registerLocaleData} from '@angular/common';
 import ptBr from '@angular/common/locales/pt';
+import {HeaderModule} from './core/header/header.module';
 
 
 registerLocaleData(ptBr);
@@ -20,6 +21,7 @@ registerLocaleData(ptBr);
         BrowserAnimationsModule,
         AppRoutingModule,
         PoModule,
+        HeaderModule,
     ],
     providers: [
         {

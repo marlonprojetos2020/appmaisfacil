@@ -8,6 +8,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {registerLocaleData} from '@angular/common';
 import ptBr from '@angular/common/locales/pt';
 
+
 registerLocaleData(ptBr);
 
 @NgModule({

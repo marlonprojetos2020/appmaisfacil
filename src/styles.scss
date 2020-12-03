@@ -34,6 +34,7 @@ $colorText: #4b4b4b;
     --color-danger: #{$colorDanger};
     --color-warning: #{$colorWarning};
     --color-cancel: #{$colorCancel};
+    --color-backgorund: #{$colorLight};
 
     --color-text: #{$colorText};
 
@@ -72,6 +73,7 @@ $colorText: #4b4b4b;
 
 body {
     font-family: "Roboto-light";
+    background: var(--color-backgorund);
 }
 
 .loading-bar .po-progress-bar {
@@ -119,4 +121,8 @@ body {
         color: #fff !important;
         stroke: #fff;
     }
+}
+
+.po-menu-header-container-logo {
+    background-color: var(--color-primary);
 }

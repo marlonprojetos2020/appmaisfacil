@@ -57,25 +57,24 @@ $colorText: #4b4b4b;
 
 @font-face {
     font-family: "Roboto";
-    src: url(assets/fonts/rbt-Light.ttf) format("truetype");
-    font-weight: lighter;
+    src: url(assets/fonts/rbt-Bold.ttf) format("truetype");
+    font-weight: bold;
     font-style: normal;
-  }
+}
 
-  @font-face {
+@font-face {
     font-family: "Roboto";
     src: url(assets/fonts/Roboto-Medium.ttf) format("truetype");
     font-weight: medium;
     font-style: normal;
-  }
+}
 
-  @font-face {
+@font-face {
     font-family: "Roboto";
-    src: url(assets/fonts/rbt-Bold.ttf) format("truetype");
-    font-weight: bold;
+    src: url(assets/fonts/rbt-Light.ttf) format("truetype");
+    font-weight: lighter;
     font-style: normal;
   }
-
 
 
 body, .po-page {
@@ -138,4 +137,5 @@ body, .po-page {
     max-width: 400px;
     height: fit-content;
     min-height: 0;
+    font-weight: medium;
 }

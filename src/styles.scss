@@ -56,23 +56,30 @@ $colorText: #4b4b4b;
 }
 
 @font-face {
-    font-family: Roboto-light;
-    src: url(assets/fonts/Roboto-Light.ttf) format("opentype");
-}
+    font-family: "Roboto";
+    src: url(assets/fonts/Roboto-Light.ttf) format("truetype");
+    font-weight: lighter;
+    font-style: normal;
+  }
 
-@font-face {
-    font-family: Roboto-medium;
-    src: url(assets/fonts/Roboto-Medium.ttf) format("opentype");
-}
+  @font-face {
+    font-family: "Roboto";
+    src: url(assets/fonts/Roboto-Medium.ttf) format("truetype");
+    font-weight: medium;
+    font-style: normal;
+  }
 
-@font-face {
-    font-family: Roboto-bold;
-    src: url(assets/fonts/Roboto-Bold.ttf) format("opentype");
-}
+  @font-face {
+    font-family: "Roboto";
+    src: url(assets/fonts/Roboto-Bold.ttf) format("truetype");
+    font-weight: bold;
+    font-style: normal;
+  }
+
 
 
 body, .po-page {
-    font-family: "Roboto-light";
+    font-family: "Roboto";
     background: var(--color-backgorund);
 }
 

@@ -1,8 +1,11 @@
 <po-page-default p-title="">
     <app-head-text [helpText]="helpText">Painel de Controle</app-head-text>
-
-    <div class="po-row">
-        <div class="po-md-6">
+    <app-disclaimer
+        disclaimerTextSuccess="Sucesso"
+        disclaimerTextWarning="Erro"
+    ></app-disclaimer>
+    <div class="po-row po-mt-2">
+        <div class="po-md-6 po-pl-0">
             <app-dashboard-accordion
                 [isPending]='true'
                 title='Contabilidade'
@@ -10,7 +13,7 @@
             >
             </app-dashboard-accordion>
         </div>
-        <div class="po-md-6">
+        <div class="po-md-6 po-pr-0">
             <app-dashboard-accordion
                 [isPending]='false'
                 title='Extratos'
@@ -19,11 +22,4 @@
             </app-dashboard-accordion>
         </div>
     </div>
-
-    <app-disclaimer
-        disclaimerTextSuccess="Sucesso"
-        disclaimerTextWarning="Erro"
-        *ngIf(!destroy)
-    ></app-disclaimer>
-
 </po-page-default>

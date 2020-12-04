@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ClientRoutingModule } from './client-routing.module';
 import { ClientLayoutComponent } from './client-layout/client-layout.component';
-import { RouterModule } from '@angular/router';
 import { PoMenuModule, PoToolbarModule } from '@po-ui/ng-components';
 
 @NgModule({
@@ -18,4 +17,4 @@ import { PoMenuModule, PoToolbarModule } from '@po-ui/ng-components';
     exports: [],
     providers: [],
 })
-export class ClientModule {}
+export class ClientModule { }

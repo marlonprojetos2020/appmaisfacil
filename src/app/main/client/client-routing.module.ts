@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ClientLayoutComponent } from './client-layout/client-layout.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { ClientDashboardComponent } from './client-dashboard/client-dashboard.component';
 
 const routes: Routes = [
     {
@@ -10,7 +10,7 @@ const routes: Routes = [
         children: [
             {
                 path: '',
-                component: DashboardComponent,
+                loadChildren: () => import('./client-dashboard/client-dashboard.module').then(m => m.ClientDashboardModule),
             },
         ],
     },

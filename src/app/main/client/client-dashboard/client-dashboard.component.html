@@ -1,29 +1,30 @@
 <po-page-default p-title="">
     <app-head-text [helpText]="helpText">Painel de Controle</app-head-text>
 
+    <div class="po-mb-3">
+        <app-disclaimer
+            disclaimerTextSuccess="Sucesso"
+            disclaimerTextWarning="Erro"
+        ></app-disclaimer>
+    </div>
+
     <div class="po-row">
         <div class="po-md-6">
             <app-dashboard-accordion
-                [isPending]='true'
-                title='Contabilidade'
-                text='Olá esse é o acordion'
+                [isPending]="true"
+                title="Contabilidade"
+                text="Olá esse é o acordion"
             >
             </app-dashboard-accordion>
         </div>
+
         <div class="po-md-6">
             <app-dashboard-accordion
-                [isPending]='false'
-                title='Extratos'
-                text='Olá esse é o acordion'
+                [isPending]="false"
+                title="Extratos"
+                text="Olá esse é o acordion"
             >
             </app-dashboard-accordion>
         </div>
     </div>
-
-    <app-disclaimer
-        disclaimerTextSuccess="Sucesso"
-        disclaimerTextWarning="Erro"
-        *ngIf(!destroy)
-    ></app-disclaimer>
-
 </po-page-default>

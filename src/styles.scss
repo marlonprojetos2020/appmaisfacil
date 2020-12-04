@@ -71,7 +71,7 @@ $colorText: #4b4b4b;
 }
 
 
-body {
+body, .po-page {
     font-family: "Roboto-light";
     background: var(--color-backgorund);
 }
@@ -125,4 +125,10 @@ body {
 
 .po-menu-header-container-logo {
     background-color: var(--color-primary);
+}
+
+.po-popover { 
+    max-width: 400px;
+    height: fit-content;
+    min-height: 0;
 }

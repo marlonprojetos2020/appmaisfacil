@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard-accordion',
@@ -6,6 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard-accordion.component.scss'],
 })
 export class DashboardAccordionComponent implements OnInit {
+
+  @Input() title = '';
+  @Input() text = '';
+  @Input() isPending: boolean;
 
   constructor() {}
 

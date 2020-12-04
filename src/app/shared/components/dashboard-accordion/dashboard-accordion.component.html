@@ -1,5 +1,5 @@
-<po-accordion>
-    <po-accordion-item p-label="PO Accordion 1">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+<po-accordion [ngClass]="isPending? 'pending':'done' ">
+    <po-accordion-item [p-label]="title">
+        {{text}}
     </po-accordion-item>
 </po-accordion>

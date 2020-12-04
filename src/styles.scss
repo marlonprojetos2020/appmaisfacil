@@ -139,9 +139,53 @@ body,
     background-color: var(--color-primary);
 }
 
+// popover component classes
 .po-popover {
     max-width: 400px;
     height: fit-content;
     min-height: 0;
     font-weight: medium;
+}
+
+// disclaimer component classes
+.disclaimer-container {
+    border-radius: 8px;
+
+    .po-container {
+        padding: 22px;
+        margin-top: 20px;
+    }
+}
+
+// acordion component classes
+.pending {
+    .po-container {
+        background: url("/assets/images/warning.svg");
+        background-repeat: no-repeat;
+        background-position: 16px 16px;
+        background-size: 20px;
+        border-left: 10px solid var(--color-danger) !important;
+        .po-accordion-item-header {
+            padding-left: 28px;
+            .po-accordion-item-header-title {
+                color: var(--color-danger);
+            }
+        }
+    }
+}
+
+.done {
+    .po-container {
+        background: url("/assets/images/check.svg");
+        background-repeat: no-repeat;
+        background-position: 16px 19px;
+        background-size: 20px;
+        border-left: 10px solid var(--color-primary) !important;
+        .po-accordion-item-header {
+            padding-left: 28px;
+            .po-accordion-item-header-title {
+                color: var(--color-primary);
+            }
+        }
+    }
 }

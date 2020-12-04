@@ -4,9 +4,10 @@ import { ClientRoutingModule } from './client-routing.module';
 import { ClientLayoutComponent } from './client-layout/client-layout.component';
 import { PoMenuModule, PoToolbarModule } from '@po-ui/ng-components';
 import { ClientDashboardModule } from './client-dashboard/client-dashboard.module';
+import { NeedHelpComponent } from './client-layout//need-help/need-help.component';
 
 @NgModule({
-    declarations: [ClientLayoutComponent],
+    declarations: [ClientLayoutComponent, NeedHelpComponent],
     imports: [
         CommonModule,
         ClientRoutingModule,
@@ -14,7 +15,7 @@ import { ClientDashboardModule } from './client-dashboard/client-dashboard.modul
         PoMenuModule,
         ClientDashboardModule,
     ],
-    exports: [],
+    exports: [NeedHelpComponent],
     providers: [],
 })
 export class ClientModule {}

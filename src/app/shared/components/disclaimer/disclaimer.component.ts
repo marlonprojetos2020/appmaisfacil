@@ -12,11 +12,7 @@ export class DisclaimerComponent {
 
     @Input() disclaimerTextWarning: string = '';
 
-    @Input() isSuccess: boolean = false;
+    isSuccess: boolean = true;
 
-    @Input() showDisclaimer: boolean = true;
-
-    close() {
-        this.showDisclaimer = false;
-    }
+    showDisclaimer: boolean = true;
 }

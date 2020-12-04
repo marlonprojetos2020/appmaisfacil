@@ -1,8 +1,8 @@
 .icon-div {
     display: flex;
-    align-items: center;
-    font-size: 50px;
+    justify-content: center;
     font-weight: bold;
+    font-size: 50px;
 }
 
 .text-div {
@@ -45,6 +45,6 @@
     }
 
     .po-icon {
-        font-size: 15px;
+        font-size: 20px;
     }
 }

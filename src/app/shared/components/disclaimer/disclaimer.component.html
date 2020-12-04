@@ -8,14 +8,16 @@
             <div class="po-lg-1 icon-div">
                 <span
                     class="po-icon"
-                    [ngClass]="isSuccess ? 'po-icon-warning' : 'po-icon-close'"
+                    [ngClass]="
+                        isSuccess ? 'po-icon-exclamation' : 'po-icon-close'
+                    "
                 ></span>
             </div>
             <div class="po-lg-10 text-div">
                 <h4>
                     {{ disclaimerTitle }}
                 </h4>
-                <p>
+                <p class="po-mt-1">
                     {{
                         isSuccess
                             ? disclaimerTextSuccess
@@ -24,7 +26,7 @@
                 </p>
             </div>
             <div class="po-lg-1 close-button">
-                <button (click)="close()">
+                <button (click)="showDisclaimer = false">
                     <span class="po-icon po-icon-close"></span>
                 </button>
             </div>

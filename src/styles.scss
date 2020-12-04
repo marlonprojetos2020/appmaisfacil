@@ -141,7 +141,7 @@ body,
 
 // popover component classes
 .po-popover {
-    max-width: 400px;
+    max-width: 25rem;
     height: fit-content;
     min-height: 0;
     font-weight: medium;
@@ -150,12 +150,9 @@ body,
 // disclaimer component classes
 .disclaimer-container {
     border-radius: 8px;
-    margin-top: 20px;
-    margin-left: 45px;
-    margin-right: 45px;
-
+    margin-top: 1.25rem;
     .po-container {
-        padding: 22px;
+        padding: 1.375rem;
     }
 }
 

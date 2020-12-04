@@ -4,10 +4,9 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: './client-dashboard.component.html',
 })
 export class ClientDashboardComponent implements OnInit {
+    helpText = `Painel utilizado para transmitir todas as informações de contabilidade da sua empresa`;
 
-    helpText =  `Painel utilizado para transmitir todas as informações de contabilidade da sua empresa`;
+    constructor() {}
 
-    constructor() { }
-
-    ngOnInit(): void { }
+    ngOnInit(): void {}
 }

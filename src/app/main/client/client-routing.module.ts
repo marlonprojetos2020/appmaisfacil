@@ -10,7 +10,7 @@ const routes: Routes = [
         children: [
             {
                 path: '',
-                loadChildren: () => import('./client-dashboard/client-dashboard.module').then(m => m.ClientDashboardModule),
+                component: ClientDashboardComponent,
             },
         ],
     },

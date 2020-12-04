@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ClientRoutingModule } from './client-routing.module';
 import { ClientLayoutComponent } from './client-layout/client-layout.component';
 import { PoMenuModule, PoToolbarModule } from '@po-ui/ng-components';
+import { ClientDashboardModule } from './client-dashboard/client-dashboard.module';
 
 @NgModule({
     declarations: [
@@ -13,6 +14,7 @@ import { PoMenuModule, PoToolbarModule } from '@po-ui/ng-components';
         ClientRoutingModule,
         PoToolbarModule,
         PoMenuModule,
+        ClientDashboardModule,
     ],
     exports: [],
     providers: [],

@@ -41,7 +41,10 @@ $colorText: #4b4b4b;
     // Menu
     --color-menu-color-menu-sub-item-text: #{lighten($colorPrimary, 10%)};
     --color-menu-border-color-menu-item-selected: #{$colorPrimary};
-    --color-menu-background-color-menu-responsive-overlay: #{rgba($colorPrimary, 0.5)};
+    --color-menu-background-color-menu-responsive-overlay: #{rgba(
+            $colorPrimary,
+            0.5
+        )};
 
     // button primary
     --color-button-color-primary: var(--color-white);
@@ -76,9 +79,9 @@ $colorText: #4b4b4b;
     font-style: normal;
   }
 
-
-body, .po-page {
-    font-family: "Roboto";
+body,
+.po-page {
+    font-family: "Roboto-light";
     background: var(--color-backgorund);
 }
 
@@ -117,9 +120,9 @@ body, .po-page {
     }
 }
 
-.po-toolbar { 
+.po-toolbar {
     background-color: var(--color-primary);
-    .po-avatar{
+    .po-avatar {
         box-shadow: none;
         border: solid 1px #fff;
     }
@@ -133,9 +136,18 @@ body, .po-page {
     background-color: var(--color-primary);
 }
 
-.po-popover { 
+.po-popover {
     max-width: 400px;
     height: fit-content;
     min-height: 0;
     font-weight: medium;
+}
+
+.disclaimer-container {
+    border-radius: 8px;
+
+    .po-container {
+        padding: 22px;
+        margin-top: 20px;
+    }
 }

@@ -6,9 +6,7 @@ import { PoMenuModule, PoToolbarModule } from '@po-ui/ng-components';
 import { ClientDashboardModule } from './client-dashboard/client-dashboard.module';
 
 @NgModule({
-    declarations: [
-        ClientLayoutComponent,
-    ],
+    declarations: [ClientLayoutComponent],
     imports: [
         CommonModule,
         ClientRoutingModule,
@@ -19,4 +17,4 @@ import { ClientDashboardModule } from './client-dashboard/client-dashboard.modul
     exports: [],
     providers: [],
 })
-export class ClientModule { }
+export class ClientModule {}

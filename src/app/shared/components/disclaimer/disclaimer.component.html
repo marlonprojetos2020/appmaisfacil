@@ -1,4 +1,8 @@
-<div class="disclaimer-container" [ngClass]="isSuccess ? 'success' : 'warning'">
+<div
+    class="disclaimer-container"
+    [ngClass]="isSuccess ? 'success' : 'warning'"
+    *ngIf="showDisclaimer"
+>
     <po-container p-no-border="true" p-no-padding="true" p-no-shadow="true">
         <div class="po-row">
             <div class="po-lg-1 icon-div">
@@ -20,7 +24,7 @@
                 </p>
             </div>
             <div class="po-lg-1 close-button">
-                <button>
+                <button (click)="close()">
                     <span class="po-icon po-icon-close"></span>
                 </button>
             </div>

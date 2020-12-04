@@ -13,4 +13,10 @@ export class DisclaimerComponent {
     @Input() disclaimerTextWarning: string = '';
 
     @Input() isSuccess: boolean = false;
+
+    @Input() showDisclaimer: boolean = true;
+
+    close() {
+        this.showDisclaimer = false;
+    }
 }

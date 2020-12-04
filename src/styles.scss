@@ -41,7 +41,10 @@ $colorText: #4b4b4b;
     // Menu
     --color-menu-color-menu-sub-item-text: #{lighten($colorPrimary, 10%)};
     --color-menu-border-color-menu-item-selected: #{$colorPrimary};
-    --color-menu-background-color-menu-responsive-overlay: #{rgba($colorPrimary, 0.5)};
+    --color-menu-background-color-menu-responsive-overlay: #{rgba(
+            $colorPrimary,
+            0.5
+        )};
 
     // button primary
     --color-button-color-primary: var(--color-white);
@@ -57,27 +60,30 @@ $colorText: #4b4b4b;
 
 @font-face {
     font-family: "Roboto";
-    src: url(assets/fonts/rbt-Bold.ttf) format("truetype");
-    font-weight: bold;
+    src: url(assets/fonts/Roboto-Light.woff) format("woff"),
+        url(assets/fonts/Roboto-Light.woff2) format("woff2");
+    font-weight: 300;
     font-style: normal;
 }
 
 @font-face {
     font-family: "Roboto";
-    src: url(assets/fonts/Roboto-Medium.ttf) format("truetype");
-    font-weight: medium;
+    src: url(assets/fonts/Roboto-Medium.woff) format("woff"),
+        url(assets/fonts/Roboto-Medium.woff2) format("woff2");
+    font-weight: 500;
     font-style: normal;
 }
 
 @font-face {
     font-family: "Roboto";
-    src: url(assets/fonts/rbt-Light.ttf) format("truetype");
-    font-weight: lighter;
+    src: url(assets/fonts/Roboto-Bold.woff) format("woff"),
+        url(assets/fonts/Roboto-Bold.woff2) format("woff2");
+    font-weight: 700;
     font-style: normal;
-  }
+}
 
-
-body, .po-page {
+body,
+.po-page {
     font-family: "Roboto";
     background: var(--color-backgorund);
 }
@@ -117,9 +123,9 @@ body, .po-page {
     }
 }
 
-.po-toolbar { 
+.po-toolbar {
     background-color: var(--color-primary);
-    .po-avatar{
+    .po-avatar {
         box-shadow: none;
         border: solid 1px #fff;
     }
@@ -133,7 +139,7 @@ body, .po-page {
     background-color: var(--color-primary);
 }
 
-.po-popover { 
+.po-popover {
     max-width: 400px;
     height: fit-content;
     min-height: 0;

@@ -1,32 +1,36 @@
-import { ContentChildren, Directive, ElementRef, HostListener, Input, OnInit, QueryList, ViewChild } from '@angular/core';
+import {
+    AfterViewInit,
+    Directive,
+    ElementRef,
+    Input,
+    Renderer2,
+    ViewChild,
+} from '@angular/core';
+import { PoModalComponent } from '@po-ui/ng-components';
 
 @Directive({
     selector: '[appHelpPopOver]',
 })
-export class HelpPopoverDirective implements OnInit {
+export class HelpPopoverDirective implements AfterViewInit {
 
     @Input() helpText: string;
 
-    constructor(private el: ElementRef) {}
+    pageHeaderElement: any;
 
-    ngOnInit(): void {
-    }
+    constructor(
+        private el: ElementRef,
+        private renderer: Renderer2,
+    ) {}
 
     ngAfterViewInit(): void {
-        console.log(this.el.nativeElement);
+        this.pageHeaderElement = this.el.nativeElement
+            .querySelector('.po-page-header');
+
+        this.pageHeaderElement
+            .addEventListener('click', this.showPopover.bind(this));
     }
 
-    @HostListener('mouseenter') onMouseEnter() {
-
-    }
-
-    @HostListener('mouseleave') onMouseLeave() {
-        // console.log('saiu');
-    }
-
-    // po-page-header
-    // po-page-header-title
-    private highlight(color: string) {
-        this.el.nativeElement.style.backgroundColor = color;
+    private showPopover(): void {
+        alert(this.helpText);
     }
 }

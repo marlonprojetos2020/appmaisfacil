@@ -5,6 +5,7 @@ import { ClientLayoutComponent } from './client-layout/client-layout.component';
 import { PoMenuModule, PoToolbarModule } from '@po-ui/ng-components';
 import { ClientDashboardModule } from './client-dashboard/client-dashboard.module';
 import { NeedHelpComponent } from './client-layout//need-help/need-help.component';
+import { ChargesModule } from './charges/charges.module';
 
 @NgModule({
     declarations: [ClientLayoutComponent, NeedHelpComponent],
@@ -14,8 +15,9 @@ import { NeedHelpComponent } from './client-layout//need-help/need-help.componen
         PoToolbarModule,
         PoMenuModule,
         ClientDashboardModule,
+        ChargesModule,
     ],
-    exports: [NeedHelpComponent],
+    exports: [],
     providers: [],
 })
 export class ClientModule {}

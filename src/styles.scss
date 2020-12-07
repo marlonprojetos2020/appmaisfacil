@@ -160,6 +160,7 @@ body,
 .pending {
     .po-container {
         background: url("/assets/images/warning.svg");
+        background-color: #fff;
         background-repeat: no-repeat;
         background-position: 16px 16px;
         background-size: 20px;
@@ -176,6 +177,7 @@ body,
 .done {
     .po-container {
         background: url("/assets/images/check.svg");
+        background-color: #fff;
         background-repeat: no-repeat;
         background-position: 16px 19px;
         background-size: 20px;
@@ -187,4 +189,17 @@ body,
             }
         }
     }
+}
+
+//page-datable
+.po-container {
+    background: #fff;
+}
+
+//Page header form template
+.po-page-header-title {
+    color: var(--color-primary);
+    font-size: 2.3rem;
+    font-family: "roboto";
+    font-weight: bold;
 }

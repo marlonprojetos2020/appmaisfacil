@@ -45,7 +45,7 @@ export class ClientLayoutComponent {
         {
             icon: 'po-icon-warning',
             label: 'Cobranças',
-            link: '/admin/produtos',
+            link: '/cliente/cobrancas',
         },
         {
             icon: 'po-icon-finance',

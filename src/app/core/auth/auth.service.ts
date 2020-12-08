@@ -1,8 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { PoPageLogin } from '@po-ui/ng-templates';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { JwtService } from './jwt.service';
 import { Credentials } from './model/credentials';
@@ -72,5 +72,33 @@ export class AuthService {
         return this.getUserDetailsSnapshot()
             .roles.map(role => role.value)
             .includes(RoleType.ROLE_COMPANY);
+    }
+
+    // AUTH INTERCEPTOR - Retorna o acess token para o interceptor
+    getAccessToken(): string {
+        const credentials = this.jwtService.getCredentials();
+        return credentials && credentials.accessToken;
+    }
+
+    refreshToken(): Observable<any> {
+        // busca o novo token
+        const refreshToken = this.getRefreshToken();
+        // comando para retirar eventuais notificações de erro
+        const headers = { 'X-PO-No-Message': 'true' };
+
+        return this.httpClient.post<Credentials>(`${environment.apiUrl}/auth/refresh`, { refreshToken }, { headers })
+            .pipe(tap(credentials => this.jwtService.saveCredentials(credentials)))
+            .pipe(tap(() => this.notifyUserDetails()))
+            //  em caso de erro faz logou e pede pra fazer um novo login
+            .pipe(catchError(err => {
+                this.logout();
+                return throwError(err);
+            }));
+    }
+
+    // Retorna o token
+    getRefreshToken(): string {
+        const credentials = this.jwtService.getCredentials();
+        return credentials && credentials.refreshToken;
     }
 }

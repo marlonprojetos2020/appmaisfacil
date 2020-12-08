@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { PoMenuItem, PoToolbarAction, PoToolbarProfile } from '@po-ui/ng-components';
+import { AuthService } from 'src/app/core/auth/auth.service';
 
 @Component({
     templateUrl: './company-layout.component.html',
@@ -30,7 +31,7 @@ export class CompanyLayoutComponent {
             type: 'danger',
             separator: true,
             action: () => {
-                // this.authService.logout();
+                this.authService.logout();
                 this.router.navigateByUrl('/');
             },
         },
@@ -100,6 +101,7 @@ export class CompanyLayoutComponent {
     ];
 
     constructor(
+        private authService: AuthService,
         private router: Router) {
 
     }

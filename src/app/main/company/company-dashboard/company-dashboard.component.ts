@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    templateUrl: './client-dashboard.component.html',
+    templateUrl: './company-dashboard.component.html',
 })
-export class ClientDashboardComponent implements OnInit {
+export class CompanyDashboardComponent implements OnInit {
     helpText = `Painel utilizado para transmitir todas as informações de contabilidade da sua empresa`;
 
     constructor() {}

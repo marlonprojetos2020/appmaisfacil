@@ -3,26 +3,26 @@ import { Router } from '@angular/router';
 import { PoMenuItem, PoToolbarAction, PoToolbarProfile } from '@po-ui/ng-components';
 
 @Component({
-    templateUrl: './client-layout.component.html',
+    templateUrl: './company-layout.component.html',
 })
-export class ClientLayoutComponent {
+export class CompanyLayoutComponent {
 
     pProfile: PoToolbarProfile;
     profileActions: Array<PoToolbarAction> = [
         {
             icon: 'po-icon-user',
             label: 'Minha Conta',
-            url: '/cliente/perfil',
+            url: '/empresa/perfil',
         },
         {
             icon: 'po-icon-lock',
             label: 'Meu Plano',
-            url: '/cliente/meu-plano',
+            url: '/empresa/meu-plano',
         },
         {
             icon: 'po-icon-lock',
             label: 'Alterar senha',
-            url: '/cliente/alterar-senha',
+            url: '/empresa/alterar-senha',
         },
         {
             icon: 'po-icon-exit',
@@ -40,62 +40,62 @@ export class ClientLayoutComponent {
         {
             icon: 'po-icon-home',
             label: 'Painel de Controle',
-            link: '/cliente',
+            link: '/empresa',
         },
         {
             icon: 'po-icon-warning',
             label: 'Cobranças',
-            link: '/cliente/cobrancas',
+            link: '/empresa/cobrancas',
         },
         {
             icon: 'po-icon-finance',
             label: 'Minhas Despesas',
-            link: '/cliente/pedidos',
+            link: '/empresa/pedidos',
         },
         {
             icon: 'po-icon-finance-secure',
             label: 'Meus Extratos',
-            link: '/cliente/extrato',
+            link: '/empresa/extrato',
         },
         {
             icon: 'po-icon-database',
             label: 'Contabilidade',
-            link: '/cliente/contabilidade',
+            link: '/empresa/contabilidade',
         },
         {
             icon: 'po-icon-document',
             label: 'Nota Fiscal',
-            link: '/cliente/nota-fiscal',
+            link: '/empresa/nota-fiscal',
         },
         {
             icon: 'po-icon-company',
             label: 'Minha Empresa',
-            link: '/cliente/empresa',
+            link: '/empresa/empresa',
         },
         {
             icon: ' po-icon-handshake',
             label: 'Sócios',
-            link: '/cliente/socios',
+            link: '/empresa/socios',
         },
         {
             icon: 'po-icon-users',
             label: 'Funcionários',
-            link: '/cliente/funcionarios',
+            link: '/empresa/funcionarios',
         },
         {
             icon: 'po-icon-plus',
             label: 'Serviços',
-            link: '/cliente/servicos',
+            link: '/empresa/servicos',
         },
         {
             icon: 'po-icon-user-add',
             label: 'Indicações',
-            link: '/cliente/indicacoes',
+            link: '/empresa/indicacoes',
         },
         {
             icon: 'po-icon-help',
             label: 'F.A.Q.',
-            link: '/cliente/faq',
+            link: '/empresa/faq',
         },
     ];
 

@@ -10,8 +10,8 @@
     p-logo="/assets/images/logo.svg"
     p-authentication-type="PoPageLoginAuthenticationType"
     p-contact-email="contato@maisfacil.com.br"
-    p-loading="boolean"
-    (p-login-submit)="login()"
+    (p-login-submit)="login($event)"
     p-background="/assets/images/bg-login.png"
-    >
+    [p-loading]="loadingSubmit"
+>
 </po-page-login>

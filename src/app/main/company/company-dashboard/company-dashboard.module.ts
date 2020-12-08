@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { PoPageModule } from '@po-ui/ng-components';
-import { ClientDashboardComponent } from './client-dashboard.component';
+import { CompanyDashboardComponent } from './company-dashboard.component';
 import { HeadTextModule } from '../../../shared/components/head-text/head-text.module';
 import { DisclaimerModule } from '../../../shared/components/disclaimer/disclaimer.module';
 import { DashboardAccordionModule } from '../../../shared/components/dashboard-accordion/dashboard-accordion.module';
 import { HelpPopoverModule } from '../../../shared/directives/help-popover/help-popover.module';
 
 @NgModule({
-    declarations: [ClientDashboardComponent],
+    declarations: [CompanyDashboardComponent],
     imports: [
         PoPageModule,
         CommonModule,
@@ -17,6 +17,6 @@ import { HelpPopoverModule } from '../../../shared/directives/help-popover/help-
         DisclaimerModule,
         HelpPopoverModule,
     ],
-    exports: [ClientDashboardComponent],
+    exports: [CompanyDashboardComponent],
 })
-export class ClientDashboardModule {}
+export class CompanyDashboardModule {}

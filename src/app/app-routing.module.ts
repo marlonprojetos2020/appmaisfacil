@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './core/auth/auth.guard';
+import { LoginGuard } from './core/auth/login.guard';
+import { AdminGuard } from './main/admin/admin.guard';
+import { CompanyGuard } from './main/company/company.guard';
 
 const routes: Routes = [
 
@@ -10,15 +14,18 @@ const routes: Routes = [
     },
     {
         path: 'acessar',
-        loadChildren: () => import('./main/auth/auth.module').then(m => m.AuthModule),
+        loadChildren: () => import('./core/auth/auth.module').then(m => m.AuthModule),
+        canActivate: [LoginGuard],
     },
     {
         path: 'admin',
         loadChildren: () => import('./main/admin/admin.module').then(m => m.AdminModule),
+        canActivate: [AuthGuard, AdminGuard],
     },
     {
-        path: 'cliente',
-        loadChildren: () => import('./main/client/client.module').then(m => m.ClientModule),
+        path: 'empresa',
+        loadChildren: () => import('./main/company/company.module').then(m => m.CompanyModule),
+        canActivate: [AuthGuard, CompanyGuard],
     },
 
 ];
@@ -28,4 +35,4 @@ const routes: Routes = [
     exports: [RouterModule],
 
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

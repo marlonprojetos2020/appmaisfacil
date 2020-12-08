@@ -56,6 +56,9 @@ export class AuthService {
 
     // ADMIN GUARD - confere se é ADMIN
     isAdmin(): boolean {
+        if (!this.isLogged()) {
+            return false;
+        }
         return this.getUserDetailsSnapshot()
             .roles.map(role => role.value)
             .includes(RoleType.ROLE_ADMIN);
@@ -63,6 +66,9 @@ export class AuthService {
 
     // COMPANY GUARD - confere se é CLIENT
     isCompany(): boolean {
+        if (!this.isLogged) {
+            return false;
+        }
         return this.getUserDetailsSnapshot()
             .roles.map(role => role.value)
             .includes(RoleType.ROLE_COMPANY);

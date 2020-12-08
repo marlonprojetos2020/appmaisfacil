@@ -12,7 +12,6 @@ export class LoginGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot)
         : boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-        console.log(this.authService.isLogged());
         if (!this.authService.isLogged()) {
             return true;
         }

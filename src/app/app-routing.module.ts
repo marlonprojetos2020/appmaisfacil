@@ -27,6 +27,10 @@ const routes: Routes = [
         loadChildren: () => import('./main/company/company.module').then(m => m.CompanyModule),
         canActivate: [AuthGuard, CompanyGuard],
     },
+    {
+        path: 'sessao-expirada',
+        loadChildren: () => import('./main/session-expired/session-expired.module').then(m => m.SessionExpiredModule),
+    },
 
 ];
 

@@ -1,6 +1,7 @@
 <po-page-dynamic-search
     [p-title]="title"
     [p-actions]="pageActions"
+    [p-breadcrumb]="breadcrumb"
     [p-concat-filters]="true"
     [p-filters]="filters"
     [p-keep-filters]="true"
@@ -21,18 +22,13 @@
         [p-striped]="true"
         (p-sort-by)="sortBy($event)"
     >
-        <ng-template
-            *ngFor="let column of customColumns()"
-            p-table-column-template
-            [p-property]="column.property"
-            let-value
-        >
+        <ng-template *ngFor="let column of customColumns()" p-table-column-template [p-property]="column.property"
+                     let-value>
             <ng-container *ngFor="let item of column.customValue(value)">
                 <app-badge
                     *ngIf="column.badgePoColor"
                     [poColor]="column.badgePoColor"
-                    [value]="item"
-                >
+                    [value]="item">
                 </app-badge>
                 <span *ngIf="!column.badgePoColor">{{item}}</span>
             </ng-container>

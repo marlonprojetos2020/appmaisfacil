@@ -1,13 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { PoPageAction, PoSelectOption, PoTableAction, PoTableColumnSort, PoTableColumnSortType } from '@po-ui/ng-components';
-import { PoPageDynamicSearchFilters } from '@po-ui/ng-templates';
-import { DatatableColumn } from './datatable-column';
-import { finalize } from 'rxjs/operators';
-import { PageDatatableService } from './page-datatable.service';
+import {Component, Input, OnInit} from '@angular/core';
+import {PoBreadcrumb, PoPageAction, PoSelectOption, PoTableAction, PoTableColumnSort, PoTableColumnSortType} from '@po-ui/ng-components';
+import {PageDatatableService} from './page-datatable.service';
+import {finalize} from 'rxjs/operators';
+import {DatatableColumn} from './datatable-column';
+import {PoPageDynamicSearchFilters} from '@po-ui/ng-templates';
 
 @Component({
-    selector: 'app-page-datable',
-    templateUrl: './page-datable.component.html',
+    selector: 'app-page-datatable',
+    templateUrl: './page-datatable.component.html',
+    styleUrls: ['./page-datatable.component.scss'],
 })
 export class PageDatatableComponent implements OnInit {
 
@@ -15,6 +16,7 @@ export class PageDatatableComponent implements OnInit {
 
     // page search props
     @Input() title;
+    @Input() breadcrumb: PoBreadcrumb;
     @Input() pageActions: PoPageAction[];
 
     // table props
@@ -26,7 +28,7 @@ export class PageDatatableComponent implements OnInit {
     filters: PoPageDynamicSearchFilters[];
     currentFilters: any = {};
 
-    // items: any[];
+    items: any[];
     loading = false;
     loadingShowMore = false;
     showMoreDisabled = false;
@@ -35,36 +37,20 @@ export class PageDatatableComponent implements OnInit {
 
     currentPage: number;
 
-    items = [
-        {
-            status: 'Pendente',
-            titulo: 'Imposto de Renda',
-            tipo: 'Imposto',
-            vencimento: '28/10/2020',
-            valor: 'R$ 200,00',
-        },
-        {
-            status: 'Pendente',
-            titulo: 'Imposto de Renda',
-            tipo: 'Imposto',
-            vencimento: '28/10/2020',
-            valor: 'R$ 200,00',
-        },
-        {
-            status: 'Pendente',
-            titulo: 'Imposto de Renda',
-            tipo: 'Imposto',
-            vencimento: '28/10/2020',
-            valor: 'R$ 200,00',
-        },
-    ];
-
-    constructor(private pageDatatableService: PageDatatableService) {}
-
+    constructor(
+        private pageDatatableService: PageDatatableService,
+    ) {
+    }
 
     ngOnInit(): void {
         this.buildAdvancedSearch();
+
         this.loadItems();
+    }
+
+    customColumns(): DatatableColumn[] {
+        return this.columns
+            .filter(column => column.customValue);
     }
 
     loadItems(): void {
@@ -72,6 +58,34 @@ export class PageDatatableComponent implements OnInit {
         this.currentPage = 1;
         this.loading = true;
         this.updateData();
+    }
+
+    showMore(tableColumnSort: PoTableColumnSort): void {
+        this.tableColumnSort = tableColumnSort;
+        this.updateData();
+    }
+
+    sortBy(tableColumnSort: PoTableColumnSort): void {
+        this.tableColumnSort = tableColumnSort;
+        if (!this.tableColumnSort || !this.isSortDisabled(this.tableColumnSort.column.property)) {
+            this.loadItems();
+        }
+    }
+
+    handleQuickSearch(searchValue: string): void {
+        searchValue ? this.currentFilters.search = searchValue : delete this.currentFilters.search;
+        this.loadItems();
+    }
+
+    handleAdvancedSearch(advancedSearch: any[]): void {
+        this.currentFilters = advancedSearch;
+        this.loadItems();
+    }
+
+    handleChangeDisclaimers(disclaimers: any[]): void {
+        this.currentFilters = {};
+        disclaimers.forEach(disclaimer => this.currentFilters[disclaimer.property] = disclaimer.value);
+        this.loadItems();
     }
 
     private updateData(): void {
@@ -107,7 +121,7 @@ export class PageDatatableComponent implements OnInit {
             return {};
         }
 
-        return { sort: `${this.tableColumnSort.column.property},${this.tableColumnSortType(this.tableColumnSort.type)}` };
+        return {sort: `${this.tableColumnSort.column.property},${this.tableColumnSortType(this.tableColumnSort.type)}`};
     }
 
     private tableColumnSortType(type: PoTableColumnSortType): string {
@@ -123,7 +137,6 @@ export class PageDatatableComponent implements OnInit {
         return datatableColumn.disableSort === true || !!datatableColumn.customValue;
     }
 
-    // BUSCA AVANÇADA
     private buildAdvancedSearch(): void {
         this.filters = [
             {
@@ -150,44 +163,5 @@ export class PageDatatableComponent implements OnInit {
                 value: column.searchProperty ? column.searchProperty : column.property,
                 label: column.label,
             }));
-    }
-
-    // HANDLER PARA PESQUISA
-    handleQuickSearch(searchValue: string): void {
-        searchValue ? this.currentFilters.search = searchValue : delete this.currentFilters.search;
-        this.loadItems();
-    }
-
-    // HANDLER PARA PESQUISA AVANÇADA
-    handleAdvancedSearch(advancedSearch: any[]): void {
-        this.currentFilters = advancedSearch;
-        this.loadItems();
-    }
-
-    // HANDLER DE MUDANÇA NOS DISCLAIMERS
-    handleChangeDisclaimers(disclaimers: any[]): void {
-        this.currentFilters = {};
-        disclaimers.forEach(disclaimer => this.currentFilters[disclaimer.property] = disclaimer.value);
-        this.loadItems();
-    }
-
-    // EVENTO DISPARADO QUANDO CAREGA MAIS RESULTADOS
-    showMore(tableColumnSort: PoTableColumnSort): void {
-        this.tableColumnSort = tableColumnSort;
-        this.updateData();
-    }
-
-    // ORGANIZAR
-    sortBy(tableColumnSort: PoTableColumnSort): void {
-        this.tableColumnSort = tableColumnSort;
-        if (!this.tableColumnSort || !this.isSortDisabled(this.tableColumnSort.column.property)) {
-            this.loadItems();
-        }
-    }
-
-    // 
-    customColumns(): DatatableColumn[] {
-        return this.columns
-            .filter(column => column.customValue);
     }
 }

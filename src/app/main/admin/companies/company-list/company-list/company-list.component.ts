@@ -14,7 +14,7 @@ export class CompanyListComponent {
         { label: 'Novo', url: '' },
     ];
 
-    serviceApi = `${environment.apiUrl}/users`;
+    serviceApi = `${environment.apiUrl}/users/p/search`;
     tableActions: PoTableAction[] = [
         { label: 'Visualizar', action: item => this.router.navigateByUrl(`/loja/produtos/${item.id}`) },
         { label: 'Editar', action: item => this.router.navigateByUrl(`/loja/produtos/${item.id}/editar`) },

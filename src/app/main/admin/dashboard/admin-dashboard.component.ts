@@ -7,6 +7,6 @@ export class AdminDashboardComponent implements OnInit {
     constructor() {}
 
     ngOnInit(): void {
-        console.log('oi');
+
     }
 }

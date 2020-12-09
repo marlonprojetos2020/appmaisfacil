@@ -8,7 +8,7 @@ export class CompanyDetailService {
 
     constructor(private httpClient: HttpClient) {}
 
-    getCompany(id: number): Observable<any> {
+    getUserCompany(id: number): Observable<any> {
         return this.httpClient.get(`${environment.apiUrl}/users/${id}`);
     }
 

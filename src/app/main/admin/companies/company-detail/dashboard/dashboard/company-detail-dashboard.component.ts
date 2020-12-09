@@ -7,7 +7,8 @@ import { CompanyDetailService } from '../../company-detail.service';
 })
 export class CompanyDetailDashboardComponent implements OnInit {
 
-    title = ''
+    title = '';
+    // company:
 
     constructor(
         private activetedRoute: ActivatedRoute,
@@ -15,7 +16,7 @@ export class CompanyDetailDashboardComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.companyDetailService.getCompany(this.activetedRoute.snapshot.params.id).subscribe(
+        this.companyDetailService.getUserCompany(this.activetedRoute.snapshot.params.id).subscribe(
             data => console.log(data),
         );
     }

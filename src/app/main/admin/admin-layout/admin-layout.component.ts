@@ -47,7 +47,7 @@ export class AdminLayoutComponent {
         {
             icon: 'po-icon-company',
             label: 'Empresas',
-            link: '/admin',
+            link: '/admin/empresas',
         },
         {
             icon: 'po-icon-warning',

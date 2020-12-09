@@ -12,6 +12,10 @@ const routes: Routes = [
                 path: '',
                 component: AdminDashboardComponent,
             },
+            {
+                path: 'empresas',
+                loadChildren: () => import('./companies/admin-company.module').then(m => m.AdminCompanyModule),
+            },
         ],
     },
 ];

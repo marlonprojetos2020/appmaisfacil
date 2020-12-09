@@ -10,6 +10,10 @@ const routes: Routes = [
         path: '',
         component: CompanyListComponent,
     },
+    {
+        path: ':id',
+        loadChildren: () => import('./company-detail/company-detail.module').then(m => m.CompanyDatailModule),
+    }
 ];
 
 @NgModule({

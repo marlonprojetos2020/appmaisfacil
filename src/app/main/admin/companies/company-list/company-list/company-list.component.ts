@@ -16,8 +16,8 @@ export class CompanyListComponent {
 
     serviceApi = `${environment.apiUrl}/users/p/search`;
     tableActions: PoTableAction[] = [
-        { label: 'Visualizar', action: item => this.router.navigateByUrl(`/loja/produtos/${item.id}`) },
-        { label: 'Editar', action: item => this.router.navigateByUrl(`/loja/produtos/${item.id}/editar`) },
+        { label: 'Visualizar', action: item => this.router.navigateByUrl(`/admin/empresas/${item.id}`) },
+        // { label: 'Editar', action: item => this.router.navigateByUrl(`/loja/produtos/${item.id}/editar`) },
     ];
     columns: DatatableColumn[] = [
         { property: 'name', label: 'Nome' },

@@ -11,6 +11,6 @@ import { CompanyDetailService } from '../company-detail.service';
         PoPageModule,
     ],
     exports: [CompanyDetailDashboardComponent],
-    providers: [CompanyDetailService]
+    providers: [CompanyDetailService],
 })
 export class CompanyDetailDashboardModule {}

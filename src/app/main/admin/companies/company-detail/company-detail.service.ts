@@ -9,7 +9,7 @@ export class CompanyDetailService {
     constructor(private httpClient: HttpClient) {}
 
     getCompany(id: number): Observable<any> {
-        return this.httpClient.get(`${environment.apiUrl}/users/${id}`)
+        return this.httpClient.get(`${environment.apiUrl}/users/${id}`);
     }
 
 }

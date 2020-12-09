@@ -16,7 +16,7 @@ export class CompanyDetailDashboardComponent implements OnInit {
 
     ngOnInit(): void {
         this.companyDetailService.getCompany(this.activetedRoute.snapshot.params.id).subscribe(
-            data => console.log(data)
+            data => console.log(data),
         );
     }
 }

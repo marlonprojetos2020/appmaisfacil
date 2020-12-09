@@ -26,6 +26,12 @@ export class CompanyLayoutComponent {
             url: '/empresa/alterar-senha',
         },
         {
+            icon: 'po-icon-desktop',
+            label: 'Acessar como Admin',
+            url: '/admin',
+            visible: this.authService.isAdmin(),
+        },
+        {
             icon: 'po-icon-exit',
             label: 'Sair',
             type: 'danger',

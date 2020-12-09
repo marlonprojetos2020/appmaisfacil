@@ -1,9 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {PoBreadcrumb, PoPageAction, PoSelectOption, PoTableAction, PoTableColumnSort, PoTableColumnSortType} from '@po-ui/ng-components';
-import {PageDatatableService} from './page-datatable.service';
-import {finalize} from 'rxjs/operators';
-import {DatatableColumn} from './datatable-column';
-import {PoPageDynamicSearchFilters} from '@po-ui/ng-templates';
+import { Component, Input, OnInit } from '@angular/core';
+import { PoBreadcrumb, PoPageAction, PoSelectOption, PoTableAction, PoTableColumnSort, PoTableColumnSortType } from '@po-ui/ng-components';
+import { PageDatatableService } from './page-datatable.service';
+import { finalize } from 'rxjs/operators';
+import { DatatableColumn } from './datatable-column';
+import { PoPageDynamicSearchFilters } from '@po-ui/ng-templates';
 
 @Component({
     selector: 'app-page-datatable',
@@ -101,8 +101,9 @@ export class PageDatatableComponent implements OnInit {
             }))
             .subscribe(
                 result => {
+                    console.log(result);
                     this.showMoreDisabled = !result.hasNext;
-                    this.items.push(...result.items);
+                    this.items.push(...result);
                 },
             );
     }
@@ -121,7 +122,7 @@ export class PageDatatableComponent implements OnInit {
             return {};
         }
 
-        return {sort: `${this.tableColumnSort.column.property},${this.tableColumnSortType(this.tableColumnSort.type)}`};
+        return { sort: `${this.tableColumnSort.column.property},${this.tableColumnSortType(this.tableColumnSort.type)}` };
     }
 
     private tableColumnSortType(type: PoTableColumnSortType): string {

@@ -213,3 +213,15 @@ body,
         color: var(--color-secondary);
     }
 }
+
+.company-detail-dashboard {
+    .po-container {
+        background-color: var(--color-backgorund);
+        border: none;
+        box-shadow: none;
+    }
+
+    .po-accordion-item-header {
+        background-color: #fff;
+    }
+}

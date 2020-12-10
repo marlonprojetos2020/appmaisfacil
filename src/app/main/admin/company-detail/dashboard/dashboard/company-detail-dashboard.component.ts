@@ -6,18 +6,20 @@ import { User } from '../../model/user';
 
 @Component({
     templateUrl: './company-detail-dashboard.component.html',
+    styleUrls: ['./company-detail.component.scss'],
 })
 export class CompanyDetailDashboardComponent implements OnInit {
-
     title = '';
     company$: Observable<User> = null;
 
     constructor(
         private activetedRoute: ActivatedRoute,
-        private companyDetailService: CompanyDetailService,
+        private companyDetailService: CompanyDetailService
     ) {}
 
     ngOnInit(): void {
-        this.company$ = this.companyDetailService.getUserCompany(this.activetedRoute.snapshot.params.id);
+        this.company$ = this.companyDetailService.getUserCompany(
+            this.activetedRoute.snapshot.params.id
+        );
     }
 }

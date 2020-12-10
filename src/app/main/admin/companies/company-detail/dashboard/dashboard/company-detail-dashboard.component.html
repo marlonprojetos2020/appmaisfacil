@@ -1,3 +1,5 @@
-<po-page-default p-title=title>
-    <p>olaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaola</p>
+<po-page-default
+    *ngIf="(company$ | async) as company"
+    [p-title]="company.name"
+>
 </po-page-default>

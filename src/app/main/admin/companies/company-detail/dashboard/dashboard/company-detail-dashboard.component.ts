@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { CompanyDetailService } from '../../company-detail.service';
+import { User } from '../../model/user';
 
 @Component({
-    templateUrl: './company-detail-dashboard.component.html'
+    templateUrl: './company-detail-dashboard.component.html',
 })
 export class CompanyDetailDashboardComponent implements OnInit {
 
     title = '';
-    // company:
+    company$: Observable<User> = null;
 
     constructor(
         private activetedRoute: ActivatedRoute,
@@ -16,8 +18,6 @@ export class CompanyDetailDashboardComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.companyDetailService.getUserCompany(this.activetedRoute.snapshot.params.id).subscribe(
-            data => console.log(data),
-        );
+        this.company$ = this.companyDetailService.getUserCompany(this.activetedRoute.snapshot.params.id);
     }
 }

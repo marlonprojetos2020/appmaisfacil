@@ -3,13 +3,15 @@
         <po-container p-no-padding="true">
             <div class="po-row">
                 <div class="po-lg-12">
-                    <span class="document">{{ company.userCompany.cnpj }}</span>
+                    <span class="document">{{
+                        company.userCompany.cnpj | cpfcnpj
+                    }}</span>
                 </div>
                 <div class="po-lg-12">
                     <div class="card-info">
                         <div class="info po-mb-2">
                             <span class="po-icon po-icon-telephone"></span>
-                            <p>{{ company.userCompany.phone }}</p>
+                            <p>{{ company.userCompany.phone | phone }}</p>
                             <span
                                 class="po-icon po-icon-social-whatsapp po-ml-1"
                             ></span>

@@ -4,19 +4,19 @@ import { PoPageAction, PoTableAction } from '@po-ui/ng-components';
 import { environment } from 'src/environments/environment';
 import { DatatableColumn } from '../../../../../shared/components/page-datatable/page-datatable/datatable-column';
 
-
 @Component({
     templateUrl: './company-list.component.html',
 })
 export class CompanyListComponent {
-
-    pageActions: PoPageAction[] = [
-        { label: 'Novo', url: '' },
-    ];
+    pageActions: PoPageAction[] = [{ label: 'Novo', url: '' }];
 
     serviceApi = `${environment.apiUrl}/users/p/search`;
     tableActions: PoTableAction[] = [
-        { label: 'Visualizar', action: item => this.router.navigateByUrl(`/admin/empresa/${item.id}`) },
+        {
+            label: 'Visualizar',
+            action: (item) =>
+                this.router.navigateByUrl(`/admin/empresa/${item.id}`),
+        },
         // { label: 'Editar', action: item => this.router.navigateByUrl(`/admin/empresa/${item.id}/editar`) },
     ];
     columns: DatatableColumn[] = [
@@ -24,11 +24,7 @@ export class CompanyListComponent {
         { property: 'userCompany', label: 'CNPJ' },
     ];
 
-    constructor(
-        private router: Router,
-    ) {}
+    constructor(private router: Router) {}
 
-    ngOnInit(): void {
-    }
-
+    ngOnInit(): void {}
 }

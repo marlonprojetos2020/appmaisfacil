@@ -13,12 +13,11 @@ import { RoleType } from './model/role-type';
     providedIn: 'root',
 })
 export class AuthService {
-
     private userDetails = new BehaviorSubject<UserDetails>(null);
 
     constructor(
         private httpClient: HttpClient,
-        private jwtService: JwtService,
+        private jwtService: JwtService
     ) {
         // verifica se já tem algo salvo
         this.notifyUserDetails();
@@ -26,8 +25,13 @@ export class AuthService {
     }
 
     login(poPageLogin: PoPageLogin): Observable<Credentials> {
-        return this.httpClient.post<Credentials>(`${environment.apiUrl}/auth`, poPageLogin)
-            .pipe(tap(credentials => this.jwtService.saveCredentials(credentials)))
+        return this.httpClient
+            .post<Credentials>(`${environment.apiUrl}/auth`, poPageLogin)
+            .pipe(
+                tap((credentials) =>
+                    this.jwtService.saveCredentials(credentials)
+                )
+            )
             .pipe(tap(() => this.notifyUserDetails()));
     }
 
@@ -60,7 +64,7 @@ export class AuthService {
             return false;
         }
         return this.getUserDetailsSnapshot()
-            .roles.map(role => role.value)
+            .roles.map((role) => role.value)
             .includes(RoleType.ROLE_ADMIN);
     }
 
@@ -70,7 +74,7 @@ export class AuthService {
             return false;
         }
         return this.getUserDetailsSnapshot()
-            .roles.map(role => role.value)
+            .roles.map((role) => role.value)
             .includes(RoleType.ROLE_COMPANY);
     }
 
@@ -86,14 +90,27 @@ export class AuthService {
         // comando para retirar eventuais notificações de erro
         const headers = { 'X-PO-No-Message': 'true' };
 
-        return this.httpClient.post<Credentials>(`${environment.apiUrl}/auth/refresh`, { refreshToken }, { headers })
-            .pipe(tap(credentials => this.jwtService.saveCredentials(credentials)))
-            .pipe(tap(() => this.notifyUserDetails()))
-            //  em caso de erro faz logou e pede pra fazer um novo login
-            .pipe(catchError(err => {
-                this.logout();
-                return throwError(err);
-            }));
+        return (
+            this.httpClient
+                .post<Credentials>(
+                    `${environment.apiUrl}/auth/refresh`,
+                    { refreshToken },
+                    { headers }
+                )
+                .pipe(
+                    tap((credentials) =>
+                        this.jwtService.saveCredentials(credentials)
+                    )
+                )
+                .pipe(tap(() => this.notifyUserDetails()))
+                //  em caso de erro faz logou e pede pra fazer um novo login
+                .pipe(
+                    catchError((err) => {
+                        this.logout();
+                        return throwError(err);
+                    })
+                )
+        );
     }
 
     // Retorna o token

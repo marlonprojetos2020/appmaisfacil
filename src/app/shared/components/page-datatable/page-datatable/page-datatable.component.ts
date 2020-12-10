@@ -101,7 +101,6 @@ export class PageDatatableComponent implements OnInit {
             }))
             .subscribe(
                 result => {
-                    console.log(result);
                     this.showMoreDisabled = !result.hasNext;
                     this.items.push(...result.items);
                 },

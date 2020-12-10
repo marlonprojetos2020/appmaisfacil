@@ -25,10 +25,14 @@ const routes: Routes = [
                 ],
             },
             {
-                path: 'empresa',
+                path: 'empresa/:id',
                 component: CompanyDetailMenuComponent,
-                //         children: [
-                //         ]
+                children: [
+                    {
+                        path: '',
+                        loadChildren: () => import('./company-detail/company-detail.module').then(m => m.CompanyDatailModule),
+                    },
+                ],
             },
         ],
     },

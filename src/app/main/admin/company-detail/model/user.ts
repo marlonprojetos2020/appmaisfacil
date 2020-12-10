@@ -1,5 +1,5 @@
 import { Company } from './company';
-import { UserDetails } from '../../../../../core/auth/model/user-details';
+import { UserDetails } from 'src/app/core/auth/model/user-details';
 
 export interface User extends UserDetails {
     enabled: true;

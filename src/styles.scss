@@ -225,3 +225,13 @@ body,
         background-color: #fff;
     }
 }
+
+.company-detail-menu {
+    .po-menu-item-wrapper:first-child {
+        background-color: var(--color-secondary) !important;
+        .po-menu-item {
+            color: white;
+            text-transform: uppercase;
+        }
+    }
+}

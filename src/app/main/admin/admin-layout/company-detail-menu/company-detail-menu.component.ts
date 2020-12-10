@@ -5,9 +5,9 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
     templateUrl: './company-detail-menu.component.html',
+    styleUrls: ['./company-detail-menu.component.scss'],
 })
 export class CompanyDetailMenuComponent implements OnInit {
-
     id = null;
 
     menuCompanyDetail: Array<PoMenuItem> = [
@@ -76,17 +76,17 @@ export class CompanyDetailMenuComponent implements OnInit {
 
     constructor(
         private companyDetailService: CompanyDetailService,
-        private acivatedRoute: ActivatedRoute,
+        private acivatedRoute: ActivatedRoute
     ) {}
 
     ngOnInit(): void {
         this.id = this.acivatedRoute.snapshot.params.id;
-        this.companyDetailService.getUserCompany(this.id).subscribe(
-            data => this.menuCompanyDetail.unshift(
-                {
-                    icon: 'po-icon-arrow-left',
-                    label: data.name,
-                    link: `/admin/empresas`,
-                }));
+        this.companyDetailService.getUserCompany(this.id).subscribe((data) =>
+            this.menuCompanyDetail.unshift({
+                icon: 'po-icon-arrow-left',
+                label: data.name,
+                link: `/admin/empresas`,
+            })
+        );
     }
 }

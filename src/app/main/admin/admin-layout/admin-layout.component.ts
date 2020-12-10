@@ -145,13 +145,7 @@ export class AdminLayoutComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit(): void {
-        this.companyDetailService.getUserId().subscribe(
-            id => {
-                console.log(`Funfou id: ${id}`);
-            },
-            err => console.log(err),
-        );
-        setInterval(() => this.companyDetailService.getUserId, 1000);
+        this.companyDetailService.getUserId().subscribe(id => this.id = id);
     }
 
     ngOnDestroy(): void {

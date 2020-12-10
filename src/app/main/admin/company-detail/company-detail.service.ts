@@ -10,22 +10,10 @@ import { User } from './model/user';
 })
 export class CompanyDetailService {
 
-    private userId$ = new Subject<number>();
-
     constructor(private httpClient: HttpClient) {
     }
 
     getUserCompany(id: number): Observable<User> {
-        return this.httpClient.get<User>(`${environment.apiUrl}/users/${id}`)
-            .pipe(tap(data => this.notifyUserId(id)));
+        return this.httpClient.get<User>(`${environment.apiUrl}/users/${id}`);
     }
-
-    getUserId(): Observable<number> {
-        return this.userId$.asObservable();
-    }
-
-    notifyUserId(id: number): void {
-        this.userId$.next(id);
-    }
-
 }

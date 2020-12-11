@@ -1,2 +1,239 @@
-<po-page-default p-title="Nova Empresa
-"></po-page-default>
+<po-page-default p-title="Nova Empresa">
+    <po-stepper>
+        <po-step p-label="Usuário">
+            <po-container>
+                <h2 class="po-ml-1 po-mb-3">Dados Pessoais</h2>
+                <form [formGroup]="">
+                    <po-input
+                        class="po-md-12"
+                        p-auto-focus="true"
+                        p-clean="true"
+                        p-error-pattern="Este campo é obrigatório"
+                        p-label="Nome do titular da conta"
+                        name="string"
+                        p-placeholder="Digite o nome"
+                        p-required="true"
+                    >
+                    </po-input>
+                    <po-email
+                        class="po-mt-2 po-md-6"
+                        name="email"
+                        formControlName="email"
+                        p-label="E-mail"
+                        p-placeholder="Digite o e-mail"
+                        p-clean
+                        p-required
+                        p-maxlength="100"
+                        p-icon=""
+                    ></po-email>
+                    <po-input
+                        class="po-md-4 po-mt-2"
+                        p-label="CPF"
+                        p-placeholder="000.000.000-00"
+                        p-clean
+                        p-mask="999.999.999-99"
+                        p-pattern="^[0-9]{11}$"
+                        p-error-pattern="Digite um CPF válido"
+                    ></po-input>
+                    <po-input
+                        class="po-md-3 po-mt-2 po-mb-3"
+                        name="phone"
+                        p-label="Celular"
+                        p-placeholder="(00) 00000-0000"
+                        p-clean
+                        p-required
+                        p-mask="(99) 99999?-9999"
+                        p-pattern="^[0-9]{10,11}$"
+                        p-error-pattern="Digite um celular válido"
+                    ></po-input>
+                    <div class="po-row po-ml-1">
+                        <po-button
+                            p-label="Próximo"
+                            p-type="primary"
+                        ></po-button>
+                    </div>
+                </form>
+            </po-container>
+        </po-step>
+        <po-step p-label="Empresa">
+            <po-container>
+                <h2 class="po-mb-3 po-ml-1">Dados da Empresa </h2>
+                <form [formGroup]="">
+
+                    <po-input
+                        class="po-sm-3"
+                        p-clean="true"
+                        p-error-pattern="Este campo é obrigatório"
+                        p-placeholder="00.000.000/0001-00"
+                        p-mask="99.999.999/9999-99"
+                        p-pattern="^[0-9]{14}$"
+                        p-label="CNPJ"
+                        name="string"
+                        p-required="true"
+                    >
+                    </po-input>
+                    <po-input
+                        class="po-sm-12 po-mt-2"
+                        p-clean="true"
+                        p-error-pattern="Este campo é obrigatório"
+                        p-mask=""
+                        p-label="Razão Social"
+                        p-placeholder="Digite a razão social"
+                        name="string"
+                        p-required="true"
+                    >
+                    </po-input>
+                    <po-input
+                        class="po-sm-12 po-mt-2"
+                        p-clean="true"
+                        p-error-pattern="Este campo é obrigatório"
+                        p-placeholder="Digite o nome fantasia"
+                        p-mask=""
+                        p-label="Nome Fantasia"
+                        name="string"
+                        p-required="true"
+                    >
+                    </po-input>
+                    <po-radio-group
+                        class="po-md-12 po-mt-2"
+                        name="radioGroupBasic"
+                        p-label="Tipo da empresa"
+                        [p-options]="[
+                            { label: 'Prestadora de Serviço', value: 'SERVICE' },
+                            { label: 'Comércio', value: 'COMMERCE' },
+                            { label: 'Industria', value: 'INDUSTRY' }
+                            ]"
+                    >
+                    </po-radio-group>
+                    <po-input
+                        class="po-md-3 po-mt-2"
+                        p-clean="true"
+                        p-label="Ramo"
+                        p-required="true"
+                        p-placeholder="ramo de atuação"
+                    >
+                    </po-input>
+                    <po-input
+                        class="po-md-9 po-mt-2 po-mb-3"
+                        p-clean="true"
+                        p-label="CNAE"
+                        p-placeholder="Digite o CNAE"
+                        p-required="true"
+                    >
+                    </po-input>
+                    <div class="po-row po-ml-1">
+                        <h2>Endereço</h2>
+                    </div>
+                    <po-radio-group
+                        class="po-md-12 po-mt-3"
+                        name="radioGroupBasic2"
+                        p-label="Tipo de Endereço"
+                        [p-options]="[
+                            { label: 'Comercial', value: 'comercio' },
+                            { label: 'Residencial', value: 'redidencial' }
+
+                        ]"
+                    >
+                    </po-radio-group>
+                    <po-input
+                        class="po-md-3 po-mt-2"
+                        p-label="CEP"
+                        p-placeholder="00000-000"
+                        p-clean
+                        p-required
+                        p-mask="99999-999"
+                        p-pattern="^[0-9]{8}$"
+                        p-error-pattern="Digite um cep válido"
+                    ></po-input>
+                    <!-- <ng-container *ngIf="form.get('zipcode').valid && zipcodeError !== true"> -->
+                    <ng-container>
+                        <po-input
+                            #streetInput
+                            class="po-md-12 po-mt-2"
+                            p-label="Logradouro"
+                            p-placeholder="Rua, Avenida, Alameda..."
+                            p-clean
+                            p-required
+                        ></po-input>
+
+                        <po-input
+                            #numberInput
+                            class="po-md-4 po-mt-2"
+                            p-label="Número"
+                            p-placeholder="0000"
+                            p-clean
+                            p-required
+                        ></po-input>
+
+
+                        <po-input
+                            class="po-md-8 po-mt-2"
+                            p-label="Complemento"
+                            p-placeholder="Ap. 10"
+                            p-clean
+                        ></po-input>
+
+                        <po-input
+                            class="po-md-4 po-mt-2"
+                            p-label="Bairro"
+                            p-placeholder="Digite o bairro"
+                            p-clean
+                            p-required
+                        ></po-input>
+
+                        <ng-container>
+
+                            <po-input
+                                class="po-md-4 po-mt-2"
+                                p-label="Cidade"
+                                p-placeholder="Digite a cidade"
+                                p-required
+                                p-readonly
+                            ></po-input>
+
+                            <po-input
+                                class="po-md-4 po-mt-2"
+                                p-label="Estado"
+                                p-placeholder="Digite o estado"
+                                p-required
+                                p-readonly
+                            ></po-input>
+
+                        </ng-container>
+                    </ng-container>
+                    <div class="po-row po-ml-1 ">
+                        <h2 class="po-mt-3">Contato</h2>
+                    </div>
+                    <po-email
+                        class="po-mt-2 po-md-6"
+                        name="email"
+                        formControlName="email"
+                        p-label="E-mail"
+                        p-placeholder="Digite o e-mail"
+                        p-icon=""
+                        p-clean
+                        p-required
+                        p-maxlength="100"
+                    ></po-email>
+                    <po-input
+                        class="po-md-3 po-mt-2 po-mb-3"
+                        name="phone"
+                        p-label="Telefone"
+                        p-placeholder="(00) 00000-0000"
+                        p-clean
+                        p-required
+                        p-mask="(99) 99999?-9999"
+                        p-pattern="^[0-9]{10,11}$"
+                        p-error-pattern="Digite um celular válido"
+                    ></po-input>
+                    <div class="po-row po-ml-1">
+                        <po-button
+                            p-label="Próximo"
+                            p-type="primary"
+                        ></po-button>
+                    </div>
+                </form>
+            </po-container>
+        </po-step>
+    </po-stepper>
+</po-page-default>

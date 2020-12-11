@@ -15,6 +15,7 @@
                         p-required="true"
                     >
                     </po-input>
+                    <app-invalid-feedback>Este campo é Obrigatório</app-invalid-feedback>
                     <po-email
                         class="po-mt-2 po-md-6"
                         name="email"
@@ -59,11 +60,10 @@
             <po-container>
                 <h2 class="po-mb-3 po-ml-1">Dados da Empresa </h2>
                 <form [formGroup]="">
-
                     <po-input
                         class="po-sm-3"
                         p-clean="true"
-                        p-error-pattern="Este campo é obrigatório"
+                        p-error-pattern="Digite um CNPJ válido"
                         p-placeholder="00.000.000/0001-00"
                         p-mask="99.999.999/9999-99"
                         p-pattern="^[0-9]{14}$"
@@ -72,6 +72,7 @@
                         p-required="true"
                     >
                     </po-input>
+
                     <po-input
                         class="po-sm-12 po-mt-2"
                         p-clean="true"
@@ -83,6 +84,7 @@
                         p-required="true"
                     >
                     </po-input>
+
                     <po-input
                         class="po-sm-12 po-mt-2"
                         p-clean="true"
@@ -94,6 +96,7 @@
                         p-required="true"
                     >
                     </po-input>
+
                     <po-radio-group
                         class="po-md-12 po-mt-2"
                         name="radioGroupBasic"
@@ -105,6 +108,7 @@
                             ]"
                     >
                     </po-radio-group>
+
                     <po-input
                         class="po-md-3 po-mt-2"
                         p-clean="true"
@@ -113,6 +117,7 @@
                         p-placeholder="ramo de atuação"
                     >
                     </po-input>
+
                     <po-input
                         class="po-md-9 po-mt-2 po-mb-3"
                         p-clean="true"
@@ -121,9 +126,11 @@
                         p-required="true"
                     >
                     </po-input>
+
                     <div class="po-row po-ml-1">
                         <h2>Endereço</h2>
                     </div>
+
                     <po-radio-group
                         class="po-md-12 po-mt-3"
                         name="radioGroupBasic2"
@@ -135,6 +142,7 @@
                         ]"
                     >
                     </po-radio-group>
+
                     <po-input
                         class="po-md-3 po-mt-2"
                         p-label="CEP"
@@ -145,6 +153,7 @@
                         p-pattern="^[0-9]{8}$"
                         p-error-pattern="Digite um cep válido"
                     ></po-input>
+
                     <!-- <ng-container *ngIf="form.get('zipcode').valid && zipcodeError !== true"> -->
                     <ng-container>
                         <po-input
@@ -164,7 +173,6 @@
                             p-clean
                             p-required
                         ></po-input>
-
 
                         <po-input
                             class="po-md-8 po-mt-2"

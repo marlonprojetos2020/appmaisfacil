@@ -1,65 +1,93 @@
-<po-page-default p-title="Nova Empresa">
-    <po-stepper>
+<po-page-edit p-title="Nova Empresa">
+    <po-stepper #stepper>
         <po-step p-label="Usuário">
+            <!-- [p-can-active-next-step]="formDadosPessoais.invalid" -->
             <po-container>
                 <h2 class="po-ml-1 po-mb-3">Dados Pessoais</h2>
-                <form [formGroup]="">
-                    <po-input
-                        class="po-md-12"
-                        p-auto-focus="true"
-                        p-clean="true"
-                        p-error-pattern="Este campo é obrigatório"
-                        p-label="Nome do titular da conta"
-                        name="string"
-                        p-placeholder="Digite o nome"
-                        p-required="true"
-                    >
-                    </po-input>
-                    <app-invalid-feedback>Este campo é Obrigatório</app-invalid-feedback>
+                <form [formGroup]="formDadosPessoais">
+                    <div class="po-md-12">
+                        <po-input
+                            formControlName="name"
+                            p-auto-focus="true"
+                            p-clean="true"
+                            p-label="Nome do titular da conta"
+                            p-placeholder="Digite o nome"
+                            p-required="true"
+                            (p-blur)="dirtyMe('name')"
+                        >
+                        </po-input>
+                        <app-invalid-feedback
+                            [formCtrl]="formDadosPessoais.get('name')"
+                            [hasError]="formDadosPessoais.get('name').errors?.required 
+                            && (formDadosPessoais.get('name').dirty)"
+                        >
+                            Este campo é Obrigatório
+                        </app-invalid-feedback>
+                    </div>
                     <po-email
-                        class="po-mt-2 po-md-6"
-                        name="email"
                         formControlName="email"
+                        class="po-mt-2 po-md-6"
                         p-label="E-mail"
                         p-placeholder="Digite o e-mail"
+                        p-error-pattern="Digite um e-mail válido"
                         p-clean
                         p-required
                         p-maxlength="100"
                         p-icon=""
                     ></po-email>
-                    <po-input
-                        class="po-md-4 po-mt-2"
-                        p-label="CPF"
-                        p-placeholder="000.000.000-00"
-                        p-clean
-                        p-mask="999.999.999-99"
-                        p-pattern="^[0-9]{11}$"
-                        p-error-pattern="Digite um CPF válido"
-                    ></po-input>
-                    <po-input
-                        class="po-md-3 po-mt-2 po-mb-3"
-                        name="phone"
-                        p-label="Celular"
-                        p-placeholder="(00) 00000-0000"
-                        p-clean
-                        p-required
-                        p-mask="(99) 99999?-9999"
-                        p-pattern="^[0-9]{10,11}$"
-                        p-error-pattern="Digite um celular válido"
-                    ></po-input>
+                    <app-invalid-feedback
+                        [formCtrl]="formDadosPessoais.get('email')"
+                        errorCode="uniqueEmail"
+                    >
+                        Esse e-mail já foi utilizado por outro usuário
+                    </app-invalid-feedback>
+                    <div
+                        class="po-row"
+                        formGroupName="userExtraData"
+                    >
+                        <po-input
+                            formControlName="cpf"
+                            class="po-md-4 po-mt-2"
+                            p-label="CPF"
+                            p-placeholder="000.000.000-00"
+                            p-clean
+                            p-mask="999.999.999-99"
+                            p-pattern="^[0-9]{11}$"
+                            p-error-pattern="Digite um CPF válido"
+                        ></po-input>
+                    </div>
+                    <div formGroupName="userExtraData">
+                        <po-input
+                            formControlName="phone"
+                            class="po-md-3 po-mt-2 po-mb-3"
+                            name="phone"
+                            p-label="Celular"
+                            p-placeholder="(00) 00000-0000"
+                            p-clean
+                            p-required
+                            p-mask="(99) 99999?-9999"
+                            p-pattern="^[0-9]{10,11}$"
+                            p-error-pattern="Digite um celular válido"
+                        ></po-input>
+                    </div>
                     <div class="po-row po-ml-1">
                         <po-button
+                            [p-disabled]="formDadosPessoais.invalid"
                             p-label="Próximo"
                             p-type="primary"
+                            (p-click)="nextForm()"
                         ></po-button>
                     </div>
                 </form>
             </po-container>
         </po-step>
-        <po-step p-label="Empresa">
+        <po-step
+            p-label="Empresa"
+            [p-can-active-next-step]="formDadosEmpresa.invalid"
+        >
             <po-container>
                 <h2 class="po-mb-3 po-ml-1">Dados da Empresa </h2>
-                <form [formGroup]="">
+                <form [formGroup]="formDadosEmpresa">
                     <po-input
                         class="po-sm-3"
                         p-clean="true"
@@ -70,6 +98,7 @@
                         p-label="CNPJ"
                         name="string"
                         p-required="true"
+                        formControlName='cnpj'
                     >
                     </po-input>
 
@@ -82,6 +111,7 @@
                         p-placeholder="Digite a razão social"
                         name="string"
                         p-required="true"
+                        formControlName='socialReason'
                     >
                     </po-input>
 
@@ -94,6 +124,7 @@
                         p-label="Nome Fantasia"
                         name="string"
                         p-required="true"
+                        formControlName='fantasyName'
                     >
                     </po-input>
 
@@ -106,6 +137,7 @@
                             { label: 'Comércio', value: 'COMMERCE' },
                             { label: 'Industria', value: 'INDUSTRY' }
                             ]"
+                        formControlName='type'
                     >
                     </po-radio-group>
 
@@ -115,6 +147,7 @@
                         p-label="Ramo"
                         p-required="true"
                         p-placeholder="ramo de atuação"
+                        formControlName='lineOfBusiness'
                     >
                     </po-input>
 
@@ -124,6 +157,7 @@
                         p-label="CNAE"
                         p-placeholder="Digite o CNAE"
                         p-required="true"
+                        formControlName='cnae'
                     >
                     </po-input>
 
@@ -142,71 +176,80 @@
                         ]"
                     >
                     </po-radio-group>
+                    <ng-container formGroupName="address">
+                        <div class="po-md-3 po-mt-2">
+                            <po-input
+                                p-label="CEP"
+                                p-placeholder="00000-000"
+                                p-clean
+                                p-required
+                                p-mask="99999-999"
+                                p-pattern="^[0-9]{8}$"
+                                p-error-pattern="Digite um cep válido"
+                                formControlName='zipcode'
+                            ></po-input>
+                            <app-invalid-feedback [hasError]="zipcodeError === true">
+                                CEP não encontrado
+                            </app-invalid-feedback>
+                        </div>
 
-                    <po-input
-                        class="po-md-3 po-mt-2"
-                        p-label="CEP"
-                        p-placeholder="00000-000"
-                        p-clean
-                        p-required
-                        p-mask="99999-999"
-                        p-pattern="^[0-9]{8}$"
-                        p-error-pattern="Digite um cep válido"
-                    ></po-input>
-
-                    <!-- <ng-container *ngIf="form.get('zipcode').valid && zipcodeError !== true"> -->
-                    <ng-container>
-                        <po-input
-                            #streetInput
-                            class="po-md-12 po-mt-2"
-                            p-label="Logradouro"
-                            p-placeholder="Rua, Avenida, Alameda..."
-                            p-clean
-                            p-required
-                        ></po-input>
-
-                        <po-input
-                            #numberInput
-                            class="po-md-4 po-mt-2"
-                            p-label="Número"
-                            p-placeholder="0000"
-                            p-clean
-                            p-required
-                        ></po-input>
-
-                        <po-input
-                            class="po-md-8 po-mt-2"
-                            p-label="Complemento"
-                            p-placeholder="Ap. 10"
-                            p-clean
-                        ></po-input>
-
-                        <po-input
-                            class="po-md-4 po-mt-2"
-                            p-label="Bairro"
-                            p-placeholder="Digite o bairro"
-                            p-clean
-                            p-required
-                        ></po-input>
-
-                        <ng-container>
+                        <ng-container *ngIf="formDadosEmpresa.get('address.zipcode').valid && zipcodeError !== true">
+                            <po-input
+                                #streetInput
+                                class="po-md-12 po-mt-2"
+                                p-label="Logradouro"
+                                p-placeholder="Rua, Avenida, Alameda..."
+                                p-clean
+                                p-required
+                                formControlName='street'
+                            ></po-input>
 
                             <po-input
+                                #numberInput
                                 class="po-md-4 po-mt-2"
-                                p-label="Cidade"
-                                p-placeholder="Digite a cidade"
+                                p-label="Número"
+                                p-placeholder="0000"
+                                p-clean
                                 p-required
-                                p-readonly
+                                formControlName='number'
+                            ></po-input>
+
+                            <po-input
+                                class="po-md-8 po-mt-2"
+                                p-label="Complemento"
+                                p-placeholder="Ap. 10"
+                                p-clean
+                                formControlName='complement'
                             ></po-input>
 
                             <po-input
                                 class="po-md-4 po-mt-2"
-                                p-label="Estado"
-                                p-placeholder="Digite o estado"
+                                p-label="Bairro"
+                                p-placeholder="Digite o bairro"
+                                p-clean
                                 p-required
-                                p-readonly
+                                formControlName='neighborhood'
                             ></po-input>
 
+                            <ng-container formGroupName="city">
+
+                                <po-input
+                                    class="po-md-4 po-mt-2"
+                                    p-label="Cidade"
+                                    p-placeholder="Digite a cidade"
+                                    p-required
+                                    formControlName='name'
+                                ></po-input>
+
+                                <po-input
+                                    class="po-md-4 po-mt-2"
+                                    p-label="Estado"
+                                    p-placeholder="Digite o estado"
+                                    p-required
+                                    formControlName='stateProvince'
+                                ></po-input>
+
+                            </ng-container>
                         </ng-container>
                     </ng-container>
                     <div class="po-row po-ml-1 ">
@@ -215,13 +258,13 @@
                     <po-email
                         class="po-mt-2 po-md-6"
                         name="email"
-                        formControlName="email"
                         p-label="E-mail"
                         p-placeholder="Digite o e-mail"
                         p-icon=""
                         p-clean
                         p-required
                         p-maxlength="100"
+                        formControlName='email'
                     ></po-email>
                     <po-input
                         class="po-md-3 po-mt-2 po-mb-3"
@@ -233,15 +276,18 @@
                         p-mask="(99) 99999?-9999"
                         p-pattern="^[0-9]{10,11}$"
                         p-error-pattern="Digite um celular válido"
+                        formControlName='phone'
                     ></po-input>
                     <div class="po-row po-ml-1">
                         <po-button
-                            p-label="Próximo"
+                            [p-disabled]="formDadosEmpresa.invalid"
+                            p-label="Finalizar"
                             p-type="primary"
+                            (p-click)="submitForm()"
                         ></po-button>
                     </div>
                 </form>
             </po-container>
         </po-step>
     </po-stepper>
-</po-page-default>
+</po-page-edit>

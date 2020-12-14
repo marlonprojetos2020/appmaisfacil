@@ -10,7 +10,6 @@ import { AddressApiResponse } from '../model/address-api-response';
 
 @Component({
     templateUrl: './company-new.component.html',
-    styleUrls: ['./company-new.component.scss'],
 })
 export class CompanyNewComponent implements OnInit {
     formDadosPessoais: FormGroup;

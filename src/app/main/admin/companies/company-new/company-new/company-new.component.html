@@ -1,7 +1,9 @@
 <po-page-edit p-title="Nova Empresa">
     <po-stepper #stepper>
-        <po-step p-label="Usuário">
-            <!-- [p-can-active-next-step]="formDadosPessoais.invalid" -->
+        <po-step
+            p-label="Usuário"
+            [p-can-active-next-step]="formDadosPessoais.invalid"
+        >
             <po-container>
                 <h2 class="po-ml-1 po-mb-3">Dados Pessoais</h2>
                 <form [formGroup]="formDadosPessoais">
@@ -21,7 +23,7 @@
                             [hasError]="formDadosPessoais.get('name').errors?.required 
                             && (formDadosPessoais.get('name').dirty)"
                         >
-                            Este campo é Obrigatório
+                            Este campo é obrigatório
                         </app-invalid-feedback>
                     </div>
                     <po-email
@@ -37,29 +39,37 @@
                     ></po-email>
                     <app-invalid-feedback
                         [formCtrl]="formDadosPessoais.get('email')"
-                        [hasError]="formDadosPessoais.errors?.isEmailTaken"
+                        [hasError]="formDadosPessoais.get('email').errors?.isEmailTaken"
                     >
                         Esse e-mail já é utilizado por outro usuário
                     </app-invalid-feedback>
-                    <div
-                        class="po-row"
-                        formGroupName="userExtraData"
-                    >
+                    <div formGroupName="userExtraData">
                         <po-input
-                            formControlName="cpf"
                             class="po-md-4 po-mt-2"
+                            formControlName="cpf"
                             p-label="CPF"
                             p-placeholder="000.000.000-00"
                             p-clean
                             p-mask="999.999.999-99"
                             p-pattern="^[0-9]{11}$"
                             p-error-pattern="Digite um CPF válido"
+                            p-required='true'
+                            (p-blur)="dirtyMe('userExtraData.cpf')"
                         ></po-input>
+                        <app-invalid-feedback
+                            [formCtrl]="formDadosPessoais.get('userExtraData.cpf')"
+                            [hasError]="formDadosPessoais.get('userExtraData.cpf').errors?.required 
+                            && (formDadosPessoais.get('userExtraData.cpf').dirty)"
+                        >
+                            Este campo é obrigatório
+                        </app-invalid-feedback>
                     </div>
-                    <div formGroupName="userExtraData">
+                    <div
+                        class="po-md-3 po-mt-2 po-mb-3"
+                        formGroupName="userExtraData"
+                    >
                         <po-input
                             formControlName="phone"
-                            class="po-md-3 po-mt-2 po-mb-3"
                             name="phone"
                             p-label="Celular"
                             p-placeholder="(00) 00000-0000"
@@ -68,7 +78,15 @@
                             p-mask="(99) 99999?-9999"
                             p-pattern="^[0-9]{10,11}$"
                             p-error-pattern="Digite um celular válido"
+                            (p-blur)="dirtyMe('userExtraData.phone')"
                         ></po-input>
+                        <app-invalid-feedback
+                            [formCtrl]="formDadosPessoais.get('userExtraData.phone')"
+                            [hasError]="formDadosPessoais.get('userExtraData.phone').errors?.required 
+                                                    && (formDadosPessoais.get('userExtraData.phone').dirty)"
+                        >
+                            Este campo é obrigatório
+                        </app-invalid-feedback>
                     </div>
                     <div class="po-row po-ml-1">
                         <po-button

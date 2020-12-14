@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { PoNotificationService } from '@po-ui/ng-components';
 import { filter, tap } from 'rxjs/operators';
 import { Company } from '../../../company-detail/model/company';
 import { User } from '../../../company-detail/model/user';
@@ -24,6 +26,8 @@ export class CompanyNewComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private companyNewService: CompanyNewService,
+        private notificationService: PoNotificationService,
+        private router: Router,
     ) {}
 
     ngOnInit(): void {
@@ -77,9 +81,9 @@ export class CompanyNewComponent implements OnInit {
                     if (addressApiResponse.bairro) {
                         this.formDadosEmpresa.get('address.neighborhood').setValue(addressApiResponse.bairro);
                     }
-                    if (addressApiResponse.complemento) {
-                        this.formDadosEmpresa.get('address.complement').setValue(addressApiResponse.complemento);
-                    }
+                    // if (addressApiResponse.complemento) {
+                    //     this.formDadosEmpresa.get('address.complement').setValue(addressApiResponse.complemento);
+                    // }
                     this.formDadosEmpresa.get('address.city.name').setValue(addressApiResponse.localidade);
                     this.formDadosEmpresa.get('address.city.stateProvince').setValue(addressApiResponse.uf);
 
@@ -99,7 +103,12 @@ export class CompanyNewComponent implements OnInit {
 
     submitForm(): void {
         this.newCompany.userCompany = this.formDadosEmpresa.getRawValue() as Company;
-        console.log(this.newCompany);
+        this.companyNewService.createUser(this.newCompany).subscribe(
+            () => {
+                this.notificationService.success(`Usuário adicionado com sucesso`);
+                this.router.navigate(['/admin', 'empresas']);
+            },
+        );
     }
 
     dirtyMe(input): void {

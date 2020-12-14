@@ -118,10 +118,13 @@ export class CompanyNewComponent implements OnInit {
     }
 
     submitForm(): void {
-        this.newCompany.roles.push({
-            value: RoleType.ROLE_COMPANY,
-            label: 'Empresa',
-        });
+        this.newCompany.roles = [
+            {
+                value: RoleType.ROLE_COMPANY,
+                label: 'Empresa',
+            },
+        ];
+
         this.newCompany.userCompany = this.formDadosEmpresa.getRawValue() as Company;
         console.log(this.newCompany);
         // this.companyNewService.createUser(this.newCompany).subscribe(
@@ -136,21 +139,21 @@ export class CompanyNewComponent implements OnInit {
         this.formDadosPessoais.get(input).markAsDirty();
     }
 }
-        // id: number;
-        // email: string;
-        // name: string;
-        // roles: [
-        //         {
-        //             "_messages": [],
-        //             "value": "ROLE_COMPANY",
-        //             "label": "Empresa"
-        //         },
-        //         {
-        //             "_messages": [],
-        //             "value": "ROLE_ADMIN",
-        //             "label": "Administrador"
-        //         }
-        //     ],
+// id: number;
+// email: string;
+// name: string;
+// roles: [
+//         {
+//             "_messages": [],
+//             "value": "ROLE_COMPANY",
+//             "label": "Empresa"
+//         },
+//         {
+//             "_messages": [],
+//             "value": "ROLE_ADMIN",
+//             "label": "Administrador"
+//         }
+//     ],
 //         "userExtraData": {
 //     "phone": "17981008663",
 //         "cpf": "42373499851"

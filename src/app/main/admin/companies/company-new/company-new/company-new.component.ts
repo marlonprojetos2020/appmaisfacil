@@ -7,6 +7,7 @@ import { Company } from '../../../company-detail/model/company';
 import { User } from '../../../company-detail/model/user';
 import { CompanyNewService } from '../company-new.service';
 import { AddressApiResponse } from '../model/address-api-response';
+import { RoleType } from 'src/app/core/auth/model/role-type';
 
 @Component({
     templateUrl: './company-new.component.html',
@@ -102,13 +103,18 @@ export class CompanyNewComponent implements OnInit {
     }
 
     submitForm(): void {
+        this.newCompany.roles.push({
+            value: RoleType.ROLE_COMPANY,
+            label: 'Empresa',
+        });
         this.newCompany.userCompany = this.formDadosEmpresa.getRawValue() as Company;
-        this.companyNewService.createUser(this.newCompany).subscribe(
-            () => {
-                this.notificationService.success(`Usuário adicionado com sucesso`);
-                this.router.navigate(['/admin', 'empresas']);
-            },
-        );
+        console.log(this.newCompany);
+        // this.companyNewService.createUser(this.newCompany).subscribe(
+        //     () => {
+        //         this.notificationService.success(`Usuário adicionado com sucesso`);
+        //         this.router.navigate(['/admin', 'empresas']);
+        //     },
+        // );
     }
 
     dirtyMe(input): void {
@@ -119,7 +125,7 @@ export class CompanyNewComponent implements OnInit {
         // id: number;
         // email: string;
         // name: string;
-        //     "roles": [
+        // roles: [
         //         {
         //             "_messages": [],
         //             "value": "ROLE_COMPANY",

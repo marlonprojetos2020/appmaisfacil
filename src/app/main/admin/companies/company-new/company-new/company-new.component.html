@@ -37,9 +37,9 @@
                     ></po-email>
                     <app-invalid-feedback
                         [formCtrl]="formDadosPessoais.get('email')"
-                        errorCode="uniqueEmail"
+                        [hasError]="formDadosPessoais.errors?.isEmailTaken"
                     >
-                        Esse e-mail já foi utilizado por outro usuário
+                        Esse e-mail já é utilizado por outro usuário
                     </app-invalid-feedback>
                     <div
                         class="po-row"

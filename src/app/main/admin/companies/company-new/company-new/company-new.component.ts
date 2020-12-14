@@ -30,7 +30,7 @@ export class CompanyNewComponent implements OnInit {
 
         this.formDadosPessoais = this.formBuilder.group({
             name: ['', Validators.required],
-            email: ['', Validators.required],
+            email: ['', Validators.required, this.companyNewService.isEmailTaken()],
             userExtraData: this.formBuilder.group({
                 phone: ['', Validators.required],
                 cpf: ['', Validators.required],

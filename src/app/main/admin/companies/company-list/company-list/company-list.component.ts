@@ -17,7 +17,7 @@ export class CompanyListComponent {
             action: (item) =>
                 this.router.navigateByUrl(`/admin/empresa/${item.id}`),
         },
-        // { label: 'Editar', action: item => this.router.navigateByUrl(`/admin/empresa/${item.id}/editar`) },
+        { label: 'Editar', action: item => this.router.navigateByUrl(`/admin/empresa/${item.id}/editar`) },
     ];
     columns: DatatableColumn[] = [
         { property: 'name', label: 'Nome' },

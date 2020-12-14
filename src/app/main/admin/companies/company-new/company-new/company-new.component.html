@@ -62,7 +62,6 @@
                         </app-invalid-feedback>
                     </div>
                     <div class="po-row">
-<<<<<<< HEAD
                         <div
                             class="po-md-3 po-mt-2 po-mb-3"
                             formGroupName="userExtraData"
@@ -93,8 +92,7 @@
                                 Este campo é obrigatório
                             </app-invalid-feedback>
                         </div>
-=======
->>>>>>> main
+
                         <div
                             formGroupName="userExtraData"
                             class="po-md-4 po-mt-2"
@@ -124,39 +122,6 @@
                                 Este campo é obrigatório
                             </app-invalid-feedback>
                         </div>
-<<<<<<< HEAD
-=======
-                        <div
-                            class="po-md-3 po-mt-2 po-mb-3"
-                            formGroupName="userExtraData"
-                        >
-                            <po-input
-                                formControlName="phone"
-                                name="phone"
-                                p-label="Celular"
-                                p-placeholder="(00) 00000-0000"
-                                p-clean
-                                p-required="true"
-                                p-mask="(99) 99999?-9999"
-                                p-pattern="^[0-9]{10,11}$"
-                                p-error-pattern="Digite um celular válido"
-                                (p-blur)="dirtyMe('userExtraData.phone')"
-                            ></po-input>
-                            <app-invalid-feedback
-                                [formCtrl]="
-                                    formDadosPessoais.get('userExtraData.phone')
-                                "
-                                [hasError]="
-                                    formDadosPessoais.get('userExtraData.phone')
-                                        .errors?.required &&
-                                    formDadosPessoais.get('userExtraData.phone')
-                                        .dirty
-                                "
-                            >
-                                Este campo é obrigatório
-                            </app-invalid-feedback>
-                        </div>
->>>>>>> main
                     </div>
                     <div class="po-row po-ml-1">
                         <po-button

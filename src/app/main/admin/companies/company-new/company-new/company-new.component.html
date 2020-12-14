@@ -20,73 +20,108 @@
                         </po-input>
                         <app-invalid-feedback
                             [formCtrl]="formDadosPessoais.get('name')"
-                            [hasError]="formDadosPessoais.get('name').errors?.required 
-                            && (formDadosPessoais.get('name').dirty)"
+                            [hasError]="
+                                formDadosPessoais.get('name').errors
+                                    ?.required &&
+                                formDadosPessoais.get('name').dirty
+                            "
                         >
                             Este campo é obrigatório
                         </app-invalid-feedback>
                     </div>
-                    <po-email
-                        formControlName="email"
-                        class="po-mt-2 po-md-6"
-                        p-label="E-mail"
-                        p-placeholder="Digite o e-mail"
-                        p-error-pattern="Digite um e-mail válido"
-                        p-clean
-                        p-required
-                        p-maxlength="100"
-                        p-icon=""
-                    ></po-email>
-                    <app-invalid-feedback
-                        [formCtrl]="formDadosPessoais.get('email')"
-                        [hasError]="formDadosPessoais.get('email').errors?.isEmailTaken"
-                    >
-                        Esse e-mail já é utilizado por outro usuário
-                    </app-invalid-feedback>
-                    <div formGroupName="userExtraData">
-                        <po-input
+                    <div class="po-mt-2 po-md-6 teste">
+                        <po-email
+                            formControlName="email"
+                            p-label="E-mail"
+                            p-placeholder="Digite o e-mail"
+                            p-error-pattern="Digite um e-mail válido"
+                            p-clean
+                            p-required="true"
+                            p-maxlength="100"
+                            p-icon=""
+                            (p-blur)="dirtyMe('email')"
+                        ></po-email>
+                        <app-invalid-feedback
+                            [formCtrl]="formDadosPessoais.get('email')"
+                            [hasError]="
+                                formDadosPessoais.get('email').errors
+                                    ?.isEmailTaken
+                            "
+                        >
+                            Esse e-mail já é utilizado por outro usuário
+                        </app-invalid-feedback>
+                        <app-invalid-feedback
+                            [formCtrl]="formDadosPessoais.get('email')"
+                            [hasError]="
+                                formDadosPessoais.get('email').errors
+                                    ?.required &&
+                                formDadosPessoais.get('email').dirty
+                            "
+                        >
+                            Este campo é obrigatório
+                        </app-invalid-feedback>
+                    </div>
+                    <div class="po-row">
+                        <div
+                            class="po-md-3 po-mt-2 po-mb-3"
+                            formGroupName="userExtraData"
+                        >
+                            <po-input
+                                formControlName="phone"
+                                name="phone"
+                                p-label="Celular"
+                                p-placeholder="(00) 00000-0000"
+                                p-clean
+                                p-required="true"
+                                p-mask="(99) 99999?-9999"
+                                p-pattern="^[0-9]{10,11}$"
+                                p-error-pattern="Digite um celular válido"
+                                (p-blur)="dirtyMe('userExtraData.phone')"
+                            ></po-input>
+                            <app-invalid-feedback
+                                [formCtrl]="
+                                    formDadosPessoais.get('userExtraData.phone')
+                                "
+                                [hasError]="
+                                    formDadosPessoais.get('userExtraData.phone')
+                                        .errors?.required &&
+                                    formDadosPessoais.get('userExtraData.phone')
+                                        .dirty
+                                "
+                            >
+                                Este campo é obrigatório
+                            </app-invalid-feedback>
+                        </div>
+
+                        <div
+                            formGroupName="userExtraData"
                             class="po-md-4 po-mt-2"
-                            formControlName="cpf"
-                            p-label="CPF"
-                            p-placeholder="000.000.000-00"
-                            p-clean
-                            p-mask="999.999.999-99"
-                            p-pattern="^[0-9]{11}$"
-                            p-error-pattern="Digite um CPF válido"
-                            p-required='true'
-                            (p-blur)="dirtyMe('userExtraData.cpf')"
-                        ></po-input>
-                        <app-invalid-feedback
-                            [formCtrl]="formDadosPessoais.get('userExtraData.cpf')"
-                            [hasError]="formDadosPessoais.get('userExtraData.cpf').errors?.required 
-                            && (formDadosPessoais.get('userExtraData.cpf').dirty)"
                         >
-                            Este campo é obrigatório
-                        </app-invalid-feedback>
-                    </div>
-                    <div
-                        class="po-md-3 po-mt-2 po-mb-3"
-                        formGroupName="userExtraData"
-                    >
-                        <po-input
-                            formControlName="phone"
-                            name="phone"
-                            p-label="Celular"
-                            p-placeholder="(00) 00000-0000"
-                            p-clean
-                            p-required
-                            p-mask="(99) 99999?-9999"
-                            p-pattern="^[0-9]{10,11}$"
-                            p-error-pattern="Digite um celular válido"
-                            (p-blur)="dirtyMe('userExtraData.phone')"
-                        ></po-input>
-                        <app-invalid-feedback
-                            [formCtrl]="formDadosPessoais.get('userExtraData.phone')"
-                            [hasError]="formDadosPessoais.get('userExtraData.phone').errors?.required 
-                                                    && (formDadosPessoais.get('userExtraData.phone').dirty)"
-                        >
-                            Este campo é obrigatório
-                        </app-invalid-feedback>
+                            <po-input
+                                formControlName="cpf"
+                                p-label="CPF"
+                                p-placeholder="000.000.000-00"
+                                p-clean
+                                p-mask="999.999.999-99"
+                                p-pattern="^[0-9]{11}$"
+                                p-error-pattern="Digite um CPF válido"
+                                p-required="true"
+                                (p-blur)="dirtyMe('userExtraData.cpf')"
+                            ></po-input>
+                            <app-invalid-feedback
+                                [formCtrl]="
+                                    formDadosPessoais.get('userExtraData.cpf')
+                                "
+                                [hasError]="
+                                    formDadosPessoais.get('userExtraData.cpf')
+                                        .errors?.required &&
+                                    formDadosPessoais.get('userExtraData.cpf')
+                                        .dirty
+                                "
+                            >
+                                Este campo é obrigatório
+                            </app-invalid-feedback>
+                        </div>
                     </div>
                     <div class="po-row po-ml-1">
                         <po-button
@@ -104,7 +139,7 @@
             [p-can-active-next-step]="formDadosEmpresa.invalid"
         >
             <po-container>
-                <h2 class="po-mb-3 po-ml-1">Dados da Empresa </h2>
+                <h2 class="po-mb-3 po-ml-1">Dados da Empresa</h2>
                 <form [formGroup]="formDadosEmpresa">
                     <po-input
                         class="po-sm-3"
@@ -115,8 +150,8 @@
                         p-pattern="^[0-9]{14}$"
                         p-label="CNPJ"
                         name="string"
-                        p-required="true"
-                        formControlName='cnpj'
+                        formControlName="cnpj"
+                        p-optional="true"
                     >
                     </po-input>
 
@@ -128,8 +163,8 @@
                         p-label="Razão Social"
                         p-placeholder="Digite a razão social"
                         name="string"
-                        p-required="true"
-                        formControlName='socialReason'
+                        formControlName="socialReason"
+                        p-optional="true"
                     >
                     </po-input>
 
@@ -141,8 +176,8 @@
                         p-mask=""
                         p-label="Nome Fantasia"
                         name="string"
-                        p-required="true"
-                        formControlName='fantasyName'
+                        formControlName="fantasyName"
+                        p-optional="true"
                     >
                     </po-input>
 
@@ -151,11 +186,15 @@
                         name="radioGroupBasic"
                         p-label="Tipo da empresa"
                         [p-options]="[
-                            { label: 'Prestadora de Serviço', value: 'SERVICE' },
+                            {
+                                label: 'Prestadora de Serviço',
+                                value: 'SERVICE'
+                            },
                             { label: 'Comércio', value: 'COMMERCE' },
                             { label: 'Industria', value: 'INDUSTRY' }
-                            ]"
-                        formControlName='type'
+                        ]"
+                        formControlName="type"
+                        p-optional="true"
                     >
                     </po-radio-group>
 
@@ -163,9 +202,9 @@
                         class="po-md-3 po-mt-2"
                         p-clean="true"
                         p-label="Ramo"
-                        p-required="true"
                         p-placeholder="ramo de atuação"
-                        formControlName='lineOfBusiness'
+                        formControlName="lineOfBusiness"
+                        p-optional="true"
                     >
                     </po-input>
 
@@ -174,8 +213,8 @@
                         p-clean="true"
                         p-label="CNAE"
                         p-placeholder="Digite o CNAE"
-                        p-required="true"
-                        formControlName='cnae'
+                        formControlName="cnae"
+                        p-optional="true"
                     >
                     </po-input>
 
@@ -190,8 +229,8 @@
                         [p-options]="[
                             { label: 'Comercial', value: 'comercio' },
                             { label: 'Residencial', value: 'redidencial' }
-
                         ]"
+                        p-optional="true"
                     >
                     </po-radio-group>
                     <ng-container formGroupName="address">
@@ -200,26 +239,33 @@
                                 p-label="CEP"
                                 p-placeholder="00000-000"
                                 p-clean
-                                p-required
                                 p-mask="99999-999"
                                 p-pattern="^[0-9]{8}$"
                                 p-error-pattern="Digite um cep válido"
-                                formControlName='zipcode'
+                                formControlName="zipcode"
+                                p-optional="true"
                             ></po-input>
-                            <app-invalid-feedback [hasError]="zipcodeError === true">
+                            <app-invalid-feedback
+                                [hasError]="zipcodeError === true"
+                            >
                                 CEP não encontrado
                             </app-invalid-feedback>
                         </div>
 
-                        <ng-container *ngIf="formDadosEmpresa.get('address.zipcode').valid && zipcodeError !== true">
+                        <ng-container
+                            *ngIf="
+                                formDadosEmpresa.get('address.zipcode').valid &&
+                                zipcodeError !== true
+                            "
+                        >
                             <po-input
                                 #streetInput
                                 class="po-md-12 po-mt-2"
                                 p-label="Logradouro"
                                 p-placeholder="Rua, Avenida, Alameda..."
                                 p-clean
-                                p-required
-                                formControlName='street'
+                                formControlName="street"
+                                p-optional="true"
                             ></po-input>
 
                             <po-input
@@ -228,8 +274,8 @@
                                 p-label="Número"
                                 p-placeholder="0000"
                                 p-clean
-                                p-required
-                                formControlName='number'
+                                formControlName="number"
+                                p-optional="true"
                             ></po-input>
 
                             <po-input
@@ -237,7 +283,8 @@
                                 p-label="Complemento"
                                 p-placeholder="Ap. 10"
                                 p-clean
-                                formControlName='complement'
+                                formControlName="complement"
+                                p-optional="true"
                             ></po-input>
 
                             <po-input
@@ -245,32 +292,30 @@
                                 p-label="Bairro"
                                 p-placeholder="Digite o bairro"
                                 p-clean
-                                p-required
-                                formControlName='neighborhood'
+                                formControlName="neighborhood"
+                                p-optional="true"
                             ></po-input>
 
                             <ng-container formGroupName="city">
-
                                 <po-input
                                     class="po-md-4 po-mt-2"
                                     p-label="Cidade"
                                     p-placeholder="Digite a cidade"
-                                    p-required
-                                    formControlName='name'
+                                    formControlName="name"
+                                    p-optional="true"
                                 ></po-input>
 
                                 <po-input
                                     class="po-md-4 po-mt-2"
                                     p-label="Estado"
                                     p-placeholder="Digite o estado"
-                                    p-required
-                                    formControlName='stateProvince'
+                                    formControlName="stateProvince"
+                                    p-optional="true"
                                 ></po-input>
-
                             </ng-container>
                         </ng-container>
                     </ng-container>
-                    <div class="po-row po-ml-1 ">
+                    <div class="po-row po-ml-1">
                         <h2 class="po-mt-3">Contato</h2>
                     </div>
                     <po-email
@@ -280,9 +325,9 @@
                         p-placeholder="Digite o e-mail"
                         p-icon=""
                         p-clean
-                        p-required
                         p-maxlength="100"
-                        formControlName='email'
+                        formControlName="email"
+                        p-optional="true"
                     ></po-email>
                     <po-input
                         class="po-md-3 po-mt-2 po-mb-3"
@@ -290,11 +335,11 @@
                         p-label="Telefone"
                         p-placeholder="(00) 00000-0000"
                         p-clean
-                        p-required
                         p-mask="(99) 99999?-9999"
                         p-pattern="^[0-9]{10,11}$"
                         p-error-pattern="Digite um celular válido"
-                        formControlName='phone'
+                        formControlName="phone"
+                        p-optional="true"
                     ></po-input>
                     <div class="po-row po-ml-1">
                         <po-button

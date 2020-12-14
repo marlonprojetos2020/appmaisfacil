@@ -13,7 +13,6 @@ import { RoleType } from 'src/app/core/auth/model/role-type';
     templateUrl: './company-new.component.html',
 })
 export class CompanyNewComponent implements OnInit {
-
     formDadosPessoais: FormGroup;
     formDadosEmpresa: FormGroup;
     newCompany: User;
@@ -28,14 +27,17 @@ export class CompanyNewComponent implements OnInit {
         private formBuilder: FormBuilder,
         private companyNewService: CompanyNewService,
         private notificationService: PoNotificationService,
-        private router: Router,
+        private router: Router
     ) {}
 
     ngOnInit(): void {
-
         this.formDadosPessoais = this.formBuilder.group({
             name: ['', Validators.required],
-            email: ['', Validators.required, this.companyNewService.isEmailTaken()],
+            email: [
+                '',
+                Validators.required,
+                this.companyNewService.isEmailTaken(),
+            ],
             userExtraData: this.formBuilder.group({
                 phone: ['', Validators.required],
                 cpf: ['', Validators.required],
@@ -43,55 +45,68 @@ export class CompanyNewComponent implements OnInit {
         });
 
         this.formDadosEmpresa = this.formBuilder.group({
-            cnpj: ['', Validators.required],
-            socialReason: ['', Validators.required],
-            fantasyName: ['', Validators.required],
-            type: ['', Validators.required],
-            lineOfBusiness: ['', Validators.required],
-            cnae: ['', Validators.required],
+            cnpj: [''],
+            socialReason: [''],
+            fantasyName: [''],
+            type: [''],
+            lineOfBusiness: [''],
+            cnae: [''],
             address: this.formBuilder.group({
-                complement: ['', Validators.required],
-                zipcode: ['', Validators.required],
-                street: ['', Validators.required],
-                number: ['', Validators.required],
-                neighborhood: ['', Validators.required],
+                complement: [''],
+                zipcode: [''],
+                street: [''],
+                number: [''],
+                neighborhood: [''],
                 city: this.formBuilder.group({
-                    name: ['', Validators.required],
-                    stateProvince: ['', Validators.required],
+                    name: [''],
+                    stateProvince: [''],
                 }),
             }),
-            email: ['', Validators.required],
-            phone: ['', Validators.required],
+            email: [''],
+            phone: [''],
         });
 
-        this.formDadosEmpresa.get('address.zipcode').valueChanges
-            .pipe(filter(data => data !== this.latestZipCode))
-            .pipe(tap(data => this.latestZipCode = data))
-            .pipe(tap(() => this.zipcodeError = false))
+        this.formDadosEmpresa
+            .get('address.zipcode')
+            .valueChanges.pipe(filter((data) => data !== this.latestZipCode))
+            .pipe(tap((data) => (this.latestZipCode = data)))
+            .pipe(tap(() => (this.zipcodeError = false)))
             .subscribe(this.updateZipcode.bind(this));
     }
 
-
     updateZipcode(): void {
         if (this.formDadosEmpresa.get('address.zipcode').valid) {
-            this.companyNewService.getAddressFromZipcode(this.formDadosEmpresa.get('address.zipcode').value)
+            this.companyNewService
+                .getAddressFromZipcode(
+                    this.formDadosEmpresa.get('address.zipcode').value
+                )
                 .subscribe((addressApiResponse: AddressApiResponse) => {
                     if (addressApiResponse.logradouro) {
-                        this.formDadosEmpresa.get('address.street').setValue(addressApiResponse.logradouro);
+                        this.formDadosEmpresa
+                            .get('address.street')
+                            .setValue(addressApiResponse.logradouro);
                     }
                     if (addressApiResponse.bairro) {
-                        this.formDadosEmpresa.get('address.neighborhood').setValue(addressApiResponse.bairro);
+                        this.formDadosEmpresa
+                            .get('address.neighborhood')
+                            .setValue(addressApiResponse.bairro);
                     }
                     // if (addressApiResponse.complemento) {
                     //     this.formDadosEmpresa.get('address.complement').setValue(addressApiResponse.complemento);
                     // }
-                    this.formDadosEmpresa.get('address.city.name').setValue(addressApiResponse.localidade);
-                    this.formDadosEmpresa.get('address.city.stateProvince').setValue(addressApiResponse.uf);
+                    this.formDadosEmpresa
+                        .get('address.city.name')
+                        .setValue(addressApiResponse.localidade);
+                    this.formDadosEmpresa
+                        .get('address.city.stateProvince')
+                        .setValue(addressApiResponse.uf);
 
                     this.zipcodeError = addressApiResponse.erro;
 
                     if (this.numberInput && this.streetInput) {
-                        addressApiResponse.logradouro ? this.numberInput.focus() : this.streetInput.focus();
+                        addressApiResponse.logradouro
+                            ? this.numberInput.focus()
+                            : this.streetInput.focus();
                     }
                 });
         }
@@ -120,7 +135,6 @@ export class CompanyNewComponent implements OnInit {
     dirtyMe(input): void {
         this.formDadosPessoais.get(input).markAsDirty();
     }
-
 }
         // id: number;
         // email: string;
@@ -138,28 +152,28 @@ export class CompanyNewComponent implements OnInit {
         //         }
         //     ],
 //         "userExtraData": {
-        //     "phone": "17981008663",
-        //         "cpf": "42373499851"
-        // },
-        // "userCompany": {
-        //     "cnpj": "79032921000196",
-    //         "socialReason": "Razão social",
+//     "phone": "17981008663",
+//         "cpf": "42373499851"
+// },
+// "userCompany": {
+//     "cnpj": "79032921000196",
+//         "socialReason": "Razão social",
 //             "fantasyName": "Nome fantasia",
 //             "type": "INDUSTRY",
 //             "lineOfBusiness": "Tipo de negócio",
 //             "cnae": "CNAE do trampo",
-        //     "address": {
-        //         "zipcode": "15043020",
-        //          "street": "Rua Fernandópolis",
-        //          "number": "2637",
-        //          "neighborhood": "Eldorado",
-        //          "complement": "Casa",
-        //          "city": {
-        //             "name": "São José do Rio Preto",
-        //              "stateProvince": "SP"
-        //           }
-        //     },
-        //     "email": "contato@empresa.com.br",
-        //     "phone": "17987651231"
-        // }
-        // }
+//     "address": {
+//         "zipcode": "15043020",
+//          "street": "Rua Fernandópolis",
+//          "number": "2637",
+//          "neighborhood": "Eldorado",
+//          "complement": "Casa",
+//          "city": {
+//             "name": "São José do Rio Preto",
+//              "stateProvince": "SP"
+//           }
+//     },
+//     "email": "contato@empresa.com.br",
+//     "phone": "17987651231"
+// }
+// }

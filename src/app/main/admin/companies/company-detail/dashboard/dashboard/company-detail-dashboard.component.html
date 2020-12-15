@@ -1,11 +1,15 @@
-<po-page-default *ngIf="company$ | async as company" [p-title]="company.name">
+<po-page-default
+    *ngIf="company$ | async as company"
+    [p-title]="company.name"
+    [p-actions]="actions"
+>
     <div class="company-detail-dashboard">
         <po-container p-no-padding="true">
             <div class="po-row">
                 <div class="po-lg-12">
                     <span class="document">{{
                         company.userCompany.cnpj | cpfcnpj
-                    }}</span>
+                        }}</span>
                 </div>
                 <div class="po-lg-5">
                     <div class="card-info">

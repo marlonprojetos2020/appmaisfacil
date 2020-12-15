@@ -5,10 +5,12 @@ import { AddressApiResponse } from './model/address-api-response';
 import { AbstractControl } from '@angular/forms';
 import { debounceTime, first, map, switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { User } from '../../company-detail/model/user';
+import { User } from './model/user';
 
-@Injectable()
-export class CompanyNewService {
+@Injectable({
+    providedIn: 'root',
+})
+export class CompaniesService {
 
     constructor(private httpClient: HttpClient) {}
 
@@ -36,6 +38,10 @@ export class CompanyNewService {
 
     createUser(user: User): Observable<User> {
         return this.httpClient.post<User>(`${environment.apiUrl}/users`, user);
+    }
+
+    getUserCompany(id: number): Observable<User> {
+        return this.httpClient.get<User>(`${environment.apiUrl}/users/${id}`);
     }
 }
 

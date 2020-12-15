@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PoMenuItem } from '@po-ui/ng-components';
-import { CompanyDetailService } from '../../company-detail/company-detail.service';
+import { CompaniesService } from '../../companies/companies.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -14,7 +14,6 @@ export class CompanyDetailMenuComponent implements OnInit {
         {
             icon: 'po-icon-home',
             label: 'Painel de Controle',
-            // link: `admin/empresa/${this.id}`,
             link: ``,
         },
         {
@@ -75,8 +74,8 @@ export class CompanyDetailMenuComponent implements OnInit {
     ];
 
     constructor(
-        private companyDetailService: CompanyDetailService,
-        private acivatedRoute: ActivatedRoute
+        private companyDetailService: CompaniesService,
+        private acivatedRoute: ActivatedRoute,
     ) {}
 
     ngOnInit(): void {

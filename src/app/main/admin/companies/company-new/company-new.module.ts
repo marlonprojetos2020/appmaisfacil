@@ -6,7 +6,6 @@ import { PoStepperModule } from '@po-ui/ng-components';
 import { PoButtonModule } from '@po-ui/ng-components';
 import { CompanyNewComponent } from './company-new/company-new.component';
 import { InvalidFeedbackModule } from 'src/app/shared/components/invalid-feedback/invalid-feedback.module';
-import { CompanyNewService } from './company-new.service';
 
 @NgModule({
     declarations: [CompanyNewComponent],
@@ -21,7 +20,6 @@ import { CompanyNewService } from './company-new.service';
         InvalidFeedbackModule,
     ],
     exports: [CompanyNewComponent],
-    providers: [CompanyNewService],
 })
 
 export class CompanyNewModule {}

@@ -30,7 +30,7 @@ const routes: Routes = [
                 children: [
                     {
                         path: '',
-                        loadChildren: () => import('./company-detail/company-detail.module').then(m => m.CompanyDatailModule),
+                        loadChildren: () => import('./companies/company-detail/company-detail.module').then(m => m.CompanyDatailModule),
                         // resolve: { company: CompanyDetailResolver },
                     },
                 ],

@@ -3,10 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PoNotificationService } from '@po-ui/ng-components';
 import { filter, tap } from 'rxjs/operators';
-import { Company } from '../../../company-detail/model/company';
-import { User } from '../../../company-detail/model/user';
-import { CompanyNewService } from '../company-new.service';
-import { AddressApiResponse } from '../model/address-api-response';
+import { Company } from '../../model/company';
+import { User } from '../../model/user';
+import { CompaniesService } from '../../companies.service';
+import { AddressApiResponse } from '../../model/address-api-response';
 import { RoleType } from 'src/app/core/auth/model/role-type';
 
 @Component({
@@ -25,9 +25,9 @@ export class CompanyNewComponent implements OnInit {
 
     constructor(
         private formBuilder: FormBuilder,
-        private companyNewService: CompanyNewService,
+        private companyNewService: CompaniesService,
         private notificationService: PoNotificationService,
-        private router: Router
+        private router: Router,
     ) {}
 
     ngOnInit(): void {
@@ -124,59 +124,16 @@ export class CompanyNewComponent implements OnInit {
                 label: 'Empresa',
             },
         ];
-
         this.newCompany.userCompany = this.formDadosEmpresa.getRawValue() as Company;
-        console.log(this.newCompany);
-        // this.companyNewService.createUser(this.newCompany).subscribe(
-        //     () => {
-        //         this.notificationService.success(`Usuário adicionado com sucesso`);
-        //         this.router.navigate(['/admin', 'empresas']);
-        //     },
-        // );
+        this.companyNewService.createUser(this.newCompany).subscribe(
+            () => {
+                this.notificationService.success(`Usuário adicionado com sucesso`);
+                this.router.navigate(['/admin', 'empresas']);
+            },
+        );
     }
 
     dirtyMe(input): void {
         this.formDadosPessoais.get(input).markAsDirty();
     }
 }
-// id: number;
-// email: string;
-// name: string;
-// roles: [
-//         {
-//             "_messages": [],
-//             "value": "ROLE_COMPANY",
-//             "label": "Empresa"
-//         },
-//         {
-//             "_messages": [],
-//             "value": "ROLE_ADMIN",
-//             "label": "Administrador"
-//         }
-//     ],
-//         "userExtraData": {
-//     "phone": "17981008663",
-//         "cpf": "42373499851"
-// },
-// "userCompany": {
-//     "cnpj": "79032921000196",
-//         "socialReason": "Razão social",
-//             "fantasyName": "Nome fantasia",
-//             "type": "INDUSTRY",
-//             "lineOfBusiness": "Tipo de negócio",
-//             "cnae": "CNAE do trampo",
-//     "address": {
-//         "zipcode": "15043020",
-//          "street": "Rua Fernandópolis",
-//          "number": "2637",
-//          "neighborhood": "Eldorado",
-//          "complement": "Casa",
-//          "city": {
-//             "name": "São José do Rio Preto",
-//              "stateProvince": "SP"
-//           }
-//     },
-//     "email": "contato@empresa.com.br",
-//     "phone": "17987651231"
-// }
-// }

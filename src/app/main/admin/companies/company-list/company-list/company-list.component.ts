@@ -20,11 +20,16 @@ export class CompanyListComponent {
         { label: 'Editar', action: item => this.router.navigateByUrl(`/admin/empresa/${item.id}/editar`) },
     ];
     columns: DatatableColumn[] = [
-        { property: 'name', label: 'Nome' },
-        { property: 'userCompany', label: 'CNPJ' },
+        {
+            label: 'Nome',
+            property: 'userCompany.fantasyName',
+        },
+        {
+            label: 'CNPJ',
+            property: 'userCompany.cnpj',
+        },
+        { property: 'name', label: 'Usuário' },
     ];
 
     constructor(private router: Router) {}
-
-    ngOnInit(): void {}
 }

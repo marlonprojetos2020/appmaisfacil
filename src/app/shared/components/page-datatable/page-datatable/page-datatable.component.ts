@@ -102,7 +102,7 @@ export class PageDatatableComponent implements OnInit {
             .subscribe(
                 result => {
                     this.showMoreDisabled = !result.hasNext;
-                    this.items.push(...result.items);
+                    this.items.push(...result.items.map(item => this.flattenObject(item)));
                 },
             );
     }
@@ -164,4 +164,26 @@ export class PageDatatableComponent implements OnInit {
                 label: column.label,
             }));
     }
+
+    private flattenObject = function (ob) {
+        const toReturn = {};
+        let flatObject;
+        for (const i in ob) {
+            if (!ob.hasOwnProperty(i)) {
+                continue;
+            }
+            if ((typeof ob[i]) === 'object') {
+                flatObject = this.flattenObject(ob[i]);
+                for (const x in flatObject) {
+                    if (!flatObject.hasOwnProperty(x)) {
+                        continue;
+                    }
+                    toReturn[i + (!!isNaN(parseInt(x)) ? '.' + x : '')] = flatObject[x];
+                }
+            } else {
+                toReturn[i] = ob[i];
+            }
+        }
+        return toReturn;
+    };
 }

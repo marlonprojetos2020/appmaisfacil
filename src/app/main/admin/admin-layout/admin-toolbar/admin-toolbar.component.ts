@@ -23,7 +23,7 @@ export class AdminToolbarComponent {
         {
             icon: 'po-icon-lock',
             label: 'Alterar senha',
-            url: '/admin/alterar-senha',
+            url: '/alterar-senha',
         },
         {
             icon: 'po-icon-desktop',

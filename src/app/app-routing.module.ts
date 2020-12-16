@@ -20,6 +20,11 @@ const routes: Routes = [
         canActivate: [LoginGuard],
     },
     {
+        path: 'alterar-senha',
+        loadChildren: () => import('./main/change-password/change-password.module').then(m => m.ChangePasswordModule),
+        canActivate: [AuthGuard],
+    },
+    {
         path: 'admin',
         loadChildren: () => import('./main/admin/admin.module').then(m => m.AdminModule),
         canActivate: [AuthGuard, AdminGuard],

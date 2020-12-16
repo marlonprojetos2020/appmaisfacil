@@ -23,7 +23,7 @@ export class CompanyLayoutComponent {
         {
             icon: 'po-icon-lock',
             label: 'Alterar senha',
-            url: '/empresa/alterar-senha',
+            url: '/alterar-senha',
         },
         {
             icon: 'po-icon-desktop',

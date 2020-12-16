@@ -9,5 +9,4 @@ export interface User extends UserDetails {
         cpf: string;
     };
     version: number;
-
 }

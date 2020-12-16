@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { AddressApiResponse } from './model/address-api-response';
 import { AbstractControl } from '@angular/forms';
-import { debounceTime, first, map, switchMap } from 'rxjs/operators';
+import { debounceTime, first, map, switchMap, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { User } from './model/user';
 
@@ -27,17 +27,20 @@ export class CompaniesService {
         return this.httpClient.get<boolean>(`${environment.apiUrl}/users/exists/email?email=${email}`);
     }
 
-    isEmailTaken(): object {
+    isEmailTaken(initialValue?: string): (control: AbstractControl) => Observable<{ isEmailTaken: boolean }> {
         return (control: AbstractControl) =>
-            control.valueChanges
+            of(control.value)
                 .pipe(debounceTime(300))
-                .pipe(switchMap(email => this.existEmail(email)))
-                .pipe(map(data => data ? { isEmailTaken: true } : null))
-                .pipe(first());
+                .pipe(switchMap(email => email === initialValue ? of(null) : this.existEmail(email)))
+                .pipe(map(isTaken => isTaken ? { isEmailTaken: true } : null));
     }
 
     createUser(user: User): Observable<User> {
         return this.httpClient.post<User>(`${environment.apiUrl}/users`, user);
+    }
+
+    editUser(user: User, id: number): Observable<User> {
+        return this.httpClient.put<User>(`${environment.apiUrl}/users/${id}`, user);
     }
 
     getUserCompany(id: number): Observable<User> {

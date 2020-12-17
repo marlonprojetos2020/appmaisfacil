@@ -8,6 +8,7 @@ import { MyAccountFormService } from '../my-account-form.service';
 @Component({
     selector: 'app-my-account-form',
     templateUrl: './my-account-form.component.html',
+    styleUrls: ['./my-account.form.component.scss'],
 })
 export class MyAccountFormComponent implements OnInit {
 

@@ -8,7 +8,11 @@ import { DatatableColumn } from '../../../../../shared/components/page-datatable
     templateUrl: './company-list.component.html',
 })
 export class CompanyListComponent {
-    pageActions: PoPageAction[] = [{ label: 'Nova Empresa', url: 'admin/empresas/nova-empresa' }];
+    pageActions: PoPageAction[] = [{
+        label: 'Nova Empresa',
+        icon: 'po-icon-plus-circle',
+        url: 'admin/empresas/nova-empresa',
+    }];
 
     serviceApi = `${environment.apiUrl}/users/p/search`;
     tableActions: PoTableAction[] = [

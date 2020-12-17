@@ -21,22 +21,22 @@ export class AdminMenuComponent {
         {
             icon: 'po-icon-warning',
             label: 'Cobranças',
-            link: '/admin',
+            link: '/admin/cobrancas',
         },
         {
             icon: 'po-icon-finance-secure',
             label: 'Extratos',
-            link: '/admin',
+            link: '/admin/extratos',
         },
         {
             icon: 'po-icon-document',
             label: 'Nota Fiscal',
-            link: '/admin',
+            link: '/admin/nota-fiscal',
         },
         {
             icon: 'po-icon-users',
             label: 'Funcionários',
-            link: '/admin',
+            link: '/admin/funcionarios',
         },
     ];
 

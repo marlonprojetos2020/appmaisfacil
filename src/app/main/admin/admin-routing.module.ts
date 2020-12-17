@@ -33,6 +33,10 @@ const routes: Routes = [
                         path: 'extratos',
                         loadChildren: () => import('./admin-bank-statements/admin-bank-statements.module')
                             .then(m => m.AdminBankStatementsModule),
+                    },    {
+                        path: 'nota-fiscal',
+                        loadChildren: () => import('./admin-invoices/admin-invoices.module')
+                            .then(m => m.AdminInvoicesModule),
                     },
                 ],
             },

@@ -1,9 +1,9 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {PageDatatableComponent} from './page-datatable/page-datatable.component';
-import {PoTableModule} from '@po-ui/ng-components';
-import {PoPageDynamicSearchModule} from '@po-ui/ng-templates';
-import {BadgeModule} from '../badge/badge.module';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { PageDatatableComponent } from './page-datatable/page-datatable.component';
+import { PoContainerModule, PoTableModule } from '@po-ui/ng-components';
+import { PoPageDynamicSearchModule } from '@po-ui/ng-templates';
+import { BadgeModule } from '../badge/badge.module';
 
 
 @NgModule({
@@ -16,6 +16,7 @@ import {BadgeModule} from '../badge/badge.module';
         PoTableModule,
         PoPageDynamicSearchModule,
         BadgeModule,
+        PoContainerModule,
     ],
 })
 export class PageDatatableModule {

@@ -244,9 +244,25 @@ h2 {
     font-weight: bold;
 }
 
-.users{
-    .po-icon{
+.users {
+    .po-icon {
         font-weight: bold;
         font-size: 32px;
     }
+}
+
+// list pages header
+.po-page-list-actions {
+    text-align: right;
+}
+
+.po-page-list-filter-wrapper {
+    float: unset;
+    .po-page-filter-content {
+        width: calc(100% - 320px);
+    }
+}
+
+.po-page-list-operations {
+    margin-top: 32px;
 }

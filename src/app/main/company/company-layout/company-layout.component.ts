@@ -13,7 +13,7 @@ export class CompanyLayoutComponent {
         {
             icon: 'po-icon-user',
             label: 'Minha Conta',
-            url: '/empresa/perfil',
+            url: '/empresa/minha-conta',
         },
         {
             icon: 'po-icon-lock',

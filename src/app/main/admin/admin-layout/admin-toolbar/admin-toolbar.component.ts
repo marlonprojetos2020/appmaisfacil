@@ -18,7 +18,7 @@ export class AdminToolbarComponent {
         {
             icon: 'po-icon-user',
             label: 'Minha Conta',
-            url: '/admin/perfil',
+            url: 'admin/minha-conta',
         },
         {
             icon: 'po-icon-lock',

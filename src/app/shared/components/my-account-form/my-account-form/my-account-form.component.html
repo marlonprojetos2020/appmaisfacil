@@ -1,0 +1,70 @@
+<po-container>
+    <h2 class="po-ml-1 po-mb-3">Dados Pessoais</h2>
+    <form
+        *ngIf="currentUser"
+        [formGroup]="formDadosPessoais"
+    >
+        <div class="po-md-12">
+            <po-input
+                formControlName="name"
+                p-auto-focus="true"
+                p-clean="true"
+                p-label="Nome do titular da conta"
+                p-placeholder="Digite o nome"
+                p-required="true"
+                (p-blur)="dirtyMe('name')"
+            >
+            </po-input>
+            <app-invalid-feedback
+                [formCtrl]="formDadosPessoais.get('name')"
+                [hasError]="
+                                        formDadosPessoais.get('name').errors
+                                            ?.required &&
+                                        formDadosPessoais.get('name').dirty
+                                    "
+            >
+                Este campo é obrigatório
+            </app-invalid-feedback>
+        </div>
+        <div class="po-mt-2 po-mb-2 po-md-6">
+            <po-email
+                formControlName="email"
+                p-label="E-mail"
+                p-placeholder="Digite o e-mail"
+                p-error-pattern="Digite um e-mail válido"
+                p-clean
+                p-required="true"
+                p-maxlength="100"
+                p-icon=""
+                (p-blur)="dirtyMe('email')"
+            ></po-email>
+            <app-invalid-feedback
+                [formCtrl]="formDadosPessoais.get('email')"
+                [hasError]="
+                                        formDadosPessoais.get('email').errors
+                                            ?.isEmailTaken
+                                    "
+            >
+                Esse e-mail já é utilizado por outro usuário
+            </app-invalid-feedback>
+            <app-invalid-feedback
+                [formCtrl]="formDadosPessoais.get('email')"
+                [hasError]="
+                                        formDadosPessoais.get('email').errors
+                                            ?.required &&
+                                        formDadosPessoais.get('email').dirty
+                                    "
+            >
+                Este campo é obrigatório
+            </app-invalid-feedback>
+        </div>
+        <div class="po-row po-ml-1">
+            <po-button
+                [p-disabled]="formDadosPessoais.invalid"
+                p-label="Editar"
+                p-type="primary"
+                (p-click)="nextForm()"
+            ></po-button>
+        </div>
+    </form>
+</po-container>

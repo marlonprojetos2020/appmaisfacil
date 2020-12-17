@@ -4,6 +4,9 @@ import { AdminDashboardComponent } from './dashboard/admin-dashboard.component';
 import { AdminToolbarComponent } from './admin-layout/admin-toolbar/admin-toolbar.component';
 import { AdminMenuComponent } from './admin-layout/admin-menu/admin-menu.component';
 import { CompanyDetailMenuComponent } from './admin-layout/company-detail-menu/company-detail-menu.component';
+import { AdminMyAccountComponent } from './admin-my-account/admin-my-account/admin-my-account.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from 'src/app/core/auth/auth.interceptor';
 // import { CompanyDetailResolver } from './company-detail/company-detail-resolver';
 const routes: Routes = [
     {
@@ -17,6 +20,10 @@ const routes: Routes = [
                     {
                         path: '',
                         component: AdminDashboardComponent,
+                    },
+                    {
+                        path: 'minha-conta',
+                        component: AdminMyAccountComponent,
                     },
                     {
                         path: 'empresas',
@@ -42,5 +49,12 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true,
+        },
+    ],
 })
 export class AdminRoutingModule {}

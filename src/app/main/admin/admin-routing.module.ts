@@ -34,7 +34,7 @@ const routes: Routes = [
                         path: 'extratos',
                         loadChildren: () => import('./admin-bank-statements/admin-bank-statements.module')
                             .then(m => m.AdminBankStatementsModule),
-                    },    {
+                    }, {
                         path: 'nota-fiscal',
                         loadChildren: () => import('./admin-invoices/admin-invoices.module')
                             .then(m => m.AdminInvoicesModule),
@@ -43,6 +43,11 @@ const routes: Routes = [
                         path: 'cobrancas',
                         loadChildren: () => import('./admin-charges/admin-charges.module')
                             .then(m => m.AdminChargesModule),
+                    },
+                    {
+                        path: 'funcionarios',
+                        loadChildren: () => import('./admin-employees/admin-employees.module')
+                            .then(m => m.AdminEmployeesModule),
                     },
                 ],
             },

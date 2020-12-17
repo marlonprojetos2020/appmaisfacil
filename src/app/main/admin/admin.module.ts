@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { AdminDashboardModule } from './dashboard/admin-dashboard.module';
+import { AdminDashboardModule } from './admin-dashboard/admin-dashboard.module';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminToolbarComponent } from './admin-layout/admin-toolbar/admin-toolbar.component';
 import { AdminMenuComponent } from './admin-layout/admin-menu/admin-menu.component';

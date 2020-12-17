@@ -252,17 +252,22 @@ h2 {
 }
 
 // list pages header
+.po-page-list-operations {
+    margin-top: -54px;
+}
+
 .po-page-list-actions {
     text-align: right;
 }
 
 .po-page-list-filter-wrapper {
     float: unset;
+    margin-top: 32px;
     .po-page-filter-content {
-        width: calc(100% - 320px);
+        width: calc(100% - 80px);
     }
 }
 
-.po-page-list-operations {
-    margin-top: 32px;
+.po-page-content {
+    padding-top: 0 !important;
 }

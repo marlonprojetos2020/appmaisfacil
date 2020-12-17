@@ -8,6 +8,7 @@ import { AdminMyAccountComponent } from './admin-my-account/admin-my-account/adm
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from 'src/app/core/auth/auth.interceptor';
 // import { CompanyDetailResolver } from './company-detail/company-detail-resolver';
+
 const routes: Routes = [
     {
         path: '',
@@ -33,6 +34,11 @@ const routes: Routes = [
                         path: 'extratos',
                         loadChildren: () => import('./admin-bank-statements/admin-bank-statements.module')
                             .then(m => m.AdminBankStatementsModule),
+                    },
+                    {
+                        path: 'cobrancas',
+                        loadChildren: () => import('./admin-charges/admin-charges.module')
+                            .then(m => m.AdminChargesModule),
                     },
                 ],
             },

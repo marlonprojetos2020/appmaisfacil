@@ -14,7 +14,7 @@ export class CompanyDetailMenuComponent implements OnInit {
         {
             icon: 'po-icon-home',
             label: 'Início',
-            link: ``,
+            link: `.`,
         },
         {
             icon: 'po-icon-warning',

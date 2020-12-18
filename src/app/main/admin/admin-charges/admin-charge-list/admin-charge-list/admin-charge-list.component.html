@@ -1,0 +1,15 @@
+<app-page-datatable
+    title="Cobranças"
+    [pageActions]="pageActions"
+    [serviceApi]="serviceApi"
+    [tableActions]="tableActions"
+    [columns]="columns"
+>
+</app-page-datatable>
+<po-modal
+    p-title="Options"
+    [p-primary-action]="confirm"
+    [p-secondary-action]="close"
+>
+    <h1>{{title}}</h1>
+</po-modal>

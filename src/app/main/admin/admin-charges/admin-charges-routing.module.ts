@@ -2,7 +2,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthInterceptor } from 'src/app/core/auth/auth.interceptor';
-import { AdminChargeListComponent } from './admin-chage-list/admin-charge-list/admin-charge-list.component';
+import { AdminChargeListComponent } from './admin-charge-list/admin-charge-list/admin-charge-list.component';
 
 const routes: Routes = [
     {

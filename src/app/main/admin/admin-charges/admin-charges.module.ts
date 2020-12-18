@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { AdminChargeListModule } from './admin-chage-list/admin-charge-list.module';
+import { AdminChargeListModule } from './admin-charge-list/admin-charge-list.module';
 import { AdminChargesRoutingModule } from './admin-charges-routing.module';
 import { AdminChargesService } from './admin-charges.service';
 

@@ -57,7 +57,7 @@ export class CompanyLayoutComponent {
         {
             icon: 'po-icon-finance',
             label: 'Minhas Despesas',
-            link: '/empresa/pedidos',
+            link: '/empresa/despesas',
         },
         {
             icon: 'po-icon-finance-secure',

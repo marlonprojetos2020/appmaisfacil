@@ -13,7 +13,7 @@ export class CompanyDetailMenuComponent implements OnInit {
     menuCompanyDetail: Array<PoMenuItem> = [
         {
             icon: 'po-icon-home',
-            label: 'Painel de Controle',
+            label: 'Início',
             link: ``,
         },
         {
@@ -85,7 +85,7 @@ export class CompanyDetailMenuComponent implements OnInit {
                 icon: 'po-icon-arrow-left',
                 label: data.name,
                 link: `/admin/empresas`,
-            })
+            }),
         );
     }
 }

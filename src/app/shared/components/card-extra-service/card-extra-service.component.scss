@@ -9,15 +9,32 @@
 }
 
 
-.bg {
-    background-color: var(--color-card);
-}
-
 .service-card {
 
     padding: 25px 18px;
 }
 
+.div-text {
+    width: 50%;
+
+    h2 {
+        margin-bottom: 11px;
+        font-size: 18px;
+    }
+}
+
+.centralize {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.price {
+    font-weight: 700;
+    color: var(--color-primary);
+    font-size: 18px;
+}
 
 .extra-services {
     color: #FFFFFF;

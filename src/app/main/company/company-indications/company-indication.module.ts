@@ -1,10 +1,10 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {PoPageModule} from '@po-ui/ng-components';
+import {PoContainerModule, PoPageModule} from '@po-ui/ng-components';
 import {CompanyIndicationComponent} from './company-indication/company-indication.component';
 
 @NgModule({
-    imports:[CommonModule, PoPageModule],
+    imports:[CommonModule, PoPageModule, PoContainerModule],
     declarations: [CompanyIndicationComponent],
 })
 export class CompanyIndicationModule{}

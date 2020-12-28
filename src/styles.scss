@@ -272,3 +272,18 @@ h2 {
 .po-page-content {
     padding-top: 0 !important;
 }
+
+.button-indication {
+    .po-button{
+        width: 100% !important;
+        color: #FFFFFF;
+        background-color: var(--color-secondary);
+        border-radius: 10px;
+    }
+}
+
+.input-style{
+    .po-field-container-content{
+        padding: 8px 0 0 0 !important;
+    }
+}

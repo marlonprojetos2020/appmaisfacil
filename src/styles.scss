@@ -287,3 +287,15 @@ h2 {
         padding: 8px 0 0 0 !important;
     }
 }
+
+
+.button-new-employee{
+    .po-button{
+        color: #FFFFFF !important;
+        border-radius: 10px;
+        background-color: var(--color-secondary);
+        padding: 0 90px;
+        text-transform: uppercase;
+    }
+}
+

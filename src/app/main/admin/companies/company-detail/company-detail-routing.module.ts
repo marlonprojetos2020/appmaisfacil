@@ -11,7 +11,6 @@ import {AdminCompanyAccountingComponent} from './admin-company-accounting/admin-
 import {AdminCompanyInvoiceComponent} from './admin-company-invoices/admin-company-invoice/admin-company-invoice.component';
 import {AdminCompanyCompanyComponent} from './admin-company-companies/admin-company-company/admin-company-company.component';
 import {AdminCompanyAssociateComponent} from './admin-company-associates/admin-company-associate/admin-company-associate.component';
-import {AdminCompanyEmployeeComponent} from './admin-company-employees/admin-company-employee/admin-company-employee.component';
 import {AdminCompanyExtraServiceComponent} from './admin-company-extra-services/admin-company-extra-service/admin-company-extra-service.component';
 import {AdminCompanyIndicationComponent} from './admin-company-indications/admin-company-indication/admin-company-indication.component';
 import {AdminCompanyFaqComponent} from './admin-company-faq/admin-company-faq/admin-company-faq.component';
@@ -55,7 +54,7 @@ const routes: Routes = [
     },
     {
         path: 'funcionarios',
-        component: AdminCompanyEmployeeComponent,
+        loadChildren: () => import('./admin-company-employees/admin-company-employee.module').then(m => m.AdminCompanyEmployeeModule),
     },
     {
         path: 'servicos',
@@ -68,7 +67,7 @@ const routes: Routes = [
     {
         path: 'faq',
         component: AdminCompanyFaqComponent,
-    }
+    },
 ];
 
 @NgModule({

@@ -1,10 +1,11 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {PoPageModule} from '@po-ui/ng-components';
+import {PoContainerModule, PoPageModule} from '@po-ui/ng-components';
 import {AdminCompanyExtraServiceComponent} from './admin-company-extra-service/admin-company-extra-service.component';
+import {CardExtraServiceModule} from '../../../../../shared/components/card-extra-service/card-extra-service.module';
 
 @NgModule({
-    imports: [CommonModule, PoPageModule],
+    imports: [CommonModule, PoPageModule, PoContainerModule, CardExtraServiceModule],
     declarations: [AdminCompanyExtraServiceComponent],
 })
 export class AdminCompanyExtraServiceModule {}

@@ -1,14 +1,37 @@
 import {Component} from '@angular/core';
-import {PoPageAction} from '@po-ui/ng-components';
+import {PoPageAction, PoTableAction} from '@po-ui/ng-components';
+import {environment} from '../../../../../environments/environment';
+import {DatatableColumn} from '../../../../shared/components/page-datatable/page-datatable/datatable-column';
 
 @Component({
     templateUrl: './company-employee.component.html',
 })
-export class CompanyEmployeeComponent{
-    actions: Array<PoPageAction> = [
+export class CompanyEmployeeComponent {
+    pageActions: PoPageAction[] = [{
+        label: 'Funcionário',
+        icon: 'po-icon-plus-circle',
+        url: '/empresa/funcionarios/cadastro',
+    }];
+
+    serviceApi = `${environment.apiUrl}/users/p/search`;
+
+    tableActions: PoTableAction[] = [];
+    columns: DatatableColumn[] = [
         {
-            label: '+ Funcionário',
-            url: '/empresa/funcionarios/cadastro',
+            label: 'Situação',
+            property: 'userCompany.fantasyName',
+        },
+        {
+            label: 'Nome',
+            property: 'userCompany.cnpj',
+        },
+        {
+            label: 'Categoria',
+        },
+        {
+            label: 'Admissão',
         },
     ];
+
+
 }

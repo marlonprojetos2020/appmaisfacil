@@ -1,0 +1,42 @@
+.atention-icon {
+    font-size: 50px;
+
+}
+
+.div-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 115px;
+}
+
+.atention-text {
+    font-size: 16px;
+    font-weight: lighter;
+
+    li {
+        list-style: none;
+
+        &:before{
+            content: '•';
+            margin-right: 5px;
+        }
+    }
+}
+
+
+h6 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+.div-card {
+    display: flex;
+    flex-direction: row;
+    background-color: #DCB7AE;
+    border-radius: 10px;
+    padding: 28px 0;
+    margin-bottom: 24px;
+    color: var(--color-danger),
+}

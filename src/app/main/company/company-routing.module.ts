@@ -8,11 +8,9 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthInterceptor} from '../../core/auth/auth.interceptor';
 import {CompanyExpenseComponent} from './company-expenses/company-expense/company-expense.component';
 import {CompanyAccountingComponent} from './company-accounting/company-accounting/company-accounting.component';
-import {CompanyInvoiceComponent} from './company-invoices/company-invoice/company-invoice.component';
 import {CompanyCompanyComponent} from './company-company/company-company/company-company.component';
 import {CompanyBankStatementComponent} from './company-bank-statements/company-bank-statement/company-bank-statement.component';
 import {CompanyAssociateComponent} from './company-associates/company-associate/company-associate.component';
-import {CompanyEmployeeComponent} from './company-employees/company-employee/company-employee.component';
 import {CompanyExtraServiceComponent} from './company-extra-services/company-extra-service/company-extra-service.component';
 import {CompanyIndicationComponent} from './company-indications/company-indication/company-indication.component';
 import {CompanyFaqComponent} from './company-faq/company-faq/company-faq.component';
@@ -44,7 +42,7 @@ const routes: Routes = [
             },
             {
                 path: 'nota-fiscal',
-                component: CompanyInvoiceComponent,
+                loadChildren: () => import('./company-invoices/company-invoice.module').then(m => m.CompanyInvoiceModule),
             },
             {
                 path: 'empresa',

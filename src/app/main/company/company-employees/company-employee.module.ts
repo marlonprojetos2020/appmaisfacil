@@ -7,7 +7,8 @@ import {CompanyEmployeeRountingModule} from './company-employee-rounting.module'
 import {PageDatatableModule} from '../../../shared/components/page-datatable/page-datatable.module';
 
 @NgModule({
-    imports: [CommonModule, PoPageModule, PoContainerModule, PoFieldModule, NewEmployeeModule, CompanyEmployeeRountingModule, PageDatatableModule],
+    // tslint:disable-next-line:max-line-length
+    imports: [CommonModule, PoContainerModule, PoPageModule, PoFieldModule, NewEmployeeModule, CompanyEmployeeRountingModule, PageDatatableModule],
     declarations: [CompanyEmployeeComponent],
 })
 export class CompanyEmployeeModule {

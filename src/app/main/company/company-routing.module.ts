@@ -14,6 +14,8 @@ import { CompanyAssociateComponent } from './company-associates/company-associat
 import { CompanyExtraServiceComponent } from './company-extra-services/company-extra-service/company-extra-service.component';
 import { CompanyIndicationComponent } from './company-indications/company-indication/company-indication.component';
 import { CompanyFaqComponent } from './company-faq/company-faq/company-faq.component';
+import { CompanyInvoiceComponent } from './company-invoices/company-invoice/company-invoice.component';
+import { CompanyEmployeeComponent } from './company-employees/company-employee/company-employee.component';
 
 const routes: Routes = [
     {
@@ -42,10 +44,7 @@ const routes: Routes = [
             },
             {
                 path: 'nota-fiscal',
-                loadChildren: () =>
-                    import('./company-invoices/company-invoice.module').then(
-                        (m) => m.CompanyInvoiceModule
-                    ),
+                component: CompanyInvoiceComponent,
             },
             {
                 path: 'minha-empresa',
@@ -61,10 +60,7 @@ const routes: Routes = [
             },
             {
                 path: 'funcionarios',
-                loadChildren: () =>
-                    import('./company-employees/company-employee.module').then(
-                        (m) => m.CompanyEmployeeModule
-                    ),
+                component: CompanyEmployeeComponent,
             },
             // {
             //     path: 'sessao-expirada',

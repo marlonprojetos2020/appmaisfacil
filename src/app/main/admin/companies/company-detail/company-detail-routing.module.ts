@@ -12,6 +12,7 @@ import { AdminCompanyAssociateComponent } from './admin-company-associates/admin
 import { AdminCompanyExtraServiceComponent } from './admin-company-extra-services/admin-company-extra-service/admin-company-extra-service.component';
 import { AdminCompanyIndicationComponent } from './admin-company-indications/admin-company-indication/admin-company-indication.component';
 import { AdminCompanyFaqComponent } from './admin-company-faq/admin-company-faq/admin-company-faq.component';
+import { AdminCompanyEmployeeComponent } from './admin-company-employees/admin-company-employee/admin-company-employee.component';
 
 const routes: Routes = [
     {
@@ -54,14 +55,14 @@ const routes: Routes = [
     },
     {
         path: 'socios',
-        component: AdminCompanyAssociateComponent,
+        loadChildren: () =>
+            import(
+                './admin-company-associates/admin-company-associate.module'
+            ).then((m) => m.AdminCompanyAssociateModule),
     },
     {
         path: 'funcionarios',
-        loadChildren: () =>
-            import(
-                './admin-company-employees/admin-company-employee.module'
-            ).then((m) => m.AdminCompanyEmployeeModule),
+        component: AdminCompanyEmployeeComponent,
     },
     {
         path: 'servicos',

@@ -1,36 +1,35 @@
-import {Component, OnInit} from '@angular/core';
-import {PoPageAction} from '@po-ui/ng-components';
-import {ActivatedRoute} from '@angular/router';
-import {CompaniesService} from '../../../companies.service';
-import {Observable} from 'rxjs';
-import {User} from '../../../model/user';
+import { Component } from '@angular/core';
+import { PoPageAction, PoTableAction } from '@po-ui/ng-components';
+import { environment } from '../../../../../../../environments/environment';
+import { DatatableColumn } from '../../../../../../shared/components/page-datatable/page-datatable/datatable-column';
 
 @Component({
     templateUrl: './admin-company-employee.component.html',
+    styleUrls: ['admin-company-employee.component.scss'],
 })
-export class AdminCompanyEmployeeComponent implements OnInit {
-    company$: Observable<User> = null;
+export class AdminCompanyEmployeeComponent {
+    pageActions: PoPageAction[] = [];
 
-
-    actions: Array<PoPageAction> = [
+    serviceApi = `${environment.apiUrl}/users/p/search`;
+    tableActions: PoTableAction[] = [];
+    columns: DatatableColumn[] = [
         {
-            label: '+ Funcionário',
-            url: `/admin/empresa/${this.activetedRoute.snapshot.params.id}/funcionarios/cadastro`,
+            label: 'Situação',
+            property: 'userCompany.fantasyName',
+        },
+        {
+            label: 'Nome',
+            property: 'userCompany.cnpj',
+        },
+        {
+            label: 'Categoria',
+            property: 'name',
+        },
+        {
+            label: 'Admissão',
+            property: 'name',
         },
     ];
 
-
-    constructor(
-        private activetedRoute: ActivatedRoute,
-        private companyDetailService: CompaniesService,
-    ) {}
-
-    ngOnInit(): void {
-        this.company$ = this.companyDetailService.getUserCompany(
-            this.activetedRoute.snapshot.params.id,
-        );
-    }
-
-
-
+    constructor() {}
 }

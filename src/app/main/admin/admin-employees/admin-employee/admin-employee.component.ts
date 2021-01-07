@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { PoPageAction, PoTableAction } from '@po-ui/ng-components';
-import { environment } from '../../../../../../../environments/environment';
-import { DatatableColumn } from '../../../../../../shared/components/page-datatable/page-datatable/datatable-column';
+import { environment } from '../../../../../environments/environment';
+import { DatatableColumn } from '../../../../shared/components/page-datatable/page-datatable/datatable-column';
 
 @Component({
-    templateUrl: './admin-company-invoice.component.html',
+    templateUrl: 'admin-employee.component.html',
 })
-export class AdminCompanyInvoiceComponent {
+export class AdminEmployeeComponent {
     pageActions: PoPageAction[] = [];
 
     serviceApi = `${environment.apiUrl}/users/p/search`;
@@ -17,11 +17,19 @@ export class AdminCompanyInvoiceComponent {
             property: 'userCompany.fantasyName',
         },
         {
-            label: 'Valor',
+            label: 'Empresa',
             property: 'userCompany.cnpj',
         },
         {
-            label: 'Emissão',
+            label: 'Funcionário',
+            property: 'userCompany.cnpj',
+        },
+        {
+            label: 'Categoria',
+            property: 'name',
+        },
+        {
+            label: 'Admissão',
             property: 'name',
         },
     ];

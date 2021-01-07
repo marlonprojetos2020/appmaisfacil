@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PoFieldModule } from '@po-ui/ng-components';
 import { PoPageLogin, PoPageLoginRecovery } from '@po-ui/ng-templates';
 import { finalize } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';

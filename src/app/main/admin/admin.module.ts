@@ -7,9 +7,14 @@ import { AdminMenuComponent } from './admin-layout/admin-menu/admin-menu.compone
 import { CompanyDetailMenuComponent } from './admin-layout/company-detail-menu/company-detail-menu.component';
 import { PoMenuModule, PoToolbarModule } from '@po-ui/ng-components';
 import { AdminMyAccountModule } from './admin-my-account/admin-my-account.module';
+import { AdminEmployeeModule } from './admin-employees/admin-employee.module';
 
 @NgModule({
-    declarations: [AdminToolbarComponent, AdminMenuComponent, CompanyDetailMenuComponent],
+    declarations: [
+        AdminToolbarComponent,
+        AdminMenuComponent,
+        CompanyDetailMenuComponent,
+    ],
     imports: [
         CommonModule,
         AdminRoutingModule,
@@ -17,7 +22,12 @@ import { AdminMyAccountModule } from './admin-my-account/admin-my-account.module
         PoToolbarModule,
         AdminDashboardModule,
         AdminMyAccountModule,
+        AdminEmployeeModule,
     ],
-    exports: [AdminToolbarComponent, AdminMenuComponent, CompanyDetailMenuComponent],
+    exports: [
+        AdminToolbarComponent,
+        AdminMenuComponent,
+        CompanyDetailMenuComponent,
+    ],
 })
 export class AdminModule {}

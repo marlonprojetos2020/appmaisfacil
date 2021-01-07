@@ -1,10 +1,10 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {PoPageModule} from '@po-ui/ng-components';
-import {AdminCompanyBankStatementComponent} from './admin-company-bank-statement/admin-company-bank-statement.component';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { AdminCompanyBankStatementComponent } from './admin-company-bank-statement/admin-company-bank-statement.component';
+import { PageDatatableModule } from '../../../../../shared/components/page-datatable/page-datatable.module';
 
 @NgModule({
-    imports: [CommonModule, PoPageModule],
+    imports: [CommonModule, PageDatatableModule],
     declarations: [AdminCompanyBankStatementComponent],
 })
 export class AdminCompanyBankStatementModule {

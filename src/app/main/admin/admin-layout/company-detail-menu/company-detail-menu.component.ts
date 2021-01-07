@@ -75,7 +75,7 @@ export class CompanyDetailMenuComponent implements OnInit {
 
     constructor(
         private companyDetailService: CompaniesService,
-        private acivatedRoute: ActivatedRoute,
+        private acivatedRoute: ActivatedRoute
     ) {}
 
     ngOnInit(): void {
@@ -85,7 +85,7 @@ export class CompanyDetailMenuComponent implements OnInit {
                 icon: 'po-icon-arrow-left',
                 label: data.name,
                 link: `/admin/empresas`,
-            }),
+            })
         );
     }
 }

@@ -6,16 +6,16 @@ import {
     PoFieldModule,
     PoPageModule,
 } from '@po-ui/ng-components';
-import { AdminCompanyNewChargeComponent } from './admin-company-new-charge/admin-company-new-charge.component';
+import { AdminCompanyNewExpenseComponent } from './admin-company-new-expense/admin-company-new-expense.component';
 
 @NgModule({
     imports: [
         CommonModule,
         PoPageModule,
         PoContainerModule,
-        PoFieldModule,
         PoButtonModule,
+        PoFieldModule,
     ],
-    declarations: [AdminCompanyNewChargeComponent],
+    declarations: [AdminCompanyNewExpenseComponent],
 })
-export class AdminCompanyNewChargeModule {}
+export class AdminCompanyNewExpenseModule {}

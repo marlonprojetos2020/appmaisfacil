@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthInterceptor } from 'src/app/core/auth/auth.interceptor';
 import { CompanyEditComponent } from '../company-edit/company-edit/company-edit.component';
 import { CompanyDetailDashboardComponent } from './dashboard/dashboard/company-detail-dashboard.component';
-import { AdminCompanyExpenseComponent } from './admin-company-expenses/admin-company-expense/admin-company-expense.component';
 import { AdminCompanyBankStatementComponent } from './admin-company-bank-statements/admin-company-bank-statement/admin-company-bank-statement.component';
 import { AdminCompanyAccountingComponent } from './admin-company-accounting/admin-company-accounting/admin-company-accounting.component';
 import { AdminCompanyInvoiceComponent } from './admin-company-invoices/admin-company-invoice/admin-company-invoice.component';
@@ -32,7 +31,10 @@ const routes: Routes = [
     },
     {
         path: 'pedidos',
-        component: AdminCompanyExpenseComponent,
+        loadChildren: () =>
+            import(
+                './admin-company-expenses/admin-company-expense.module'
+            ).then((m) => m.AdminCompanyExpenseModule),
     },
     {
         path: 'extrato',

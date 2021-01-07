@@ -1,13 +1,16 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { PoMenuItem, PoToolbarAction, PoToolbarProfile } from '@po-ui/ng-components';
+import {
+    PoMenuItem,
+    PoToolbarAction,
+    PoToolbarProfile,
+} from '@po-ui/ng-components';
 import { AuthService } from 'src/app/core/auth/auth.service';
 
 @Component({
     templateUrl: './company-layout.component.html',
 })
 export class CompanyLayoutComponent {
-
     pProfile: PoToolbarProfile;
     profileActions: Array<PoToolbarAction> = [
         {
@@ -77,7 +80,7 @@ export class CompanyLayoutComponent {
         {
             icon: 'po-icon-company',
             label: 'Minha Empresa',
-            link: '/empresa/empresa',
+            link: '/empresa/minha-empresa',
         },
         {
             icon: ' po-icon-handshake',
@@ -106,9 +109,5 @@ export class CompanyLayoutComponent {
         },
     ];
 
-    constructor(
-        private authService: AuthService,
-        private router: Router) {
-
-    }
+    constructor(private authService: AuthService, private router: Router) {}
 }

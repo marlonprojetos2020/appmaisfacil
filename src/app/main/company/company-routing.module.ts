@@ -44,7 +44,10 @@ const routes: Routes = [
             },
             {
                 path: 'nota-fiscal',
-                component: CompanyInvoiceComponent,
+                loadChildren: () =>
+                    import('./company-invoices/company-invoice.module').then(
+                        (m) => m.CompanyInvoiceModule
+                    ),
             },
             {
                 path: 'minha-empresa',

@@ -7,10 +7,15 @@ import { DatatableColumn } from '../../../../shared/components/page-datatable/pa
     templateUrl: './company-employee.component.html',
 })
 export class CompanyEmployeeComponent {
-    pageActions: PoPageAction[] = [];
+    pageActions: PoPageAction[] = [
+        {
+            label: 'Novo Funcionário',
+            icon: 'po-icon-plus-circle',
+            url: `/empresa/funcionarios/cadastro`,
+        },
+    ];
 
     serviceApi = `${environment.apiUrl}/users/p/search`;
-
     tableActions: PoTableAction[] = [];
     columns: DatatableColumn[] = [
         {
@@ -23,9 +28,13 @@ export class CompanyEmployeeComponent {
         },
         {
             label: 'Categoria',
+            property: 'name',
         },
         {
             label: 'Admissão',
+            property: 'name',
         },
     ];
+
+    constructor() {}
 }

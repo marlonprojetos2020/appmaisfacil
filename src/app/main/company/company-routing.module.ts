@@ -60,12 +60,12 @@ const routes: Routes = [
             },
             {
                 path: 'funcionarios',
-                component: CompanyEmployeeComponent,
+                loadChildren: () =>
+                    import('./company-employees/company-employee.module').then(
+                        (m) => m.CompanyEmployeeModule
+                    ),
             },
-            // {
-            //     path: 'sessao-expirada',
-            //     loadChildren: () => import('./main/session-expired/session-expired.module').then(m => m.SessionExpiredModule),
-            // },
+
             {
                 path: 'servicos',
                 component: CompanyExtraServiceComponent,

@@ -1,0 +1,17 @@
+.list {
+    font-size: 16px;
+    font-weight: lighter;
+
+    p{
+        margin-bottom: 8px;
+    }
+
+    ul{
+        list-style: none;
+        text-transform: uppercase;
+
+        li{
+            margin-bottom: 8px;
+        }
+    }
+}

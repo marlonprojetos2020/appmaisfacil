@@ -308,3 +308,23 @@ h2 {
         width: fit-content !important;
     }
 }
+
+.div-upload {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+    text-align: center;
+    background-color: #f1f1e9;
+    border-radius: 10px;
+    margin-top: 32px;
+    margin-bottom: 40px;
+    color: var(--color-primary);
+}
+
+.icon-upload {
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+

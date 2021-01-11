@@ -6,34 +6,75 @@ import { environment } from 'src/environments/environment';
 import { User } from '../../../companies/model/user';
 
 @Component({
+    styleUrls: [
+        './admin-carge-list.component.scss',
+    ],
     templateUrl: './admin-charge-list.component.html',
 })
 export class AdminChargeListComponent {
 
-    @ViewChild(PoModalComponent, { static: true }) poModal: PoModalComponent;
-    title = '';
+    @ViewChild('modalComprovante', { static: true }) poModalComprovante: PoModalComponent;
+    @ViewChild('modalCobranca', { static: true }) poModalCobranca: PoModalComponent;
 
-    pageActions: PoPageAction[] = [{
-        label: 'Nova Empresa',
-        icon: 'po-icon-plus-circle',
-        url: 'admin/empresas/nova-empresa',
-    }];
+
+    cobranca =
+        // {
+        //     status: 'PENDENTE',
+        //     isPendente: true,
+        //     titulo: 'Imposto de Renda',
+        //     tipo: 'Imposto',
+        //     vencimento: '28/10/2020',
+        //     valor: 50,
+        // };
+        {
+            status: 'EM_ANALISE',
+            isPendente: false,
+            titulo: 'Imposto de Renda',
+            tipo: 'Fatura',
+            vencimento: '28/10/2020',
+            valor: 50,
+        };
+    // {
+    //     status: 'PAGO',
+    //     titulo: 'Imposto de Renda',
+    //     tipo: 'Taxa',
+    //     vencimento: '28/10/2020',
+    //     valor: 50,
+    // },
 
     serviceApi = `${environment.apiUrl}/users/p/search`;
     tableActions: PoTableAction[] = [
         {
-            label: 'Visualizar',
-            action: (item) =>
-                this.router.navigateByUrl(`/admin/empresa/${item.id}`),
-        },
-        {
-            label: 'Abrir Modal',
+            label: 'ver',
             action: (item) => {
                 this.prepareModal(item);
-                this.poModal.open();
             },
         },
     ];
+
+    delete: PoModalAction = {
+        action: () => {
+            console.log('cancelar');
+        },
+        label: 'Deletar Cobrança',
+        danger: true,
+    };
+
+    decline: PoModalAction = {
+        action: () => {
+            console.log('cancelar');
+        },
+        label: 'Recusar',
+        danger: true,
+    };
+
+    confirm: PoModalAction = {
+        action: () => {
+            console.log('confirmou');
+        },
+        label: 'Aprovar',
+    };
+
     columns: DatatableColumn[] = [
         {
             label: 'Nome',
@@ -46,24 +87,23 @@ export class AdminChargeListComponent {
         { property: 'name', label: 'Usuário' },
     ];
 
-    close: PoModalAction = {
-        action: () => {
-            console.log('cancelar');
-        },
-        label: 'Close',
-        danger: true,
-    };
-
-    confirm: PoModalAction = {
-        action: () => {
-            console.log('confirmou');
-        },
-        label: 'Confirm',
-    };
-
     constructor(private router: Router) {}
 
     prepareModal(company: User): void {
-        this.title = company.name;
+        if (this.cobranca.status === 'PENDENTE') {
+            this.poModalCobranca.open();
+        } else {
+            this.poModalComprovante.open();
+        }
+    }
+
+    showCharge(): void {
+        this.poModalComprovante.close();
+        this.poModalCobranca.open();
+    }
+
+    showReceipt(): void {
+        this.poModalCobranca.close();
+        this.poModalComprovante.open();
     }
 }

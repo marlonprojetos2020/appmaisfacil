@@ -1,15 +1,115 @@
 <app-page-datatable
     title="Cobranças"
-    [pageActions]="pageActions"
     [serviceApi]="serviceApi"
     [tableActions]="tableActions"
     [columns]="columns"
 >
 </app-page-datatable>
+
 <po-modal
-    p-title="Options"
+    #modalComprovante
+    p-title="Comprovante de pagamento"
     [p-primary-action]="confirm"
-    [p-secondary-action]="close"
+    [p-secondary-action]="decline"
 >
-    <h1>{{title}}</h1>
+    <div class="po-row">
+        <div class="po-md-6">
+            <img
+                src="assets/images/bg-login.png"
+                alt=""
+            >
+        </div>
+        <div class="po-md-6">
+            <h1>Imposto de Renda</h1>
+            <h2 class="po-mb-2">
+                <span>Empresa</span>
+                <!-- adicionar router link para o nome -->
+                3R desenvolvimento de programas
+            </h2>
+            <div class="po-row">
+                <div class="po-pl-0 po-md-6 po-mb-2">
+                    <h3>
+                        <span>Status</span>
+                        {{cobranca.status}}
+                    </h3>
+                </div>
+                <div class="po-pr-0 po-md-6 po-mb-2">
+                    <h3>
+                        <span>Tipo</span>
+                        {{cobranca.tipo}}
+                    </h3>
+                </div>
+            </div>
+            <div class="po-row">
+                <div class="po-pl-0 po-md-6 po-mb-2">
+                    <h3>
+                        <span>Vencimento</span>
+                        {{cobranca.vencimento}}
+                    </h3>
+                </div>
+                <div class="po-pr-0 po-md-6 po-mb-2">
+                    <h3>
+                        <span>Valor</span>
+                        {{cobranca.valor}}
+                    </h3>
+                </div>
+            </div>
+            <a (click)="showCharge()">Ver Cobrança</a>
+        </div>
+    </div>
+</po-modal>
+
+<po-modal
+    #modalCobranca
+    p-title="Cobrança"
+    [p-primary-action]="cobranca.isPendente? delete : null"
+>
+    <div class="po-row">
+        <div class="po-md-6">
+            <img
+                src="assets/images/bg-login.png"
+                alt=""
+            >
+        </div>
+        <div class="po-md-6">
+            <h1>Imposto de Renda</h1>
+            <h2 class="po-mb-2">
+                <span>Empresa</span>
+                <!-- adicionar router link para o nome -->
+                3R desenvolvimento de programas
+            </h2>
+            <div class="po-row">
+                <div class="po-pl-0 po-md-6 po-mb-2">
+                    <h3>
+                        <span>Status</span>
+                        {{cobranca.status}}
+                    </h3>
+                </div>
+                <div class="po-pr-0 po-md-6 po-mb-2">
+                    <h3>
+                        <span>Tipo</span>
+                        {{cobranca.tipo}}
+                    </h3>
+                </div>
+            </div>
+            <div class="po-row">
+                <div class="po-pl-0 po-md-6 po-mb-2">
+                    <h3>
+                        <span>Vencimento</span>
+                        {{cobranca.vencimento}}
+                    </h3>
+                </div>
+                <div class="po-pr-0 po-md-6 po-mb-2">
+                    <h3>
+                        <span>Valor</span>
+                        {{cobranca.valor}}
+                    </h3>
+                </div>
+            </div>
+            <a
+                *ngIf="this.cobranca.status !== 'PENDENTE'"
+                (click)="showReceipt()"
+            >Ver Recibo</a>
+        </div>
+    </div>
 </po-modal>

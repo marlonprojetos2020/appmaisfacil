@@ -11,7 +11,7 @@ import { environment } from '../../../../../../environments/environment';
 export class AdminCompanyAssociateService {
     constructor(private httpClient: HttpClient) {}
 
-    createAssociate(associate: Associate, id: number): Observable<Associate> {
+    createAssociate(associate: Associate, id: string): Observable<Associate> {
         return this.httpClient.post<Associate>(
             `${environment.apiUrl}/users/${id}/company-partners`,
             associate

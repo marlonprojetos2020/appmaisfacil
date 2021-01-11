@@ -2,65 +2,63 @@
     <div class="po-container">
         <div class="po-row">
             <form [formGroup]="formAssociate">
-                <div class="po-md-12 po-mb-4">
-                    <po-input
-                        p-label="Nome"
-                        formControlName="name"
-                        name="name"
-                        p-required="true"
-                        p-auto-focus="true"
-                        p-clean="true"
-                        p-placeholder="Digite um Nome"
-                        p-maxlength="100"
-                    ></po-input>
-                </div>
-                <div class="po-md-4 po-mb-4">
-                    <po-input
-                        p-label="RG"
-                        formControlName="RG"
-                        name="RG"
-                        p-required="true"
-                        p-clean="true"
-                        p-placeholder="00.000.000-0"
-                        p-maxlength="10"
-                        p-mask="99.999.999-0"
-                    ></po-input>
-                </div>
-                <div class="po-md-4 po-mb-4">
-                    <po-input
-                        p-label="CPF"
-                        formControlName="CPF"
-                        name="CPF"
-                        p-required="true"
-                        p-clean="true"
-                        p-mask="999.999.999-99"
-                        p-pattern="^[0-9]{11}$"
-                        p-placeholder="000.000.000-00"
-                    ></po-input>
-                </div>
-                <div class="po-md-4 po-mb-4">
-                    <po-input
-                        p-label="Titulo de Eleitor"
-                        formControlName="voterTitle"
-                        name="voterTitle"
-                        p-required="true"
-                        p-clean="true"
-                        p-placeholder="0000 0000 00 00"
-                        p-mask="9999 9999 99 99"
-                        p-pattern="^[0-9]{12}$"
-                    ></po-input>
-                </div>
-                <div class="po-md-4 po-mb-4">
-                    <po-input
-                        p-label="Participação na sociedade (em %)"
-                        formControlName="percentageInSociety"
-                        name="percentageInSociety"
-                        p-required="true"
-                        p-clean="true"
-                        p-placeholder="000%"
-                        p-pattern="^[1-9][0-9]?$|^100$"
-                    ></po-input>
-                </div>
+                <po-input
+                    class="po-md-12 po-mb-4"
+                    p-label="Nome"
+                    formControlName="name"
+                    name="name"
+                    p-required="true"
+                    p-auto-focus="true"
+                    p-clean="true"
+                    p-placeholder="Digite um Nome"
+                    p-maxlength="100"
+                ></po-input>
+
+                <po-input
+                    class="po-md-4 po-mb-4"
+                    p-label="RG"
+                    formControlName="RG"
+                    name="RG"
+                    p-required="true"
+                    p-clean="true"
+                    p-placeholder="00.000.000-0"
+                    p-maxlength="15"
+                ></po-input>
+
+                <po-input
+                    class="po-md-4 po-mb-4"
+                    p-label="CPF"
+                    formControlName="CPF"
+                    name="CPF"
+                    p-required="true"
+                    p-clean="true"
+                    p-mask="999.999.999-99"
+                    p-pattern="^[0-9]{11}$"
+                    p-placeholder="000.000.000-00"
+                ></po-input>
+
+                <po-input
+                    class="po-md-4 po-mb-4"
+                    p-label="Titulo de Eleitor"
+                    formControlName="voterTitle"
+                    name="voterTitle"
+                    p-required="true"
+                    p-clean="true"
+                    p-placeholder="0000 0000 00 00"
+                    p-mask="9999 9999 99 99"
+                    p-pattern="^[0-9]{12}$"
+                ></po-input>
+
+                <po-input
+                    class="po-md-4 po-mb-4"
+                    p-label="Participação na sociedade (em %)"
+                    formControlName="percentageInSociety"
+                    name="percentageInSociety"
+                    p-required="true"
+                    p-clean="true"
+                    p-placeholder="000%"
+                    p-pattern="^[1-9][0-9]?$|^100$"
+                ></po-input>
             </form>
         </div>
         <div class="po-row po-mb-4">
@@ -78,15 +76,15 @@
             </div>
         </div>
         <div class="po-row po-mb-4">
-            <div class="po-md-12">
-                <po-upload
-                    p-drag-drop
-                    [p-multiple]="true"
-                    [p-restrictions]="restrictions"
-                    [p-url]="urlUploadDocument"
-                    (p-success)="(urlUploadDocument)"
-                ></po-upload>
-            </div>
+            <!--            <po-upload-->
+            <!--                class="po-md-12"-->
+            <!--                p-drag-drop-->
+            <!--                [p-multiple]="true"-->
+            <!--                [p-restrictions]="restrictions"-->
+            <!--                [p-url]="urlUploadDocument"-->
+            <!--                (p-success)="(urlUploadDocument)"-->
+            <!--                p-required="false"-->
+            <!--            ></po-upload>-->
         </div>
         <div class="po-row">
             <div class="po-md-3">

@@ -22,7 +22,13 @@ export class AdminCompanyAssociateComponent implements OnInit {
     ];
 
     serviceApi = `${environment.apiUrl}/users/p/search`;
-    tableActions: PoTableAction[] = [];
+    tableActions: PoTableAction[] = [
+        {
+            label: 'Visualizar',
+            action: (item) =>
+                this.router.navigateByUrl(`/admin/empresa/${item.id}`),
+        },
+    ];
     columns: DatatableColumn[] = [
         {
             label: 'Nome',

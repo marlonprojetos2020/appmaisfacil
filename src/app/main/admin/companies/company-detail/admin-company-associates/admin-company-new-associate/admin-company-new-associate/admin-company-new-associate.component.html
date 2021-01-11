@@ -1,21 +1,67 @@
-<po-page-default p-title="Sócios">
+<po-page-edit p-title="Sócios">
     <div class="po-container">
         <div class="po-row">
-            <div class="po-md-12 po-mb-4">
-                <po-input p-label="Nome"></po-input>
-            </div>
-            <div class="po-md-4 po-mb-4">
-                <po-input p-label="RG"></po-input>
-            </div>
-            <div class="po-md-4 po-mb-4">
-                <po-input p-label="CPF"></po-input>
-            </div>
-            <div class="po-md-4 po-mb-4">
-                <po-input p-label="Titulo de Eleitor"></po-input>
-            </div>
-            <div class="po-md-4 po-mb-4">
-                <po-input p-label="Participação na sociedade (em %)"></po-input>
-            </div>
+            <form [formGroup]="formAssociate">
+                <div class="po-md-12 po-mb-4">
+                    <po-input
+                        p-label="Nome"
+                        formControlName="name"
+                        name="name"
+                        p-required="true"
+                        p-auto-focus="true"
+                        p-clean="true"
+                        p-placeholder="Digite um Nome"
+                        p-maxlength="100"
+                    ></po-input>
+                </div>
+                <div class="po-md-4 po-mb-4">
+                    <po-input
+                        p-label="RG"
+                        formControlName="RG"
+                        name="RG"
+                        p-required="true"
+                        p-clean="true"
+                        p-placeholder="00.000.000-0"
+                        p-maxlength="10"
+                        p-mask="99.999.999-0"
+                    ></po-input>
+                </div>
+                <div class="po-md-4 po-mb-4">
+                    <po-input
+                        p-label="CPF"
+                        formControlName="CPF"
+                        name="CPF"
+                        p-required="true"
+                        p-clean="true"
+                        p-mask="999.999.999-99"
+                        p-pattern="^[0-9]{11}$"
+                        p-placeholder="000.000.000-00"
+                    ></po-input>
+                </div>
+                <div class="po-md-4 po-mb-4">
+                    <po-input
+                        p-label="Titulo de Eleitor"
+                        formControlName="voterTitle"
+                        name="voterTitle"
+                        p-required="true"
+                        p-clean="true"
+                        p-placeholder="0000 0000 00 00"
+                        p-mask="9999 9999 99 99"
+                        p-pattern="^[0-9]{12}$"
+                    ></po-input>
+                </div>
+                <div class="po-md-4 po-mb-4">
+                    <po-input
+                        p-label="Participação na sociedade (em %)"
+                        formControlName="percentageInSociety"
+                        name="percentageInSociety"
+                        p-required="true"
+                        p-clean="true"
+                        p-placeholder="000%"
+                        p-pattern="^[1-9][0-9]?$|^100$"
+                    ></po-input>
+                </div>
+            </form>
         </div>
         <div class="po-row po-mb-4">
             <div class="po-md-5 list">
@@ -33,17 +79,24 @@
         </div>
         <div class="po-row po-mb-4">
             <div class="po-md-12">
-                <div class="div-upload">
-                    <span class="po-icon po-icon-upload icon-upload"></span>
-                    <p>Solte aqui os <strong>Documentos</strong></p>
-                    <p>Ou clique aqui para pesquisar</p>
-                </div>
+                <po-upload
+                    p-drag-drop
+                    [p-multiple]="true"
+                    [p-restrictions]="restrictions"
+                    [p-url]="urlUploadDocument"
+                    (p-success)="(urlUploadDocument)"
+                ></po-upload>
             </div>
         </div>
         <div class="po-row">
             <div class="po-md-3">
-                <po-button p-label="Concluir" p-type="primary"></po-button>
+                <po-button
+                    p-label="Concluir"
+                    p-type="primary"
+                    (p-click)="submitForm()"
+                    [p-disabled]="formAssociate.invalid"
+                ></po-button>
             </div>
         </div>
     </div>
-</po-page-default>
+</po-page-edit>

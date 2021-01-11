@@ -35,6 +35,7 @@ $colorText: #4b4b4b;
     --color-warning: #{$colorWarning};
     --color-cancel: #{$colorCancel};
     --color-backgorund: #{$colorLight};
+    --color-card: #{$colorLight2};
 
     --color-text: #{$colorText};
 
@@ -274,4 +275,40 @@ h2 {
 
 .po-page-content {
     padding-top: 0 !important;
+}
+
+.button-indication {
+    .po-button{
+        width: 100% !important;
+        color: #FFFFFF;
+        background-color: var(--color-secondary);
+        border-radius: 10px;
+    }
+}
+
+.input-style{
+    .po-field-container-content{
+        padding: 8px 0 0 0 !important;
+    }
+}
+
+
+.button-new-employee{
+    .po-button{
+        color: #FFFFFF !important;
+        border-radius: 10px;
+        background-color: var(--color-secondary);
+        padding: 0 90px;
+        text-transform: uppercase;
+    }
+}
+
+.table-no-button{
+    .po-page-filter-content{
+        margin-top: 50px !important;
+    }
+
+    .po-page-header-title{
+        width: fit-content !important;
+    }
 }

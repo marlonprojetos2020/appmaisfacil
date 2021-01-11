@@ -1,0 +1,101 @@
+<po-page-default p-title="Minha Empresa">
+    <div class="po-container">
+        <div class="po-row">
+            <div class="po-md-12">
+                <h2 class="po-mb-3">Empresa</h2>
+            </div>
+            <div class="po-md-3 po-mb-4">
+                <po-input p-label="CNPJ"></po-input>
+            </div>
+        </div>
+        <div class="po-row po-mb-4">
+            <div class="po-md-12">
+                <po-input p-label="Razão Social"></po-input>
+            </div>
+        </div>
+        <div class="po-row po-mb-4">
+            <div class="po-md-12">
+                <po-input p-label="Nome Fantasia"></po-input>
+            </div>
+        </div>
+        <div class="po-row po-mb-4">
+            <div class="po-md-6">
+                <po-radio-group
+                    p-label="Tipo de Empresa"
+                    [p-options]="[
+                        { label: 'Prestadora de Serviço', value: 'SERVICE' },
+                        { label: 'Comércio', value: 'COMMERCE' },
+                        { label: 'Industria', value: 'INDUSTRY' }
+                    ]"
+                ></po-radio-group>
+            </div>
+        </div>
+        <div class="po-row po-mb-4">
+            <div class="po-md-4">
+                <po-input p-label="Ramo"></po-input>
+            </div>
+            <div class="po-md-8">
+                <po-input p-label="CNAE"></po-input>
+            </div>
+        </div>
+        <div class="po-row po-mb-4">
+            <div class="po-md-12">
+                <h2 class="po-mb-3">Endereço</h2>
+            </div>
+            <div class="po-md-6">
+                <po-radio-group
+                    p-label="Tipo de Endereço"
+                    [p-options]="[
+                        { label: 'Comercial', value: 'comercio' },
+                        { label: 'Residencial', value: 'redidencial' }
+                    ]"
+                ></po-radio-group>
+            </div>
+        </div>
+        <div class="po-row po-mb-4">
+            <div class="po-md-3">
+                <po-input p-label="CEP"></po-input>
+            </div>
+        </div>
+        <div class="po-row po-mb-4">
+            <div class="po-md-12">
+                <po-input p-label="Endereço"></po-input>
+            </div>
+        </div>
+        <div class="po-row po-mb-4">
+            <div class="po-md-4">
+                <po-input p-label="Número"></po-input>
+            </div>
+            <div class="po-md-8">
+                <po-input p-label="Complemento (opcional)"></po-input>
+            </div>
+        </div>
+        <div class="po-row po-mb-4">
+            <div class="po-md-4">
+                <po-input p-label="Bairro"></po-input>
+            </div>
+            <div class="po-md-4">
+                <po-input p-label="Cidade"></po-input>
+            </div>
+            <div class="po-md-4">
+                <po-input p-label="Estado"></po-input>
+            </div>
+        </div>
+        <div class="po-row po-mb-4">
+            <div class="po-md-12">
+                <h2 class="po-mb-3">Contato da Empresa</h2>
+            </div>
+            <div class="po-md-5">
+                <po-input p-label="E-mail"></po-input>
+            </div>
+        </div>
+        <div class="po-row po-mb-4">
+            <div class="po-md-3">
+                <po-input p-label="Telefone"></po-input>
+            </div>
+            <div class="po-md-3">
+                <po-input p-label="Celular"></po-input>
+            </div>
+        </div>
+    </div>
+</po-page-default>

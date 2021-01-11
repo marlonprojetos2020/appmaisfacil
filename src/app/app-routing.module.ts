@@ -50,7 +50,7 @@ const routes: Routes = [
             useClass: AuthInterceptor,
             multi: true,
         },
-    ]
+    ],
 
 })
 export class AppRoutingModule {}

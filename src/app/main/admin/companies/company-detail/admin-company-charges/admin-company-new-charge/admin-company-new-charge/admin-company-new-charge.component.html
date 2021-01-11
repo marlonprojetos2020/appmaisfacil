@@ -1,0 +1,42 @@
+<po-page-default p-title="Nova Cobrança">
+    <div class="po-container">
+        <div class="po-row">
+            <div class="po-md-12">
+                <div class="div-upload">
+                    <span class="po-icon po-icon-upload icon"></span>
+                    <p>Solte aqui a imagem do comprovante fiscal</p>
+                    <p>Ou clique aqui para pesqusiar</p>
+                </div>
+            </div>
+        </div>
+        <div class="po-row po-mb-4">
+            <div class="po-md-6">
+                <po-input p-label="Titulo"></po-input>
+            </div>
+        </div>
+        <div class="po-row po-mb-4">
+            <div class="po-md-4">
+                <po-select
+                    p-label="Tipo"
+                    [p-options]="[
+                        { label: 'option 1', value: '1' },
+                        { label: 'option 2', value: '2' }
+                    ]"
+                ></po-select>
+            </div>
+        </div>
+        <div class="po-row po-mb-4">
+            <div class="po-md-3">
+                <po-input p-label="Data de Vencimento"></po-input>
+            </div>
+            <div class="po-md-3">
+                <po-input p-label="Valor"></po-input>
+            </div>
+        </div>
+        <div class="po-row">
+            <div class="po-md-2">
+                <po-button p-label="Salvar"></po-button>
+            </div>
+        </div>
+    </div>
+</po-page-default>

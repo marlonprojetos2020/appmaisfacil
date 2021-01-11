@@ -1,4 +1,6 @@
-<po-page-edit [p-title]="editedUser? editedUser.userCompany.fantasyName : 'Novo Usuário'">
+<po-page-edit
+    [p-title]="editedUser ? editedUser.userCompany.fantasyName : 'Novo Usuário'"
+>
     <po-stepper #stepper>
         <po-step
             p-label="Usuário"
@@ -245,15 +247,19 @@
                                 formControlName="zipcode"
                                 p-optional="true"
                             ></po-input>
-                            <app-invalid-feedback [hasError]="zipcodeError === true">
+                            <app-invalid-feedback
+                                [hasError]="zipcodeError === true"
+                            >
                                 CEP não encontrado
                             </app-invalid-feedback>
                         </div>
 
-                        <ng-container *ngIf="
+                        <ng-container
+                            *ngIf="
                                 formDadosEmpresa.get('address.zipcode').valid &&
                                 zipcodeError !== true
-                            ">
+                            "
+                        >
                             <po-input
                                 #streetInput
                                 class="po-md-12 po-mt-2"

@@ -13,8 +13,8 @@ export class CompanyDetailMenuComponent implements OnInit {
     menuCompanyDetail: Array<PoMenuItem> = [
         {
             icon: 'po-icon-home',
-            label: 'Painel de Controle',
-            link: ``,
+            label: 'Início',
+            link: `.`,
         },
         {
             icon: 'po-icon-warning',
@@ -75,7 +75,7 @@ export class CompanyDetailMenuComponent implements OnInit {
 
     constructor(
         private companyDetailService: CompaniesService,
-        private acivatedRoute: ActivatedRoute,
+        private acivatedRoute: ActivatedRoute
     ) {}
 
     ngOnInit(): void {

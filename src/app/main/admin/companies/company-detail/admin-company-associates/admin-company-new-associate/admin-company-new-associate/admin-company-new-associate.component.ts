@@ -58,11 +58,11 @@ export class AdminCompanyNewAssociateComponent implements OnInit {
             .replace('-', '')
             .trim();
 
-        // this.associateService
-        //     .createAssociate(
-        //         this.newAssociate,
-        //         this.activatedRoute.snapshot.paramMap.get('id')
-        //     )
-        //     .subscribe();
+        this.associateService
+            .createAssociate(
+                this.newAssociate,
+                this.activatedRoute.snapshot.paramMap.get('id')
+            )
+            .subscribe();
     }
 }

@@ -5,7 +5,7 @@ import { PoPageAction, PoTableAction } from '@po-ui/ng-components';
 import { environment } from '../../../../../../../environments/environment';
 import { DatatableColumn } from '../../../../../../shared/components/page-datatable/page-datatable/datatable-column';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CompaniesService } from '../../../companies.service';
+import { PercentPipe } from '@angular/common';
 
 @Component({
     templateUrl: './admin-company-associate.component.html',
@@ -13,15 +13,8 @@ import { CompaniesService } from '../../../companies.service';
 export class AdminCompanyAssociateComponent implements OnInit {
     company$: Observable<User> = null;
 
-    pageActions: PoPageAction[] = [
-        {
-            label: 'Adicionar Sócio',
-            icon: 'po-icon-plus-circle',
-            url: `/admin/empresa/${this.activetedRoute.snapshot.params.id}/socios/novo-socio`,
-        },
-    ];
-
-    serviceApi = `${environment.apiUrl}/users/p/search`;
+    pageActions: PoPageAction[] = [];
+    serviceApi = '';
     tableActions: PoTableAction[] = [
         {
             label: 'Visualizar',
@@ -32,27 +25,38 @@ export class AdminCompanyAssociateComponent implements OnInit {
     columns: DatatableColumn[] = [
         {
             label: 'Nome',
-            property: 'userCompany.fantasyName',
+            property: 'name',
         },
         {
             label: 'CPF',
-            property: 'userCompany.cnpj',
+            property: 'cpf',
+            customValue: cpf => {
+                if (cpf) {
+                    return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, '\$1.\$2.\$3\-\$4');
+                }
+                return null;
+            },
         },
         {
-            label: 'Participação na Sociedade',
-            property: 'name',
+            label: 'Participação na Sociedade (em %)',
+            property: 'percentageInSociety',
         },
-    ];
+    ]
 
     constructor(
         private router: Router,
         private activetedRoute: ActivatedRoute,
-        private companyDetailService: CompaniesService
     ) {}
 
     ngOnInit(): void {
-        this.company$ = this.companyDetailService.getUserCompany(
-            this.activetedRoute.snapshot.params.id
+        const id = this.activetedRoute.snapshot.params.id;
+        this.pageActions.push(
+            {
+                label: 'Adicionar Sócio',
+                icon: 'po-icon-plus-circle',
+                url: `/admin/empresa/${id}/socios/novo-socio`,
+            },
         );
+        this.serviceApi = `${environment.apiUrl}/users/${id}/company-partners`;
     }
 }

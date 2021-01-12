@@ -17,8 +17,8 @@
                 <po-input
                     class="po-md-4 po-mb-4"
                     p-label="RG"
-                    formControlName="RG"
-                    name="RG"
+                    formControlName="rg"
+                    name="rg"
                     p-required="true"
                     p-clean="true"
                     p-placeholder="00.000.000-0"
@@ -28,8 +28,8 @@
                 <po-input
                     class="po-md-4 po-mb-4"
                     p-label="CPF"
-                    formControlName="CPF"
-                    name="CPF"
+                    formControlName="cpf"
+                    name="cpf"
                     p-required="true"
                     p-clean="true"
                     p-mask="999.999.999-99"
@@ -68,23 +68,23 @@
                     documentos:
                 </p>
                 <ul>
-                    <li>- Rg</li>
-                    <li>- CPF</li>
+                    <li>- rg</li>
+                    <li>- cpf</li>
                     <li>- Titulo de Eleitor</li>
                     <li>- Comprovante de Residência</li>
                 </ul>
             </div>
         </div>
         <div class="po-row po-mb-4">
-                        <po-upload
-                            class="po-md-12"
-                            p-drag-drop
-                            [p-multiple]="true"
-                            [p-restrictions]="restrictions"
-                            [p-url]="urlUploadDocument"
-                            (p-success)="(urlUploadDocument)"
-                            p-required="false"
-                        ></po-upload>
+            <po-upload
+                class="po-md-12"
+                p-drag-drop
+                [p-multiple]="true"
+                [p-restrictions]="restrictions"
+                [p-url]="urlUploadDocument"
+                (p-success)="(urlUploadDocument)"
+                p-required="false"
+            ></po-upload>
         </div>
         <div class="po-row">
             <div class="po-md-3">

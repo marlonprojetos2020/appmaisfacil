@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Associate } from '../../../../model/associate';
-import { PoUploadFileRestrictions } from '@po-ui/ng-components';
+import { Associate } from '../../associate';
+import { PoNotificationService, PoUploadFileRestrictions } from '@po-ui/ng-components';
 import { environment } from '../../../../../../../../environments/environment';
 import { AdminCompanyAssociateService } from '../../admin-company-associate.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
-// @ts-ignore
 @Component({
     templateUrl: 'admin-company-new-associate.component.html',
     styleUrls: ['admin-company-new-associate.component.scss'],
@@ -20,15 +20,16 @@ export class AdminCompanyNewAssociateComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private associateService: AdminCompanyAssociateService,
-        private router: Router,
-        private activatedRoute: ActivatedRoute
+        private activatedRoute: ActivatedRoute,
+        private location: Location,
+
     ) {}
 
     ngOnInit(): void {
         this.formAssociate = this.formBuilder.group({
             name: ['', Validators.required],
-            RG: ['', Validators.required],
-            CPF: ['', Validators.required],
+            rg: ['', Validators.required],
+            cpf: ['', Validators.required],
             voterTitle: ['', Validators.required],
             percentageInSociety: ['', Validators.required],
         });
@@ -47,22 +48,22 @@ export class AdminCompanyNewAssociateComponent implements OnInit {
     submitForm(): any {
         this.formAssociate.value.percentageInSociety = parseInt(
             this.formAssociate.value.percentageInSociety,
-            10
+            10,
         );
 
-        this.formAssociate.value.RG = this.formAssociate.value.RG.replace(
-            '.',
-            ''
-        )
-            .replace('.', '')
-            .replace('-', '')
-            .trim();
 
-        this.associateService
-            .createAssociate(
-                this.newAssociate,
-                this.activatedRoute.snapshot.paramMap.get('id')
-            )
-            .subscribe();
+        this.newAssociate = this.formAssociate.getRawValue() as Associate;
+        this.newAssociate.rg = this.newAssociate.rg
+            .toUpperCase()
+            .replace(/[^\dX]/g, '')
+            .trim();
+        this.associateService.createAssociate(
+            this.newAssociate,
+            this.activatedRoute.snapshot.paramMap.get('id'))
+            .subscribe(
+                () => {
+                    this.location.back();
+                },
+            );
     }
 }

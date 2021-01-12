@@ -101,8 +101,13 @@ export class PageDatatableComponent implements OnInit {
             }))
             .subscribe(
                 result => {
+                    console.log(result);
                     this.showMoreDisabled = !result.hasNext;
-                    this.items.push(...result.items.map(item => this.flattenObject(item)));
+                    if (result.items) {
+                        this.items.push(...result.items.map(item => this.flattenObject(item)));
+                    } else {
+                        this.items.push(...result.map(item => this.flattenObject(item)));
+                    }
                 },
             );
     }

@@ -5,6 +5,7 @@ import {
     PoButtonModule,
     PoContainerModule,
     PoFieldModule,
+    PoNotificationModule,
     PoPageModule,
 } from '@po-ui/ng-components';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -17,6 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
         PoFieldModule,
         PoButtonModule,
         ReactiveFormsModule,
+        PoNotificationModule,
     ],
     declarations: [AdminCompanyNewAssociateComponent],
 })

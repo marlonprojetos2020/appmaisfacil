@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Associate } from '../../associate';
-import { PoNotificationService, PoUploadFileRestrictions } from '@po-ui/ng-components';
+import {
+    PoNotificationService,
+    PoUploadFileRestrictions,
+} from '@po-ui/ng-components';
 import { environment } from '../../../../../../../../environments/environment';
 import { AdminCompanyAssociateService } from '../../admin-company-associate.service';
 import { ActivatedRoute } from '@angular/router';
@@ -21,8 +24,7 @@ export class AdminCompanyNewAssociateComponent implements OnInit {
         private formBuilder: FormBuilder,
         private associateService: AdminCompanyAssociateService,
         private activatedRoute: ActivatedRoute,
-        private location: Location,
-
+        private location: Location
     ) {}
 
     ngOnInit(): void {
@@ -48,22 +50,25 @@ export class AdminCompanyNewAssociateComponent implements OnInit {
     submitForm(): any {
         this.formAssociate.value.percentageInSociety = parseInt(
             this.formAssociate.value.percentageInSociety,
-            10,
+            10
         );
-
 
         this.newAssociate = this.formAssociate.getRawValue() as Associate;
         this.newAssociate.rg = this.newAssociate.rg
             .toUpperCase()
             .replace(/[^\dX]/g, '')
             .trim();
-        this.associateService.createAssociate(
-            this.newAssociate,
-            this.activatedRoute.snapshot.paramMap.get('id'))
-            .subscribe(
-                () => {
-                    this.location.back();
-                },
-            );
+        this.associateService
+            .createAssociate(
+                this.newAssociate,
+                this.activatedRoute.snapshot.paramMap.get('id')
+            )
+            .subscribe(() => {
+                this.location.back();
+            });
+    }
+
+    dirtyMe(input): void {
+        this.formAssociate.get(input).markAsDirty();
     }
 }

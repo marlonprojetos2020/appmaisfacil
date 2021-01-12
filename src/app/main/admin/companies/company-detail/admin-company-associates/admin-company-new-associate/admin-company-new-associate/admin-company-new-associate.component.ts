@@ -50,20 +50,13 @@ export class AdminCompanyNewAssociateComponent implements OnInit {
             this.formAssociate.value.percentageInSociety,
             10,
         );
-
-
         this.newAssociate = this.formAssociate.getRawValue() as Associate;
         this.newAssociate.rg = this.newAssociate.rg
             .toUpperCase()
             .replace(/[^\dX]/g, '')
             .trim();
-        this.associateService.createAssociate(
-            this.newAssociate,
-            this.activatedRoute.snapshot.paramMap.get('id'))
-            .subscribe(
-                () => {
-                    this.location.back();
-                },
-            );
+        this.associateService
+            .createAssociate(this.newAssociate, this.activatedRoute.snapshot.paramMap.get('id'))
+            .subscribe(() => this.location.back());
     }
 }

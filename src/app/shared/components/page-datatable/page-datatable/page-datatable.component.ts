@@ -101,13 +101,17 @@ export class PageDatatableComponent implements OnInit {
             }))
             .subscribe(
                 result => {
-                    console.log(result);
                     this.showMoreDisabled = !result.hasNext;
                     if (result.items) {
                         this.items.push(...result.items.map(item => this.flattenObject(item)));
                     } else {
-                        this.items.push(...result.map(item => this.flattenObject(item)));
+                        this.items.push(...result.map(item => {
+                            // não parece uma boa opção 
+                            item.cpf ? item.cpf = item.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, '\$1.\$2.\$3\-\$4') : null;
+                            return this.flattenObject(item);
+                        }));
                     }
+
                 },
             );
     }

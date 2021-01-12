@@ -30,18 +30,12 @@ export class AdminCompanyAssociateComponent implements OnInit {
         {
             label: 'CPF',
             property: 'cpf',
-            customValue: cpf => {
-                if (cpf) {
-                    return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, '\$1.\$2.\$3\-\$4');
-                }
-                return null;
-            },
         },
         {
             label: 'Participação na Sociedade (em %)',
             property: 'percentageInSociety',
         },
-    ]
+    ];
 
     constructor(
         private router: Router,

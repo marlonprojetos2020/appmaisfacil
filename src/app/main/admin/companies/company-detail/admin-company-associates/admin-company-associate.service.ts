@@ -14,8 +14,7 @@ export class AdminCompanyAssociateService {
     createAssociate(associate: Associate, id: string): Observable<Associate> {
         return this.httpClient.post<Associate>(
             `${environment.apiUrl}/users/${id}/company-partners`,
-            associate
-        );
+            associate);
     }
 
     getUserCompany(id: number): Observable<User> {

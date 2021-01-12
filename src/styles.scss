@@ -277,14 +277,6 @@ h2 {
     padding-top: 0 !important;
 }
 
-.button-indication {
-    .po-button{
-        width: 100% !important;
-        color: #FFFFFF;
-        background-color: var(--color-secondary);
-        border-radius: 10px;
-    }
-}
 
 .input-style{
     .po-field-container-content{
@@ -292,16 +284,6 @@ h2 {
     }
 }
 
-
-.button-new-employee{
-    .po-button{
-        color: #FFFFFF !important;
-        border-radius: 10px;
-        background-color: var(--color-secondary);
-        padding: 0 90px;
-        text-transform: uppercase;
-    }
-}
 
 .table-no-button{
     .po-page-filter-content{
@@ -312,3 +294,23 @@ h2 {
         width: fit-content !important;
     }
 }
+
+.div-upload {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+    text-align: center;
+    background-color: #f1f1e9;
+    border-radius: 10px;
+    margin-top: 32px;
+    margin-bottom: 40px;
+    color: var(--color-primary);
+}
+
+.icon-upload {
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+

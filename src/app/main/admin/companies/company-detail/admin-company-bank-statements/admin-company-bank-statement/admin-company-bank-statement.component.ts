@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { PoPageAction, PoTableAction } from '@po-ui/ng-components';
 import { environment } from '../../../../../../../environments/environment';
 import { DatatableColumn } from '../../../../../../shared/components/page-datatable/page-datatable/datatable-column';
@@ -6,10 +7,9 @@ import { DatatableColumn } from '../../../../../../shared/components/page-datata
 @Component({
     templateUrl: './admin-company-bank-statement.component.html',
 })
-export class AdminCompanyBankStatementComponent {
+export class AdminCompanyBankStatementComponent implements OnInit {
     pageActions: PoPageAction[] = [];
-
-    serviceApi = `${environment.apiUrl}/users/p/search`;
+    serviceApi = '';
     tableActions: PoTableAction[] = [];
     columns: DatatableColumn[] = [
         {
@@ -26,5 +26,19 @@ export class AdminCompanyBankStatementComponent {
         },
     ];
 
-    constructor() {}
+    constructor(
+        private activatedRoute: ActivatedRoute,
+    ) {}
+
+    ngOnInit(): void {
+        const id = this.activatedRoute.snapshot.paramMap.get('id');
+        this.pageActions.push(
+            {
+                label: 'Cadastrar Nova Conta',
+                icon: 'po-icon-plus-circle',
+                url: `/admin/empresa/${id}/extrato/nova-conta`,
+            },
+        );
+        this.serviceApi = `${environment.apiUrl}/users/${id}/bank-accounts`;
+    }
 }

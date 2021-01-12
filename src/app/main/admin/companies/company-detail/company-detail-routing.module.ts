@@ -25,20 +25,20 @@ const routes: Routes = [
     {
         path: 'cobrancas',
         loadChildren: () =>
-            import('./admin-company-charges/admin-company-charge.module').then(
-                (m) => m.AdminCompanyChargeModule
-            ),
+            import('./admin-company-charges/admin-company-charge.module')
+                .then((m) => m.AdminCompanyChargeModule),
     },
     {
         path: 'pedidos',
         loadChildren: () =>
-            import(
-                './admin-company-expenses/admin-company-expense.module'
-            ).then((m) => m.AdminCompanyExpenseModule),
+            import('./admin-company-expenses/admin-company-expense.module')
+                .then((m) => m.AdminCompanyExpenseModule),
     },
     {
         path: 'extrato',
-        component: AdminCompanyBankStatementComponent,
+        loadChildren: () =>
+            import('./admin-company-bank-statements/admin-company-bank-statement.module')
+                .then((m) => m.AdminCompanyBankStatementModule),
     },
     {
         path: 'contabilidade',

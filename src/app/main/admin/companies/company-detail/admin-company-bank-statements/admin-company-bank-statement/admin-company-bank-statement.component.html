@@ -1,8 +1,10 @@
-<app-page-datatable
-    title="Extratos"
-    [pageActions]="pageActions"
-    [serviceApi]="serviceApi"
-    [columns]="columns"
-    [tableActions]="tableActions"
-    class="table-no-button"
-></app-page-datatable>
+<ng-container *ngIf="serviceApi">
+    <app-page-datatable
+        title="Extratos"
+        [pageActions]="pageActions"
+        [serviceApi]="serviceApi"
+        [columns]="columns"
+        [tableActions]="tableActions"
+        class="table-no-button"
+    ></app-page-datatable>
+</ng-container>

@@ -1,10 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Associate } from '../../associate';
-import {
-    PoNotificationService,
-    PoUploadFileRestrictions,
-} from '@po-ui/ng-components';
+import { PoUploadFileRestrictions } from '@po-ui/ng-components';
 import { environment } from '../../../../../../../../environments/environment';
 import { AdminCompanyAssociateService } from '../../admin-company-associate.service';
 import { ActivatedRoute } from '@angular/router';
@@ -19,6 +16,8 @@ export class AdminCompanyNewAssociateComponent implements OnInit {
     newAssociate: Associate;
     restrictions: PoUploadFileRestrictions;
     urlUploadDocument: string;
+
+    @Input() editAssociate: Associate;
 
     constructor(
         private formBuilder: FormBuilder,

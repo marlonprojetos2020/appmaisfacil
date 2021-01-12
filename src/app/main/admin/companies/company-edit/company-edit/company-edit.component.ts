@@ -8,15 +8,16 @@ import { User } from '../../model/user';
     templateUrl: './company-edit.component.html',
 })
 export class CompanyEditComponent implements OnInit {
-
     company$: Observable<User> = null;
 
     constructor(
         private companiesService: CompaniesService,
-        private activetedRoute: ActivatedRoute,
+        private activetedRoute: ActivatedRoute
     ) {}
 
     ngOnInit(): void {
-        this.company$ = this.companiesService.getUserCompany(this.activetedRoute.snapshot.params.id);
+        this.company$ = this.companiesService.getUserCompany(
+            this.activetedRoute.snapshot.params.id
+        );
     }
 }

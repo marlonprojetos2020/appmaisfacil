@@ -4,6 +4,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '../../../../../core/auth/auth.interceptor';
 import { AdminCompanyAssociateComponent } from './admin-company-associate/admin-company-associate.component';
 import { AdminCompanyNewAssociateComponent } from './admin-company-new-associate/admin-company-new-associate/admin-company-new-associate.component';
+import { AdminCompanyEditAssociateComponent } from './admin-company-edit-associate/admin-company-edit-associate/admin-company-edit-associate.component';
 
 const routes: Routes = [
     {
@@ -13,6 +14,10 @@ const routes: Routes = [
     {
         path: 'novo-socio',
         component: AdminCompanyNewAssociateComponent,
+    },
+    {
+        path: 'editar',
+        component: AdminCompanyEditAssociateComponent,
     },
 ];
 

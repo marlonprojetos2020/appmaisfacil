@@ -7,6 +7,7 @@ import {
     PoPageModule,
 } from '@po-ui/ng-components';
 import { AdminCompanyNewChargeComponent } from './admin-company-new-charge/admin-company-new-charge.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     imports: [
@@ -15,6 +16,7 @@ import { AdminCompanyNewChargeComponent } from './admin-company-new-charge/admin
         PoContainerModule,
         PoFieldModule,
         PoButtonModule,
+        ReactiveFormsModule,
     ],
     declarations: [AdminCompanyNewChargeComponent],
 })

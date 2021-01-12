@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Associate } from '../../../../model/associate';
+import { Associate } from '../../models/associate';
 import { PoUploadFileRestrictions } from '@po-ui/ng-components';
 import { environment } from '../../../../../../../../environments/environment';
 import { AdminCompanyAssociateService } from '../../admin-company-associate.service';

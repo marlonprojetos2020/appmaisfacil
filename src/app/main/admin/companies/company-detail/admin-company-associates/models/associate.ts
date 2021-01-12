@@ -1,7 +1,7 @@
 export interface Associate {
     name: string;
-    RG: number;
-    CPF: number;
-    voterTitle: number;
+    RG: string;
+    CPF: string;
+    voterTitle: string;
     percentageInSociety: number;
 }

@@ -5,7 +5,6 @@ import { DatatableColumn } from '../../../../../../shared/components/page-datata
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from '../../../model/user';
-import { CompaniesService } from '../../../companies.service';
 
 @Component({
     templateUrl: './admin-company-charge.component.html',
@@ -13,48 +12,47 @@ import { CompaniesService } from '../../../companies.service';
 export class AdminCompanyChargeComponent implements OnInit {
     company$: Observable<User> = null;
 
-    pageActions: PoPageAction[] = [
-        {
-            label: 'Nova Cobrança',
-            icon: 'po-icon-plus-circle',
-            url: `/admin/empresa/${this.activetedRoute.snapshot.params.id}/cobrancas/nova-cobranca`,
-        },
-    ];
+    pageActions: PoPageAction[] = [];
 
-    serviceApi = `${environment.apiUrl}/users/p/search`;
+    serviceApi = '';
     tableActions: PoTableAction[] = [];
     columns: DatatableColumn[] = [
         {
             label: 'Status',
-            property: 'userCompany.fantasyName',
+            property: 'status',
         },
         {
             label: 'Titulo',
-            property: 'userCompany.cnpj',
+            property: 'description',
         },
         {
             label: 'Tipo',
-            property: 'name',
+            property: 'type.label',
         },
         {
             label: 'Vencimento',
-            property: 'name',
+            property: 'dueDate',
         },
         {
             label: 'Valor',
-            property: 'name',
+            property: 'value',
         },
     ];
 
     constructor(
         private router: Router,
-        private activetedRoute: ActivatedRoute,
-        private companyDetailService: CompaniesService
+        private activetedRoute: ActivatedRoute
     ) {}
 
     ngOnInit(): void {
-        this.company$ = this.companyDetailService.getUserCompany(
-            this.activetedRoute.snapshot.params.id
-        );
+        const id = this.activetedRoute.snapshot.params.id;
+
+        this.pageActions.push({
+            label: 'Nova Cobrança',
+            icon: 'po-icon-plus-circle',
+            url: `admin/empresa/${id}/cobrancas/nova-cobranca`,
+        });
+
+        this.serviceApi = `${environment.apiUrl}/billing`;
     }
 }

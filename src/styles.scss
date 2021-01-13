@@ -277,20 +277,18 @@ h2 {
     padding-top: 0 !important;
 }
 
-
-.input-style{
-    .po-field-container-content{
+.input-style {
+    .po-field-container-content {
         padding: 8px 0 0 0 !important;
     }
 }
 
-
-.table-no-button{
-    .po-page-filter-content{
+.table-no-button {
+    .po-page-filter-content {
         margin-top: 50px !important;
     }
 
-    .po-page-header-title{
+    .po-page-header-title {
         width: fit-content !important;
     }
 }
@@ -314,3 +312,12 @@ h2 {
     margin-bottom: 20px;
 }
 
+po-number.ng-invalid.ng-dirty .po-input {
+    color: #ff0000 !important;
+    border: 1px solid #ff0000 !important;
+}
+
+po-input.ng-invalid.ng-dirty .po-input {
+    color: #ff0000 !important;
+    border: 1px solid #ff0000 !important;
+}

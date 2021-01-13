@@ -6,15 +6,22 @@ import { BankAccount } from './model/BankAccount';
 
 @Injectable()
 export class AdminCompanyBankService {
-
     constructor(private httpClient: HttpClient) {}
 
-    listBankAccounts(id: number): Observable<any> {
-        return this.httpClient.get(`${environment.apiUrl}/users/${id}/bank-accounts`);
+    listBankAccounts(id: string): Observable<any> {
+        return this.httpClient.get(
+            `${environment.apiUrl}/users/${id}/bank-accounts`
+        );
     }
 
     newAccount(id: string, bankAccount: BankAccount): Observable<any> {
-        return this.httpClient.post<any>(`${environment.apiUrl}/users/${id}/bank-accounts`, bankAccount);
+        return this.httpClient.post<any>(
+            `${environment.apiUrl}/users/${id}/bank-accounts`,
+            bankAccount
+        );
     }
 
+    selectBank(): Observable<any> {
+        return this.httpClient.get(`${environment.apiUrl}/banks`);
+    }
 }

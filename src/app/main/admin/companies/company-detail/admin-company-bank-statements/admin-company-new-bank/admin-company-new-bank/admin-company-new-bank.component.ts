@@ -9,9 +9,9 @@ import { BankAccount } from '../../model/BankAccount';
 @Component({
     templateUrl: './admin-company-new-bank.component.html',
 })
-
 export class AdminCompanyNewBankComponent implements OnInit {
-
+    options = [];
+    id: string = '';
     formNewBankAccount: FormGroup;
 
     constructor(
@@ -19,7 +19,7 @@ export class AdminCompanyNewBankComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         private adminCompanyBankService: AdminCompanyBankService,
         private location: Location,
-        private notificationService: PoNotificationService,
+        private notificationService: PoNotificationService
     ) {}
 
     ngOnInit(): void {
@@ -29,22 +29,32 @@ export class AdminCompanyNewBankComponent implements OnInit {
             agency: ['', Validators.required],
             accountNumber: ['', Validators.required],
         });
+
+        this.id = this.activatedRoute.snapshot.params.id;
+
+        this.adminCompanyBankService.selectBank().subscribe((options) => {
+            this.options.push(
+                ...options.map((item) => ({
+                    label: item.name,
+                    value: item.id,
+                }))
+            );
+        });
     }
 
     SubmitBank(): void {
-        const id = this.activatedRoute.snapshot.paramMap.get('id');
         const account = this.formNewBankAccount.getRawValue() as BankAccount;
-        this.adminCompanyBankService.newAccount(id, account)
-            .subscribe(
-                () => {
-                    this.notificationService.success(`Banco Cadastrado com sucesso!`);
-                    this.location.back();
-                },
-            );
+        this.adminCompanyBankService
+            .newAccount(this.id, account)
+            .subscribe(() => {
+                this.notificationService.success(
+                    `Banco Cadastrado com sucesso!`
+                );
+                this.location.back();
+            });
     }
 
     dirtyMe(input): void {
         this.formNewBankAccount.get(input).markAsDirty();
     }
-
 }

@@ -1,0 +1,6 @@
+<po-page-default p-title="Editar Cobrança">
+    <app-charge-form
+        *ngIf="charge$ | async as charge"
+        [editdCharge]="charge"
+    ></app-charge-form>
+</po-page-default>

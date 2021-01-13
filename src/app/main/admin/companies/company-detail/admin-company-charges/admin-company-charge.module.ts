@@ -5,7 +5,7 @@ import { AdminCompanyChargeComponent } from './admin-company-charge/admin-compan
 import { PageDatatableModule } from '../../../../../shared/components/page-datatable/page-datatable.module';
 import { AdminCompanyNewChargeModule } from './admin-company-new-charge/admin-company-new-charge.module';
 import { AdminCompanyChargeRoutingModule } from './admin-company-charge-routing.module';
-import { AdminCompanyChargeService } from './admin-company-charge.service';
+import { AdminCompanyEditAssociateModule } from '../admin-company-associates/admin-company-edit-associate/admin-company-edit-associate.module';
 
 @NgModule({
     imports: [
@@ -14,6 +14,7 @@ import { AdminCompanyChargeService } from './admin-company-charge.service';
         PageDatatableModule,
         AdminCompanyNewChargeModule,
         AdminCompanyChargeRoutingModule,
+        AdminCompanyEditAssociateModule,
     ],
     declarations: [AdminCompanyChargeComponent],
 })

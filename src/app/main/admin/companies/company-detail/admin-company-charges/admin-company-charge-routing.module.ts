@@ -4,6 +4,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '../../../../../core/auth/auth.interceptor';
 import { AdminCompanyChargeComponent } from './admin-company-charge/admin-company-charge.component';
 import { AdminCompanyNewChargeComponent } from './admin-company-new-charge/admin-company-new-charge/admin-company-new-charge.component';
+import { AdminCompanyEditChargeComponent } from './admin-company-edit-charge/admin-company-edit-charge/admin-company-edit-charge.component';
 
 const routes: Routes = [
     {
@@ -13,6 +14,10 @@ const routes: Routes = [
     {
         path: 'nova-cobranca',
         component: AdminCompanyNewChargeComponent,
+    },
+    {
+        path: 'editar',
+        component: AdminCompanyEditChargeComponent,
     },
 ];
 

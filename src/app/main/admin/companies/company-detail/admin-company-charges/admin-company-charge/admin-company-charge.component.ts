@@ -54,5 +54,13 @@ export class AdminCompanyChargeComponent implements OnInit {
         });
 
         this.serviceApi = `${environment.apiUrl}/billing`;
+
+        this.tableActions.push({
+            label: 'Editar',
+            action: (item) =>
+                this.router.navigateByUrl(
+                    `/admin/empresa/${item.id}/cobrancas/editar`
+                ),
+        });
     }
 }

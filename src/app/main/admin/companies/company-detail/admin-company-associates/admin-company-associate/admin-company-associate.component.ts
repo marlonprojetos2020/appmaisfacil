@@ -13,12 +13,30 @@ export class AdminCompanyAssociateComponent implements OnInit {
     tableActions: PoTableAction[] = [
         {
             label: 'Editar',
-            action: (item) =>
-                this.router.navigateByUrl(
-                    `/admin/empresa/${item.id}/socios/editar`
-                ),
+            action: (item) => this.router.navigateByUrl(`/admin/empresa/${item.id}/socios/editar`),
+        },
+        {
+            label: 'Baixar RG',
+            action: (item) => window.open(item.rgUrl, '_blank'),
+            disabled: (item) => !item.rgUrl,
+        },
+        {
+            label: 'Baixar CPF',
+            action: (item) => window.open(item.cpfUrl, '_blank'),
+            disabled: (item) => !item.cpfUrl,
+        },
+        {
+            label: 'Baixar Titulo de Eleitor',
+            action: (item) => window.open(item.voterTitleUrl, '_blank'),
+            disabled: (item) => !item.voterTitleUrl,
+        },
+        {
+            label: 'Baixar Comprovante de Residência',
+            action: (item) => window.open(item.proofOfAddressUrl, '_blank'),
+            disabled: (item) => !item.proofOfAddressUrl,
         },
     ];
+
     columns: DatatableColumn[] = [
         {
             label: 'Nome',

@@ -11,7 +11,7 @@ import {
 } from '@po-ui/ng-components';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InvalidFeedbackModule } from '../../../../../../shared/components/invalid-feedback/invalid-feedback.module';
-import { PhotosGalleryModule } from 'src/app/shared/components/photos-gallery/photos-gallery.module';
+import { AssociateFormModule } from '../../../../../../shared/components/associate-form/associate-form.module';
 
 @NgModule({
     imports: [
@@ -24,8 +24,8 @@ import { PhotosGalleryModule } from 'src/app/shared/components/photos-gallery/ph
         PoNotificationModule,
         PoStepperModule,
         InvalidFeedbackModule,
-        PhotosGalleryModule,
 
+        AssociateFormModule,
     ],
     declarations: [AdminCompanyNewAssociateComponent],
 })

@@ -20,4 +20,10 @@ export class ChargeFormService {
             billing
         );
     }
+
+    getCharge(id: string): Observable<Charge> {
+        return this.httpClient.get<Charge>(
+            `${environment.apiUrl}/billing/${id}`
+        );
+    }
 }

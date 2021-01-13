@@ -7,5 +7,6 @@ import { ChageFormModule } from '../../../../../../shared/components/charge-form
 @NgModule({
     declarations: [AdminCompanyEditChargeComponent],
     imports: [CommonModule, PoPageModule, ChageFormModule],
+    exports: [AdminCompanyEditChargeComponent],
 })
 export class AdminCompanyEditModule {}

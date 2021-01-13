@@ -16,7 +16,7 @@ const routes: Routes = [
         component: AdminCompanyNewChargeComponent,
     },
     {
-        path: 'editar',
+        path: 'editar/:id',
         component: AdminCompanyEditChargeComponent,
     },
 ];

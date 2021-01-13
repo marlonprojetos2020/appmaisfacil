@@ -59,7 +59,7 @@ export class AdminCompanyChargeComponent implements OnInit {
             label: 'Editar',
             action: (item) =>
                 this.router.navigateByUrl(
-                    `/admin/empresa/${item.id}/cobrancas/editar`
+                    `admin/empresa/${id}/cobrancas/editar/${item.id}`
                 ),
         });
     }

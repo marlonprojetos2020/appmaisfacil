@@ -17,5 +17,6 @@ import { AdminCompanyEditAssociateModule } from '../admin-company-associates/adm
         AdminCompanyEditAssociateModule,
     ],
     declarations: [AdminCompanyChargeComponent],
+    exports: [AdminCompanyChargeComponent],
 })
 export class AdminCompanyChargeModule {}

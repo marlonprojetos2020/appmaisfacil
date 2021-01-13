@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PoButtonModule, PoDividerModule } from '@po-ui/ng-components';
+import { PoButtonModule, PoDividerModule, PoStepperModule } from '@po-ui/ng-components';
 import { PhotosGalleryComponent } from './photos-gallery/photos-gallery.component'
 import { InvalidFeedbackModule } from '../invalid-feedback/invalid-feedback.module';
 
@@ -10,9 +10,9 @@ import { InvalidFeedbackModule } from '../invalid-feedback/invalid-feedback.modu
         CommonModule,
         PoButtonModule,
         PoDividerModule,
-        InvalidFeedbackModule
+        InvalidFeedbackModule,
     ],
     exports: [PhotosGalleryComponent]
 })
-export class PageDatatableModule {
+export class PhotosGalleryModule {
 }

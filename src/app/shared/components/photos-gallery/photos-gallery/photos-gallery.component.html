@@ -1,7 +1,7 @@
 <po-divider p-label="Galeria"></po-divider>
 <ul class="po-row">
     <li
-        *ngFor="let productPhoto of productPhotos"
+        *ngFor="let productPhoto of photos"
         class="po-md-6 po-lg-4 po-xl-2"
     >
         <div class="image-container">
@@ -22,6 +22,6 @@
     </li>
 </ul>
 
-<app-invalid-feedback *ngIf="productPhotos.length === 0">
+<app-invalid-feedback *ngIf="photos.length === 0">
     É obrigatório cadastrar ao menos uma foto!
 </app-invalid-feedback>

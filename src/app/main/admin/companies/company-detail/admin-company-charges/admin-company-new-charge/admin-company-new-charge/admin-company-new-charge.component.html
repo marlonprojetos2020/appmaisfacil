@@ -25,11 +25,11 @@
                 </div>
             </div>
             <div class="po-row po-mb-4">
-                <div class="po-md-4">
+                <div class="po-md-4" formGroupName="type">
                     <po-select
                         p-label="Tipo"
                         [p-options]="options"
-                        formControlName="type"
+                        formControlName="id"
                         p-required="true"
                         p-placeholder="Selecione"
                     ></po-select>

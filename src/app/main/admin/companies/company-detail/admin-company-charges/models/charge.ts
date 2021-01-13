@@ -1,4 +1,6 @@
-export interface Charge {
+import { CompanyCharge } from './companyCharge';
+
+export interface Charge extends CompanyCharge {
     description: string;
     company: {
         id: number;

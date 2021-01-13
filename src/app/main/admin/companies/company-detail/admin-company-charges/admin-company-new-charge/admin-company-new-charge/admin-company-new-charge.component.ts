@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../../../../../../environments/environment';
 import { PoUploadFileRestrictions } from '@po-ui/ng-components';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Charge } from '../../models/charge';
+import { ActivatedRoute } from '@angular/router';
+import { AdminCompanyChargeService } from '../../admin-company-charge.service';
 
 @Component({
     templateUrl: 'admin-company-new-charge.component.html',
@@ -12,10 +15,16 @@ export class AdminCompanyNewChargeComponent implements OnInit {
     urlUploadDocument: string;
     formCharge: FormGroup;
     serviceApi = '';
+    newCharge: Charge;
+    id: number;
 
     options = [];
 
-    constructor(private formBuilder: FormBuilder) {}
+    constructor(
+        private formBuilder: FormBuilder,
+        private activatedRoute: ActivatedRoute,
+        private adminCompanyChargeService: AdminCompanyChargeService
+    ) {}
 
     ngOnInit(): void {
         this.restrictions = {
@@ -35,7 +44,9 @@ export class AdminCompanyNewChargeComponent implements OnInit {
                     Validators.maxLength(100),
                 ]),
             ],
-            type: ['', Validators.required],
+            type: this.formBuilder.group({
+                id: ['', Validators.required],
+            }),
             dueDate: ['', Validators.required],
             value: [
                 '',
@@ -46,17 +57,27 @@ export class AdminCompanyNewChargeComponent implements OnInit {
                 ]),
             ],
         });
+        this.adminCompanyChargeService.getTypeCharge().subscribe((options) => {
+            this.options.push(
+                ...options.map((item) => {
+                    return {
+                        label: item.label,
+                        value: item.id,
+                    };
+                })
+            );
+            console.log(this.options);
+        });
 
-        this.options = [
-            ...this.options,
-            {
-                value: '1',
-                label: `Tipo Exemplo`,
-            },
-        ];
+        this.id = this.activatedRoute.snapshot.params.id;
     }
 
     subscribeForm(): any {
-        console.log(this.formCharge.value);
+        this.newCharge = this.formCharge.getRawValue() as Charge;
+
+        this.newCharge.company = {
+            id: this.id,
+        };
+        console.log(this.newCharge);
     }
 }

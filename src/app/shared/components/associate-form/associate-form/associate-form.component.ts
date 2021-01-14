@@ -85,15 +85,15 @@ export class AssociateFormComponent implements OnInit {
     success(result: HttpResponse<any>, last = false): void {
         const message = this.editedAssociate ? 'Documento editado com sucesso' : 'Documento carregado com sucesso';
         this.poNotificationService.success(message);
-        last ? this.location.back() : this.nextForm();
+        this.nextForm(last);
     }
 
     canActiveNextStep(form: NgForm) {
         return form.valid;
     }
 
-    nextForm(): void {
-        this.stepper.next();
+    nextForm(last = false): void {
+        last ? this.location.back() : this.stepper.next();
     }
 
     dirtyMe(input): void {

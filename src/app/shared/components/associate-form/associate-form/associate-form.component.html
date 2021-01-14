@@ -155,6 +155,10 @@
                     (p-success)="success($event)"
                 ></po-upload>
             </div>
+            <po-button
+                (p-click)="nextForm()"
+                p-label="Pular"
+            ></po-button>
         </div>
     </po-step>
     <po-step p-label="CPF">
@@ -171,6 +175,10 @@
                     (p-success)="success($event)"
                 ></po-upload>
             </div>
+            <po-button
+                (p-click)="nextForm()"
+                p-label="Pular"
+            ></po-button>
         </div>
     </po-step>
     <po-step p-label="Ttitulo de Eleitor">
@@ -203,6 +211,10 @@
                     (p-success)="success($event, true)"
                 ></po-upload>
             </div>
+            <po-button
+                (p-click)="nextForm(true)"
+                p-label="Encerrar"
+            ></po-button>
         </div>
     </po-step>
 </po-stepper>

@@ -5,6 +5,7 @@ import { DatatableColumn } from '../../../../../../shared/components/page-datata
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from '../../../model/user';
+import { AdminCompanyChargeService } from '../admin-company-charge.service';
 
 @Component({
     templateUrl: './admin-company-charge.component.html',
@@ -41,7 +42,8 @@ export class AdminCompanyChargeComponent implements OnInit {
 
     constructor(
         private router: Router,
-        private activetedRoute: ActivatedRoute
+        private activetedRoute: ActivatedRoute,
+        private chargeService: AdminCompanyChargeService
     ) {}
 
     ngOnInit(): void {
@@ -56,11 +58,15 @@ export class AdminCompanyChargeComponent implements OnInit {
         this.serviceApi = `${environment.apiUrl}/billing`;
 
         this.tableActions.push({
-            label: 'Editar',
-            action: (item) =>
-                this.router.navigateByUrl(
-                    `admin/empresa/${id}/cobrancas/editar/${item.id}`
-                ),
+            label: 'Cancelar',
+            action: (item) => {
+                this.chargeService.canceledCharge(item.id).subscribe((data) =>
+                    this.columns.push({
+                        label: 'Status',
+                        property: data.description,
+                    })
+                );
+            },
         });
     }
 }

@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PoBreadcrumb, PoPageAction, PoSelectOption, PoTableAction, PoTableColumnSort, PoTableColumnSortType } from '@po-ui/ng-components';
-import { PageDatatableService } from './page-datatable.service';
+import { PageDatatableService } from '../page-datatable.service';
 import { finalize } from 'rxjs/operators';
-import { DatatableColumn } from './datatable-column';
+import { DatatableColumn } from '../datatable-column';
 import { PoPageDynamicSearchFilters } from '@po-ui/ng-templates';
 
 @Component({
@@ -13,7 +13,7 @@ import { PoPageDynamicSearchFilters } from '@po-ui/ng-templates';
 export class PageDatatableComponent implements OnInit {
 
     @Input() serviceApi: string;
-
+    @Input() hasSearch = true;
     // page search props
     @Input() title;
     @Input() breadcrumb: PoBreadcrumb;

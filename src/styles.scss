@@ -252,46 +252,47 @@ h2 {
     }
 }
 
-// list pages header
-.po-page-list-actions {
-    .po-button {
-        display: block;
-        margin-top: -54px;
-        margin-left: auto;
-    }
-}
+// INICIO list pages header
+// .po-page-list-actions {
+//     .po-button {
+//         display: block;
+//         margin-top: -54px;
+//         margin-left: auto;
+//     }
+// }
 
-.po-page-list-actions {
-    text-align: right;
-}
+// .po-page-list-actions {
+//     text-align: right;
+// }
 
-.po-page-list-filter-wrapper {
-    float: unset;
-    margin-top: 32px;
-    .po-page-filter-content {
-        width: calc(100% - 80px);
-    }
-}
+// .po-page-list-filter-wrapper {
+//     float: unset;
+//     margin-top: 32px;
+//     .po-page-filter-content {
+//         width: calc(100% - 80px);
+//     }
+// }
 
-.po-page-content {
-    padding-top: 0 !important;
-}
+// .po-page-content {
+//     padding-top: 0 !important;
+// }
 
-.input-style {
-    .po-field-container-content {
-        padding: 8px 0 0 0 !important;
-    }
-}
+// .input-style {
+//     .po-field-container-content {
+//         padding: 8px 0 0 0 !important;
+//     }
+// }
 
-.table-no-button {
-    .po-page-filter-content {
-        margin-top: 50px !important;
-    }
+// .table-no-button {
+//     .po-page-filter-content {
+//         margin-top: 50px !important;
+//     }
 
-    .po-page-header-title {
-        width: fit-content !important;
-    }
-}
+//     .po-page-header-title {
+//         width: fit-content !important;
+//     }
+// }
+// FIM list pages header
 
 .div-upload {
     display: flex;

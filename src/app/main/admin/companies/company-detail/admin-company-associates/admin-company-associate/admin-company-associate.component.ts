@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PoPageAction, PoTableAction } from '@po-ui/ng-components';
 import { environment } from '../../../../../../../environments/environment';
-import { DatatableColumn } from '../../../../../../shared/components/page-datatable/page-datatable/datatable-column';
+import { DatatableColumn } from '../../../../../../shared/components/page-datatable/datatable-column';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({

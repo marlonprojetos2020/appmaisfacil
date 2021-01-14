@@ -335,3 +335,10 @@ po-datepicker.ng-invalid.ng-dirty .po-input {
 .po-radio-group-input-checked + .po-radio-group-label:before {
     background-color: var(--color-primary) !important;
 }
+
+// remove search bar do componente page-datable quando hasSearch é false
+.noSearchBar {
+    .po-page-list-filter-wrapper {
+        display: none !important;
+    }
+}

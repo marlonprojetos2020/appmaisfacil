@@ -25,7 +25,6 @@ export class AdminCompanyCompanyComponent implements OnInit {
             .getUser(this.activetedRoute.snapshot.params.id)
             .subscribe((data) => {
                 this.setFields(data.userCompany);
-                console.log(data, data.userCompany.cnpj);
             });
     }
 

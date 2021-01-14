@@ -1,9 +1,6 @@
-<po-page-default p-title="Minha Empresa">
-    <po-container>
-        <form
-            *ngIf="formCompany"
-            [formGroup]="formCompany"
-        >
+<po-page-default p-title="Minha Empresa" [p-actions]="actions">
+    <po-container class="form">
+        <form *ngIf="formCompany" [formGroup]="formCompany">
             <div class="po-row po-mb-4">
                 <div class="po-md-12">
                     <h3 class="po-mb-4">Empresa</h3>
@@ -12,6 +9,7 @@
                     <po-input
                         p-label="CNPJ"
                         formControlName="cnpj"
+                        p-readonly="true"
                     >
                     </po-input>
                 </div>
@@ -21,6 +19,7 @@
                     <po-input
                         p-label="Razão Social"
                         formControlName="socialReason"
+                        p-readonly="true"
                     ></po-input>
                 </div>
             </div>
@@ -29,6 +28,7 @@
                     <po-input
                         p-label="Nome Fantasia"
                         formControlName="fantasyName"
+                        p-readonly="true"
                     ></po-input>
                 </div>
             </div>
@@ -38,10 +38,15 @@
                         formControlName="type"
                         name="radioGroupBasic"
                         p-label="Tipo da Empresa"
+                        p-columns="3"
+                        p-disabled
                         [p-options]="[
-                            { label: 'Option 1', value: '1' },
-                            { label: 'Option 2', value: '2' },
-                            { label: 'Option 3', value: '3' }
+                            {
+                                label: 'Prestadora de Serviço',
+                                value: 'SERVICE'
+                            },
+                            { label: 'Comércio', value: 'COMMERCE' },
+                            { label: 'Industria', value: 'INDUSTRY' }
                         ]"
                     >
                     </po-radio-group>
@@ -52,12 +57,14 @@
                     <po-input
                         p-label="Ramo"
                         formControlName="lineOfBusiness"
+                        p-readonly="true"
                     ></po-input>
                 </div>
                 <div class="po-md-8">
                     <po-input
                         p-label="CNAE"
                         formControlName="cnae"
+                        p-readonly="true"
                     ></po-input>
                 </div>
             </div>
@@ -71,6 +78,7 @@
                         <po-input
                             p-label="CEP"
                             formControlName="zipcode"
+                            p-readonly="true"
                         ></po-input>
                     </div>
                 </div>
@@ -79,6 +87,7 @@
                         <po-input
                             p-label="Endereço"
                             formControlName="street"
+                            p-readonly="true"
                         ></po-input>
                     </div>
                 </div>
@@ -87,6 +96,7 @@
                         <po-input
                             p-label="Número"
                             formControlName="number"
+                            p-readonly="true"
                         ></po-input>
                     </div>
 
@@ -94,6 +104,7 @@
                         <po-input
                             p-label="Complemento"
                             formControlName="complement"
+                            p-readonly="true"
                         ></po-input>
                     </div>
                 </div>
@@ -103,22 +114,22 @@
                         <po-input
                             p-label="Bairro"
                             formControlName="neighborhood"
+                            p-readonly="true"
                         ></po-input>
                     </div>
-                    <div
-                        class="po-md-8"
-                        formGroupName="city"
-                    >
+                    <div class="po-md-8" formGroupName="city">
                         <div class="po-md-6">
                             <po-input
                                 p-label="Cidade"
                                 formControlName="name"
+                                p-readonly="true"
                             ></po-input>
                         </div>
                         <div class="po-md-6">
                             <po-input
                                 p-label="Estado"
                                 formControlName="stateProvince"
+                                p-readonly="true"
                             ></po-input>
                         </div>
                     </div>
@@ -134,6 +145,7 @@
                     <po-input
                         p-label="E-mail"
                         formControlName="email"
+                        p-readonly="true"
                     ></po-input>
                 </div>
             </div>
@@ -142,6 +154,7 @@
                     <po-input
                         p-label="Telefone"
                         formControlName="phone"
+                        p-readonly="true"
                     ></po-input>
                 </div>
             </div>

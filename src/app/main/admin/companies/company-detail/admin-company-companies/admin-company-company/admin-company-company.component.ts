@@ -4,6 +4,7 @@ import { User } from '../../../model/user';
 import { ActivatedRoute } from '@angular/router';
 import { AdminCompanyCompanyService } from '../admin-company-company.service';
 import { Company } from '../../../model/company';
+import { PoPageAction } from '@po-ui/ng-components';
 
 @Component({
     templateUrl: './admin-company-company.component.html',
@@ -11,6 +12,12 @@ import { Company } from '../../../model/company';
 })
 export class AdminCompanyCompanyComponent implements OnInit {
     formCompany: FormGroup;
+    actions: PoPageAction[] = [
+        {
+            label: 'Editar',
+            url: `admin/empresa/${this.activetedRoute.snapshot.params.id}/editar`,
+        },
+    ];
 
     @Input() editedUser: User;
 

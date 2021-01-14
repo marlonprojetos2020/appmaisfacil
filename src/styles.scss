@@ -327,3 +327,11 @@ po-datepicker.ng-invalid.ng-dirty .po-input {
     color: var(--color-danger) !important;
     border: 1px solid var(--color-danger) !important;
 }
+
+.po-radio-group-input:disabled + .po-radio-group-label:before {
+    color: #ffffff;
+}
+
+.po-radio-group-input-checked + .po-radio-group-label:before {
+    background-color: var(--color-primary) !important;
+}

@@ -1,4 +1,5 @@
 export interface Charge {
+    id: number;
     description: string;
     company: {
         id: number;

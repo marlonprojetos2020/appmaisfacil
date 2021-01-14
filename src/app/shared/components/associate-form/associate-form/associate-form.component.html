@@ -4,6 +4,7 @@
         [p-can-active-next-step]="this.editedAssociate?  null:canActiveNextStep.bind(this, formAssociate)"
     >
         <div class="po-container po-mt-2">
+            <h2 class="po-ml-1 po-mb-3">Dados Pessoais</h2>
             <form [formGroup]="formAssociate">
                 <div class="po-row">
                     <div class="po-md-12 po-mb-4">
@@ -137,11 +138,23 @@
                             [p-disabled]="formAssociate.invalid"
                         ></po-button>
                     </div>
+                    <div
+                        class="po-pr-md-1"
+                        [ngStyle]="{'margin-left': 'auto'}"
+                    >
+                        <po-button
+                            *ngIf="this.editedAssociate"
+                            (p-click)="nextForm()"
+                            p-label="Pular"
+                        ></po-button>
+                    </div>
                 </div>
             </form>
+
         </div>
     </po-step>
     <po-step p-label="RG">
+        <h2 class="po-ml-1 po-mb-3">Documento RG</h2>
         <div class="po-container po-mt-2">
             <div class="po-row po-mb-4">
                 <po-upload
@@ -162,6 +175,7 @@
         </div>
     </po-step>
     <po-step p-label="CPF">
+        <h2 class="po-ml-1 po-mb-3">Documento CPF</h2>
         <div class="po-container po-mt-2">
             <div class="po-row po-mb-4">
                 <po-upload
@@ -195,6 +209,10 @@
                     (p-success)="success($event)"
                 ></po-upload>
             </div>
+            <po-button
+                (p-click)="nextForm()"
+                p-label="Pular"
+            ></po-button>
         </div>
     </po-step>
     <po-step p-label="Comporovante de Moradia">

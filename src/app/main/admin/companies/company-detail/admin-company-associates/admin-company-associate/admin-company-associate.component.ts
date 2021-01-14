@@ -13,7 +13,7 @@ export class AdminCompanyAssociateComponent implements OnInit {
     tableActions: PoTableAction[] = [
         {
             label: 'Editar',
-            action: (item) => this.router.navigateByUrl(`/admin/empresa/${item.id}/socios/editar`),
+            action: (item) => this.router.navigate(['editar', item.id], { relativeTo: this.activetedRoute }),
         },
         {
             label: 'Baixar RG',

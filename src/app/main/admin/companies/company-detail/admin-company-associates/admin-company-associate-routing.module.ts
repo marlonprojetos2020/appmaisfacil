@@ -16,7 +16,7 @@ const routes: Routes = [
         component: AdminCompanyNewAssociateComponent,
     },
     {
-        path: 'editar',
+        path: 'editar/:idAssociate',
         component: AdminCompanyEditAssociateComponent,
     },
 ];

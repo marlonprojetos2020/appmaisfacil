@@ -10,7 +10,6 @@ import {
     PoStepperModule,
 } from '@po-ui/ng-components';
 import { AssociateFormComponent } from './associate-form/associate-form.component';
-import { AssociateFormService } from './associate-form.service';
 import { InvalidFeedbackModule } from 'src/app/shared/components/invalid-feedback/invalid-feedback.module';
 
 
@@ -28,6 +27,5 @@ import { InvalidFeedbackModule } from 'src/app/shared/components/invalid-feedbac
         InvalidFeedbackModule,
     ],
     exports: [AssociateFormComponent],
-    providers: [AssociateFormService],
 })
 export class AssociateFormModule {}

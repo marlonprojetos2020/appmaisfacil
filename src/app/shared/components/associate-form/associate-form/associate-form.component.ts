@@ -7,6 +7,7 @@ import { PoNotificationService, PoUploadFileRestrictions } from '@po-ui/ng-compo
 import { environment } from 'src/environments/environment';
 import { Associate } from '../models/associate';
 import { AssociateFormService } from '../associate-form.service';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-associate-form',
@@ -22,7 +23,7 @@ export class AssociateFormComponent implements OnInit {
     urlUploadVoterTitle: string;
     urlUploadProofOfAddress: string;
 
-    // @Input();
+    @Input() editedAssociate?: Associate;
     @ViewChild('stepper', { static: true }) stepper;
 
     restrictions: PoUploadFileRestrictions = {
@@ -30,8 +31,6 @@ export class AssociateFormComponent implements OnInit {
         maxFileSize: 5242880,
         maxFiles: 1,
     };
-
-
 
     constructor(
         private formBuilder: FormBuilder,
@@ -43,19 +42,15 @@ export class AssociateFormComponent implements OnInit {
 
     ngOnInit(): void {
         this.formAssociate = this.formBuilder.group({
-            name: ['', Validators.required],
-            rg: ['', Validators.required],
-            cpf: ['', Validators.required],
-            voterTitle: ['', Validators.required],
-            percentageInSociety: ['', Validators.required],
+            name: [this.editedAssociate?.name, Validators.required],
+            rg: [this.editedAssociate?.rg, Validators.required],
+            cpf: [this.editedAssociate?.cpf, Validators.required],
+            voterTitle: [this.editedAssociate?.voterTitle, Validators.required],
+            percentageInSociety: [this.editedAssociate?.percentageInSociety, Validators.required],
         });
     }
 
-    nextForm(): void {
-        this.stepper.next();
-    }
-
-    submitForm(): any {
+    submitForm(): void {
         const id = this.activatedRoute.snapshot.paramMap.get('id');
         this.formAssociate.value.percentageInSociety = parseInt(this.formAssociate.value.percentageInSociety, 10);
         this.newAssociate = this.formAssociate.getRawValue() as Associate;
@@ -63,23 +58,35 @@ export class AssociateFormComponent implements OnInit {
             .toUpperCase()
             .replace(/[^\dX]/g, '')
             .trim();
-        this.associateFormService
-            .createAssociate(this.newAssociate, id)
-            .subscribe(data => {
-                this.urlUploadRG = `${environment.apiUrl}/users/${id}/company-partners/${data.id}/rg-file`;
-                this.urlUploadCPF = `${environment.apiUrl}/users/${id}/company-partners/${data.id}/cpf-file`;
-                this.urlUploadVoterTitle = `${environment.apiUrl}/users/${id}/company-partners/${data.id}/voter-title-file`;
-                this.urlUploadProofOfAddress = `${environment.apiUrl}/users/${id}/company-partners/${data.id}/proof-of-address-file`;
-                this.nextForm();
-            });
+
+        // se estiver recebendo um associado editado faz o uso de update, senão cria um novo;
+        (this.editedAssociate ?
+            this.associateFormService.updateAssociate(this.newAssociate, id, this.editedAssociate.id)
+            :
+            this.associateFormService.createAssociate(this.newAssociate, id)
+        ).subscribe(data => this.setRequestsUrl(data.id, id));
+    }
+
+    setRequestsUrl(idAssociate: number, id: string): void {
+        const baseString = `${environment.apiUrl}/users/${id}/company-partners/${idAssociate}`;
+        this.urlUploadRG = `${baseString}/rg-file`;
+        this.urlUploadCPF = `${baseString}/cpf-file`;
+        this.urlUploadVoterTitle = `${baseString}/voter-title-file`;
+        this.urlUploadProofOfAddress = `${baseString}/proof-of-address-file`;
+        this.nextForm();
     }
 
     success(result: HttpResponse<any>, last = false): void {
-        this.poNotificationService.success(`Documento carregado com sucesso`);
+        const message = this.editedAssociate ? 'Documento editado com sucesso' : 'Documento carregado com sucesso';
+        this.poNotificationService.success(message);
         last ? this.location.back() : this.nextForm();
+    }
+
+    nextForm(): void {
+        this.stepper.next();
     }
 
     dirtyMe(input): void {
         this.formAssociate.get(input).markAsDirty();
     }
-};
+}

@@ -1,31 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { PoPageModule } from '@po-ui/ng-components';
 import { AdminCompanyNewAssociateComponent } from './admin-company-new-associate/admin-company-new-associate.component';
-import {
-    PoButtonModule,
-    PoContainerModule,
-    PoFieldModule,
-    PoNotificationModule,
-    PoPageModule,
-    PoStepperModule,
-} from '@po-ui/ng-components';
-import { ReactiveFormsModule } from '@angular/forms';
-import { InvalidFeedbackModule } from '../../../../../../shared/components/invalid-feedback/invalid-feedback.module';
-import { AssociateFormModule } from '../../../../../../shared/components/associate-form/associate-form.module';
-
+import { AssociateFormModule } from 'src/app/shared/components/associate-form/associate-form.module';
 @NgModule({
     imports: [
         CommonModule,
-        PoPageModule,
-        PoContainerModule,
-        PoFieldModule,
-        PoButtonModule,
-        ReactiveFormsModule,
-        PoNotificationModule,
-        PoStepperModule,
-        InvalidFeedbackModule,
-
         AssociateFormModule,
+        PoPageModule,
     ],
     declarations: [AdminCompanyNewAssociateComponent],
 })

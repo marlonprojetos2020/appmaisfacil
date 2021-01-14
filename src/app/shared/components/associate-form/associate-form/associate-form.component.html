@@ -1,10 +1,10 @@
 <po-stepper #stepper>
     <po-step
         p-label="Dados Pessoais"
-        [p-can-active-next-step]="formAssociate.invalid"
+        [p-can-active-next-step]="this.editedAssociate? formAssociate.invalid:false"
     >
 
-        <div class="po-container">
+        <div class="po-container po-mt-2">
             <div class="po-row">
                 <form [formGroup]="formAssociate">
                     <div class="po-md-12 po-mb-4">
@@ -141,7 +141,7 @@
         </div>
     </po-step>
     <po-step p-label="RG">
-        <po-container>
+        <div class="po-container po-mt-2">
             <div class="po-row po-mb-4">
                 <po-upload
                     p-label="Anexe o RG"
@@ -154,10 +154,10 @@
                     (p-success)="success($event)"
                 ></po-upload>
             </div>
-        </po-container>
+        </div>
     </po-step>
     <po-step p-label="CPF">
-        <po-container>
+        <div class="po-container po-mt-2">
             <div class="po-row po-mb-4">
                 <po-upload
                     p-label="Anexe o CPF"
@@ -170,10 +170,10 @@
                     (p-success)="success($event)"
                 ></po-upload>
             </div>
-        </po-container>
+        </div>
     </po-step>
     <po-step p-label="Ttitulo de Eleitor">
-        <po-container>
+        <div class="po-container po-mt-2">
             <div class="po-row po-mb-4">
                 <po-upload
                     p-label="Anexe o Titulo de Eleitor"
@@ -186,10 +186,10 @@
                     (p-success)="success($event)"
                 ></po-upload>
             </div>
-        </po-container>
+        </div>
     </po-step>
     <po-step p-label="Comporovante de Moradia">
-        <po-container>
+        <div class="po-container po-mt-2">
             <div class="po-row po-mb-4">
                 <po-upload
                     p-label="Anexe o Comprovante Residencial"
@@ -202,6 +202,6 @@
                     (p-success)="success($event, true)"
                 ></po-upload>
             </div>
-        </po-container>
+        </div>
     </po-step>
 </po-stepper>

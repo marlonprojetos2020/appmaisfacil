@@ -15,5 +15,9 @@ export class AdminCompanyEditChargeComponent implements OnInit {
         private activatedRoute: ActivatedRoute
     ) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.charge$ = this.chargeFormService.getCharge(
+            this.activatedRoute.snapshot.params.id
+        );
+    }
 }

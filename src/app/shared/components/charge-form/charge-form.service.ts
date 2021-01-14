@@ -20,4 +20,17 @@ export class ChargeFormService {
             billing
         );
     }
+
+    getCharge(id: string): Observable<Charge> {
+        return this.httpClient.get<Charge>(
+            `${environment.apiUrl}/billing/${id}`
+        );
+    }
+
+    creatBillingFile(file: any, id: string): Observable<any> {
+        return this.httpClient.post(
+            `${environment.apiUrl}/billing/${id}/billing-file`,
+            file
+        );
+    }
 }

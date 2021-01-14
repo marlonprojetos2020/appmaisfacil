@@ -45,14 +45,16 @@
             </div>
             <div class="po-row">
                 <div class="po-md-6 po-mb-3">
-                    <po-input
+                    <po-number
                         formControlName="agency"
                         p-label="Agência (sem digito)"
                         p-mask="9999"
                         p-pattern="^[0-9]{4}$"
                         (p-blur)="dirtyMe('agency')"
+                        p-placeholder="0000"
+                        p-clean
                     >
-                    </po-input>
+                    </po-number>
                     <app-invalid-feedback
                         [formCtrl]="formNewBankAccount.get('agency')"
                         [hasError]="
@@ -65,12 +67,14 @@
                 </div>
 
                 <div class="po-md-6 po-mb-3">
-                    <po-input
+                    <po-number
                         formControlName="accountNumber"
                         p-label="Conta"
                         (p-blur)="dirtyMe('accountNumber')"
+                        p-placeholder="00000000-0"
+                        p-clean
                     >
-                    </po-input>
+                    </po-number>
                     <app-invalid-feedback
                         [formCtrl]="formNewBankAccount.get('accountNumber')"
                         [hasError]="

@@ -3,11 +3,13 @@ import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { HttpResponse } from '@angular/common/http';
-import { PoNotificationService, PoUploadFileRestrictions } from '@po-ui/ng-components';
+import {
+    PoNotificationService,
+    PoUploadFileRestrictions,
+} from '@po-ui/ng-components';
 import { environment } from 'src/environments/environment';
 import { Associate } from '../models/associate';
 import { AssociateFormService } from '../associate-form.service';
-import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-associate-form',

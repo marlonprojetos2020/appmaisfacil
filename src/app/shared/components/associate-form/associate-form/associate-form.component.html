@@ -1,12 +1,11 @@
 <po-stepper #stepper>
     <po-step
         p-label="Dados Pessoais"
-        [p-can-active-next-step]="this.editedAssociate? formAssociate.invalid:false"
+        [p-can-active-next-step]="this.editedAssociate?  null:canActiveNextStep.bind(this, formAssociate)"
     >
-
         <div class="po-container po-mt-2">
-            <div class="po-row">
-                <form [formGroup]="formAssociate">
+            <form [formGroup]="formAssociate">
+                <div class="po-row">
                     <div class="po-md-12 po-mb-4">
                         <po-input
                             p-label="Nome"
@@ -31,7 +30,8 @@
                             Este campo é obrigatório
                         </app-invalid-feedback>
                     </div>
-
+                </div>
+                <div class="po-row">
                     <div class="po-md-4 po-mb-4">
                         <po-input
                             p-label="RG"
@@ -102,8 +102,9 @@
                             Este campo é obrigatório
                         </app-invalid-feedback>
                     </div>
-
-                    <div class="po-md-4 po-mb-4 fixed">
+                </div>
+                <div class="po-row">
+                    <div class="po-md-4 po-mb-4">
                         <po-input
                             p-label="Participação na sociedade (em %)"
                             formControlName="percentageInSociety"
@@ -126,18 +127,18 @@
                             Este campo é obrigatório
                         </app-invalid-feedback>
                     </div>
-                    <div class="po-row">
-                        <div class="po-md-3">
-                            <po-button
-                                p-label="Concluir"
-                                p-type="primary"
-                                (p-click)="submitForm()"
-                                [p-disabled]="formAssociate.invalid"
-                            ></po-button>
-                        </div>
+                </div>
+                <div class="po-row">
+                    <div class="po-md-3">
+                        <po-button
+                            p-label="Concluir"
+                            p-type="primary"
+                            (p-click)="submitForm()"
+                            [p-disabled]="formAssociate.invalid"
+                        ></po-button>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </po-step>
     <po-step p-label="RG">

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { HttpResponse } from '@angular/common/http';
@@ -15,7 +15,7 @@ import { Observable } from 'rxjs';
 })
 
 export class AssociateFormComponent implements OnInit {
-
+    idCompany: string;
     formAssociate: FormGroup;
     newAssociate: Associate;
     urlUploadRG: string;
@@ -41,6 +41,7 @@ export class AssociateFormComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
+        this.idCompany = this.activatedRoute.snapshot.paramMap.get('id');
         this.formAssociate = this.formBuilder.group({
             name: [this.editedAssociate?.name, Validators.required],
             rg: [this.editedAssociate?.rg, Validators.required],
@@ -48,10 +49,12 @@ export class AssociateFormComponent implements OnInit {
             voterTitle: [this.editedAssociate?.voterTitle, Validators.required],
             percentageInSociety: [this.editedAssociate?.percentageInSociety, Validators.required],
         });
+        if (this.editedAssociate) {
+            this.setRequestsUrl(this.editedAssociate.id);
+        }
     }
 
     submitForm(): void {
-        const id = this.activatedRoute.snapshot.paramMap.get('id');
         this.formAssociate.value.percentageInSociety = parseInt(this.formAssociate.value.percentageInSociety, 10);
         this.newAssociate = this.formAssociate.getRawValue() as Associate;
         this.newAssociate.rg = this.newAssociate.rg
@@ -60,26 +63,33 @@ export class AssociateFormComponent implements OnInit {
             .trim();
 
         // se estiver recebendo um associado editado faz o uso de update, senão cria um novo;
-        (this.editedAssociate ?
-            this.associateFormService.updateAssociate(this.newAssociate, id, this.editedAssociate.id)
+        this.editedAssociate ?
+            this.associateFormService.updateAssociate(this.newAssociate, this.idCompany, this.editedAssociate.id)
+                .subscribe(data => this.nextForm())
             :
-            this.associateFormService.createAssociate(this.newAssociate, id)
-        ).subscribe(data => this.setRequestsUrl(data.id, id));
+            this.associateFormService.createAssociate(this.newAssociate, this.idCompany)
+                .subscribe(data => {
+                    this.setRequestsUrl(data.id);
+                    this.nextForm();
+                });
     }
 
-    setRequestsUrl(idAssociate: number, id: string): void {
-        const baseString = `${environment.apiUrl}/users/${id}/company-partners/${idAssociate}`;
+    setRequestsUrl(idAssociate: number): void {
+        const baseString = `${environment.apiUrl}/users/${this.idCompany}/company-partners/${idAssociate}`;
         this.urlUploadRG = `${baseString}/rg-file`;
         this.urlUploadCPF = `${baseString}/cpf-file`;
         this.urlUploadVoterTitle = `${baseString}/voter-title-file`;
         this.urlUploadProofOfAddress = `${baseString}/proof-of-address-file`;
-        this.nextForm();
     }
 
     success(result: HttpResponse<any>, last = false): void {
         const message = this.editedAssociate ? 'Documento editado com sucesso' : 'Documento carregado com sucesso';
         this.poNotificationService.success(message);
         last ? this.location.back() : this.nextForm();
+    }
+
+    canActiveNextStep(form: NgForm) {
+        return form.valid;
     }
 
     nextForm(): void {

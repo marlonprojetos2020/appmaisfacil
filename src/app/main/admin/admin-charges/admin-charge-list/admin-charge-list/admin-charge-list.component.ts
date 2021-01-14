@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { PoModalAction, PoModalComponent, PoPageAction, PoTableAction } from '@po-ui/ng-components';
-import { DatatableColumn } from 'src/app/shared/components/page-datatable/page-datatable/datatable-column';
+import { DatatableColumn } from 'src/app/shared/components/page-datatable/datatable-column';
 import { environment } from 'src/environments/environment';
 import { User } from '../../../companies/model/user';
 

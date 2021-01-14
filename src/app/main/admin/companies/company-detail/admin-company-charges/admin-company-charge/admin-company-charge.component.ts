@@ -6,7 +6,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from '../../../model/user';
 import { AdminCompanyChargeService } from '../admin-company-charge.service';
-import { poLoadingOverlayLiteralsDefault } from '@po-ui/ng-components/lib/components/po-loading/po-loading-overlay/po-loading-overlay-base.component';
 
 @Component({
     templateUrl: './admin-company-charge.component.html',
@@ -20,9 +19,15 @@ export class AdminCompanyChargeComponent implements OnInit {
     tableActions: PoTableAction[] = [
         {
             label: 'Cancelar',
-            action: (item) => this.chargeService
-                .canceledCharge(item.id)
-                .subscribe((data) => item.status = data.status),
+            action: (item) =>
+                this.chargeService
+                    .canceledCharge(item.id)
+                    .subscribe((data) => (item.status = data.status)),
+        },
+        {
+            label: 'Baixar Cobraça',
+            action: (item) => window.open(item.billingFileUrl, '_blank'),
+            disabled: (item) => !item.billingFileUrl,
         },
     ];
     columns: DatatableColumn[] = [
@@ -48,11 +53,10 @@ export class AdminCompanyChargeComponent implements OnInit {
         },
     ];
 
-
     constructor(
         private router: Router,
         private activetedRoute: ActivatedRoute,
-        private chargeService: AdminCompanyChargeService,
+        private chargeService: AdminCompanyChargeService
     ) {}
 
     ngOnInit(): void {

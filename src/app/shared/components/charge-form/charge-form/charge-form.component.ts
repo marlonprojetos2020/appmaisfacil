@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import {
     PoNotificationService,
     PoUploadFileRestrictions,
@@ -9,6 +9,7 @@ import { Charge } from '../models/charge';
 import { environment } from '../../../../../environments/environment';
 import { ChargeFormService } from '../charge-form.service';
 import { HttpResponse } from '@angular/common/http';
+import { Location } from '@angular/common';
 
 @Component({
     selector: 'app-charge-form',
@@ -22,16 +23,17 @@ export class ChargeFormComponent implements OnInit {
     newCharge: Charge;
     id: number;
     startDate: any = '';
-    urlUploadBilling: string;
 
     options = [];
     @Input() editedCharge: Charge;
+    @ViewChild('stepper', { static: true }) stepper;
 
     constructor(
         private formBuilder: FormBuilder,
         private activatedRoute: ActivatedRoute,
         private chargeFormService: ChargeFormService,
-        private poNotificationService: PoNotificationService
+        private poNotificationService: PoNotificationService,
+        private location: Location
     ) {}
 
     ngOnInit(): void {
@@ -40,8 +42,6 @@ export class ChargeFormComponent implements OnInit {
             maxFileSize: 5242880,
             maxFiles: 1,
         };
-
-        this.urlUploadDocument = `${environment.apiUrl}/`;
 
         this.formCharge = this.formBuilder.group({
             description: [
@@ -81,17 +81,36 @@ export class ChargeFormComponent implements OnInit {
         this.startDate = new Date();
     }
 
-    subscribeForm(): any {
+    setUrlDocument(idCharge: number): void {
+        this.urlUploadDocument = `${environment.apiUrl}/billing/${idCharge}/billing-file`;
+        this.nextForm();
+    }
+
+    submitForm(): any {
         this.newCharge = this.formCharge.getRawValue() as Charge;
 
         this.newCharge.company = {
             id: this.id,
         };
 
-        this.chargeFormService.createBilling(this.newCharge).subscribe();
+        this.chargeFormService
+            .createBilling(this.newCharge)
+            .subscribe((data) => {
+                this.setUrlDocument(data.id);
+            });
+    }
+
+    success(): void {
+        const message = 'Documento carregado com sucesso';
+        this.poNotificationService.success(message);
+        this.location.back();
     }
 
     dirtyMe(input): void {
         this.formCharge.get(input).markAsDirty();
+    }
+
+    nextForm(): void {
+        this.stepper.next();
     }
 }

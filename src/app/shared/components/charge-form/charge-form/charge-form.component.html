@@ -1,5 +1,8 @@
 <po-stepper #stepper>
-    <po-step p-label="Dados da Cobrança" [p-can-active-next-step]="">
+    <po-step
+        p-label="Dados da Cobrança"
+        [p-can-active-next-step]="formCharge.invalid"
+    >
         <div class="po-container">
             <form [formGroup]="formCharge">
                 <div class="po-row po-mb-4">
@@ -84,7 +87,7 @@
                         <po-button
                             p-label="Salvar"
                             p-type="primary"
-                            (p-click)="subscribeForm()"
+                            (p-click)="submitForm()"
                             [p-disabled]="formCharge.invalid"
                         ></po-button>
                     </div>
@@ -95,9 +98,16 @@
     <po-step p-label="Arquivo da Cobrança">
         <po-container>
             <div class="po-mt-3 po-mb-4">
-                <po-upload p-drag-drop></po-upload>
+                <po-upload
+                    p-label="Anexe o Arquivo da Cobrança"
+                    p-drag-drop
+                    [p-auto-upload]="true"
+                    [p-multiple]="false"
+                    [p-restrictions]="restrictions"
+                    [p-url]="urlUploadDocument"
+                    (p-success)="success()"
+                ></po-upload>
             </div>
-            <po-button p-label="Concluir" p-type="primary"></po-button>
         </po-container>
     </po-step>
 </po-stepper>

@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from '../../../model/user';
 import { AdminCompanyChargeService } from '../admin-company-charge.service';
+import { poLoadingOverlayLiteralsDefault } from '@po-ui/ng-components/lib/components/po-loading/po-loading-overlay/po-loading-overlay-base.component';
 
 @Component({
     templateUrl: './admin-company-charge.component.html',
@@ -15,8 +16,15 @@ export class AdminCompanyChargeComponent implements OnInit {
 
     pageActions: PoPageAction[] = [];
 
-    serviceApi = '';
-    tableActions: PoTableAction[] = [];
+    serviceApi = `${environment.apiUrl}/billing`;
+    tableActions: PoTableAction[] = [
+        {
+            label: 'Cancelar',
+            action: (item) => this.chargeService
+                .canceledCharge(item.id)
+                .subscribe((data) => item.status = data.status),
+        },
+    ];
     columns: DatatableColumn[] = [
         {
             label: 'Status',
@@ -40,10 +48,11 @@ export class AdminCompanyChargeComponent implements OnInit {
         },
     ];
 
+
     constructor(
         private router: Router,
         private activetedRoute: ActivatedRoute,
-        private chargeService: AdminCompanyChargeService
+        private chargeService: AdminCompanyChargeService,
     ) {}
 
     ngOnInit(): void {
@@ -53,20 +62,6 @@ export class AdminCompanyChargeComponent implements OnInit {
             label: 'Nova Cobrança',
             icon: 'po-icon-plus-circle',
             url: `admin/empresa/${id}/cobrancas/nova-cobranca`,
-        });
-
-        this.serviceApi = `${environment.apiUrl}/billing`;
-
-        this.tableActions.push({
-            label: 'Cancelar',
-            action: (item) => {
-                this.chargeService.canceledCharge(item.id).subscribe((data) =>
-                    this.columns.push({
-                        label: 'Status',
-                        property: data.description,
-                    })
-                );
-            },
         });
     }
 }

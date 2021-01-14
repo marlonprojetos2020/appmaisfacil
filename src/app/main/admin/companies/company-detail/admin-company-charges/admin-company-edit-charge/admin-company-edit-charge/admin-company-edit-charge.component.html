@@ -1,3 +1,6 @@
-<po-page-default p-title="Editar Cobrança">
-    <p>aehooo</p>
+<po-page-default p-title="Editar">
+    <app-charge-form
+        *ngIf="charge$ | async as charge"
+        [editedCharge]="charge"
+    ></app-charge-form>
 </po-page-default>

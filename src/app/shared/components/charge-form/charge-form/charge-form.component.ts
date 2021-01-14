@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Charge } from '../models/charge';
 import { environment } from '../../../../../environments/environment';
 import { ChargeFormService } from '../charge-form.service';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-charge-form',
@@ -21,6 +22,7 @@ export class ChargeFormComponent implements OnInit {
     newCharge: Charge;
     id: number;
     startDate: any = '';
+    urlUploadBilling: string;
 
     options = [];
     @Input() editedCharge: Charge;
@@ -85,16 +87,11 @@ export class ChargeFormComponent implements OnInit {
         this.newCharge.company = {
             id: this.id,
         };
-        console.log(this.newCharge);
 
         this.chargeFormService.createBilling(this.newCharge).subscribe();
     }
 
     dirtyMe(input): void {
         this.formCharge.get(input).markAsDirty();
-    }
-
-    success(): void {
-        console.log('oi');
     }
 }

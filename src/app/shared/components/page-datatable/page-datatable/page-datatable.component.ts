@@ -43,7 +43,6 @@ export class PageDatatableComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        console.log(this.breadcrumb);
         this.buildAdvancedSearch();
         this.loadItems();
     }

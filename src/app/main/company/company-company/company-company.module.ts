@@ -7,6 +7,7 @@ import {
     PoPageModule,
 } from '@po-ui/ng-components';
 import { CompanyCompanyComponent } from './company-company/company-company.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     imports: [
@@ -15,6 +16,7 @@ import { CompanyCompanyComponent } from './company-company/company-company.compo
         PoFieldModule,
         PoContainerModule,
         PoButtonModule,
+        ReactiveFormsModule,
     ],
     declarations: [CompanyCompanyComponent],
 })

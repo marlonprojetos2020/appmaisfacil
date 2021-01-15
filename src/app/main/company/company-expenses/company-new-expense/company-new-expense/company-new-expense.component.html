@@ -1,0 +1,68 @@
+<po-page-default p-title="Nova Despesas">
+    <po-stepper #stepper>
+        <po-step p-label="Dados da Despesa">
+            <po-container>
+                <form [formGroup]="formCompanyExpense">
+                    <div class="po-row po-mb-3">
+                        <div class="po-md-6">
+                            <po-input
+                                formControlName="description"
+                                p-label="Título"
+                                p-placeholder="Ex: Aluguel"
+                            ></po-input>
+                        </div>
+                    </div>
+                    <div class="po-row po-mb-3">
+                        <div class="po-md-5">
+                            <div formGroupName="type">
+                                <po-select
+                                    p-label="Tipo"
+                                    formControlName="id"
+                                    p-placeholder="Selecione"
+                                    [p-options]="options"
+                                ></po-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="po-row po-mb-3">
+                        <div class="po-md-4">
+                            <po-number
+                                p-placeholder="000,00"
+                                formControlName="value"
+                                p-label="Valor"
+                            ></po-number>
+                        </div>
+                    </div>
+                    <div class="po-row po-mb-3">
+                        <div class="po-md-4">
+                            <po-datepicker
+                                p-placeholder="Selecione"
+                                formControlName="date"
+                                p-label="Data"
+                            ></po-datepicker>
+                        </div>
+                    </div>
+                </form>
+                <div class="po-row po-mb-3">
+                    <div class="po-md-2">
+                        <po-button
+                            p-label="Póximo"
+                            p-type="primary"
+                            (p-click)="submitForm()"
+                        ></po-button>
+                    </div>
+                </div>
+            </po-container>
+        </po-step>
+        <po-step p-label="Anexar Despesa">
+            <po-container>
+                <po-upload
+                    p-label="Anexe o Arquivo da Despesa"
+                    p-drag-drop
+                    [p-auto-upload]="true"
+                    [p-multiple]="false"
+                ></po-upload>
+            </po-container>
+        </po-step>
+    </po-stepper>
+</po-page-default>

@@ -1,10 +1,7 @@
-<po-page-default p-title="Minhas Despesas">
-    <app-atention-card></app-atention-card>
-    <div class="po-container">
-        <div class="po-row">
-            <div class="po-md-12">
-
-            </div>
-        </div>
-    </div>
-</po-page-default>
+<app-page-datatable
+    [serviceApi]="serviceApi"
+    [tableActions]="tableActions"
+    [columns]="columns"
+    title="Minhas Despesas"
+    [pageActions]="actions"
+></app-page-datatable>

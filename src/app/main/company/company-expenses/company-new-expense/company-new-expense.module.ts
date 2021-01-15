@@ -1,21 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CompanyNewExpenseComponent } from './company-new-expense/company-new-expense.component';
 import {
     PoButtonModule,
     PoContainerModule,
     PoFieldModule,
     PoPageModule,
+    PoStepperModule,
 } from '@po-ui/ng-components';
-import { AdminCompanyNewExpenseComponent } from './admin-company-new-expense/admin-company-new-expense.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     imports: [
         CommonModule,
         PoPageModule,
         PoContainerModule,
-        PoButtonModule,
+        ReactiveFormsModule,
+        PoStepperModule,
         PoFieldModule,
+        PoButtonModule,
     ],
-    declarations: [AdminCompanyNewExpenseComponent],
+    declarations: [CompanyNewExpenseComponent],
 })
-export class AdminCompanyNewExpenseModule {}
+export class CompanyNewExpenseModule {}

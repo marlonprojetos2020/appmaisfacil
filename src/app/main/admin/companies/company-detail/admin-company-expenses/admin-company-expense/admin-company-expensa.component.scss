@@ -1,0 +1,31 @@
+.modal {
+    height: 50vh;
+}
+
+.div-img {
+    background-color: #f1f1e9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img {
+    width: 80%;
+}
+
+.button {
+}
+.div-text {
+    h2 {
+        font-size: 24px;
+        font-weight: bold;
+    }
+    span {
+        font-size: 12px;
+        font-weight: lighter;
+    }
+    p {
+        font-weight: bold;
+        font-size: 18px;
+    }
+}

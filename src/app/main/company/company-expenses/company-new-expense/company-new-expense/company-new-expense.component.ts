@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CompanyExpense } from '../../models/company-expense';
 import { CompanyExpenseService } from '../../company-expense.service';
+import { environment } from '../../../../../../environments/environment';
 
 @Component({
     templateUrl: 'company-new-expense.component.html',
@@ -9,6 +10,9 @@ import { CompanyExpenseService } from '../../company-expense.service';
 export class CompanyNewExpenseComponent implements OnInit {
     formCompanyExpense: FormGroup;
     newCompanyExpense: CompanyExpense;
+    urlUploadDocument: string;
+
+    @ViewChild('stepper', { static: true }) stepper;
 
     options = [
         {
@@ -39,6 +43,17 @@ export class CompanyNewExpenseComponent implements OnInit {
         console.log(this.newCompanyExpense);
         this.companyExpenseService
             .createCompanyExpense(this.newCompanyExpense)
-            .subscribe((data) => console.log(data));
+            .subscribe((data) => {
+                console.log(data);
+            });
+    }
+
+    nextForm(): void {
+        this.stepper.next();
+    }
+
+    setUrlDocument(idExpense: number): void {
+        this.urlUploadDocument = `${environment.apiUrl}/company/expense/${idExpense}/proof-of-payment`;
+        this.nextForm();
     }
 }

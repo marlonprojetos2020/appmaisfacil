@@ -3,16 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '../../../../../core/auth/auth.interceptor';
 import { AdminCompanyExpenseComponent } from './admin-company-expense/admin-company-expense.component';
-import { AdminCompanyNewExpenseComponent } from './admin-company-new-expense/admin-company-new-expense/admin-company-new-expense.component';
 
 const routes: Routes = [
     {
         path: '',
         component: AdminCompanyExpenseComponent,
-    },
-    {
-        path: 'novo-pedido',
-        component: AdminCompanyNewExpenseComponent,
     },
 ];
 

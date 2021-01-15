@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { PoBreadcrumb, PoPageAction, PoSelectOption, PoTableAction, PoTableColumnSort, PoTableColumnSortType } from '@po-ui/ng-components';
+import { PoBreadcrumb, PoBreadcrumbItem, PoPageAction, PoSelectOption, PoTableAction, PoTableColumnSort, PoTableColumnSortType } from '@po-ui/ng-components';
 import { PageDatatableService } from '../page-datatable.service';
 import { finalize } from 'rxjs/operators';
 import { DatatableColumn } from '../datatable-column';
@@ -44,7 +44,6 @@ export class PageDatatableComponent implements OnInit {
 
     ngOnInit(): void {
         this.buildAdvancedSearch();
-
         this.loadItems();
     }
 

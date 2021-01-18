@@ -1,20 +1,16 @@
-.modal {
-    height: 50vh;
-}
-
 .div-img {
-    background-color: #f1f1e9;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #15b3a1;
 }
 
 .img {
     width: 80%;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
-.button {
-}
 .div-text {
     h2 {
         font-size: 24px;

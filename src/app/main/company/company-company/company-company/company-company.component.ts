@@ -23,7 +23,7 @@ export class CompanyCompanyComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.companyService.getUserCompany(1).subscribe((data) => {
+        this.companyService.getUserCompany('1').subscribe((data) => {
             this.setFields(data.userCompany);
         });
     }

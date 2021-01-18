@@ -16,4 +16,14 @@ export class CompanyExpenseService {
             companyExpense
         );
     }
+
+    getTypeExpense(): any {
+        return this.httpClient.get(
+            `${environment.apiUrl}/company/expense/types`
+        );
+    }
+
+    getCompanyExpense(id: number): any {
+        return this.httpClient.get(`${environment.apiUrl}/users/${id}`);
+    }
 }

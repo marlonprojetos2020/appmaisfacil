@@ -72,7 +72,6 @@ export class ChargeFormComponent implements OnInit {
                     value: item.id,
                 }))
             );
-            console.log(this.options);
         });
 
         this.id = this.activatedRoute.snapshot.params.id;

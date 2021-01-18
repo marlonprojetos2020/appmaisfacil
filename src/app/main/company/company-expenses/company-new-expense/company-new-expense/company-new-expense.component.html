@@ -1,6 +1,9 @@
 <po-page-default p-title="Nova Despesas">
     <po-stepper #stepper>
-        <po-step p-label="Dados da Despesa">
+        <po-step
+            p-label="Dados da Despesa"
+            [p-can-active-next-step]="formCompanyExpense.invalid"
+        >
             <po-container>
                 <form [formGroup]="formCompanyExpense">
                     <div class="po-row po-mb-3">
@@ -36,9 +39,10 @@
                     <div class="po-row po-mb-3">
                         <div class="po-md-4">
                             <po-datepicker
-                                p-placeholder="Selecione"
+                                p-placeholder="00/00/0000"
                                 formControlName="date"
                                 p-label="Data"
+                                [p-min-date]="startDate"
                             ></po-datepicker>
                         </div>
                     </div>
@@ -56,12 +60,17 @@
         </po-step>
         <po-step p-label="Anexar Despesa">
             <po-container>
-                <po-upload
-                    p-label="Anexe o Arquivo da Despesa"
-                    p-drag-drop
-                    [p-auto-upload]="true"
-                    [p-multiple]="false"
-                ></po-upload>
+                <div class="po-md-12 po-mt-4">
+                    <po-upload
+                        p-label="Anexe o Arquivo da Despesa"
+                        p-drag-drop
+                        [p-auto-upload]="true"
+                        [p-multiple]="false"
+                        [p-restrictions]="restrictions"
+                        [p-url]="urlUploadDocument"
+                        (p-success)="success()"
+                    ></po-upload>
+                </div>
             </po-container>
         </po-step>
     </po-stepper>

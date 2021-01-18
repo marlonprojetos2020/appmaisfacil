@@ -1,6 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PoContainerModule, PoPageModule } from '@po-ui/ng-components';
+import {
+    PoButtonModule,
+    PoContainerModule,
+    PoModalModule,
+    PoPageModule,
+} from '@po-ui/ng-components';
 import { CompanyExpenseComponent } from './company-expense/company-expense.component';
 import { AtentionCardModule } from '../../../shared/components/atention-card/atention-card.module';
 import { PageDatatableModule } from '../../../shared/components/page-datatable/page-datatable.module';
@@ -16,6 +21,8 @@ import { CompanyExpensesRoutingModule } from './company-expenses-routing.module'
         PageDatatableModule,
         CompanyExpensesRoutingModule,
         CompanyNewExpenseModule,
+        PoModalModule,
+        PoButtonModule,
     ],
     declarations: [CompanyExpenseComponent],
 })

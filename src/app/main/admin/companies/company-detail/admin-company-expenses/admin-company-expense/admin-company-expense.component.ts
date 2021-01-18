@@ -3,6 +3,10 @@ import { PoModalComponent, PoTableAction } from '@po-ui/ng-components';
 import { environment } from '../../../../../../../environments/environment';
 import { DatatableColumn } from '../../../../../../shared/components/page-datatable/datatable-column';
 import { Expense } from '../models/expense';
+import { AdminCompanyExpenseService } from '../admin-company-expense.service';
+import { ActivatedRoute } from '@angular/router';
+import { User } from '../../../model/user';
+import { Observable } from 'rxjs';
 
 @Component({
     templateUrl: 'admin-company-expense.component.html',
@@ -19,17 +23,21 @@ export class AdminCompanyExpenseComponent implements OnInit {
     @ViewChild('modalDespesa', { static: true })
     poModalDespesa: PoModalComponent;
 
+    company$: Observable<User>;
+
+    companyName: string;
+
     serviceApi = `${environment.apiUrl}/company/expense`;
     tableActions: PoTableAction[] = [
         {
             label: 'Visualizar',
             action: (item) => {
                 this.prepareModal(item);
-                console.log(item);
+
                 this.valorDespesa = item.value;
                 this.tituloDespesa = item.description;
                 this.dataDespesa = item.date;
-                this.tipoDespesa = item.label;
+                this.nomeEmpresa = this.companyName;
                 this.tipoDespesa = item['type.label'];
             },
         },
@@ -53,9 +61,16 @@ export class AdminCompanyExpenseComponent implements OnInit {
         },
     ];
 
-    constructor() {}
+    constructor(
+        private adminCompanyExpenseService: AdminCompanyExpenseService,
+        private activatedRoute: ActivatedRoute
+    ) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.company$ = this.adminCompanyExpenseService
+            .getCompany(this.activatedRoute.snapshot.params.id)
+            .subscribe((data) => (this.companyName = data.name));
+    }
 
     prepareModal(expense: Expense): void {
         this.poModalDespesa.open();

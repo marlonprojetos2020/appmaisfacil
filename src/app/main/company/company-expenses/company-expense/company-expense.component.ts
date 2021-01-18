@@ -7,9 +7,6 @@ import {
 } from '@po-ui/ng-components';
 import { environment } from '../../../../../environments/environment';
 import { Expense } from '../../../admin/companies/company-detail/admin-company-expenses/models/expense';
-import { User } from '../../../admin/companies/model/user';
-import { CompanyExpenseService } from '../company-expense.service';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     templateUrl: './company-expense.component.html',
@@ -22,8 +19,6 @@ export class CompanyExpenseComponent implements OnInit {
     @Input() dataDespesa: string = '';
     @Input() valorDespesa: number;
     @Input() imagemDespesa: string = '';
-    nameCompany: string;
-    company$: User;
 
     @ViewChild('modalDespesa', { static: true })
     poModalDespesa: PoModalComponent;
@@ -56,7 +51,7 @@ export class CompanyExpenseComponent implements OnInit {
                 this.tipoDespesa = item.label;
                 this.tipoDespesa = item['type.label'];
                 this.imagemDespesa = item.proofOfPaymentUrl;
-                this.nomeEmpresa = this.nameCompany;
+                this.nomeEmpresa;
             },
         },
     ];
@@ -71,17 +66,12 @@ export class CompanyExpenseComponent implements OnInit {
         },
     ];
 
-    constructor(
-        private companyExpenseService: CompanyExpenseService,
-        private activatedRoute: ActivatedRoute
-    ) {}
+    constructor() {}
 
     ngOnInit(): void {
-        this.company$ = this.companyExpenseService
-            .getCompanyExpense(1)
-            .subscribe((data) => {
-                this.nameCompany = data.name;
-            });
+        const company = JSON.parse(sessionStorage.CREDENTIALS_KEY);
+
+        this.nomeEmpresa = company.userDetails.name;
     }
 
     prepareModal(expense: Expense): void {

@@ -9,25 +9,23 @@ import { AuthService } from '../auth.service';
     templateUrl: './login.component.html',
 })
 export class LoginComponent implements OnInit {
-
     loadingSubmit: boolean;
     loginRecovery: PoPageLoginRecovery = {
         url: `${environment.apiUrl}/auth/recover-password`,
     };
 
-    constructor(
-        private router: Router,
-        private authSerice: AuthService,
-    ) {}
+    constructor(private router: Router, private authSerice: AuthService) {}
 
-    ngOnInit(): void {
-    }
+    ngOnInit(): void {}
 
     login(loginCredentials: PoPageLogin): void {
         this.loadingSubmit = true;
-        this.authSerice.login(loginCredentials)
-            .pipe(finalize(() => this.loadingSubmit = false))
-            .subscribe(
-                () => this.router.navigate(['/empresa']));
+        this.authSerice
+            .login(loginCredentials)
+            .pipe(finalize(() => (this.loadingSubmit = false)))
+            .subscribe((data) => {
+                this.router.navigate(['/empresa']);
+                console.log(data);
+            });
     }
 }

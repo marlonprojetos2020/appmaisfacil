@@ -1,42 +1,89 @@
-import { Component } from '@angular/core';
-import { PoPageAction, PoTableAction } from '@po-ui/ng-components';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import {
+    PoModalAction,
+    PoModalComponent,
+    PoPageAction,
+    PoTableAction,
+} from '@po-ui/ng-components';
 import { environment } from '../../../../../environments/environment';
 import { DatatableColumn } from '../../../../shared/components/page-datatable/datatable-column';
+import { Expense } from '../../../admin/companies/company-detail/admin-company-expenses/models/expense';
 
 @Component({
     templateUrl: './charge-list.component.html',
+    styleUrls: ['charge-list.component.scss'],
 })
-export class ChargeListComponent {
+export class ChargeListComponent implements OnInit {
+    @ViewChild('modalCobranca', { static: true })
+    poModalCobranca: PoModalComponent;
+    @Input() nomeEmpresa: string;
+    @Input() status: string;
+    @Input() tipo: string;
+    @Input() vencimento: string;
+    @Input() valor: number;
+    @Input() titulo: string;
+
+    id: number;
+
+    urlUploadDocument: string;
+
     pageActions: PoPageAction[] = [];
 
-    serviceApi = `${environment.apiUrl}/users/p/search`;
+    serviceApi = `${environment.apiUrl}/billing/p/search`;
+
     tableActions: PoTableAction[] = [];
+
     columns: DatatableColumn[] = [
         {
             label: 'Status',
-            property: 'userCompany.fantasyName',
+            property: 'status',
         },
-        {
-            label: 'Empresa',
-            property: 'userCompany.cnpj',
-        },
+
         {
             label: 'Titulo',
-            property: 'userCompany.cnpj',
+            property: 'description',
         },
         {
             label: 'Tipo',
-            property: 'name',
+            property: 'type.label',
         },
         {
             label: 'Vencimento',
-            property: 'name',
+            property: 'dueDate',
         },
         {
             label: 'Valor',
-            property: 'name',
+            property: 'value',
         },
     ];
 
     constructor() {}
+
+    ngOnInit(): void {
+        const company = JSON.parse(sessionStorage.CREDENTIALS_KEY);
+
+        this.nomeEmpresa = company.userDetails.name;
+
+        this.tableActions.push({
+            label: 'Visualizar',
+            action: (item) => {
+                this.prepareModal(item);
+                this.status = item.status;
+                this.tipo = item['type.label'];
+                this.valor = item.value;
+                this.vencimento = item.dueDate;
+                this.titulo = item.description;
+                this.nomeEmpresa;
+                this.id = item.id;
+            },
+        });
+
+        this.urlUploadDocument = `${environment.apiUrl}/company/billing/${this.id}/proof-of-payment`;
+    }
+
+    prepareModal(expense: Expense): void {
+        this.poModalCobranca.open();
+    }
+
+    sendPayment(): void {}
 }

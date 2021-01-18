@@ -5,41 +5,38 @@
     [tableActions]="tableActions"
 ></app-page-datatable>
 
-<po-modal #modalDespesa p-title="Despesa" p-size="xl" class="modal">
+<po-modal #modalDespesa p-title="Despesa">
     <div class="po-row">
-        <div class="po-md-5">
+        <div class="po-md-6">
             <div class="div-img">
                 <img [src]="imagemDespesa" alt="Despesa" class="img" />
             </div>
-
-            <!--                <div><po-button></po-button></div>-->
+            <div class="button">
+                <po-button
+                    p-icon="po-icon po-icon-download"
+                    p-type="primary"
+                ></po-button>
+            </div>
         </div>
-        <div class="po-md-7 div-text">
-            <div class="p-row po-mb-3">
-                <div class="po-md-12">
+        <div class="po-md-4">
+            <div class="div-text">
+                <div class="po-mb-2">
                     <h2>{{ tituloDespesa }}</h2>
                 </div>
-            </div>
-            <div class="p-row po-mb-3">
-                <div class="po-md-12">
+                <div class="po-mb-2">
                     <span>Empresa</span>
                     <p>{{ nomeEmpresa }}</p>
                 </div>
-            </div>
-            <div class="p-row po-mb-3">
-                <div class="po-md-12">
+
+                <div class="po-mb-2">
                     <span>Tipo</span>
                     <p>{{ tipoDespesa }}</p>
                 </div>
-            </div>
-            <div class="p-row po-mb-3">
-                <div class="po-md-12">
+                <div class="po-mb-2">
                     <span>Data</span>
                     <p>{{ dataDespesa }}</p>
                 </div>
-            </div>
-            <div class="p-row">
-                <div class="po-md-12">
+                <div class="po-mb-2">
                     <span>Valor</span>
                     <p>R$ {{ valorDespesa }}</p>
                 </div>

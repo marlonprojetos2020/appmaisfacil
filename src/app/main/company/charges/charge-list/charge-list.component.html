@@ -6,3 +6,48 @@
     [tableActions]="tableActions"
     class="table-no-button"
 ></app-page-datatable>
+
+<po-modal #modalCobranca p-title="Cobrança">
+    <div class="po-row">
+        <div class="po-md-6">
+            <img src="" alt="" />
+        </div>
+        <div class="po-md-6">
+            <div class="po-md-12 po-mb-2">
+                <h2>{{ titulo }}</h2>
+            </div>
+            <div class="po-md-12 po-mb-2 text">
+                <span>Cliente</span>
+                <p>{{ nomeEmpresa }}</p>
+            </div>
+            <div class="po-md-6 po-mb-2 text">
+                <span>Status</span>
+                <p>{{ status }}</p>
+            </div>
+            <div class="po-md-6 po-mb-2 text">
+                <span>Tipo</span>
+                <p>{{ tipo }}</p>
+            </div>
+
+            <div class="po-md-6 po-mb-2 text">
+                <span>Vencimento</span>
+                <p>{{ vencimento }}</p>
+            </div>
+            <div class="po-md-6 po-mb-2 text">
+                <span>Valor</span>
+                <p>R$ {{ valor }}</p>
+            </div>
+            <div class="po-md-6">
+                <po-upload
+                    p-label="Enviar Pagamento"
+                    (p-success)="sendPayment()"
+                    [p-url]="urlUploadDocument"
+                    [p-auto-upload]="true"
+                    [p-multiple]="false"
+                    p-auto-upload
+                ></po-upload>
+            </div>
+            <div class="po-md-6"></div>
+        </div>
+    </div>
+</po-modal>

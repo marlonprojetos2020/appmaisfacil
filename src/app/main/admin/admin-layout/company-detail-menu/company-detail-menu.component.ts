@@ -56,21 +56,6 @@ export class CompanyDetailMenuComponent implements OnInit {
             label: 'Funcionários',
             link: `funcionarios`,
         },
-        {
-            icon: 'po-icon-plus',
-            label: 'Serviços',
-            link: `servicos`,
-        },
-        {
-            icon: 'po-icon-user-add',
-            label: 'Indicações',
-            link: `indicacoes`,
-        },
-        {
-            icon: 'po-icon-help',
-            label: 'F.A.Q.',
-            link: `faq`,
-        },
     ];
 
     constructor(

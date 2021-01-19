@@ -1,44 +1,104 @@
 <po-page-default p-title="Novo Funcionário">
-    <div class="po-container">
-        <div class="po-row po-mb-4">
-            <div class="po-md-12 po-mb-4">
-                <po-input p-label="Nome Completo"></po-input>
+    <po-stepper #stepper>
+        <po-step p-label="Dados do Funcionário">
+            <div class="po-container po-mt-5">
+                <form [formGroup]="formCompanyEmployee">
+                    <div class="po-row po-mb-4 po-mt-4">
+                        <div class="po-md-12 po-mb-4">
+                            <po-input
+                                p-label="Nome Completo"
+                                formControlName="name"
+                                p-required="true"
+                                (p-blur)="dirtyMe('name')"
+                                p-error-pattern="Nome inválido"
+                            ></po-input>
+                            <app-invalid-feedback
+                                [formCtrl]="formCompanyEmployee.get('name')"
+                                [hasError]="
+                                    formCompanyEmployee.get('name').errors
+                                        ?.required &&
+                                    formCompanyEmployee.get('name').dirty
+                                "
+                            >
+                                Este campo é obrigatório
+                            </app-invalid-feedback>
+                        </div>
+                        <div class="po-md-4">
+                            <po-datepicker
+                                p-label="Admissão"
+                                formControlName="admissionAt"
+                                p-required="true"
+                                [p-min-date]="startDate"
+                            ></po-datepicker>
+                            <app-invalid-feedback
+                                [formCtrl]="
+                                    formCompanyEmployee.get('admissionAt')
+                                "
+                                [hasError]="
+                                    formCompanyEmployee.get('admissionAt')
+                                        .errors?.required &&
+                                    formCompanyEmployee.get('admissionAt').dirty
+                                "
+                            >
+                                Este campo é obrigatório
+                            </app-invalid-feedback>
+                        </div>
+                        <div class="po-md-4">
+                            <po-input
+                                p-label="Cargo"
+                                formControlName="category"
+                                p-required="true"
+                                (p-blur)="dirtyMe('category')"
+                                p-error-pattern="Cargo  inválido"
+                            ></po-input>
+                            <app-invalid-feedback
+                                [formCtrl]="formCompanyEmployee.get('category')"
+                                [hasError]="
+                                    formCompanyEmployee.get('category').errors
+                                        ?.required &&
+                                    formCompanyEmployee.get('category').dirty
+                                "
+                            >
+                                Este campo é obrigatório
+                            </app-invalid-feedback>
+                        </div>
+                        <div class="po-row po-mt-4">
+                            <div class="po-md-3">
+                                <po-button
+                                    p-label="Próximo"
+                                    p-type="primary"
+                                    (p-click)="submitForm()"
+                                    [p-disabled]="formCompanyEmployee.invalid"
+                                ></po-button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="po-md-4">
-                <po-input p-label="CPF"></po-input>
-            </div>
-            <div class="po-md-4">
-                <po-input p-label="Cargo"></po-input>
-            </div>
-        </div>
-        <div class="po-row po-mb-4">
-            <div class="po-md-12">
-                <p>
-                    Para concluir o cadastro do funcionário é necessário
-                    preencher a
-                    <strong>Ficha para Registro de Trabalhador</strong> e<br />
-                    anexa-la junto com as cópias dos documento complementares.
-                </p>
-            </div>
-        </div>
-        <div class="po-row po-mb-4">
-            <div class="po-md-12">
-                <div class="div-upload">
-                    <span class="po-icon po-icon-upload icon-upload"></span>
-                    <p>
-                        Solte aqui a
-                        <strong>Ficha para Registro de Trabalhador</strong> e
-                        seus anexos
-                    </p>
-
-                    <p>Ou clique aqui para pesquisar</p>
+        </po-step>
+        <po-step p-label="Anexo Ficha de Registro">
+            <po-container class="po-mt-5">
+                <div class="po-row po-mb-4">
+                    <div class="po-md-12 po-mt-4">
+                        <p>
+                            Para concluir o cadastro do funcionário é necessário
+                            preencher a
+                            <strong>Ficha para Registro de Trabalhador</strong>
+                            e<br />
+                            anexa-la junto com as cópias dos documento
+                            complementares.
+                        </p>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="po-row">
-            <div class="po-md-2">
-                <po-button p-label="Próximo" p-type="primary"></po-button>
-            </div>
-        </div>
-    </div>
+                <po-upload
+                    p-drag-drop
+                    [p-auto-upload]="true"
+                    [p-multiple]="false"
+                    [p-restrictions]="restrictions"
+                    [p-url]="urlUploadDocument"
+                    (p-success)="success()"
+                ></po-upload>
+            </po-container>
+        </po-step>
+    </po-stepper>
 </po-page-default>

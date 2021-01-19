@@ -67,6 +67,7 @@ export class ChargeListComponent implements OnInit {
         this.tableActions.push({
             label: 'Visualizar',
             action: (item) => {
+                console.log(item);
                 this.prepareModal(item);
                 this.status = item.status;
                 this.tipo = item['type.label'];
@@ -75,10 +76,11 @@ export class ChargeListComponent implements OnInit {
                 this.titulo = item.description;
                 this.nomeEmpresa;
                 this.id = item.id;
+                this.urlUploadDocument = `${environment.apiUrl}/company/billing/${this.id}/proof-of-payment`;
             },
         });
 
-        this.urlUploadDocument = `${environment.apiUrl}/company/billing/${this.id}/proof-of-payment`;
+        console.log(this.id);
     }
 
     prepareModal(expense: Expense): void {

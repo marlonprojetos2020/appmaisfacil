@@ -6,6 +6,15 @@
     [columns]="columns"
     class="table-no-button"
 >
-
 </app-page-datatable>
 
+<po-modal
+    #modalEmployee
+    p-title="Demitir Funcionário {{ funcionario }}"
+    [p-primary-action]="primaryAction"
+    [p-secondary-action]="secondaryAction"
+>
+    <div class="po-row">
+        <p class="text">Realmente deseja demitir o funcionário</p>
+    </div>
+</po-modal>

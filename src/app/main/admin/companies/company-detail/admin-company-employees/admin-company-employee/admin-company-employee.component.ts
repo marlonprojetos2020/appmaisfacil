@@ -1,35 +1,40 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PoPageAction, PoTableAction } from '@po-ui/ng-components';
 import { environment } from '../../../../../../../environments/environment';
 import { DatatableColumn } from '../../../../../../shared/components/page-datatable/datatable-column';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     templateUrl: './admin-company-employee.component.html',
     styleUrls: ['admin-company-employee.component.scss'],
 })
-export class AdminCompanyEmployeeComponent {
+export class AdminCompanyEmployeeComponent implements OnInit {
     pageActions: PoPageAction[] = [];
 
-    serviceApi = `${environment.apiUrl}/users/p/search`;
+    serviceApi = '';
     tableActions: PoTableAction[] = [];
     columns: DatatableColumn[] = [
         {
             label: 'Situação',
-            property: 'userCompany.fantasyName',
+            property: 'status',
         },
         {
-            label: 'Nome',
-            property: 'userCompany.cnpj',
+            label: 'Funcionário',
+            property: 'name',
         },
         {
             label: 'Categoria',
-            property: 'name',
+            property: 'category',
         },
         {
             label: 'Admissão',
-            property: 'name',
+            property: 'admissionAt',
         },
     ];
 
-    constructor() {}
+    constructor(private activatedRoute: ActivatedRoute) {}
+
+    ngOnInit(): void {
+        this.serviceApi = `${environment.apiUrl}/users/${this.activatedRoute.snapshot.params.id}/company-employees`;
+    }
 }

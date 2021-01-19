@@ -5,8 +5,11 @@ import {
     PoContainerModule,
     PoFieldModule,
     PoPageModule,
+    PoStepperModule,
 } from '@po-ui/ng-components';
 import { CompanyNewEmployeeComponent } from './company-new-employee/company-new-employee.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { InvalidFeedbackModule } from '../../../../shared/components/invalid-feedback/invalid-feedback.module';
 
 @NgModule({
     declarations: [CompanyNewEmployeeComponent],
@@ -16,6 +19,9 @@ import { CompanyNewEmployeeComponent } from './company-new-employee/company-new-
         PoContainerModule,
         PoFieldModule,
         PoButtonModule,
+        PoStepperModule,
+        ReactiveFormsModule,
+        InvalidFeedbackModule,
     ],
 })
 export class CompanyNewEmployeeModule {}

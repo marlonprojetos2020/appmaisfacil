@@ -4,7 +4,8 @@ import { User } from '../../../model/user';
 import { ActivatedRoute } from '@angular/router';
 import { AdminCompanyCompanyService } from '../admin-company-company.service';
 import { Company } from '../../../model/company';
-import { PoPageAction } from '@po-ui/ng-components';
+import { PoBreadcrumb, PoPageAction } from '@po-ui/ng-components';
+import { CompaniesService } from '../../../companies.service';
 
 @Component({
     templateUrl: './admin-company-company.component.html',
@@ -19,12 +20,17 @@ export class AdminCompanyCompanyComponent implements OnInit {
         },
     ];
 
+    breadcrumb: PoBreadcrumb = {
+        items: [],
+    };
+
     @Input() editedUser: User;
 
     constructor(
         private formBuilder: FormBuilder,
         private activetedRoute: ActivatedRoute,
-        private companyService: AdminCompanyCompanyService
+        private companyService: AdminCompanyCompanyService,
+        private companiesService: CompaniesService
     ) {}
 
     ngOnInit(): void {
@@ -33,6 +39,10 @@ export class AdminCompanyCompanyComponent implements OnInit {
             .subscribe((data) => {
                 this.setFields(data.userCompany);
             });
+
+        this.companiesService
+            .getUserCompany(this.activetedRoute.snapshot.params.id)
+            .subscribe((data) => this.setBreadcrumb(data));
     }
 
     setFields(company: Company): void {
@@ -64,5 +74,17 @@ export class AdminCompanyCompanyComponent implements OnInit {
             email: [company.email, Validators.required],
             phone: [company.phone, Validators.required],
         });
+    }
+
+    setBreadcrumb(user: User): void {
+        this.breadcrumb.items.push(
+            { label: 'Inicio', link: '/admin' },
+            { label: 'Empresas', link: '/admin/empresas' },
+            {
+                label: user.userCompany.fantasyName,
+                link: `/admin/empresa/${user.id}`,
+            },
+            { label: 'Minha Empresa' }
+        );
     }
 }

@@ -85,14 +85,6 @@ export class AdminEmployeeFiredComponent implements OnInit {
     ];
 
     primaryAction: PoModalAction = {
-        label: 'Confirmar',
-        action: () => {
-            this.adminEmployeeService.setFired(this.employeeId);
-            console.log(this.employeeId);
-        },
-    };
-
-    secondaryAction: PoModalAction = {
         label: 'Cancelar',
         action: () => this.poModalEmployeeFired.close(),
     };

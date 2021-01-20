@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { PoPageAction, PoTableAction } from '@po-ui/ng-components';
+import {
+    PoBreadcrumb,
+    PoPageAction,
+    PoTableAction,
+} from '@po-ui/ng-components';
 import { environment } from '../../../../../../../environments/environment';
 import { DatatableColumn } from '../../../../../../shared/components/page-datatable/datatable-column';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from '../../../model/user';
 import { AdminCompanyChargeService } from '../admin-company-charge.service';
+import { CompaniesService } from '../../../companies.service';
 
 @Component({
     templateUrl: './admin-company-charge.component.html',
@@ -53,10 +58,15 @@ export class AdminCompanyChargeComponent implements OnInit {
         },
     ];
 
+    breadcrumb: PoBreadcrumb = {
+        items: [],
+    };
+
     constructor(
         private router: Router,
         private activetedRoute: ActivatedRoute,
-        private chargeService: AdminCompanyChargeService
+        private chargeService: AdminCompanyChargeService,
+        private companiesService: CompaniesService
     ) {}
 
     ngOnInit(): void {
@@ -67,5 +77,21 @@ export class AdminCompanyChargeComponent implements OnInit {
             icon: 'po-icon-plus-circle',
             url: `admin/empresa/${id}/cobrancas/nova-cobranca`,
         });
+
+        this.companiesService
+            .getUserCompany(this.activetedRoute.snapshot.params.id)
+            .subscribe((data) => this.setBreadcrumb(data));
+    }
+
+    setBreadcrumb(user: User): void {
+        this.breadcrumb.items.push(
+            { label: 'Inicio', link: '/admin' },
+            { label: 'Empresas', link: '/admin/empresas' },
+            {
+                label: user.userCompany.fantasyName,
+                link: `/admin/empresa/${user.id}`,
+            },
+            { label: 'Cobranças' }
+        );
     }
 }

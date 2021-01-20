@@ -1,21 +1,32 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { PoModalAction, PoModalComponent, PoPageAction, PoTableAction } from '@po-ui/ng-components';
+import {
+    PoBreadcrumb,
+    PoModalAction,
+    PoModalComponent,
+    PoPageAction,
+    PoTableAction,
+} from '@po-ui/ng-components';
 import { DatatableColumn } from 'src/app/shared/components/page-datatable/datatable-column';
 import { environment } from 'src/environments/environment';
 import { User } from '../../../companies/model/user';
 
 @Component({
-    styleUrls: [
-        './admin-carge-list.component.scss',
-    ],
+    styleUrls: ['./admin-carge-list.component.scss'],
     templateUrl: './admin-charge-list.component.html',
 })
 export class AdminChargeListComponent {
+    breadcrumb: PoBreadcrumb = {
+        items: [
+            { label: 'Início', link: '/admin' },
+            { label: 'Cobranças', link: '/admin/cobrancas' },
+        ],
+    };
 
-    @ViewChild('modalComprovante', { static: true }) poModalComprovante: PoModalComponent;
-    @ViewChild('modalCobranca', { static: true }) poModalCobranca: PoModalComponent;
-
+    @ViewChild('modalComprovante', { static: true })
+    poModalComprovante: PoModalComponent;
+    @ViewChild('modalCobranca', { static: true })
+    poModalCobranca: PoModalComponent;
 
     cobranca =
         // {

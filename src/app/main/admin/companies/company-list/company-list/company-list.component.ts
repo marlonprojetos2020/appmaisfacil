@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { PoPageAction, PoTableAction } from '@po-ui/ng-components';
+import {
+    PoBreadcrumb,
+    PoPageAction,
+    PoTableAction,
+} from '@po-ui/ng-components';
 import { environment } from 'src/environments/environment';
 import { DatatableColumn } from '../../../../../shared/components/page-datatable/datatable-column';
 
@@ -8,11 +12,20 @@ import { DatatableColumn } from '../../../../../shared/components/page-datatable
     templateUrl: './company-list.component.html',
 })
 export class CompanyListComponent {
-    pageActions: PoPageAction[] = [{
-        label: 'Nova Empresa',
-        icon: 'po-icon-plus-circle',
-        url: 'admin/empresas/nova-empresa',
-    }];
+    breadcrumb: PoBreadcrumb = {
+        items: [
+            { label: 'Início', link: '/admin' },
+            { label: 'Empresas', link: '/admin/empresas' },
+        ],
+    };
+
+    pageActions: PoPageAction[] = [
+        {
+            label: 'Nova Empresa',
+            icon: 'po-icon-plus-circle',
+            url: 'admin/empresas/nova-empresa',
+        },
+    ];
 
     serviceApi = `${environment.apiUrl}/users/p/search`;
     tableActions: PoTableAction[] = [

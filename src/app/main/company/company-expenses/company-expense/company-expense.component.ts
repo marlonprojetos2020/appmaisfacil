@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { DatatableColumn } from '../../../../shared/components/page-datatable/datatable-column';
 import {
+    PoBreadcrumb,
     PoModalComponent,
     PoPageAction,
     PoTableAction,
@@ -22,6 +23,13 @@ export class CompanyExpenseComponent implements OnInit {
 
     @ViewChild('modalDespesa', { static: true })
     poModalDespesa: PoModalComponent;
+
+    breadcrumb: PoBreadcrumb = {
+        items: [
+            { label: 'Início', link: '/empresa' },
+            { label: 'Minhas Despesas', link: '/empresa/despesas' },
+        ],
+    };
 
     columns: DatatableColumn[] = [
         { label: 'Tipo', property: 'type.label' },

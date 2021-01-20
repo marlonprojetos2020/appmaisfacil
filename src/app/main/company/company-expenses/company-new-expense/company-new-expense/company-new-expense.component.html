@@ -1,4 +1,8 @@
-<po-page-default p-title="Nova Despesas">
+<po-page-default
+    p-title="Nova Despesas"
+    [p-breadcrumb]="breadcrumb"
+    class="breadcrumb"
+>
     <po-stepper #stepper>
         <po-step
             p-label="Dados da Despesa"

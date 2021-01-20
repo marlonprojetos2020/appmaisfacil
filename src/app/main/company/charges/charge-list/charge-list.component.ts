@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import {
+    PoBreadcrumb,
     PoModalAction,
     PoModalComponent,
     PoPageAction,
@@ -24,6 +25,13 @@ export class ChargeListComponent implements OnInit {
     @Input() titulo: string;
 
     id: number;
+
+    breadcrumb: PoBreadcrumb = {
+        items: [
+            { label: 'Início', link: '/empresa' },
+            { label: 'Cobranças', link: '/empresa/cobranca' },
+        ],
+    };
 
     urlUploadDocument: string;
 

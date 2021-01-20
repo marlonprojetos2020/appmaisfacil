@@ -1,5 +1,6 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import {
+    PoBreadcrumb,
     PoModalAction,
     PoModalComponent,
     PoPageAction,
@@ -12,10 +13,14 @@ import { CompanyEmployeeService } from '../company-employee.service';
 
 @Component({
     templateUrl: './company-employee.component.html',
-    styleUrls: ['company-employee.component.scss'],
 })
-export class CompanyEmployeeComponent {
+export class CompanyEmployeeComponent implements OnInit {
     companyEmployee: CompanyEmployee;
+    setStatus: string;
+
+    breadcrumb: PoBreadcrumb = {
+        items: [],
+    };
 
     @Input() funcionario: string = '';
 
@@ -79,7 +84,18 @@ export class CompanyEmployeeComponent {
 
     constructor(private companyEmployeeService: CompanyEmployeeService) {}
 
+    ngOnInit(): void {
+        this.setBreadCrumbs();
+    }
+
     prepareModal(companyEmployee: CompanyEmployee): void {
         this.poModalEmployee.open();
+    }
+
+    setBreadCrumbs(): void {
+        this.breadcrumb.items.push(
+            { label: 'Início', link: '/empresa' },
+            { label: 'Funcionários', link: '/empresa/funcionarios' }
+        );
     }
 }

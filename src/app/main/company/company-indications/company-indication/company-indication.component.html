@@ -1,15 +1,26 @@
-<po-page-default p-title="Indicações">
+<po-page-default
+    p-title="Indicações"
+    [p-breadcrumb]="breadcrumb"
+    class="breadcrumb"
+>
     <div class="po-container container">
         <div class="po-row card-indication">
             <div class="po-md-12">
                 <h3 class="po-mb-1">Como Funciona</h3>
-                <p>Indique novos clientes a nossa plataforma, e caso ele se torne nosso cliente você e ele ganham 50% de desconto na próxima mensalidade!</p>
+                <p>
+                    Indique novos clientes a nossa plataforma, e caso ele se
+                    torne nosso cliente você e ele ganham 50% de desconto na
+                    próxima mensalidade!
+                </p>
                 <div class="po-row po-mt-3">
                     <div class="po-md-10 input-style">
                         <po-input p-label="E-mail"></po-input>
                     </div>
-                    <div class="po-md-2 button-indication aling-button ">
-                        <po-button p-label="Indicar" p-type="primary" ></po-button>
+                    <div class="po-md-2 button-indication aling-button">
+                        <po-button
+                            p-label="Indicar"
+                            p-type="primary"
+                        ></po-button>
                     </div>
                 </div>
             </div>
@@ -19,9 +30,11 @@
     <div class="po-container container">
         <div class="po-row card-indication">
             <div class="po-md-12">
-                <po-input p-icon="po-icon po-icon-search" p-placeholder="Pesquisar por..."></po-input>
+                <po-input
+                    p-icon="po-icon po-icon-search"
+                    p-placeholder="Pesquisar por..."
+                ></po-input>
             </div>
         </div>
     </div>
 </po-page-default>
-

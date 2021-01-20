@@ -4,6 +4,7 @@ import { CompanyEmployee } from '../../models/company-employee';
 import { CompanyEmployeeService } from '../../company-employee.service';
 import { environment } from '../../../../../../environments/environment';
 import {
+    PoBreadcrumb,
     PoNotificationService,
     PoUploadFileRestrictions,
 } from '@po-ui/ng-components';
@@ -20,6 +21,17 @@ export class CompanyNewEmployeeComponent implements OnInit {
     restrictions: PoUploadFileRestrictions;
 
     urlUploadDocument: string;
+
+    breadcrumb: PoBreadcrumb = {
+        items: [
+            { label: 'Início', link: '/empresa' },
+            { label: 'Funcionários', link: '/empresa/funcionarios' },
+            {
+                label: 'Novo Funcionário',
+                link: '/empresa/funcionarios/cadastro',
+            },
+        ],
+    };
 
     @ViewChild('stepper', { static: true }) stepper;
 

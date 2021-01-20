@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
+    PoBreadcrumbModule,
     PoButtonModule,
     PoContainerModule,
     PoFieldModule,
@@ -22,6 +23,7 @@ import { InvalidFeedbackModule } from '../../../../shared/components/invalid-fee
         PoStepperModule,
         ReactiveFormsModule,
         InvalidFeedbackModule,
+        PoBreadcrumbModule,
     ],
 })
 export class CompanyNewEmployeeModule {}

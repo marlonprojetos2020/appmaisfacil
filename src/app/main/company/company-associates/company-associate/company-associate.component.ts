@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { PoPageAction, PoTableAction } from '@po-ui/ng-components';
+import {
+    PoBreadcrumb,
+    PoPageAction,
+    PoTableAction,
+} from '@po-ui/ng-components';
 import { environment } from '../../../../../environments/environment';
 import { DatatableColumn } from '../../../../shared/components/page-datatable/datatable-column';
 
@@ -8,6 +12,13 @@ import { DatatableColumn } from '../../../../shared/components/page-datatable/da
 })
 export class CompanyAssociateComponent {
     pageActions: PoPageAction[] = [];
+
+    breadcrumb: PoBreadcrumb = {
+        items: [
+            { label: 'Início', link: '/empresa' },
+            { label: 'Sócios', link: '/empresa/socios' },
+        ],
+    };
 
     serviceApi = `${environment.apiUrl}/users/p/search`;
 

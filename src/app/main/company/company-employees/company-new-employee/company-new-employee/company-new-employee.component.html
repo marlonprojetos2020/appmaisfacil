@@ -1,6 +1,13 @@
-<po-page-default p-title="Novo Funcionário">
+<po-page-default
+    p-title="Novo Funcionário"
+    [p-breadcrumb]="breadcrumb"
+    class="breadcrumb"
+>
     <po-stepper #stepper>
-        <po-step p-label="Dados do Funcionário">
+        <po-step
+            p-label="Dados do Funcionário"
+            [p-can-active-next-step]="formCompanyEmployee.invalid"
+        >
             <div class="po-container po-mt-5">
                 <form [formGroup]="formCompanyEmployee">
                     <div class="po-row po-mb-4 po-mt-4">

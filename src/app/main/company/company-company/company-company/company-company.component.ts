@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { PoPageAction } from '@po-ui/ng-components';
+import { PoBreadcrumb, PoPageAction } from '@po-ui/ng-components';
 import { Company } from '../../../admin/companies/model/company';
 import { User } from '../../../admin/companies/model/user';
 import { CompanyCompanyService } from '../company-company.service';
@@ -13,6 +13,13 @@ import { CompanyCompanyService } from '../company-company.service';
 export class CompanyCompanyComponent implements OnInit {
     formCompany: FormGroup;
     actions: PoPageAction[] = [];
+
+    breadcrumb: PoBreadcrumb = {
+        items: [
+            { label: 'Início', link: '/empresa' },
+            { label: 'Minha Empresa', link: '/empresa/minha-empresa' },
+        ],
+    };
 
     @Input() editedUser: User;
 

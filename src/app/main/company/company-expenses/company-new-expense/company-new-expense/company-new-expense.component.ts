@@ -4,6 +4,7 @@ import { CompanyExpense } from '../../models/company-expense';
 import { CompanyExpenseService } from '../../company-expense.service';
 import { environment } from '../../../../../../environments/environment';
 import {
+    PoBreadcrumb,
     PoNotificationService,
     PoUploadFileRestrictions,
 } from '@po-ui/ng-components';
@@ -18,6 +19,14 @@ export class CompanyNewExpenseComponent implements OnInit {
     urlUploadDocument: string;
     restrictions: PoUploadFileRestrictions;
     startDate: any = '';
+
+    breadcrumb: PoBreadcrumb = {
+        items: [
+            { label: 'Início', link: '/empresa' },
+            { label: 'Minhas Despesas', link: '/empresa/despesas' },
+            { label: 'Nova Despesa', link: '/empresa/despesas/nova-despesa' },
+        ],
+    };
 
     @ViewChild('stepper', { static: true }) stepper;
 

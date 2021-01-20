@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { PoPageAction, PoTableAction } from '@po-ui/ng-components';
+import {
+    PoBreadcrumb,
+    PoPageAction,
+    PoTableAction,
+} from '@po-ui/ng-components';
 import { environment } from '../../../../../environments/environment';
 import { DatatableColumn } from '../../../../shared/components/page-datatable/datatable-column';
 import { Router } from '@angular/router';
@@ -9,6 +13,13 @@ import { Router } from '@angular/router';
 })
 export class CompanyBankStatementComponent {
     pageActions: PoPageAction[] = [];
+
+    breadcrumb: PoBreadcrumb = {
+        items: [
+            { label: 'Início', link: '/empresa' },
+            { label: 'Meus Extratos', link: '/empresa/extrato' },
+        ],
+    };
 
     serviceApi = `${environment.apiUrl}/users/p/search`;
     tableActions: PoTableAction[] = [];
@@ -27,6 +38,5 @@ export class CompanyBankStatementComponent {
         },
     ];
 
-    constructor(private router: Router) {
-    }
+    constructor(private router: Router) {}
 }

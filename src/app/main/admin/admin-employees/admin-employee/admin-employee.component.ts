@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
     PoBreadcrumb,
     PoPageAction,
@@ -10,8 +10,13 @@ import { DatatableColumn } from '../../../../shared/components/page-datatable/da
 @Component({
     templateUrl: 'admin-employee.component.html',
 })
-export class AdminEmployeeComponent {
-    pageActions: PoPageAction[] = [];
+export class AdminEmployeeComponent implements OnInit {
+    pageActions: PoPageAction[] = [
+        {
+            label: 'Confirmar Demissão',
+            url: '/admin/funcionarios/confirmar-demissao',
+        },
+    ];
 
     breadcrumb: PoBreadcrumb = {
         items: [
@@ -20,30 +25,34 @@ export class AdminEmployeeComponent {
         ],
     };
 
-    serviceApi = `${environment.apiUrl}/users/p/search`;
+    serviceApi = `${environment.apiUrl}/employee/p/search`;
+
     tableActions: PoTableAction[] = [];
+
     columns: DatatableColumn[] = [
         {
             label: 'Situação',
-            property: 'userCompany.fantasyName',
+            property: 'status',
         },
         {
             label: 'Empresa',
-            property: 'userCompany.cnpj',
+            property: 'companyName',
         },
         {
             label: 'Funcionário',
-            property: 'userCompany.cnpj',
+            property: 'name',
         },
         {
             label: 'Categoria',
-            property: 'name',
+            property: 'category',
         },
         {
             label: 'Admissão',
-            property: 'name',
+            property: 'admissionAt',
         },
     ];
 
     constructor() {}
+
+    ngOnInit(): void {}
 }

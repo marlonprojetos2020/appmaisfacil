@@ -57,7 +57,10 @@ const routes: Routes = [
                     },
                     {
                         path: 'funcionarios',
-                        component: AdminEmployeeComponent,
+                        loadChildren: () =>
+                            import(
+                                './admin-employees/admin-employee.module'
+                            ).then((m) => m.AdminEmployeeModule),
                     },
                 ],
             },

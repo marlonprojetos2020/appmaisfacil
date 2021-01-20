@@ -1,0 +1,28 @@
+<app-page-datatable
+    title="Confirmar Demissão"
+    [pageActions]="pageActions"
+    [serviceApi]="serviceApi"
+    [columns]="columns"
+    [tableActions]="tableActions"
+    class="table-no-button breadcrumb"
+    [breadcrumb]="breadcrumb"
+></app-page-datatable>
+
+<po-modal
+    #modalEmployeeFired
+    p-title="Confirmar Demissão"
+    [p-primary-action]="primaryAction"
+    [p-secondary-action]="secondaryAction"
+>
+    <p>
+        Demitir o funcionário {{ employeeName }} da empresa
+        {{ employeeCompany }}
+    </p>
+    <po-upload
+        p-drag-drop
+        p-label="Anexar Ficha de Demissão"
+        [p-url]="urlUploadDocument"
+        (p-success)="success()"
+        [p-restrictions]="restrictions"
+    ></po-upload>
+</po-modal>

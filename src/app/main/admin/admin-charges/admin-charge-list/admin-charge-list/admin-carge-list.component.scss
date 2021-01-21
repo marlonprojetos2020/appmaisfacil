@@ -18,6 +18,15 @@ h3 {
 }
 
 img {
-    max-width: 100%;
+    max-width: 70%;
     height: auto;
+}
+
+.div-img {
+    background-color: var(--color-bgImage);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 355px;
+    height: 355px;
 }

@@ -48,7 +48,7 @@ export class AdminCompanyEmployeeComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.serviceApi = `${environment.apiUrl}/users/${this.activatedRoute.snapshot.params.id}/company-employees`;
+        this.serviceApi = `${environment.apiUrl}/employee/p/search?search=&companyId=${this.activatedRoute.snapshot.params.id}`;
 
         this.companiesService
             .getUserCompany(this.activatedRoute.snapshot.params.id)

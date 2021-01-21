@@ -9,12 +9,7 @@ import { User } from '../../../../model/user';
     styleUrls: ['admin-company-new-charge.component.scss'],
 })
 export class AdminCompanyNewChargeComponent implements OnInit {
-    actions: Array<PoPageAction> = [
-        {
-            label: 'Voltar',
-            url: `admin/empresa/${this.activatedRoute.snapshot.params.id}/cobrancas`,
-        },
-    ];
+    actions: Array<PoPageAction> = [];
 
     breadcrumb: PoBreadcrumb = {
         items: [],

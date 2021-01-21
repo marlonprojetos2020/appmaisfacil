@@ -61,6 +61,8 @@ export class CompanyEmployeeComponent implements OnInit {
                 this.companyEmployee = item as CompanyEmployee;
                 this.funcionario = this.companyEmployee.name;
             },
+            disabled: (item) =>
+                item.status === 'PENDING_FIRED' || item.status === 'FIRED',
         },
     ];
     columns: DatatableColumn[] = [

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminChargeListComponent } from './admin-charge-list/admin-charge-list.component';
-import { PoModalModule, PoPageModule } from '@po-ui/ng-components';
+import {PoFieldModule, PoModalModule, PoPageModule} from '@po-ui/ng-components';
 import { PageDatatableModule } from 'src/app/shared/components/page-datatable/page-datatable.module';
 
 @NgModule({
@@ -11,6 +11,7 @@ import { PageDatatableModule } from 'src/app/shared/components/page-datatable/pa
         PoPageModule,
         PageDatatableModule,
         PoModalModule,
+        PoFieldModule,
     ],
     exports: [AdminChargeListComponent],
 })

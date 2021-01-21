@@ -10,6 +10,7 @@ $colorDanger: #6a2020;
 $colorWarning: #b3ad15;
 $colorCancel: #ef6008;
 $colorText: #4b4b4b;
+$colorBgImage: #f1f1e9;
 
 :root {
     --color-primary-light-95: #{lighten($colorPrimary, 65%)};
@@ -36,7 +37,7 @@ $colorText: #4b4b4b;
     --color-cancel: #{$colorCancel};
     --color-backgorund: #{$colorLight};
     --color-card: #{$colorLight2};
-
+    --color-bgImage: #{$colorBgImage};
     --color-text: #{$colorText};
 
     // Menu

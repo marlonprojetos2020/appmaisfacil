@@ -1,21 +1,35 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import {
     PoBreadcrumb,
     PoModalAction,
     PoModalComponent,
-    PoPageAction,
+    PoNotificationService,
     PoTableAction,
+    PoUploadFileRestrictions,
 } from '@po-ui/ng-components';
 import { DatatableColumn } from 'src/app/shared/components/page-datatable/datatable-column';
 import { environment } from 'src/environments/environment';
-import { User } from '../../../companies/model/user';
+import { Charge } from '../../../../../shared/components/charge-form/models/charge';
+import { AdminChargesService } from '../../admin-charges.service';
 
 @Component({
     styleUrls: ['./admin-carge-list.component.scss'],
     templateUrl: './admin-charge-list.component.html',
 })
-export class AdminChargeListComponent {
+export class AdminChargeListComponent implements OnInit {
+    @Input() nomeEmpresa: string;
+    @Input() status: string;
+    @Input() tipo: string;
+    @Input() vencimento: string;
+    @Input() valor: number;
+    @Input() titulo: string;
+    @Input() imagemCobranca: string;
+
+    idCharge: number;
+
+    urlUploadDocument: string;
+
     breadcrumb: PoBreadcrumb = {
         items: [
             { label: 'Início', link: '/admin' },
@@ -23,98 +37,87 @@ export class AdminChargeListComponent {
         ],
     };
 
-    @ViewChild('modalComprovante', { static: true })
-    poModalComprovante: PoModalComponent;
     @ViewChild('modalCobranca', { static: true })
     poModalCobranca: PoModalComponent;
 
-    cobranca =
-        // {
-        //     status: 'PENDENTE',
-        //     isPendente: true,
-        //     titulo: 'Imposto de Renda',
-        //     tipo: 'Imposto',
-        //     vencimento: '28/10/2020',
-        //     valor: 50,
-        // };
-        {
-            status: 'EM_ANALISE',
-            isPendente: false,
-            titulo: 'Imposto de Renda',
-            tipo: 'Fatura',
-            vencimento: '28/10/2020',
-            valor: 50,
-        };
-    // {
-    //     status: 'PAGO',
-    //     titulo: 'Imposto de Renda',
-    //     tipo: 'Taxa',
-    //     vencimento: '28/10/2020',
-    //     valor: 50,
-    // },
-
-    serviceApi = `${environment.apiUrl}/users/p/search`;
-    tableActions: PoTableAction[] = [
-        {
-            label: 'ver',
-            action: (item) => {
-                this.prepareModal(item);
-            },
-        },
-    ];
-
-    delete: PoModalAction = {
-        action: () => {
-            console.log('cancelar');
-        },
-        label: 'Deletar Cobrança',
-        danger: true,
+    closeAction: PoModalAction = {
+        label: 'Fechar',
+        action: () => this.poModalCobranca.close(),
     };
 
-    decline: PoModalAction = {
-        action: () => {
-            console.log('cancelar');
-        },
-        label: 'Recusar',
-        danger: true,
-    };
-
-    confirm: PoModalAction = {
-        action: () => {
-            console.log('confirmou');
-        },
-        label: 'Aprovar',
-    };
+    serviceApi = `${environment.apiUrl}/company/billing/p/search`;
+    tableActions: PoTableAction[] = [];
 
     columns: DatatableColumn[] = [
         {
-            label: 'Nome',
-            property: 'userCompany.fantasyName',
+            label: 'Situação',
+            property: 'status',
         },
         {
-            label: 'CNPJ',
-            property: 'userCompany.cnpj',
+            label: 'Título',
+            property: 'description',
         },
-        { property: 'name', label: 'Usuário' },
+        { label: 'Tipo', property: 'type.label' },
+        { label: 'Vencimento', property: 'dueDate' },
+        { label: 'Valor', property: 'value' },
     ];
 
-    constructor(private router: Router) {}
+    restrictions: PoUploadFileRestrictions = {
+        allowedExtensions: ['.txt', '.pdf', '.png', '.jpeg', '.jpg'],
+        maxFileSize: 5242880,
+        maxFiles: 1,
+    };
 
-    prepareModal(company: User): void {
-        if (this.cobranca.status === 'PENDENTE') {
-            this.poModalCobranca.open();
-        } else {
-            this.poModalComprovante.open();
-        }
+    constructor(
+        private router: Router,
+        private poNotificationService: PoNotificationService,
+        private adminChargeService: AdminChargesService
+    ) {}
+
+    ngOnInit(): void {
+        const company = JSON.parse(sessionStorage.CREDENTIALS_KEY);
+
+        this.nomeEmpresa = company.userDetails.name;
+
+        this.tableActions.push(
+            {
+                label: 'Pagar Cobrança',
+                action: (item) => {
+                    this.prepareModal(item);
+                    this.status = item.status;
+                    this.tipo = item['type.label'];
+                    this.valor = item.value;
+                    this.vencimento = item.dueDate;
+                    this.titulo = item.description;
+                    this.nomeEmpresa;
+                    this.imagemCobranca = item.billingFileUrl;
+                    this.setUrlDocument(item.id);
+                    this.idCharge = item.id;
+                },
+                disabled: (item) => item.status === 'PAID',
+            },
+            {
+                label: 'Baixar Comprovante',
+                action: (item) => window.open(item.proofOfPaymentUrl, '_blank'),
+                disabled: (item) => !item.proofOfPaymentUrl,
+            }
+        );
     }
 
-    showCharge(): void {
-        this.poModalComprovante.close();
+    prepareModal(charge: Charge): void {
         this.poModalCobranca.open();
     }
 
-    showReceipt(): void {
+    setUrlDocument(id: number): void {
+        this.urlUploadDocument = `${environment.apiUrl}/company/billing/${id}/proof-of-payment`;
+    }
+
+    success(): void {
+        const message = 'Comprovante de pagamento carregado com sucesso';
+        this.poNotificationService.success(message);
+        this.adminChargeService
+            .paidCharge(this.idCharge)
+            .subscribe((data) => (this.status = data.status));
         this.poModalCobranca.close();
-        this.poModalComprovante.open();
     }
 }

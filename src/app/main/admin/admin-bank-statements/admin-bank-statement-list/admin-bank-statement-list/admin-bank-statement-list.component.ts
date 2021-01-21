@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
     PoBreadcrumb,
     PoPageAction,
@@ -6,11 +6,12 @@ import {
 } from '@po-ui/ng-components';
 import { environment } from '../../../../../../environments/environment';
 import { DatatableColumn } from '../../../../../shared/components/page-datatable/datatable-column';
+import { AdminBankStatementsService } from '../../admin-bank-statements.service';
 
 @Component({
     templateUrl: './admin-bank-statement-list.component.html',
 })
-export class AdminBankStatementListComponent {
+export class AdminBankStatementListComponent implements OnInit {
     pageActions: PoPageAction[] = [];
 
     breadcrumb: PoBreadcrumb = {
@@ -20,26 +21,30 @@ export class AdminBankStatementListComponent {
         ],
     };
 
-    serviceApi = `${environment.apiUrl}/users/p/search`;
+    serviceApi = `${environment.apiUrl}/statement/p/search`;
     tableActions: PoTableAction[] = [];
     columns: DatatableColumn[] = [
         {
             label: 'Status',
-            property: 'userCompany.fantasyName',
+            property: 'status',
         },
         {
             label: 'Empresa',
-            property: 'userCompany.cnpj',
+            property: 'oi',
         },
         {
             label: 'Banco',
-            property: 'userCompany.cnpj',
+            property: 'bankAccount.bankName',
         },
         {
             label: 'Mês de Referência',
-            property: 'name',
+            property: 'month',
         },
     ];
 
-    constructor() {}
+    constructor(
+        private adminBankStatementService: AdminBankStatementsService
+    ) {}
+
+    ngOnInit(): void {}
 }

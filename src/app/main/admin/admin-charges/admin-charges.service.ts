@@ -13,4 +13,11 @@ export class AdminChargesService {
             id
         );
     }
+
+    recuseCharge(id: number): Observable<any> {
+        return this.httpClient.post(
+            `${environment.apiUrl}/billing/${id}/refused`,
+            id
+        );
+    }
 }

@@ -25,6 +25,9 @@ export class AdminChargeListComponent implements OnInit {
     @Input() valor: number;
     @Input() titulo: string;
     @Input() imagemCobranca: string;
+    @Input() imagemComprovante: string;
+
+    charge;
 
     idCharge: number;
 
@@ -37,13 +40,34 @@ export class AdminChargeListComponent implements OnInit {
         ],
     };
 
-    @ViewChild('modalCobranca', { static: true })
-    poModalCobranca: PoModalComponent;
+    @ViewChild('modalComprovante', { static: true })
+    poModalComprovante: PoModalComponent;
+
+    primaryAction: PoModalAction = {
+        label: 'Confirmar',
+        action: () => {
+            this.adminChargeService
+                .paidCharge(this.idCharge)
+                .subscribe((data) => (this.status = data.status));
+            this.poModalComprovante.close();
+        },
+    };
+
+    secondaryAction: PoModalAction = {
+        label: 'Recusar',
+        action: () => {
+            this.adminChargeService.recuseCharge(this.idCharge).subscribe();
+            this.poModalComprovante.close();
+        },
+    };
 
     closeAction: PoModalAction = {
         label: 'Fechar',
         action: () => this.poModalCobranca.close(),
     };
+
+    @ViewChild('modalCobranca', { static: true })
+    poModalCobranca: PoModalComponent;
 
     serviceApi = `${environment.apiUrl}/company/billing/p/search`;
     tableActions: PoTableAction[] = [];
@@ -81,7 +105,7 @@ export class AdminChargeListComponent implements OnInit {
 
         this.tableActions.push(
             {
-                label: 'Pagar Cobrança',
+                label: 'Ver Comprovante',
                 action: (item) => {
                     this.prepareModal(item);
                     this.status = item.status;
@@ -90,11 +114,12 @@ export class AdminChargeListComponent implements OnInit {
                     this.vencimento = item.dueDate;
                     this.titulo = item.description;
                     this.nomeEmpresa;
-                    this.imagemCobranca = item.billingFileUrl;
+                    this.imagemComprovante = item.proofOfPaymentUrl;
+                    this.imagemCobranca = item.billingFilelUrl;
                     this.setUrlDocument(item.id);
                     this.idCharge = item.id;
+                    this.charge = item;
                 },
-                disabled: (item) => item.status === 'PAID',
             },
             {
                 label: 'Baixar Comprovante',
@@ -105,6 +130,10 @@ export class AdminChargeListComponent implements OnInit {
     }
 
     prepareModal(charge: Charge): void {
+        this.poModalComprovante.open();
+    }
+
+    openModalCobranca(charge: Charge): void {
         this.poModalCobranca.open();
     }
 
@@ -118,6 +147,6 @@ export class AdminChargeListComponent implements OnInit {
         this.adminChargeService
             .paidCharge(this.idCharge)
             .subscribe((data) => (this.status = data.status));
-        this.poModalCobranca.close();
+        this.poModalComprovante.close();
     }
 }

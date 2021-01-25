@@ -3,11 +3,16 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root',
+})
 export class AdminBankStatementsService {
     constructor(private httpClient: HttpClient) {}
 
-    getCompanyFromStatement(id: number): any {
-        return this.httpClient.get(`${environment.apiUrl}/users/${id}`);
+    aprovedStatement(id: number): Observable<any> {
+        return this.httpClient.post(
+            `${environment.apiUrl}/statement/${id}/ok`,
+            id
+        );
     }
 }

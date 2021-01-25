@@ -1,17 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import {
     PoBreadcrumb,
+    PoModalAction,
+    PoModalComponent,
     PoPageAction,
     PoTableAction,
 } from '@po-ui/ng-components';
 import { environment } from '../../../../../../environments/environment';
 import { DatatableColumn } from '../../../../../shared/components/page-datatable/datatable-column';
 import { AdminBankStatementsService } from '../../admin-bank-statements.service';
+import { BankStatement } from '../../../../company/company-bank-statements/models/bank-statements';
 
 @Component({
     templateUrl: './admin-bank-statement-list.component.html',
+    styleUrls: ['admin-bank-statement.component.scss'],
 })
 export class AdminBankStatementListComponent implements OnInit {
+    @Input() companyName: string;
+    @Input() month: string;
+    @Input() status: string;
+    @Input() bankName: string;
+    @Input() image: string;
+    idStatement: number;
+    @ViewChild('modalExtrato', { static: true })
+    poModalExtrato: PoModalComponent;
+
+    primaryAction: PoModalAction = {
+        label: 'Aprovar',
+        action: () => {
+            this.adminBankStatementService
+                .aprovedStatement(this.idStatement)
+                .subscribe((data) => (this.status = data.status));
+            this.poModalExtrato.close();
+        },
+    };
+
+    secondaryAction: PoModalAction = {
+        label: 'Fechar',
+        action: () => this.poModalExtrato.close(),
+    };
+
     pageActions: PoPageAction[] = [];
 
     breadcrumb: PoBreadcrumb = {
@@ -22,7 +50,30 @@ export class AdminBankStatementListComponent implements OnInit {
     };
 
     serviceApi = `${environment.apiUrl}/statement/p/search`;
-    tableActions: PoTableAction[] = [];
+
+    tableActions: PoTableAction[] = [
+        {
+            label: 'Visualizar',
+            action: (item) => {
+                console.log(item);
+                this.prepareModal(item);
+                this.status = item.status;
+                this.bankName = item['bankAccount.bankName'];
+                this.companyName = item.bankAccountCompanyName;
+                this.month = item.month;
+                this.image = item.attachmentUrl;
+                console.log(this.image.indexOf('pdf'));
+                this.idStatement = item.id;
+            },
+            disabled: (item) => item.status !== 'PENDING_REVIEW',
+        },
+        {
+            label: 'Baixar Comprovante',
+            action: (item) => window.open(item.attachmentUrl, '_blank'),
+            disabled: (item) => item.status !== 'OK',
+        },
+    ];
+
     columns: DatatableColumn[] = [
         {
             label: 'Status',
@@ -30,7 +81,7 @@ export class AdminBankStatementListComponent implements OnInit {
         },
         {
             label: 'Empresa',
-            property: 'oi',
+            property: 'bankAccountCompanyName',
         },
         {
             label: 'Banco',
@@ -47,4 +98,8 @@ export class AdminBankStatementListComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {}
+
+    prepareModal(extrato: BankStatement): void {
+        this.poModalExtrato.open();
+    }
 }

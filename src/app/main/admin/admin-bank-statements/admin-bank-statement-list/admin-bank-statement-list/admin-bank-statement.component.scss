@@ -1,0 +1,22 @@
+.div-imagem {
+    width: 350px;
+    background-color: var(--color-bgImage);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+}
+
+img {
+    width: 70%;
+}
+
+span {
+    font-size: 12px;
+    font-weight: lighter;
+}
+
+p {
+    font-size: 18px;
+    font-weight: bold;
+}

@@ -7,3 +7,25 @@
     class="table-no-button breadcrumb"
     [breadcrumb]="breadcrumb"
 ></app-page-datatable>
+
+<po-modal
+    #modalExtrato
+    p-title="Extrato"
+    [p-primary-action]="primaryAction"
+    [p-secondary-action]="secondaryAction"
+>
+    <div class="po-row">
+        <div class="po-md-6">
+            <div class="div-imagem">
+                <img [src]="image" alt="Imagem" />
+            </div>
+        </div>
+        <div class="po-md-6">
+            <h2 class="po-mb-3">Extrato {{ month }} - {{ bankName }}</h2>
+            <span>Cliente</span>
+            <p class="po-mb-2">{{ companyName }}</p>
+            <span>Situação</span>
+            <p class="po-mb-2">{{ status }}</p>
+        </div>
+    </div>
+</po-modal>

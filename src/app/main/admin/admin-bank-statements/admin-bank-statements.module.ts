@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { AdminBankStatementListModule } from './admin-bank-statement-list/admin-bank-statement-list.module';
 import { AdminBankStatementsRoutingModule } from './admin-bank-statements-routing.module';
-import { AdminBankStatementsService } from './admin-bank-statements.service';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
     imports: [
         AdminBankStatementsRoutingModule,
         AdminBankStatementListModule,
+        CommonModule,
     ],
-    providers: [AdminBankStatementsService],
 })
 export class AdminBankStatementsModule {}

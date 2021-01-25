@@ -8,3 +8,23 @@
     [breadcrumb]="breadcrumb"
 >
 </app-page-datatable>
+
+<po-modal #modalExtrato [p-primary-action]="primaryAction">
+    <div class="po-row">
+        <div class="po-md-12 modal">
+            <div>
+                <h2 class="po-mb-2">Extrato {{ month }} - {{ bankName }}</h2>
+                <span>Cliente</span>
+                <p class="po-mb-2">{{ nomeEmpresa }}</p>
+                <span>Situação</span>
+                <p class="po-mb-3">{{ status }}</p>
+                <po-upload
+                    p-drag-drop
+                    p-drag-drop-height="150"
+                    p-auto-upload
+                    [p-url]="urlUploadDocument"
+                ></po-upload>
+            </div>
+        </div>
+    </div>
+</po-modal>

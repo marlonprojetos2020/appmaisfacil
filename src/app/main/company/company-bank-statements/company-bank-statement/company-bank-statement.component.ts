@@ -53,6 +53,7 @@ export class CompanyBankStatementComponent implements OnInit {
                 this.status = item.status;
                 this.setUrlDocument(item.id);
             },
+            disabled: (item) => item.status !== 'PENDING',
         },
     ];
     columns: DatatableColumn[] = [

@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthInterceptor } from 'src/app/core/auth/auth.interceptor';
 import { AdminCompanyBankStatementComponent } from './admin-company-bank-statement/admin-company-bank-statement.component';
 import { AdminCompanyNewBankComponent } from './admin-company-new-bank/admin-company-new-bank/admin-company-new-bank.component';
+import { AdminCompanyNewBankStatementComponent } from './admin-company-new-bank-statement/admin-company-new-bank-statement/admin-company-new-bank-statement.component';
 
 const routes: Routes = [
     {
@@ -13,6 +14,10 @@ const routes: Routes = [
     {
         path: 'nova-conta',
         component: AdminCompanyNewBankComponent,
+    },
+    {
+        path: 'novo-extrato',
+        component: AdminCompanyNewBankStatementComponent,
     },
 ];
 

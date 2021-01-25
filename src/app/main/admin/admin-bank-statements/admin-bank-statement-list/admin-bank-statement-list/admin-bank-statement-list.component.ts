@@ -62,7 +62,7 @@ export class AdminBankStatementListComponent implements OnInit {
                 this.companyName = item.bankAccountCompanyName;
                 this.month = item.month;
                 this.image = item.attachmentUrl;
-                console.log(this.image.indexOf('pdf'));
+                console.log(this.image.indexOf('jpg'));
                 this.idStatement = item.id;
             },
             disabled: (item) => item.status !== 'PENDING_REVIEW',

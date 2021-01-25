@@ -20,15 +20,15 @@ export class AdminCompanyBankStatementComponent implements OnInit {
     columns: DatatableColumn[] = [
         {
             label: 'Status',
-            property: 'userCompany.fantasyName',
+            property: 'status',
         },
         {
             label: 'Banco',
-            property: 'userCompany.cnpj',
+            property: 'bankAccount.bankName',
         },
         {
             label: 'Mês de Referência',
-            property: 'name',
+            property: 'month',
         },
     ];
 
@@ -43,12 +43,19 @@ export class AdminCompanyBankStatementComponent implements OnInit {
 
     ngOnInit(): void {
         const id = this.activatedRoute.snapshot.paramMap.get('id');
-        this.pageActions.push({
-            label: 'Cadastrar Nova Conta',
-            icon: 'po-icon-plus-circle',
-            url: `/admin/empresa/${id}/extrato/nova-conta`,
-        });
-        this.serviceApi = `${environment.apiUrl}/users/${id}/bank-accounts`;
+        this.pageActions.push(
+            {
+                label: 'Cadastrar Nova Conta',
+                icon: 'po-icon-plus-circle',
+                url: `/admin/empresa/${id}/extrato/nova-conta`,
+            },
+            {
+                label: 'Novo Extrato',
+                icon: 'po-icon-plus-circle',
+                url: `/admin/empresa/${id}/extrato/novo-extrato`,
+            }
+        );
+        this.serviceApi = `${environment.apiUrl}/statement/p/search`;
 
         this.companiesService
             .getUserCompany(this.activatedRoute.snapshot.params.id)

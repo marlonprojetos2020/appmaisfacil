@@ -8,7 +8,6 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '../../core/auth/auth.interceptor';
 import { CompanyAccountingComponent } from './company-accounting/company-accounting/company-accounting.component';
 import { CompanyCompanyComponent } from './company-company/company-company/company-company.component';
-import { CompanyBankStatementComponent } from './company-bank-statements/company-bank-statement/company-bank-statement.component';
 import { CompanyAssociateComponent } from './company-associates/company-associate/company-associate.component';
 import { CompanyExtraServiceComponent } from './company-extra-services/company-extra-service/company-extra-service.component';
 import { CompanyIndicationComponent } from './company-indications/company-indication/company-indication.component';
@@ -55,7 +54,10 @@ const routes: Routes = [
             },
             {
                 path: 'extrato',
-                component: CompanyBankStatementComponent,
+                loadChildren: () =>
+                    import(
+                        './company-bank-statements/company-bank-statement.module'
+                    ).then((m) => m.CompanyBankStatementModule),
             },
             {
                 path: 'socios',

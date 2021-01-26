@@ -24,7 +24,13 @@ export class CompanyBankStatementComponent implements OnInit {
     @Input() status: string;
     @Input() month: string;
     @Input() nomeEmpresa: string;
-    pageActions: PoPageAction[] = [];
+    pageActions: PoPageAction[] = [
+        {
+            label: 'Novo Extrato',
+            icon: 'po-icon-plus',
+            url: '/empresa/extrato/novo-extrato',
+        },
+    ];
 
     urlUploadDocument: string;
 

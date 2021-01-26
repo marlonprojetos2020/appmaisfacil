@@ -5,7 +5,6 @@ import { PageDatatableModule } from '../../../../../shared/components/page-datat
 import { AdminCompanyNewBankModule } from './admin-company-new-bank/admin-company-new-bank.module';
 import { AdminCompanyBankStatementRoutingModule } from './admin-company-bank-statement-routing.module';
 import { AdminCompanyBankService } from './admin-company-bank-statement.service';
-import { AdminCompanyNewBankStatementModule } from './admin-company-new-bank-statement/admin-company-new-bank-statement.module';
 
 @NgModule({
     declarations: [AdminCompanyBankStatementComponent],
@@ -14,7 +13,6 @@ import { AdminCompanyNewBankStatementModule } from './admin-company-new-bank-sta
         AdminCompanyBankStatementRoutingModule,
         PageDatatableModule,
         AdminCompanyNewBankModule,
-        AdminCompanyNewBankStatementModule,
     ],
     providers: [AdminCompanyBankService],
 })

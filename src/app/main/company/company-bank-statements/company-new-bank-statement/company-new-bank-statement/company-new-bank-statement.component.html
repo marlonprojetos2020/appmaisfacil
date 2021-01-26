@@ -1,0 +1,41 @@
+<po-page-default p-title="Novo Extrato">
+    <po-stepper>
+        <po-step p-label="Selecionar Conta Bancaria">
+            <po-container>
+                <div class="po-row">
+                    <div class="po-md-4">
+                        <form [formGroup]="formNewStatement">
+                            <h2 class="po-mt-4 po-mb-4">Selecionar Conta</h2>
+                            <div class="po-mb-4">
+                                <po-select
+                                    [p-options]="options"
+                                    formControlName="bankName"
+                                    p-placeholder="Selecione sua Conta"
+                                ></po-select>
+                            </div>
+                            <div class="po-mb-4">
+                                <po-button
+                                    p-label="Próximo"
+                                    [p-disabled]="formNewStatement.invalid"
+                                    p-type="primary"
+                                ></po-button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </po-container>
+        </po-step>
+        <po-step p-label="Anexar Arquivo">
+            <po-container>
+                <div class="po-row">
+                    <div class="po-md-12">
+                        <po-upload p-drag-drop></po-upload>
+                    </div>
+                    <div class="po-md-4">
+                        <po-button p-type="primary" p-label="Confirmar" ></po-button>
+                    </div>
+                </div>
+            </po-container>
+        </po-step>
+    </po-stepper>
+</po-page-default>

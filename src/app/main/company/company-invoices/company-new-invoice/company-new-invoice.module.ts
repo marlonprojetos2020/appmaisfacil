@@ -7,6 +7,9 @@ import {
     PoPageModule,
 } from '@po-ui/ng-components';
 import { CompanyNewInvoiceComponent } from './company-new-invoice/company-new-invoice.component';
+import { PageDatatableModule } from '../../../../shared/components/page-datatable/page-datatable.module';
+import { CompanyInvoicesNewClientModule } from './company-invoices-new-client/company-invoices-new-client.module';
+import { CompanyNewInvoiceRoutingModule } from './company-new-invoice-routing.module';
 
 @NgModule({
     imports: [
@@ -15,6 +18,9 @@ import { CompanyNewInvoiceComponent } from './company-new-invoice/company-new-in
         PoContainerModule,
         PoFieldModule,
         PoButtonModule,
+        PageDatatableModule,
+        CompanyInvoicesNewClientModule,
+        CompanyNewInvoiceRoutingModule,
     ],
     declarations: [CompanyNewInvoiceComponent],
 })

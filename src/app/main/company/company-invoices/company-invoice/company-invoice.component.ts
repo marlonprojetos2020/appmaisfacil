@@ -26,28 +26,24 @@ export class CompanyInvoiceComponent {
         ],
     };
 
-    serviceApi = `${environment.apiUrl}/users/p/search`;
+    serviceApi = `${environment.apiUrl}/company/nota-fiscal/p/search`;
     tableActions: PoTableAction[] = [];
     columns: DatatableColumn[] = [
         {
             label: 'Situação',
-            property: 'userCompany.fantasyName',
+            property: 'status',
         },
         {
             label: 'Cliente',
-            property: 'userCompany.cnpj',
+            property: 'client.name',
         },
         {
             label: 'Emissão',
-            property: 'name',
+            property: 'emissionAt',
         },
         {
             label: 'Valor',
-            property: 'name',
-        },
-        {
-            label: 'Impostos',
-            property: 'name',
+            property: 'totalAmount',
         },
     ];
 

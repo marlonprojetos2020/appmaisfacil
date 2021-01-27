@@ -3,7 +3,6 @@ import { CompanyInvoiceComponent } from './company-invoice/company-invoice.compo
 import { NgModule } from '@angular/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '../../../core/auth/auth.interceptor';
-import { CompanyNewInvoiceComponent } from './company-new-invoice/company-new-invoice/company-new-invoice.component';
 
 const routes: Routes = [
     {
@@ -12,7 +11,10 @@ const routes: Routes = [
     },
     {
         path: 'emitir-nota',
-        component: CompanyNewInvoiceComponent,
+        loadChildren: () =>
+            import('./company-new-invoice/company-new-invoice.module').then(
+                (m) => m.CompanyNewInvoiceModule
+            ),
     },
 ];
 

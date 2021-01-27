@@ -10,6 +10,7 @@ import { CompanyNewInvoiceComponent } from './company-new-invoice/company-new-in
 import { PageDatatableModule } from '../../../../shared/components/page-datatable/page-datatable.module';
 import { CompanyInvoicesNewClientModule } from './company-invoices-new-client/company-invoices-new-client.module';
 import { CompanyNewInvoiceRoutingModule } from './company-new-invoice-routing.module';
+import { CompanyNewInvoiceProductModule } from './company-new-invoice-product/company-new-invoice-product.module';
 
 @NgModule({
     imports: [
@@ -21,6 +22,7 @@ import { CompanyNewInvoiceRoutingModule } from './company-new-invoice-routing.mo
         PageDatatableModule,
         CompanyInvoicesNewClientModule,
         CompanyNewInvoiceRoutingModule,
+        CompanyNewInvoiceProductModule,
     ],
     declarations: [CompanyNewInvoiceComponent],
 })

@@ -8,6 +8,7 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Invoice } from '../../models/invoice';
 import { CompanyNewInvoiceService } from '../../company-new-invoice.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     templateUrl: 'company-new-invoice-product.component.html',
@@ -52,6 +53,19 @@ export class CompanyNewInvoiceProductComponent implements OnInit {
         },
     ];
 
+    clienteColumns: DatatableColumn[] = [
+        {
+            label: 'Nome',
+            property: 'name',
+        },
+        {
+            label: 'Documento',
+            property: 'document',
+        },
+    ];
+
+    clienteItems: Array<any> = [];
+
     primaryAction: PoModalAction = {
         label: 'Salvar',
         action: () => this.submitForm(),
@@ -59,7 +73,8 @@ export class CompanyNewInvoiceProductComponent implements OnInit {
 
     constructor(
         private formBuilder: FormBuilder,
-        private companyNewInvoiceService: CompanyNewInvoiceService
+        private companyNewInvoiceService: CompanyNewInvoiceService,
+        private activatedRoute: ActivatedRoute
     ) {}
 
     ngOnInit(): void {
@@ -70,7 +85,14 @@ export class CompanyNewInvoiceProductComponent implements OnInit {
             total: ['', Validators.required],
         });
 
-        console.log(this.formProduct.value.title);
+        this.companyNewInvoiceService
+            .getClient(this.activatedRoute.snapshot.params.id)
+            .subscribe((data) =>
+                this.clienteItems.push({
+                    name: data.name,
+                    document: data.document,
+                })
+            );
     }
 
     prepareModal(): void {
@@ -81,6 +103,8 @@ export class CompanyNewInvoiceProductComponent implements OnInit {
         this.newInvoice = this.formProduct.getRawValue() as Invoice;
 
         this.tableItems.push(this.newInvoice);
+
+        this.poModalProduto.close();
     }
 
     nextForm(): void {

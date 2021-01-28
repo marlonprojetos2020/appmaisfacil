@@ -1,0 +1,89 @@
+<po-page-default p-title="Emitir Nota">
+    <po-stepper #stepper>
+        <po-step p-label="Selecionar Produto">
+            <po-container>
+                <div class="po-row">
+                    <div class="po-md-12">
+                        <h2 class="po-mb-4">Adicione Produtos</h2>
+                        <div class="po-mb-4">
+                            <po-button
+                                class=""
+                                p-label="Adicionar Produto"
+                                p-type="primary"
+                                (p-click)="prepareModal()"
+                            ></po-button>
+                        </div>
+                        <po-table
+                            [p-columns]="columns"
+                            [p-actions]="tableActions"
+                            [p-items]="tableItems"
+                        ></po-table>
+                        <hr />
+                        <div>
+                            <p>Total</p>
+                            <span></span>
+                        </div>
+                        <div>
+                            <po-button
+                                p-label="Próximo"
+                                p-type="primary"
+                            ></po-button>
+                        </div>
+                    </div>
+                </div>
+            </po-container>
+        </po-step>
+        <po-step p-label="Solicitar Nota">
+            <po-container>
+                <div class="po-row">
+                    <div class="po-md-12">
+                        <h2>Cliente</h2>
+                        <po-table
+                            [p-items]="clienteItems"
+                            [p-columns]="clienteColumns"
+                        ></po-table>
+                    </div>
+                </div>
+            </po-container>
+        </po-step>
+    </po-stepper>
+</po-page-default>
+
+<po-modal
+    #modalProduct
+    p-title="Novo Produto"
+    [p-primary-action]="primaryAction"
+>
+    <form [formGroup]="formProduct">
+        <div class="po-row po-mb-2">
+            <div class="po-md-12">
+                <po-input
+                    p-label="Descrição do Produto"
+                    formControlName="title"
+                    p-clean="true"
+                ></po-input>
+            </div>
+        </div>
+        <div class="po-row po-mb-2">
+            <div class="po-md-6">
+                <po-input
+                    p-label="Quantidade"
+                    formControlName="quantity"
+                    p-clean="true"
+                ></po-input>
+            </div>
+            <div class="po-md-6">
+                <po-input
+                    p-label="Valor Unitário"
+                    formControlName="amount"
+                    p-clean="true"
+                ></po-input>
+            </div>
+        </div>
+        <div class="por-row po-mb-2">
+            <div class="po-md-4">
+                <po-input p-label="Total" formControlName="total"></po-input>
+            </div>
+        </div>
+    </form>
+</po-modal>

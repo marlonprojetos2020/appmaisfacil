@@ -42,7 +42,10 @@ export class CompanyNewInvoiceComponent implements OnInit {
         },
         {
             label: 'Selecionar',
-            action: () => console.log('visto'),
+            action: (item) =>
+                this.router.navigateByUrl(
+                    `/empresa/nota-fiscal/emitir-nota/nova-nota/${item.id}`
+                ),
         },
     ];
 

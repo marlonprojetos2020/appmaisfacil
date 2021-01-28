@@ -88,7 +88,7 @@ export class CompanyNewInvoiceComponent implements OnInit {
         },
     ];
 
-    disabledStepTwo: boolean = true;
+    disabledStepTwo = true;
 
     // CONFIG STEP 3
     columnsStepThree: DatatableColumn[] = [
@@ -134,6 +134,14 @@ export class CompanyNewInvoiceComponent implements OnInit {
                 })
             );
         });
+
+        this.formProduct
+            .get('amount')
+            .valueChanges.subscribe(() => this.totalCalc());
+
+        this.formProduct
+            .get('quantity')
+            .valueChanges.subscribe(() => this.totalCalc());
     }
 
     newClient(): void {
@@ -164,5 +172,17 @@ export class CompanyNewInvoiceComponent implements OnInit {
         console.log(this.itemsStepTwo);
 
         console.log(this.newInvoice);
+    }
+
+    private totalCalc(): void {
+        const amount = this.formProduct.get('amount').value;
+        const quantity = this.formProduct.get('quantity').value;
+
+        if (amount && quantity) {
+            console.log(amount * quantity);
+            this.formProduct.get('total').setValue(`${amount * quantity}`);
+        }
+
+        this.formProduct.get('total').setValue('');
     }
 }

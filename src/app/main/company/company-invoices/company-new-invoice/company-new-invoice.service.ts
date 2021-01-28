@@ -8,9 +8,9 @@ import { environment } from '../../../../../environments/environment';
 export class CompanyNewInvoiceService {
     constructor(private httpClient: HttpClient) {}
 
-    getClient(id: number): any {
+    getClientList(): any {
         return this.httpClient.get(
-            `${environment.apiUrl}/company/client/${id}`
+            `${environment.apiUrl}/company/client/p/search`
         );
     }
 }

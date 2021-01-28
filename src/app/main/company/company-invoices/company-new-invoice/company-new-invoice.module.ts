@@ -4,13 +4,16 @@ import {
     PoButtonModule,
     PoContainerModule,
     PoFieldModule,
+    PoModalModule,
     PoPageModule,
+    PoStepperModule,
+    PoTableModule,
 } from '@po-ui/ng-components';
 import { CompanyNewInvoiceComponent } from './company-new-invoice/company-new-invoice.component';
 import { PageDatatableModule } from '../../../../shared/components/page-datatable/page-datatable.module';
 import { CompanyInvoicesNewClientModule } from './company-invoices-new-client/company-invoices-new-client.module';
 import { CompanyNewInvoiceRoutingModule } from './company-new-invoice-routing.module';
-import { CompanyNewInvoiceProductModule } from './company-new-invoice-product/company-new-invoice-product.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     imports: [
@@ -22,7 +25,10 @@ import { CompanyNewInvoiceProductModule } from './company-new-invoice-product/co
         PageDatatableModule,
         CompanyInvoicesNewClientModule,
         CompanyNewInvoiceRoutingModule,
-        CompanyNewInvoiceProductModule,
+        ReactiveFormsModule,
+        PoTableModule,
+        PoModalModule,
+        PoStepperModule,
     ],
     declarations: [CompanyNewInvoiceComponent],
 })

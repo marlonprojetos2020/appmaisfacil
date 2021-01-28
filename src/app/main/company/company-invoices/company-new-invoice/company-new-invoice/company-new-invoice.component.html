@@ -1,10 +1,143 @@
-<app-page-datatable
-    title="Emitir Nota"
-    [pageActions]="pageActions"
-    [serviceApi]="serviceApi"
-    [columns]="columns"
-    [tableActions]="tableActions"
-    class="breadcrumb"
-    [breadcrumb]="breadcrumb"
-    [hasSearch]="false"
-></app-page-datatable>
+<po-page-default p-title="Emitir Nota">
+    <po-stepper #stepper>
+        <po-step p-label="Selecionar Cliente">
+            <po-container>
+                <div class="po-row">
+                    <div class="po-md-12">
+                        <h2 class="po-mb-2">Escolha um Cliente</h2>
+                        <po-button
+                            p-label="Novo Cliente"
+                            p-icon="po-icon-plus"
+                            p-type="primary"
+                            (p-click)="newClient()"
+                        ></po-button>
+                        <po-table
+                            [p-items]="itemsStepOne"
+                            [p-columns]="columnsStepOne"
+                            [p-actions]="actionStepOne"
+                        ></po-table>
+                    </div>
+                </div>
+            </po-container>
+        </po-step>
+        <po-step p-label="Selecionar Produto">
+            <po-container>
+                <div class="po-row">
+                    <div class="po-md-12">
+                        <h2 class="po-mb-4">Adicione Produtos</h2>
+                        <div class="po-mb-4">
+                            <po-button
+                                class=""
+                                p-label="Adicionar Produto"
+                                p-type="primary"
+                                (p-click)="prepareModal()"
+                            ></po-button>
+                        </div>
+                        <po-table
+                            [p-columns]="columnsStepTwo"
+                            [p-actions]="actionsStepTwo"
+                            [p-items]="itemsStepTwo"
+                        ></po-table>
+                    </div>
+                </div>
+                <div class="po-row po-mb-5">
+                    <div class="po-md-12">
+                        <hr />
+                        <p>Total</p>
+                        <span></span>
+                    </div>
+                </div>
+                <div class="po-row">
+                    <div class="po-md-12">
+                        <po-button
+                            p-label="Próximo"
+                            p-type="primary"
+                            (p-click)="nextForm()"
+                            [p-disabled]="disabledStepTwo"
+                        ></po-button>
+                    </div>
+                </div>
+            </po-container>
+        </po-step>
+        <po-step p-label="Solicitar Nota">
+            <po-container>
+                <div class="po-row">
+                    <div class="po-md-12">
+                        <h2 class="po-mb-3">Cliente</h2>
+                        <po-table
+                            [p-items]="itemsStepThree"
+                            [p-columns]="itemsStepThree"
+                        ></po-table>
+                    </div>
+                </div>
+                <div class="po-row">
+                    <div class="po-md-12">
+                        <h2 class="po-mb-3 po-mt-3">Produto</h2>
+                        <po-table
+                            [p-columns]="columnsStepTwo"
+                            [p-items]="itemsStepTwo"
+                        ></po-table>
+                    </div>
+                </div>
+                <div class="po-row po-mb-5">
+                    <div class="po-md-12">
+                        <hr />
+                        <p>Total</p>
+                        <span></span>
+                    </div>
+                </div>
+                <div class="po-row">
+                    <div class="po-md-1">
+                        <po-button p-label="Cancelar"></po-button>
+                    </div>
+                    <div class="po-md-1">
+                        <po-button
+                            p-label="Solicitar Nota"
+                            p-type="primary"
+                            (p-click)="submitInvoice()"
+                        ></po-button>
+                    </div>
+                </div>
+            </po-container>
+        </po-step>
+    </po-stepper>
+</po-page-default>
+
+<po-modal
+    #modalProduct
+    p-title="Novo Produto"
+    [p-primary-action]="primaryAction"
+>
+    <form [formGroup]="formProduct">
+        <div class="po-row po-mb-2">
+            <div class="po-md-12">
+                <po-input
+                    p-label="Descrição do Produto"
+                    formControlName="title"
+                    p-clean="true"
+                ></po-input>
+            </div>
+        </div>
+        <div class="po-row po-mb-2">
+            <div class="po-md-6">
+                <po-input
+                    p-label="Quantidade"
+                    formControlName="quantity"
+                    p-clean="true"
+                ></po-input>
+            </div>
+            <div class="po-md-6">
+                <po-input
+                    p-label="Valor Unitário"
+                    formControlName="amount"
+                    p-clean="true"
+                ></po-input>
+            </div>
+        </div>
+        <div class="por-row po-mb-2">
+            <div class="po-md-4">
+                <po-input p-label="Total" formControlName="total"></po-input>
+            </div>
+        </div>
+    </form>
+</po-modal>

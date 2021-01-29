@@ -6,6 +6,7 @@ import {
 } from '@po-ui/ng-components';
 import { environment } from '../../../../../environments/environment';
 import { DatatableColumn } from '../../../../shared/components/page-datatable/datatable-column';
+import { CompanyInvoiceService } from '../company-invoice.service';
 
 @Component({
     templateUrl: './company-invoice.component.html',
@@ -27,7 +28,18 @@ export class CompanyInvoiceComponent {
     };
 
     serviceApi = `${environment.apiUrl}/company/nota-fiscal/p/search`;
-    tableActions: PoTableAction[] = [];
+
+    tableActions: PoTableAction[] = [
+        {
+            label: 'Cancelar',
+            action: (item) =>
+                this.companyInvoiceService
+                    .cancelInvoice(item.id)
+                    .subscribe((data) => (item.status = data.status)),
+            disabled: (item) => item.status === 'CANCELED',
+        },
+    ];
+
     columns: DatatableColumn[] = [
         {
             label: 'Situação',
@@ -47,5 +59,5 @@ export class CompanyInvoiceComponent {
         },
     ];
 
-    constructor() {}
+    constructor(private companyInvoiceService: CompanyInvoiceService) {}
 }

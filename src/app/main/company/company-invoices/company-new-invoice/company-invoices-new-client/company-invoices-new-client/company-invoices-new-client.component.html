@@ -12,7 +12,12 @@
             </div>
             <div class="po-row po-mb-4">
                 <div class="po-md-6">
-                    <po-input p-label="Nome" formControlName="name"></po-input>
+                    <po-input
+                        p-label="Nome"
+                        formControlName="name"
+                        p-clean="true"
+                        p-placeholder="Digite seu nome"
+                    ></po-input>
                 </div>
             </div>
             <div class="po-row po-mb-4">
@@ -20,6 +25,8 @@
                     <po-input
                         p-label="CPF ou CNPJ"
                         formControlName="document"
+                        p-clean="true"
+                        p-placeholder="Digite um documento"
                     ></po-input>
                 </div>
             </div>
@@ -33,12 +40,16 @@
                     <po-input
                         p-label="Inscrição Municipal (IM)"
                         formControlName="municipalInscription"
+                        p-clean="true"
+                        p-placeholder="Digite o documento"
                     ></po-input>
                 </div>
                 <div class="po-md-6 po-mb-4">
                     <po-input
                         p-label="Inscrição Estadual (IE)"
                         formControlName="stateInscription"
+                        p-clean="true"
+                        p-placeholder="Digite o documento"
                     ></po-input>
                 </div>
             </div>
@@ -53,6 +64,8 @@
                         <po-input
                             p-label="CEP"
                             formControlName="zipcode"
+                            p-placeholder="00000-000"
+                            p-clean="true"
                         ></po-input>
                     </div>
                 </div>
@@ -61,6 +74,8 @@
                         <po-input
                             p-label="Endereço"
                             formControlName="street"
+                            p-clean="true"
+                            p-placeholder="Rua..."
                         ></po-input>
                     </div>
                 </div>
@@ -69,12 +84,16 @@
                         <po-input
                             p-label="Número"
                             formControlName="number"
+                            p-clean="true"
+                            p-placeholder="0000"
                         ></po-input>
                     </div>
                     <div class="po-md-8 po-mb-4">
                         <po-input
                             p-label="Complemento"
                             formControlName="complement"
+                            p-clean="true"
+                            p-placeholder="Complemento..."
                         ></po-input>
                     </div>
                 </div>
@@ -83,6 +102,8 @@
                         <po-input
                             p-label="Bairro"
                             formControlName="neighborhood"
+                            p-clean="true"
+                            p-placeholder="Bairro..."
                         ></po-input>
                     </div>
                     <div class="po-md-8 po-p-0" formGroupName="city">
@@ -90,6 +111,8 @@
                             <po-input
                                 p-label="Cidade"
                                 formControlName="name"
+                                p-clean="true"
+                                p-placeholder="Cidade..."
                             ></po-input>
                         </div>
                         <div class="po-md-6">
@@ -113,6 +136,8 @@
                     <po-email
                         p-label="E-mail"
                         formControlName="email"
+                        p-clean="true"
+                        p-placeholder="Email..."
                     ></po-email>
                 </div>
             </div>
@@ -122,6 +147,8 @@
                         p-label="Telefone"
                         formControlName="phone"
                         p-mask="(99)99999?-9999"
+                        p-clean="true"
+                        p-placeholder="(00) 0000-0000"
                     ></po-input>
                 </div>
             </div>
@@ -130,6 +157,8 @@
                     <po-input
                         p-label="Nome pra Contato"
                         formControlName="contactName"
+                        p-clean="true"
+                        p-placeholder="Digite um nome"
                     ></po-input>
                 </div>
             </div>

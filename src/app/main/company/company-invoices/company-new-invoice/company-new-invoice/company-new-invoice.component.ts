@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {
+    PoBreadcrumb,
     PoModalAction,
     PoModalComponent,
+    PoNotificationService,
     PoTableAction,
 } from '@po-ui/ng-components';
 import { DatatableColumn } from '../../../../../shared/components/page-datatable/datatable-column';
@@ -9,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Invoice } from '../models/invoice';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CompanyNewInvoiceService } from '../company-new-invoice.service';
+import { Product } from '../models/product';
 
 @Component({
     templateUrl: 'company-new-invoice.component.html',
@@ -18,11 +21,23 @@ export class CompanyNewInvoiceComponent implements OnInit {
     @ViewChild('modalProduct', { static: true })
     poModalProduto: PoModalComponent;
 
+    breadcrumb: PoBreadcrumb = {
+        items: [
+            { label: 'Início', link: '/empresa' },
+            { label: 'Nota Fiscal', link: '/empresa/nota-fiscal' },
+            { label: 'Emitir Nota', link: '' },
+        ],
+    };
+
     @ViewChild('stepper', { static: true }) stepper;
 
-    newInvoice: Invoice;
+    newInvoice: Invoice = {} as Invoice;
 
     total = 0;
+
+    podeSelecionar = true;
+
+    chageToStep2 = false;
 
     cliente = [];
 
@@ -49,12 +64,15 @@ export class CompanyNewInvoiceComponent implements OnInit {
             label: 'Selecionar',
             action: (item) => {
                 this.nextForm();
-                // this.itemsStepThree.push({
-                //     name: item.name,
-                //     document: item.document,
-                // });
+                this.itemsStepThree.push({
+                    name: item.name,
+                    document: item.document,
+                });
                 this.idClient = item.id;
+                this.podeSelecionar = false;
+                this.chageToStep2 = true;
             },
+            disabled: () => !this.podeSelecionar,
         },
     ];
 
@@ -83,7 +101,9 @@ export class CompanyNewInvoiceComponent implements OnInit {
     actionsStepTwo: PoTableAction[] = [
         {
             label: 'Deletar',
-            action: () => console.log('oi'),
+            action: (item) => {
+                console.log(this.itemsStepTwo, item);
+            },
         },
     ];
 
@@ -106,14 +126,15 @@ export class CompanyNewInvoiceComponent implements OnInit {
     // ACAO PRIMARIA MODAL
     primaryAction: PoModalAction = {
         label: 'Salvar',
-        action: () => this.submitForm(),
+        action: () => this.processProduct(),
     };
 
     constructor(
         private formBuilder: FormBuilder,
         private companyNewInvoiceService: CompanyNewInvoiceService,
         private activatedRoute: ActivatedRoute,
-        private router: Router
+        private router: Router,
+        private poNotificationService: PoNotificationService
     ) {}
 
     ngOnInit(): void {
@@ -150,14 +171,34 @@ export class CompanyNewInvoiceComponent implements OnInit {
     }
 
     prepareModal(): void {
+        this.formProduct = this.formBuilder.group({
+            title: [
+                '',
+                Validators.compose([
+                    Validators.required,
+                    Validators.minLength(4),
+                ]),
+            ],
+            amount: ['', Validators.required],
+            quantity: ['', Validators.required],
+            total: ['', Validators.required],
+        });
+
+        this.formProduct
+            .get('amount')
+            .valueChanges.subscribe(() => this.totalCalc());
+
+        this.formProduct
+            .get('quantity')
+            .valueChanges.subscribe(() => this.totalCalc());
+
         this.poModalProduto.open();
     }
 
     submitForm(): void {
-        this.newInvoice = this.formProduct.getRawValue() as Invoice;
+        const itemsProdct: Product = this.formProduct.getRawValue() as Product;
 
-        this.itemsStepTwo.push(this.newInvoice);
-
+        this.itemsStepTwo.push(itemsProdct);
         this.poModalProduto.close();
         this.atuzalizaTotal();
 
@@ -169,14 +210,13 @@ export class CompanyNewInvoiceComponent implements OnInit {
     }
 
     submitInvoice(): void {
+        this.newInvoice.items = this.itemsStepTwo;
 
-        const invoice = {
-            items: [],
-            client: { id: 0 },
-        };
-        invoice.items.push(this.itemsStepTwo);
-        invoice.client.id = this.idClient;
-        console.log(invoice);
+        this.newInvoice.client = { id: this.idClient };
+
+        this.companyNewInvoiceService
+            .createInvoice(this.newInvoice)
+            .subscribe();
     }
 
     private totalCalc(): void {
@@ -193,5 +233,26 @@ export class CompanyNewInvoiceComponent implements OnInit {
         this.total = this.itemsStepTwo.reduce((total: number, elem) => {
             return total + parseInt(elem.total, 10);
         }, 0);
+    }
+
+    dirtyMe(input): void {
+        this.formProduct.get(input).markAsDirty();
+    }
+
+    processProduct(): void {
+        if (this.formProduct.invalid) {
+            const productInvalidMessage = 'Preencha o formulário';
+            this.poNotificationService.warning(productInvalidMessage);
+        } else {
+            this.submitForm();
+            this.primaryAction.loading = true;
+            setTimeout(() => {
+                this.poNotificationService.success(
+                    'Produto adicionado com sucesso'
+                );
+                this.primaryAction.loading = false;
+                this.poModalProduto.close();
+            }, 700);
+        }
     }
 }

@@ -13,13 +13,18 @@ export class AssociateFormService {
     createAssociate(associate: Associate, id: string): Observable<Associate> {
         return this.httpClient.post<Associate>(
             `${environment.apiUrl}/users/${id}/company-partners`,
-            associate);
+            associate
+        );
     }
 
-    updateAssociate(associate: Associate, id: string, idAssociate: number): Observable<Associate> {
-        console.log(associate);
+    updateAssociate(
+        associate: Associate,
+        id: string,
+        idAssociate: number
+    ): Observable<Associate> {
         return this.httpClient.put<Associate>(
             `${environment.apiUrl}/users/${id}/company-partners/${idAssociate}`,
-            associate);
+            associate
+        );
     }
 }

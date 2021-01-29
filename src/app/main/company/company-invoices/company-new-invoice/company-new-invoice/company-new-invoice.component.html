@@ -1,6 +1,12 @@
-<po-page-default p-title="Emitir Nota">
+<po-page-default
+    p-title="Emitir Nota"
+    [p-breadcrumb]="breadcrumb"
+    class="breadcrumb"
+>
     <po-stepper #stepper>
-        <po-step p-label="Selecionar Cliente">
+        <po-step
+            p-label="Selecionar Cliente"
+        >
             <po-container>
                 <div class="po-row">
                     <div class="po-md-12">
@@ -43,7 +49,7 @@
                 <div class="po-row po-mb-5">
                     <div class="po-md-12">
                         <hr />
-                        <p>Total: R${{total}}</p>
+                        <p>Total: R${{ total }}</p>
                         <span></span>
                     </div>
                 </div>
@@ -82,7 +88,7 @@
                 <div class="po-row po-mb-5">
                     <div class="po-md-12">
                         <hr />
-                        <p>Total: R${{total}}</p>
+                        <p>Total: R${{ total }}</p>
                         <span></span>
                     </div>
                 </div>
@@ -112,34 +118,70 @@
         <div class="po-row po-mb-2">
             <div class="po-md-12">
                 <po-input
+                    p-auto-focus="true"
                     p-label="Descrição do Produto"
                     formControlName="title"
                     p-clean="true"
+                    p-required="true"
+                    (p-blur)="dirtyMe('title')"
+                    p-error-pattern="Nome Inválido"
                 ></po-input>
+                <app-invalid-feedback
+                    [formCtrl]="formProduct.get('title')"
+                    [hasError]="
+                        formProduct.get('title').errors?.required &&
+                        formProduct.get('title').dirty
+                    "
+                >
+                    Este campo é obrigatório
+                </app-invalid-feedback>
             </div>
         </div>
         <div class="po-row po-mb-2">
             <div class="po-md-6">
-                <po-input
+                <po-number
                     p-label="Quantidade"
                     formControlName="quantity"
                     p-clean="true"
-                ></po-input>
+                    p-required="true"
+                    (p-blur)="dirtyMe('quantity')"
+                ></po-number>
+                <app-invalid-feedback
+                    [formCtrl]="formProduct.get('quantity')"
+                    [hasError]="
+                        formProduct.get('quantity').errors?.required &&
+                        formProduct.get('quantity').dirty
+                    "
+                >
+                    Este campo é obrigatório
+                </app-invalid-feedback>
             </div>
             <div class="po-md-6">
-                <po-input
+                <po-number
                     p-label="Valor Unitário"
                     formControlName="amount"
                     p-clean="true"
-                ></po-input>
+                    p-required="true"
+                    (p-blur)="dirtyMe('amount')"
+                ></po-number>
+                <app-invalid-feedback
+                    [formCtrl]="formProduct.get('amount')"
+                    [hasError]="
+                        formProduct.get('amount').errors?.required &&
+                        formProduct.get('amount').dirty
+                    "
+                >
+                    Este campo é obrigatório
+                </app-invalid-feedback>
             </div>
         </div>
         <div class="por-row po-mb-2">
             <div class="po-md-4">
-                <po-input
+                <po-number
+                    p-readonly="true"
                     p-label="Total"
                     formControlName="total"
-                ></po-input>
+                ></po-number>
             </div>
         </div>
     </form>

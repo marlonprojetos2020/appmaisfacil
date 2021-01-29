@@ -1,9 +1,7 @@
+import { Product } from './product';
+
 export interface Invoice {
-    items: {
-        title: string;
-        quantity: number;
-        amount: number;
-    };
+    items: Product[];
     client: {
         id: number;
     };

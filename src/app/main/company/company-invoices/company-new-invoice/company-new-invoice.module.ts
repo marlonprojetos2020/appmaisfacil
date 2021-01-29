@@ -14,6 +14,7 @@ import { PageDatatableModule } from '../../../../shared/components/page-datatabl
 import { CompanyInvoicesNewClientModule } from './company-invoices-new-client/company-invoices-new-client.module';
 import { CompanyNewInvoiceRoutingModule } from './company-new-invoice-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { InvalidFeedbackModule } from '../../../../shared/components/invalid-feedback/invalid-feedback.module';
 
 @NgModule({
     imports: [
@@ -29,6 +30,7 @@ import { ReactiveFormsModule } from '@angular/forms';
         PoTableModule,
         PoModalModule,
         PoStepperModule,
+        InvalidFeedbackModule,
     ],
     declarations: [CompanyNewInvoiceComponent],
 })

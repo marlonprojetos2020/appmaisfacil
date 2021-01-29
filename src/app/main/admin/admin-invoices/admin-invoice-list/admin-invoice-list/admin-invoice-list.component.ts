@@ -11,15 +11,17 @@ import {
 import { environment } from '../../../../../../environments/environment';
 import { DatatableColumn } from '../../../../../shared/components/page-datatable/datatable-column';
 import { AdminInvoiceService } from '../../admin-invoice.service';
-import { Location } from '@angular/common';
 
 @Component({
     templateUrl: './admin-invoices-list.component.html',
     styleUrls: ['admin-invoice-list.component.scss'],
 })
 export class AdminInvoiceListComponent implements OnInit {
-    @ViewChild('modalNotaFiscal', { static: true })
-    poModalNotaFiscal: PoModalComponent;
+    @ViewChild('modalEnviarNota', { static: true })
+    poModalEnviarNota: PoModalComponent;
+
+    @ViewChild('modalCancelarNota', { static: true })
+    poModalCancelarNota: PoModalComponent;
 
     uploadDocumentUrl: string = '';
 
@@ -29,6 +31,10 @@ export class AdminInvoiceListComponent implements OnInit {
     @Input() status: string;
     @Input() companyDocument: string;
     @Input() totalAmount: string;
+    @Input() emissionAt: string;
+    @Input() imageInvoice: string;
+
+    idInvoice: number;
 
     pageActions: PoPageAction[] = [];
 
@@ -51,7 +57,7 @@ export class AdminInvoiceListComponent implements OnInit {
         {
             label: 'Enviar Nota',
             action: (item) => {
-                this.poModalNotaFiscal.open();
+                this.poModalEnviarNota.open();
                 this.companyName = item.companyName;
                 this.clientName = item['client.name'];
                 this.clientDocument = item['client.document'];
@@ -76,6 +82,25 @@ export class AdminInvoiceListComponent implements OnInit {
                 }
             },
             disabled: (item) => item.status === 'CANCELED',
+        },
+        {
+            label: 'Visualizar Nota',
+            action: (item) => {
+                console.log(item);
+                this.idInvoice = item.id;
+                this.poModalCancelarNota.open();
+                this.companyName = item.companyName;
+                this.clientName = item['client.name'];
+                this.clientDocument = item['client.document'];
+                this.status = item.status;
+                this.totalAmount = item.totalAmount;
+                this.adminInvoiceService
+                    .getCompany(item.companyId)
+                    .subscribe((data) => {
+                        this.companyDocument = data.userCompany.cnpj;
+                    });
+                this.imageInvoice = item.attachmentUrl;
+            },
         },
     ];
 
@@ -121,7 +146,23 @@ export class AdminInvoiceListComponent implements OnInit {
 
     primaryAction: PoModalAction = {
         label: 'Cancelar',
-        action: () => this.poModalNotaFiscal.close(),
+        action: () => this.poModalEnviarNota.close(),
+    };
+
+    // Acoes Modal CancelInvoice
+    cancelInvoice: PoModalAction = {
+        label: 'Cancelar Nota',
+        action: () => {
+            this.adminInvoiceService
+                .cancelInvoiceAdmin(this.idInvoice)
+                .subscribe();
+            this.poModalCancelarNota.close();
+        },
+    };
+
+    closeModalCancelInvoice: PoModalAction = {
+        label: 'Fechar',
+        action: () => this.poModalCancelarNota.close(),
     };
 
     constructor(
@@ -138,6 +179,6 @@ export class AdminInvoiceListComponent implements OnInit {
     success(): void {
         const message = 'Documento carregado com sucesso';
         this.poNotificationService.success(message);
-        this.poModalNotaFiscal.close();
+        this.poModalEnviarNota.close();
     }
 }

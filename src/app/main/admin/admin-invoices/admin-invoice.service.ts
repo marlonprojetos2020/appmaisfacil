@@ -15,4 +15,11 @@ export class AdminInvoiceService {
     getInvoice(id: number): any {
         return this.httpClient.get(`${environment.apiUrl}/nota-fiscal/${id}`);
     }
+
+    cancelInvoiceAdmin(id: number): any {
+        return this.httpClient.post(
+            `${environment.apiUrl}/nota-fiscal/${id}/cancel`,
+            id
+        );
+    }
 }

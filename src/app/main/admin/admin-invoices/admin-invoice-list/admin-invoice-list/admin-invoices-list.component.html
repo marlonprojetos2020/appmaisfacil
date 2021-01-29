@@ -9,7 +9,7 @@
 ></app-page-datatable>
 
 <po-modal
-    #modalNotaFiscal
+    #modalEnviarNota
     p-title="Nota Fiscal"
     [p-primary-action]="primaryAction"
 >
@@ -53,6 +53,33 @@
                 p-multiple="false"
                 [p-restrictions]="restrictions"
             ></po-upload>
+        </div>
+    </div>
+</po-modal>
+
+<po-modal
+    p-title="Nota Fiscal"
+    #modalCancelarNota
+    [p-primary-action]="cancelInvoice"
+    [p-secondary-action]="closeModalCancelInvoice"
+>
+    <div class="po-row">
+        <div class="po-md-6">
+            <img [src]="imageInvoice" alt="" />
+        </div>
+        <div class="po-md-6">
+            <span>Empresa</span>
+            <p>{{ companyName }}</p>
+            <span>CNPJ/Empresa</span>
+            <p>{{ companyDocument }}</p>
+            <span>Cliente</span>
+            <p>{{ clientName }}</p>
+            <span>Documento Cliente</span>
+            <p>{{ clientDocument }}</p>
+            <span>Data de Emissão</span>
+            <p>{{ emissionAt }}</p>
+            <span>Total</span>
+            <p>{{ totalAmount }}</p>
         </div>
     </div>
 </po-modal>

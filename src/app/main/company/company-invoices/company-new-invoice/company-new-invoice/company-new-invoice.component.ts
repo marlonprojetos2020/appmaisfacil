@@ -22,7 +22,7 @@ export class CompanyNewInvoiceComponent implements OnInit {
 
     newInvoice: Invoice;
 
-    total: number;
+    total = 0;
 
     cliente = [];
 
@@ -49,12 +49,11 @@ export class CompanyNewInvoiceComponent implements OnInit {
             label: 'Selecionar',
             action: (item) => {
                 this.nextForm();
-                this.itemsStepThree.push({
-                    name: item.name,
-                    document: item.document,
-                });
+                // this.itemsStepThree.push({
+                //     name: item.name,
+                //     document: item.document,
+                // });
                 this.idClient = item.id;
-                console.log(item);
             },
         },
     ];
@@ -160,6 +159,7 @@ export class CompanyNewInvoiceComponent implements OnInit {
         this.itemsStepTwo.push(this.newInvoice);
 
         this.poModalProduto.close();
+        this.atuzalizaTotal();
 
         this.disabledStepTwo = false;
     }
@@ -169,20 +169,29 @@ export class CompanyNewInvoiceComponent implements OnInit {
     }
 
     submitInvoice(): void {
-        console.log(this.itemsStepTwo);
 
-        console.log(this.newInvoice);
+        const invoice = {
+            items: [],
+            client: { id: 0 },
+        };
+        invoice.items.push(this.itemsStepTwo);
+        invoice.client.id = this.idClient;
+        console.log(invoice);
     }
 
     private totalCalc(): void {
         const amount = this.formProduct.get('amount').value;
         const quantity = this.formProduct.get('quantity').value;
-
         if (amount && quantity) {
-            console.log(amount * quantity);
             this.formProduct.get('total').setValue(`${amount * quantity}`);
+        } else {
+            this.formProduct.get('total').setValue('');
         }
+    }
 
-        this.formProduct.get('total').setValue('');
+    private atuzalizaTotal(): void {
+        this.total = this.itemsStepTwo.reduce((total: number, elem) => {
+            return total + parseInt(elem.total, 10);
+        }, 0);
     }
 }

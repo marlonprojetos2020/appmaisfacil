@@ -101,6 +101,7 @@ export class AdminInvoiceListComponent implements OnInit {
                     });
                 this.imageInvoice = item.attachmentUrl;
             },
+            disabled: (item) => item.status === 'CANCELED',
         },
     ];
 

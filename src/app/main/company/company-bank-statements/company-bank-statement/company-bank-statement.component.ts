@@ -50,7 +50,7 @@ export class CompanyBankStatementComponent implements OnInit {
     serviceApi = `${environment.apiUrl}/company/statement/p/search`;
     tableActions: PoTableAction[] = [
         {
-            label: 'Visualizar',
+            label: 'Anexar Extrato',
             action: (item) => {
                 this.prepareModal(item);
                 this.bankName = item['bankAccount.bankName'];
@@ -95,7 +95,7 @@ export class CompanyBankStatementComponent implements OnInit {
         this.nomeEmpresa = company.userDetails.name;
     }
 
-    prepareModal(extarto: BankStatement): void {
+    prepareModal(extrato: BankStatement): void {
         this.poModalExtrato.open();
     }
 

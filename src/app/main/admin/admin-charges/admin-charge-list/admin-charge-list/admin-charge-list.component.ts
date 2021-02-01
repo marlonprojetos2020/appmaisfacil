@@ -115,7 +115,6 @@ export class AdminChargeListComponent implements OnInit {
             {
                 label: 'Confirmar Pagamento',
                 action: (item) => {
-                    console.log(item);
                     this.prepareModal(item);
                     this.status = item.status;
                     this.tipo = item['type.label'];

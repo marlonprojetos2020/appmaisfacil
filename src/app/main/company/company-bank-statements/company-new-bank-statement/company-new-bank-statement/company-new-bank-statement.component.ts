@@ -4,6 +4,7 @@ import { CompanyBankStatementService } from '../../company-bank-statement.servic
 import { environment } from '../../../../../../environments/environment';
 import {
     PoNotificationService,
+    PoSelectOption,
     PoUploadFileRestrictions,
 } from '@po-ui/ng-components';
 import { Location } from '@angular/common';
@@ -18,7 +19,7 @@ export class CompanyNewBankStatementComponent implements OnInit {
 
     @ViewChild('stepper', { static: true }) stepper;
 
-    options = [];
+    options: PoSelectOption[] = [];
 
     restrictions: PoUploadFileRestrictions = {
         allowedExtensions: ['.txt', '.pdf', '.png', '.jpeg', '.jpg'],
@@ -63,9 +64,9 @@ export class CompanyNewBankStatementComponent implements OnInit {
     submitForm(): any {
         const idBankAccount = this.formNewStatement.getRawValue();
 
-        this.setUrlDocument(idBankAccount.id);
+        console.log(idBankAccount);
 
-        this.nextForm();
+        this.setUrlDocument(idBankAccount.id);
     }
 
     nextForm(): void {
@@ -73,7 +74,7 @@ export class CompanyNewBankStatementComponent implements OnInit {
     }
 
     setUrlDocument(idStatement: number): void {
-        this.urlUploadDocument = `${environment.apiUrl}/company/statement/${idStatement}`;
+        this.urlUploadDocument = `${environment.apiUrl}/company/statement/bank-account/${idStatement}`;
         this.nextForm();
     }
 

@@ -87,7 +87,6 @@ export class AdminInvoiceListComponent implements OnInit {
         {
             label: 'Visualizar Nota',
             action: (item) => {
-                console.log(item);
                 this.idInvoice = item.id;
                 this.poModalCancelarNota.open();
                 this.companyName = item.companyName;
@@ -104,6 +103,12 @@ export class AdminInvoiceListComponent implements OnInit {
             },
             disabled: (item) =>
                 item.status === 'CANCELED' || item.status === 'PRECESSING',
+        },
+        {
+            label: 'Baixar Nota',
+            action: (item) => window.open(item.attachmentUrl, '_blank'),
+            disabled: (item) =>
+                !item.attachmentUrl || item.status === 'CANCELED',
         },
     ];
 

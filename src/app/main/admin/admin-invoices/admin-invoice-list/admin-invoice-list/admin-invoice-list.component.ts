@@ -81,7 +81,8 @@ export class AdminInvoiceListComponent implements OnInit {
                     return;
                 }
             },
-            disabled: (item) => item.status === 'CANCELED',
+            disabled: (item) =>
+                item.status === 'CANCELED' || item.status === 'OK',
         },
         {
             label: 'Visualizar Nota',
@@ -101,7 +102,8 @@ export class AdminInvoiceListComponent implements OnInit {
                     });
                 this.imageInvoice = item.attachmentUrl;
             },
-            disabled: (item) => item.status === 'CANCELED',
+            disabled: (item) =>
+                item.status === 'CANCELED' || item.status === 'PRECESSING',
         },
     ];
 

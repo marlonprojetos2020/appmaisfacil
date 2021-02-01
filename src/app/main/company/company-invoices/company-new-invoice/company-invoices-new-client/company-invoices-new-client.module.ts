@@ -8,6 +8,7 @@ import {
     PoPageModule,
 } from '@po-ui/ng-components';
 import { ReactiveFormsModule } from '@angular/forms';
+import { InvalidFeedbackModule } from '../../../../../shared/components/invalid-feedback/invalid-feedback.module';
 
 @NgModule({
     imports: [
@@ -17,6 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
         PoFieldModule,
         PoButtonModule,
         ReactiveFormsModule,
+        InvalidFeedbackModule,
     ],
     declarations: [CompanyInvoicesNewClientComponent],
 })

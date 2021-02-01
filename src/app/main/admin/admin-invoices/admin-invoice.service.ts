@@ -22,4 +22,10 @@ export class AdminInvoiceService {
             id
         );
     }
+
+    getInvoiceList(): any {
+        return this.httpClient.get(
+            `${environment.apiUrl}/nota-fiscal/p/search`
+        );
+    }
 }

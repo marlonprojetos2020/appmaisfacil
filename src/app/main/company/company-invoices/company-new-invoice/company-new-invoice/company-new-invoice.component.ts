@@ -217,6 +217,8 @@ export class CompanyNewInvoiceComponent implements OnInit {
         this.companyNewInvoiceService
             .createInvoice(this.newInvoice)
             .subscribe();
+
+        this.router.navigateByUrl('/empresa/nota-fiscal');
     }
 
     private totalCalc(): void {

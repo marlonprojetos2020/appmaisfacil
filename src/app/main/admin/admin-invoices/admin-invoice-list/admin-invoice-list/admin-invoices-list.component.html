@@ -1,11 +1,11 @@
 <app-page-datatable
     title="Nota Fiscal"
     [pageActions]="pageActions"
-    [serviceApi]="serviceApi"
     [columns]="columns"
     [tableActions]="tableActions"
     class="table-no-button breadcrumb"
     [breadcrumb]="breadcrumb"
+    [serviceApi]="serviceApi"
 ></app-page-datatable>
 
 <po-modal
@@ -65,7 +65,9 @@
 >
     <div class="po-row">
         <div class="po-md-6">
-            <img [src]="imageInvoice" alt="" />
+            <div class="div-image">
+                <img [src]="imageInvoice" alt="" />
+            </div>
         </div>
         <div class="po-md-6 user">
             <span>Empresa</span>

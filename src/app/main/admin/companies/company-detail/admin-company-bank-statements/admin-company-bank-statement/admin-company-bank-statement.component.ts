@@ -43,18 +43,12 @@ export class AdminCompanyBankStatementComponent implements OnInit {
 
     ngOnInit(): void {
         const id = this.activatedRoute.snapshot.paramMap.get('id');
-        this.pageActions.push(
-            {
-                label: 'Cadastrar Nova Conta',
-                icon: 'po-icon-plus-circle',
-                url: `/admin/empresa/${id}/extrato/nova-conta`,
-            },
-            {
-                label: 'Novo Extrato',
-                icon: 'po-icon-plus-circle',
-                url: `/admin/empresa/${id}/extrato/novo-extrato`,
-            }
-        );
+        this.pageActions.push({
+            label: 'Cadastrar Nova Conta',
+            icon: 'po-icon-plus-circle',
+            url: `/admin/empresa/${id}/extrato/nova-conta`,
+        });
+
         this.serviceApi = `${environment.apiUrl}/statement/p/search`;
 
         this.companiesService

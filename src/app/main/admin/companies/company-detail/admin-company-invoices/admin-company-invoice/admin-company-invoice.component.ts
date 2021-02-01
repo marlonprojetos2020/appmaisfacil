@@ -20,20 +20,20 @@ export class AdminCompanyInvoiceComponent implements OnInit {
 
     pageActions: PoPageAction[] = [];
 
-    serviceApi = `${environment.apiUrl}/users/p/search`;
+    serviceApi = `${environment.apiUrl}/nota-fiscal/p/search`;
     tableActions: PoTableAction[] = [];
     columns: DatatableColumn[] = [
         {
             label: 'Situação',
-            property: 'userCompany.fantasyName',
+            property: 'status',
         },
         {
             label: 'Valor',
-            property: 'userCompany.cnpj',
+            property: 'totalAmount',
         },
         {
             label: 'Emissão',
-            property: 'name',
+            property: 'emissionAt',
         },
     ];
 

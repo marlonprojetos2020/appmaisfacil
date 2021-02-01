@@ -69,7 +69,7 @@ export class AdminChargeListComponent implements OnInit {
     @ViewChild('modalCobranca', { static: true })
     poModalCobranca: PoModalComponent;
 
-    serviceApi = `${environment.apiUrl}/company/billing/p/search`;
+    serviceApi = `${environment.apiUrl}/billing/p/search`;
     tableActions: PoTableAction[] = [];
 
     columns: DatatableColumn[] = [
@@ -92,6 +92,14 @@ export class AdminChargeListComponent implements OnInit {
         maxFiles: 1,
     };
 
+    @ViewChild('modalVisualizarComprovante', { static: true })
+    poModalVisualizarComprovante: PoModalComponent;
+
+    closeActionModalVisualizarComprovante: PoModalAction = {
+        label: 'Fechar',
+        action: () => this.poModalVisualizarComprovante.close(),
+    };
+
     constructor(
         private router: Router,
         private poNotificationService: PoNotificationService,
@@ -105,9 +113,33 @@ export class AdminChargeListComponent implements OnInit {
 
         this.tableActions.push(
             {
-                label: 'Ver Comprovante',
+                label: 'Confirmar Pagamento',
                 action: (item) => {
+                    console.log(item);
                     this.prepareModal(item);
+                    this.status = item.status;
+                    this.tipo = item['type.label'];
+                    this.valor = item.value;
+                    this.vencimento = item.dueDate;
+                    this.titulo = item.description;
+                    this.nomeEmpresa;
+                    this.imagemComprovante = item.proofOfPaymentUrl;
+                    this.imagemCobranca = item.billingFileUrl;
+                    this.setUrlDocument(item.id);
+                    this.idCharge = item.id;
+                    this.charge = item;
+                },
+                disabled: (item) => item.status !== 'PENDING_REVIEW',
+            },
+            {
+                label: 'Baixar Comprovante',
+                action: (item) => window.open(item.proofOfPaymentUrl, '_blank'),
+                disabled: (item) => item.status !== 'PAID',
+            },
+            {
+                label: 'Visualizar Comprovante',
+                action: (item) => {
+                    this.poModalVisualizarComprovante.open();
                     this.status = item.status;
                     this.tipo = item['type.label'];
                     this.valor = item.value;
@@ -120,11 +152,7 @@ export class AdminChargeListComponent implements OnInit {
                     this.idCharge = item.id;
                     this.charge = item;
                 },
-            },
-            {
-                label: 'Baixar Comprovante',
-                action: (item) => window.open(item.proofOfPaymentUrl, '_blank'),
-                disabled: (item) => !item.proofOfPaymentUrl,
+                disabled: (item) => item.status !== 'PENDING_REVIEW',
             }
         );
     }
@@ -133,7 +161,7 @@ export class AdminChargeListComponent implements OnInit {
         this.poModalComprovante.open();
     }
 
-    openModalCobranca(charge: Charge): void {
+    openModalCobranca(): void {
         this.poModalCobranca.open();
     }
 

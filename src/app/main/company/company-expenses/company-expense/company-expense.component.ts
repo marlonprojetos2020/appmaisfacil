@@ -62,6 +62,10 @@ export class CompanyExpenseComponent implements OnInit {
                 this.nomeEmpresa;
             },
         },
+        {
+            label: 'Baixar Cobrança',
+            action: (item) => window.open(item.proofOfPaymentUrl, '_blank'),
+        },
     ];
 
     serviceApi = `${environment.apiUrl}/company/expense`;

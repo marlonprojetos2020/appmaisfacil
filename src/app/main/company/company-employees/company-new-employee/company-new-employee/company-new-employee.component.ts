@@ -75,8 +75,6 @@ export class CompanyNewEmployeeComponent implements OnInit {
     submitForm(): any {
         this.newCompanyEmployee = this.formCompanyEmployee.getRawValue() as CompanyEmployee;
 
-        console.log(this.newCompanyEmployee);
-
         this.companyEmployeeService
             .createCompanyEmployee(this.newCompanyEmployee)
             .subscribe((data) => {

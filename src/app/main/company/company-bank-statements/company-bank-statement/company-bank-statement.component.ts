@@ -6,6 +6,7 @@ import {
     PoNotificationService,
     PoPageAction,
     PoTableAction,
+    PoUploadFileRestrictions,
 } from '@po-ui/ng-components';
 import { environment } from '../../../../../environments/environment';
 import { DatatableColumn } from '../../../../shared/components/page-datatable/datatable-column';
@@ -51,7 +52,6 @@ export class CompanyBankStatementComponent implements OnInit {
         {
             label: 'Visualizar',
             action: (item) => {
-                console.log(item);
                 this.prepareModal(item);
                 this.bankName = item['bankAccount.bankName'];
                 this.nomeEmpresa;
@@ -62,6 +62,7 @@ export class CompanyBankStatementComponent implements OnInit {
             disabled: (item) => item.status !== 'PENDING',
         },
     ];
+
     columns: DatatableColumn[] = [
         {
             label: 'Status',
@@ -76,6 +77,12 @@ export class CompanyBankStatementComponent implements OnInit {
             property: 'month',
         },
     ];
+
+    restrictions: PoUploadFileRestrictions = {
+        allowedExtensions: ['.txt', '.pdf', '.png', '.jpeg', '.jpg'],
+        maxFileSize: 5242880,
+        maxFiles: 1,
+    };
 
     constructor(
         private router: Router,
@@ -99,7 +106,6 @@ export class CompanyBankStatementComponent implements OnInit {
     success(): void {
         const message = 'Comprovante de pagamento carregado com sucesso';
         this.poNotificationService.success(message);
-        (data) => console.log(data);
         this.poModalExtrato.close();
     }
 }

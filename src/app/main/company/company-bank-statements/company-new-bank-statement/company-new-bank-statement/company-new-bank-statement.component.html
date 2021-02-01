@@ -1,6 +1,9 @@
 <po-page-default p-title="Novo Extrato">
     <po-stepper #stepper>
-        <po-step p-label="Selecionar Conta Bancaria">
+        <po-step
+            p-label="Selecionar Conta Bancaria"
+            [p-can-active-next-step]="formNewStatement.invalid"
+        >
             <po-container>
                 <div class="po-row">
                     <div class="po-md-4">
@@ -31,13 +34,15 @@
                 <div class="po-row">
                     <div class="po-md-12">
                         <po-upload
+                            p-label="Anexe o Extrato Bancario"
                             p-drag-drop
                             p-auto-upload="true"
+                            [p-restrictions]="restrictions"
                             [p-url]="urlUploadDocument"
                             (p-success)="success()"
                         ></po-upload>
                     </div>
-                    <div class="po-md-4">
+                    <div class="po-md-4 po-mt-4">
                         <po-button
                             p-type="primary"
                             p-label="Confirmar"

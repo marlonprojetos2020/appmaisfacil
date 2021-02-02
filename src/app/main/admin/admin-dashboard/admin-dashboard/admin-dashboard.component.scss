@@ -1,10 +1,10 @@
-.admin-dashboard-container{
+.admin-dashboard-container {
     background-color: transparent;
     box-shadow: none;
 }
 
-.users{
-    background-color: #FFFFFF;
+.users {
+    background-color: #ffffff;
     padding: 15px 16px;
 
     display: flex;
@@ -15,14 +15,12 @@
     font-weight: bold;
     color: var(--color-primary);
 
-    h3{
+    h3 {
         font-weight: bold;
     }
 
-    .number-users{
+    .number-users {
         margin-left: auto;
         color: var(--color-secondary);
     }
-
 }
-

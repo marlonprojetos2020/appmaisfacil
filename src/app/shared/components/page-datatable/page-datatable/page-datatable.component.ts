@@ -1,5 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { PoBreadcrumb, PoBreadcrumbItem, PoPageAction, PoSelectOption, PoTableAction, PoTableColumnSort, PoTableColumnSortType } from '@po-ui/ng-components';
+import {
+    PoBreadcrumb,
+    PoPageAction,
+    PoSelectOption,
+    PoTableAction,
+    PoTableColumnSort,
+    PoTableColumnSortType,
+    PoTableLiterals,
+} from '@po-ui/ng-components';
 import { PageDatatableService } from '../page-datatable.service';
 import { finalize } from 'rxjs/operators';
 import { DatatableColumn } from '../datatable-column';
@@ -11,7 +19,6 @@ import { PoPageDynamicSearchFilters } from '@po-ui/ng-templates';
     styleUrls: ['./page-datatable.component.scss'],
 })
 export class PageDatatableComponent implements OnInit {
-
     @Input() serviceApi: string;
     @Input() hasSearch = true;
     // page search props
@@ -25,6 +32,8 @@ export class PageDatatableComponent implements OnInit {
 
     @Input() size = 10;
 
+    @Input() literals: PoTableLiterals[];
+
     filters: PoPageDynamicSearchFilters[];
     currentFilters: any = {};
 
@@ -37,10 +46,7 @@ export class PageDatatableComponent implements OnInit {
 
     currentPage: number;
 
-    constructor(
-        private pageDatatableService: PageDatatableService,
-    ) {
-    }
+    constructor(private pageDatatableService: PageDatatableService) {}
 
     ngOnInit(): void {
         this.buildAdvancedSearch();
@@ -48,8 +54,7 @@ export class PageDatatableComponent implements OnInit {
     }
 
     customColumns(): DatatableColumn[] {
-        return this.columns
-            .filter(column => column.customValue);
+        return this.columns.filter((column) => column.customValue);
     }
 
     loadItems(): void {
@@ -66,13 +71,18 @@ export class PageDatatableComponent implements OnInit {
 
     sortBy(tableColumnSort: PoTableColumnSort): void {
         this.tableColumnSort = tableColumnSort;
-        if (!this.tableColumnSort || !this.isSortDisabled(this.tableColumnSort.column.property)) {
+        if (
+            !this.tableColumnSort ||
+            !this.isSortDisabled(this.tableColumnSort.column.property)
+        ) {
             this.loadItems();
         }
     }
 
     handleQuickSearch(searchValue: string): void {
-        searchValue ? this.currentFilters.search = searchValue : delete this.currentFilters.search;
+        searchValue
+            ? (this.currentFilters.search = searchValue)
+            : delete this.currentFilters.search;
         this.loadItems();
     }
 
@@ -83,36 +93,45 @@ export class PageDatatableComponent implements OnInit {
 
     handleChangeDisclaimers(disclaimers: any[]): void {
         this.currentFilters = {};
-        disclaimers.forEach(disclaimer => this.currentFilters[disclaimer.property] = disclaimer.value);
+        disclaimers.forEach(
+            (disclaimer) =>
+                (this.currentFilters[disclaimer.property] = disclaimer.value)
+        );
         this.loadItems();
     }
 
     private updateData(): void {
         this.loadingShowMore = true;
 
-        this.pageDatatableService.load(
-            this.serviceApi,
-            this.params(),
-        )
-            .pipe(finalize(() => {
-                this.loading = false;
-                this.loadingShowMore = false;
-            }))
-            .subscribe(
-                result => {
-                    this.showMoreDisabled = !result.hasNext;
-                    if (result.items) {
-                        this.items.push(...result.items.map(item => this.flattenObject(item)));
-                    } else {
-                        this.items.push(...result.map(item => {
-                            // não parece uma boa opção 
-                            item.cpf ? item.cpf = item.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, '\$1.\$2.\$3\-\$4') : null;
+        this.pageDatatableService
+            .load(this.serviceApi, this.params())
+            .pipe(
+                finalize(() => {
+                    this.loading = false;
+                    this.loadingShowMore = false;
+                })
+            )
+            .subscribe((result) => {
+                this.showMoreDisabled = !result.hasNext;
+                if (result.items) {
+                    this.items.push(
+                        ...result.items.map((item) => this.flattenObject(item))
+                    );
+                } else {
+                    this.items.push(
+                        ...result.map((item) => {
+                            // não parece uma boa opção
+                            item.cpf
+                                ? (item.cpf = item.cpf.replace(
+                                      /(\d{3})(\d{3})(\d{3})(\d{2})/g,
+                                      '$1.$2.$3-$4'
+                                  ))
+                                : null;
                             return this.flattenObject(item);
-                        }));
-                    }
-
-                },
-            );
+                        })
+                    );
+                }
+            });
     }
 
     private params(): any {
@@ -125,11 +144,18 @@ export class PageDatatableComponent implements OnInit {
     }
 
     private sortParams(): { sort?: string } {
-        if (!this.tableColumnSort || this.isSortDisabled(this.tableColumnSort.column.property)) {
+        if (
+            !this.tableColumnSort ||
+            this.isSortDisabled(this.tableColumnSort.column.property)
+        ) {
             return {};
         }
 
-        return { sort: `${this.tableColumnSort.column.property},${this.tableColumnSortType(this.tableColumnSort.type)}` };
+        return {
+            sort: `${
+                this.tableColumnSort.column.property
+            },${this.tableColumnSortType(this.tableColumnSort.type)}`,
+        };
     }
 
     private tableColumnSortType(type: PoTableColumnSortType): string {
@@ -141,8 +167,13 @@ export class PageDatatableComponent implements OnInit {
     }
 
     private isSortDisabled(property: string): boolean {
-        const datatableColumn = this.columns.find(value => value.property === property);
-        return datatableColumn.disableSort === true || !!datatableColumn.customValue;
+        const datatableColumn = this.columns.find(
+            (value) => value.property === property
+        );
+        return (
+            datatableColumn.disableSort === true ||
+            !!datatableColumn.customValue
+        );
     }
 
     private buildAdvancedSearch(): void {
@@ -166,9 +197,11 @@ export class PageDatatableComponent implements OnInit {
 
     private searchByValues(): PoSelectOption[] {
         return this.columns
-            .filter(column => column.disableSearch !== true)
-            .map(column => ({
-                value: column.searchProperty ? column.searchProperty : column.property,
+            .filter((column) => column.disableSearch !== true)
+            .map((column) => ({
+                value: column.searchProperty
+                    ? column.searchProperty
+                    : column.property,
                 label: column.label,
             }));
     }
@@ -180,13 +213,14 @@ export class PageDatatableComponent implements OnInit {
             if (!ob.hasOwnProperty(i)) {
                 continue;
             }
-            if ((typeof ob[i]) === 'object') {
+            if (typeof ob[i] === 'object') {
                 flatObject = this.flattenObject(ob[i]);
                 for (const x in flatObject) {
                     if (!flatObject.hasOwnProperty(x)) {
                         continue;
                     }
-                    toReturn[i + (!!isNaN(parseInt(x)) ? '.' + x : '')] = flatObject[x];
+                    toReturn[i + (!!isNaN(parseInt(x)) ? '.' + x : '')] =
+                        flatObject[x];
                 }
             } else {
                 toReturn[i] = ob[i];

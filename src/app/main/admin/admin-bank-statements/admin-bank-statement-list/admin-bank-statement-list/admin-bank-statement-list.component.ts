@@ -5,6 +5,7 @@ import {
     PoModalComponent,
     PoPageAction,
     PoTableAction,
+    PoTableLiterals,
 } from '@po-ui/ng-components';
 import { environment } from '../../../../../../environments/environment';
 import { DatatableColumn } from '../../../../../shared/components/page-datatable/datatable-column';

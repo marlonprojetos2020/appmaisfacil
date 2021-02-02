@@ -1,5 +1,5 @@
 <po-page-dynamic-search
-    [ngClass]="hasSearch? '':'noSearchBar'"
+    [ngClass]="hasSearch ? '' : 'noSearchBar'"
     [p-title]="title"
     [p-actions]="pageActions"
     [p-breadcrumb]="breadcrumb"
@@ -23,6 +23,7 @@
             [p-sort]="true"
             [p-striped]="true"
             (p-sort-by)="sortBy($event)"
+            [p-literals]="literals"
         >
             <ng-template
                 *ngFor="let column of customColumns()"
@@ -37,7 +38,7 @@
                         [value]="item"
                     >
                     </app-badge>
-                    <span *ngIf="!column.badgePoColor">{{item}}</span>
+                    <span *ngIf="!column.badgePoColor">{{ item }}</span>
                 </ng-container>
             </ng-template>
         </po-table>

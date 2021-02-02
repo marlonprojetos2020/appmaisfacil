@@ -1,0 +1,65 @@
+.pending {
+    font-size: 24px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    color: #15b3a1;
+
+    .status-service {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        p {
+            margin-left: 20px;
+        }
+
+        span {
+            margin-left: 20px;
+        }
+
+        &:before {
+            content: "";
+            background-color: #15b3a1;
+            width: 10px;
+            height: 50px;
+        }
+    }
+}
+
+.cancel {
+    font-size: 24px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    color: #ef6008;
+
+    .status-service {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        p {
+            margin-left: 20px;
+        }
+
+        span {
+            margin-left: 20px;
+        }
+
+        &:before {
+            content: "";
+            background-color: #ef6008;
+            width: 10px;
+            height: 50px;
+        }
+    }
+}
+
+.quantity {
+    padding-right: 16px;
+}

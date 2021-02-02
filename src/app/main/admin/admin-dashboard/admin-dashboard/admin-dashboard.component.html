@@ -1,7 +1,4 @@
-<po-page-default
-    p-title="Painel de Controle"
-    [p-actions]="actions"
->
+<po-page-default p-title="Painel de Controle" [p-actions]="actions">
     <div class="po-container admin-dashboard-container">
         <div class="po-row po-mb-5">
             <div class="po-col po-lg-12">
@@ -13,26 +10,56 @@
             </div>
         </div>
         <div class="po-row">
-            <div class="po-col po-lg-6 po-mb-5 ">
-                <app-dashboard-accordion title="extrato" text="ola" isPending="false"></app-dashboard-accordion>
+            <div class="po-col po-lg-6 po-mb-5">
+                <app-card-dashboard
+                    text="Extrato Pendente"
+                    icon="po-icon po-icon-clock"
+                    quantity="90"
+                    pending="false"
+                ></app-card-dashboard>
             </div>
             <div class="po-col po-lg-6 po-mb-5">
-                <app-dashboard-accordion title="extrato" text="ola" isPending="false"></app-dashboard-accordion>
+                <app-card-dashboard
+                    text="Extrato Pendente"
+                    icon="po-icon po-icon-clock"
+                    quantity="90"
+                    pending="true"
+                ></app-card-dashboard>
             </div>
             <div class="po-col po-lg-6 po-mb-5">
-                <app-dashboard-accordion title="extrato" text="ola" isPending="false"></app-dashboard-accordion>
+                <app-dashboard-accordion
+                    title="extrato"
+                    text="ola"
+                    isPending="false"
+                ></app-dashboard-accordion>
             </div>
             <div class="po-col po-lg-6 po-mb-5">
-                <app-dashboard-accordion title="extrato" text="ola" isPending="false"></app-dashboard-accordion>
+                <app-dashboard-accordion
+                    title="extrato"
+                    text="ola"
+                    isPending="false"
+                ></app-dashboard-accordion>
             </div>
             <div class="po-col po-lg-6 po-mb-5">
-                <app-dashboard-accordion title="extrato" text="ola" isPending="false"></app-dashboard-accordion>
+                <app-dashboard-accordion
+                    title="extrato"
+                    text="ola"
+                    isPending="false"
+                ></app-dashboard-accordion>
             </div>
             <div class="po-col po-lg-6 po-mb-5">
-                <app-dashboard-accordion title="extrato" text="ola" isPending="false"></app-dashboard-accordion>
+                <app-dashboard-accordion
+                    title="extrato"
+                    text="ola"
+                    isPending="false"
+                ></app-dashboard-accordion>
             </div>
             <div class="po-col po-lg-6 po-mb-5">
-                <app-dashboard-accordion title="extrato" text="ola" isPending="false"></app-dashboard-accordion>
+                <app-dashboard-accordion
+                    title="extrato"
+                    text="ola"
+                    isPending="false"
+                ></app-dashboard-accordion>
             </div>
         </div>
     </div>

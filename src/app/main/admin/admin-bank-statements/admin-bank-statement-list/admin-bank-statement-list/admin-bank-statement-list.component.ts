@@ -21,9 +21,12 @@ export class AdminBankStatementListComponent implements OnInit {
     @Input() status: string;
     @Input() bankName: string;
     @Input() image: string;
+    @Input() pdf: string;
     idStatement: number;
     @ViewChild('modalExtrato', { static: true })
     poModalExtrato: PoModalComponent;
+
+    ehPdf = false;
 
     primaryAction: PoModalAction = {
         label: 'Aprovar',
@@ -62,8 +65,15 @@ export class AdminBankStatementListComponent implements OnInit {
                 this.companyName = item.bankAccountCompanyName;
                 this.month = item.month;
                 this.image = item.attachmentUrl;
-                console.log(this.image.indexOf('jpg'));
+                console.log(this.image.indexOf('pdf'));
                 this.idStatement = item.id;
+                if (this.image.indexOf('pdf') < 0) {
+                    this.ehPdf = false;
+                } else {
+                    this.ehPdf = true;
+                    this.pdf = item.attachmentUrl;
+                }
+                console.log(this.ehPdf);
             },
             disabled: (item) => item.status !== 'PENDING_REVIEW',
         },

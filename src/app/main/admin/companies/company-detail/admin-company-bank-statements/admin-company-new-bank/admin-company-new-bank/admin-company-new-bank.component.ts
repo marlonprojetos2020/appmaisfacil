@@ -14,6 +14,7 @@ import { CompaniesService } from '../../../../companies.service';
 export class AdminCompanyNewBankComponent implements OnInit {
     options = [];
     id: string = '';
+    loading: boolean;
     formNewBankAccount: FormGroup;
 
     breadcrumb: PoBreadcrumb = {
@@ -54,10 +55,11 @@ export class AdminCompanyNewBankComponent implements OnInit {
     }
 
     SubmitBank(): void {
+        this.loading = true;
         const account = this.formNewBankAccount.getRawValue() as BankAccount;
         this.adminCompanyBankService
             .newAccount(this.id, account)
-            .subscribe(() => {
+            .subscribe((data) => {
                 this.notificationService.success(
                     `Banco Cadastrado com sucesso!`
                 );

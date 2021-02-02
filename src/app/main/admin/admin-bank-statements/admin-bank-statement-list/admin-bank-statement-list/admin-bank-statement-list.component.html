@@ -17,7 +17,16 @@
     <div class="po-row">
         <div class="po-md-6">
             <div class="div-imagem">
-                <img [src]="image" alt="Imagem" />
+                <ng-template>
+                    <pdf-viewer
+                        [src]="pdf"
+                        [render-text]="true"
+                        style="display: block"
+                    ></pdf-viewer>
+                </ng-template>
+                <ng-template [ngIf]="!ehPdf">
+                    <img [src]="image" alt="Imagem" />
+                </ng-template>
             </div>
         </div>
         <div class="po-md-6">

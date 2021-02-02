@@ -4,6 +4,7 @@ import { PoPageLogin, PoPageLoginRecovery } from '@po-ui/ng-templates';
 import { finalize } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     templateUrl: './login.component.html',
@@ -25,7 +26,6 @@ export class LoginComponent implements OnInit {
             .pipe(finalize(() => (this.loadingSubmit = false)))
             .subscribe((data) => {
                 this.router.navigate(['/empresa']);
-                console.log(data);
             });
     }
 }

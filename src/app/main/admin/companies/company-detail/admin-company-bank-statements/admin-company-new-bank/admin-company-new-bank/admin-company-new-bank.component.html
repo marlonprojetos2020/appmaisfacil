@@ -1,4 +1,8 @@
-<po-page-edit p-title="Nova Conta Bancária" [p-breadcrumb]="breadcrumb" class="breadcrumb">
+<po-page-edit
+    p-title="Nova Conta Bancária"
+    [p-breadcrumb]="breadcrumb"
+    class="breadcrumb"
+>
     <po-container>
         <form [formGroup]="formNewBankAccount">
             <div class="po-row">
@@ -48,8 +52,7 @@
                     <po-number
                         formControlName="agency"
                         p-label="Agência (sem digito)"
-                        p-mask="9999"
-                        p-pattern="^[0-9]{4}$"
+                        p-maxlength="4"
                         (p-blur)="dirtyMe('agency')"
                         p-placeholder="0000"
                         p-clean
@@ -93,6 +96,7 @@
                     p-type="primary"
                     (p-click)="SubmitBank()"
                     p-label="Cadastrar Banco"
+                    [p-loading]="loading"
                 >
                 </po-button>
             </div>

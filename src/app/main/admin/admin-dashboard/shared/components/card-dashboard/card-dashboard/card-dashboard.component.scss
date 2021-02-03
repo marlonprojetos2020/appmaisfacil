@@ -1,11 +1,11 @@
-.pending {
+.pendente {
     font-size: 24px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     background-color: #ffffff;
-    color: #15b3a1;
+    color: var(--color-pendente);
 
     .status-service {
         display: flex;
@@ -22,21 +22,21 @@
 
         &:before {
             content: "";
-            background-color: #15b3a1;
+            background-color: var(--color-pendente);
             width: 10px;
             height: 50px;
         }
     }
 }
 
-.cancel {
+.cancelado {
     font-size: 24px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     background-color: #ffffff;
-    color: #ef6008;
+    color: var(--color-cancelado);
 
     .status-service {
         display: flex;
@@ -53,7 +53,38 @@
 
         &:before {
             content: "";
-            background-color: #ef6008;
+            background-color: var(--color-cancelado);
+            width: 10px;
+            height: 50px;
+        }
+    }
+}
+
+.analise {
+    font-size: 24px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    color: var(--color-analise);
+
+    .status-service {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        p {
+            margin-left: 20px;
+        }
+
+        span {
+            margin-left: 20px;
+        }
+
+        &:before {
+            content: "";
+            background-color: var(--color-analise);
             width: 10px;
             height: 50px;
         }
@@ -62,4 +93,8 @@
 
 .quantity {
     padding-right: 16px;
+}
+
+.link {
+    text-decoration: none;
 }

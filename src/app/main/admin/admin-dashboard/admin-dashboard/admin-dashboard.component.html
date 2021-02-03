@@ -1,65 +1,68 @@
-<po-page-default p-title="Painel de Controle" [p-actions]="actions">
+<po-page-default p-title="Painel de Controle">
     <div class="po-container admin-dashboard-container">
         <div class="po-row po-mb-5">
             <div class="po-col po-lg-12">
                 <div class="users">
                     <span class="po-icon po-icon po-icon-users po-mr-2"></span>
                     <h3>Usuarios Cadastrados</h3>
-                    <span class="number-users">90</span>
+                    <span class="number-users">{{ totalUsers }}</span>
                 </div>
             </div>
         </div>
         <div class="po-row">
             <div class="po-col po-lg-6 po-mb-5">
                 <app-card-dashboard
-                    text="Extrato Pendente"
+                    routerLink="/admin/cobrancas"
+                    text="Cobranças em Análise"
                     icon="po-icon po-icon-clock"
-                    quantity="90"
-                    pending="false"
+                    [quantity]="cobrancaAnalise"
+                    analise="true"
                 ></app-card-dashboard>
             </div>
             <div class="po-col po-lg-6 po-mb-5">
                 <app-card-dashboard
-                    text="Extrato Pendente"
+                    routerLink="/admin/extratos"
+                    text="Extrato Análise"
                     icon="po-icon po-icon-clock"
-                    quantity="90"
-                    pending="true"
+                    [quantity]="extratoAnalise"
+                    analise="true"
                 ></app-card-dashboard>
             </div>
             <div class="po-col po-lg-6 po-mb-5">
-                <app-dashboard-accordion
-                    title="extrato"
-                    text="ola"
-                    isPending="false"
-                ></app-dashboard-accordion>
+                <app-card-dashboard
+                    routerLink="/admin/nota-fiscal"
+                    text="Notas Fiscais em Análise"
+                    icon="po-icon po-icon-clock"
+                    [quantity]="notaFiscalAnalise"
+                    analise="true"
+                ></app-card-dashboard>
             </div>
             <div class="po-col po-lg-6 po-mb-5">
-                <app-dashboard-accordion
-                    title="extrato"
-                    text="ola"
-                    isPending="false"
-                ></app-dashboard-accordion>
+                <app-card-dashboard
+                    routerLink="/admin/extratos"
+                    text="Extratos Pendente"
+                    icon="po-icon po-icon-clock"
+                    [quantity]="extratoPendente"
+                    pendente="true"
+                ></app-card-dashboard>
             </div>
             <div class="po-col po-lg-6 po-mb-5">
-                <app-dashboard-accordion
-                    title="extrato"
-                    text="ola"
-                    isPending="false"
-                ></app-dashboard-accordion>
+                <app-card-dashboard
+                    routerLink="/admin/nota-fiscal"
+                    text="Notas Fiscais em Cancelamento"
+                    icon="po-icon po-icon-clock"
+                    [quantity]="notaFiscalCancelamento"
+                    cancelado="true"
+                ></app-card-dashboard>
             </div>
             <div class="po-col po-lg-6 po-mb-5">
-                <app-dashboard-accordion
-                    title="extrato"
-                    text="ola"
-                    isPending="false"
-                ></app-dashboard-accordion>
-            </div>
-            <div class="po-col po-lg-6 po-mb-5">
-                <app-dashboard-accordion
-                    title="extrato"
-                    text="ola"
-                    isPending="false"
-                ></app-dashboard-accordion>
+                <app-card-dashboard
+                    routerLink="/admin/funcionarios/confirmar-demissao"
+                    text="Demissões Solicitadas"
+                    icon="po-icon po-icon-clock"
+                    [quantity]="funcionarioDemissao"
+                    cancelado="true"
+                ></app-card-dashboard>
             </div>
         </div>
     </div>

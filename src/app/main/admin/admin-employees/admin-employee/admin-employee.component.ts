@@ -13,7 +13,7 @@ import { DatatableColumn } from '../../../../shared/components/page-datatable/da
 export class AdminEmployeeComponent implements OnInit {
     pageActions: PoPageAction[] = [
         {
-            label: 'Confirmar Demissão',
+            label: 'Demissões Pendentes',
             url: '/admin/funcionarios/confirmar-demissao',
         },
     ];

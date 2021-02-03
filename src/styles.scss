@@ -11,6 +11,9 @@ $colorWarning: #b3ad15;
 $colorCancel: #ef6008;
 $colorText: #4b4b4b;
 $colorBgImage: #f1f1e9;
+$colorPendente: #6a2020;
+$colorAnalise: #b3ad15;
+$colorCancelado: #ef6009;
 
 :root {
     --color-primary-light-95: #{lighten($colorPrimary, 65%)};
@@ -39,6 +42,10 @@ $colorBgImage: #f1f1e9;
     --color-card: #{$colorLight2};
     --color-bgImage: #{$colorBgImage};
     --color-text: #{$colorText};
+
+    --color-analise: #{$colorAnalise};
+    --color-pendente: #{$colorPendente};
+    --color-cancelado: #{$colorCancelado};
 
     // Menu
     --color-menu-color-menu-sub-item-text: #{lighten($colorPrimary, 10%)};

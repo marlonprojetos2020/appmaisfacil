@@ -1,7 +1,19 @@
-<div [ngClass]="pending ? 'pending' : 'cancel'">
-    <div class="status-service">
-        <span [class]="icon"></span>
-        <p>{{ text }}</p>
+<a [routerLink]="routerLink" class="link">
+    <div
+        [ngClass]="
+            pendente
+                ? 'pendente'
+                : '' || analise
+                ? 'analise'
+                : '' || cancelado
+                ? 'cancelado'
+                : ''
+        "
+    >
+        <div class="status-service">
+            <span [class]="icon"></span>
+            <p>{{ text }}</p>
+        </div>
+        <p class="quantity">{{ quantity }}</p>
     </div>
-    <p class="quantity">{{ quantity }}</p>
-</div>
+</a>

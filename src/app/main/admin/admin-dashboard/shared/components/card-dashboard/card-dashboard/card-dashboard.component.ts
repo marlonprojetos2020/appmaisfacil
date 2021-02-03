@@ -9,8 +9,11 @@ export class CardDashboardComponent implements OnInit {
     @Input() text: string;
     @Input() quantity: number;
     @Input() icon: string;
+    @Input() routerLink: string;
 
-    @Input() pending: boolean;
+    @Input() pendente: boolean;
+    @Input() cancelado: boolean;
+    @Input() analise: boolean;
 
     constructor() {}
 

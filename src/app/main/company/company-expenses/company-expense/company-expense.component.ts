@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { DatatableColumn } from '../../../../shared/components/page-datatable/datatable-column';
 import {
     PoBreadcrumb,
+    PoModalAction,
     PoModalComponent,
     PoPageAction,
     PoTableAction,
@@ -77,6 +78,11 @@ export class CompanyExpenseComponent implements OnInit {
             url: '/empresa/despesas/nova-despesa',
         },
     ];
+
+    primaryAction: PoModalAction = {
+        label: 'Fechar',
+        action: () => this.poModalDespesa.close(),
+    };
 
     constructor() {}
 

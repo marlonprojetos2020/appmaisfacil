@@ -23,8 +23,11 @@ export class AdminBankStatementListComponent implements OnInit {
     @Input() image: string;
     @Input() pdf: string;
     idStatement: number;
-    @ViewChild('modalExtrato', { static: true })
-    poModalExtrato: PoModalComponent;
+    @ViewChild('modalExtratoPendente', { static: true })
+    poModalExtratoPendente: PoModalComponent;
+
+    @ViewChild('modalExtratoAprovado', { static: true })
+    poModalExtratoAprovado: PoModalComponent;
 
     ehPdf = false;
 
@@ -34,13 +37,13 @@ export class AdminBankStatementListComponent implements OnInit {
             this.adminBankStatementService
                 .aprovedStatement(this.idStatement)
                 .subscribe((data) => (this.status = data.statusText));
-            this.poModalExtrato.close();
+            this.poModalExtratoPendente.close();
         },
     };
 
     secondaryAction: PoModalAction = {
         label: 'Fechar',
-        action: () => this.poModalExtrato.close(),
+        action: () => this.poModalExtratoPendente.close(),
     };
 
     pageActions: PoPageAction[] = [];
@@ -56,9 +59,8 @@ export class AdminBankStatementListComponent implements OnInit {
 
     tableActions: PoTableAction[] = [
         {
-            label: 'Visualizar',
+            label: 'Aprovar Extrato',
             action: (item) => {
-                console.log(item);
                 this.prepareModal(item);
                 this.status = item.statusText;
                 this.bankName = item['bankAccount.bankName'];
@@ -80,6 +82,19 @@ export class AdminBankStatementListComponent implements OnInit {
         {
             label: 'Baixar Comprovante',
             action: (item) => window.open(item.attachmentUrl, '_blank'),
+            disabled: (item) =>
+                item.status !== 'OK' && item.status !== 'PENDING_REVIEW',
+        },
+        {
+            label: 'Visualizar Extrato',
+            action: (item) => {
+                this.poModalExtratoAprovado.open();
+                this.status = item.statusText;
+                this.bankName = item['bankAccount.bankName'];
+                this.companyName = item.bankAccountCompanyName;
+                this.image = item.attachmentUrl;
+                this.month = item.month;
+            },
             disabled: (item) => item.status !== 'OK',
         },
     ];
@@ -103,6 +118,13 @@ export class AdminBankStatementListComponent implements OnInit {
         },
     ];
 
+    // ModalExtratoAprovado
+
+    closeModalExtratoAprovado: PoModalAction = {
+        label: 'Fechar',
+        action: () => this.poModalExtratoAprovado.close(),
+    };
+
     constructor(
         private adminBankStatementService: AdminBankStatementsService
     ) {}
@@ -110,6 +132,6 @@ export class AdminBankStatementListComponent implements OnInit {
     ngOnInit(): void {}
 
     prepareModal(extrato: BankStatement): void {
-        this.poModalExtrato.open();
+        this.poModalExtratoPendente.open();
     }
 }

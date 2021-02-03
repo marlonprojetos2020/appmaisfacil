@@ -14,25 +14,29 @@
 >
     <div class="po-row">
         <div class="po-md-6">
-            <div class="div-img">
-                <img [src]="imagemCobranca" alt="" />
+            <div class="img-modal">
+                <img [src]="imagemCobranca" alt="Cobrança" />
             </div>
         </div>
-        <div class="po-md-6">
-            <h1>Imposto de Renda</h1>
-            <h2 class="po-mb-2">
-                <span>Empresa</span>
-                <!-- adicionar router link para o nome -->
-                {{ nomeEmpresa }}
-            </h2>
+        <div class="po-md-6 text-modal">
             <div class="po-row">
-                <div class="po-pl-0 po-md-6 po-mb-2">
+                <div class="po-md-12">
+                    <h1>{{ titulo }}</h1>
+                </div>
+                <div class="po-md-12">
+                    <h2 class="po-mb-2">
+                        <span>Empresa</span>
+                        <!-- adicionar router link para o nome -->
+                        {{ nomeEmpresa }}
+                    </h2>
+                </div>
+                <div class="po-md-6 po-mb-2">
                     <h3>
                         <span>Status</span>
                         {{ status }}
                     </h3>
                 </div>
-                <div class="po-pr-0 po-md-6 po-mb-2">
+                <div class="po-md-6 po-mb-2">
                     <h3>
                         <span>Tipo</span>
                         {{ tipo }}
@@ -40,20 +44,18 @@
                 </div>
             </div>
             <div class="po-row">
-                <div class="po-pl-0 po-md-6 po-mb-2">
+                <div class="po-md-6 po-mb-2">
                     <h3>
                         <span>Vencimento</span>
                         {{ vencimento }}
                     </h3>
                 </div>
-                <div class="po-pr-0 po-md-6 po-mb-2">
+                <div class="po-md-6 po-mb-2">
                     <h3>
                         <span>Valor</span>
                         {{ valor }}
                     </h3>
                 </div>
-            </div>
-            <div class="po-row">
                 <div class="po-md-12">
                     <po-upload
                         p-label="Anexar Comprovante de Pagamento"

@@ -56,7 +56,7 @@ export class CompanyBankStatementComponent implements OnInit {
                 this.bankName = item['bankAccount.bankName'];
                 this.nomeEmpresa;
                 this.month = item.month;
-                this.status = item.status;
+                this.status = item.statusText;
                 this.setUrlDocument(item.id);
             },
             disabled: (item) => item.status !== 'PENDING',
@@ -66,7 +66,7 @@ export class CompanyBankStatementComponent implements OnInit {
     columns: DatatableColumn[] = [
         {
             label: 'Status',
-            property: 'status',
+            property: 'statusText',
         },
         {
             label: 'Banco',

@@ -35,7 +35,7 @@ export class AdminCompanyExpenseComponent implements OnInit {
     serviceApi = `${environment.apiUrl}/company/expense`;
     tableActions: PoTableAction[] = [
         {
-            label: 'Visualizar',
+            label: 'Visualizar Despesa',
             action: (item) => {
                 this.prepareModal(item);
 

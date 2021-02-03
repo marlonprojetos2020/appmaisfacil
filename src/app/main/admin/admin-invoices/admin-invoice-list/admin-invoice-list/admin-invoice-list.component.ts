@@ -55,7 +55,7 @@ export class AdminInvoiceListComponent implements OnInit {
 
     tableActions: PoTableAction[] = [
         {
-            label: 'Enviar Nota',
+            label: 'Anexar Nota Fiscal',
             action: (item) => {
                 this.poModalEnviarNota.open();
                 this.companyName = item.companyName;
@@ -81,11 +81,10 @@ export class AdminInvoiceListComponent implements OnInit {
                     return;
                 }
             },
-            disabled: (item) =>
-                item.status === 'CANCELED' || item.status === 'OK',
+            disabled: (item) => item.status !== 'PROCESSING',
         },
         {
-            label: 'Visualizar Nota',
+            label: 'Confirmar Cancelamento',
             action: (item) => {
                 this.idInvoice = item.id;
                 this.poModalCancelarNota.open();
@@ -100,15 +99,14 @@ export class AdminInvoiceListComponent implements OnInit {
                         this.companyDocument = data.userCompany.cnpj;
                     });
                 this.imageInvoice = item.attachmentUrl;
+                this.emissionAt = item.emissionAt;
             },
-            disabled: (item) =>
-                item.status === 'CANCELED' || item.status === 'PRECESSING',
+            disabled: (item) => item.status !== 'WAITING_CANCELEMENT',
         },
         {
             label: 'Baixar Nota',
             action: (item) => window.open(item.attachmentUrl, '_blank'),
-            disabled: (item) =>
-                !item.attachmentUrl || item.status === 'CANCELED',
+            disabled: (item) => !item.attachmentUrl,
         },
     ];
 
@@ -153,7 +151,7 @@ export class AdminInvoiceListComponent implements OnInit {
     modalTableActions: PoTableAction[] = [];
 
     primaryAction: PoModalAction = {
-        label: 'Cancelar',
+        label: 'Fechar',
         action: () => this.poModalEnviarNota.close(),
     };
 

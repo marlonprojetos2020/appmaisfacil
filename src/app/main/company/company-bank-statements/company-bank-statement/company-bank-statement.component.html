@@ -10,14 +10,24 @@
 </app-page-datatable>
 
 <po-modal #modalExtrato [p-primary-action]="primaryAction">
-    <div class="po-row">
-        <div class="po-md-12 modal">
-            <div>
-                <h2 class="po-mb-2">Extrato {{ month }} - {{ bankName }}</h2>
-                <span>Cliente</span>
-                <p class="po-mb-2">{{ nomeEmpresa }}</p>
-                <span>Situação</span>
-                <p class="po-mb-3">{{ status }}</p>
+    <div class="po-row text-modal">
+        <div class="po-md-12">
+            <div class="po-md-12 po-mb-2">
+                <h2><span>Extrato</span> {{ month }} - {{ bankName }}</h2>
+            </div>
+            <div class="po-md-12 po-mb-2">
+                <h3>
+                    <span>Cliente</span>
+                    {{ nomeEmpresa }}
+                </h3>
+            </div>
+            <div class="po-md-12 po-mb-2">
+                <h3>
+                    <span>Situação</span>
+                    {{ status }}
+                </h3>
+            </div>
+            <div class="po-md-12">
                 <po-upload
                     p-drag-drop
                     p-drag-drop-height="150"

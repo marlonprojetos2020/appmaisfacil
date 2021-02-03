@@ -31,7 +31,7 @@ export class CompanyInvoiceComponent {
 
     tableActions: PoTableAction[] = [
         {
-            label: 'Cancelar',
+            label: 'Solicitar Cancelamento',
             action: (item) =>
                 this.companyInvoiceService
                     .cancelInvoice(item.id)

@@ -16,7 +16,23 @@
                                 formControlName="description"
                                 p-label="Título"
                                 p-placeholder="Ex: Aluguel"
+                                p-minlength="4"
+                                p-maxlength="100"
+                                p-error-pattern="Descrição Inválida"
+                                (p-blur)="dirtyMe('description')"
                             ></po-input>
+                            <app-invalid-feedback
+                                [formCtrl]="
+                                    formCompanyExpense.get('description')
+                                "
+                                [hasError]="
+                                    formCompanyExpense.get('description').errors
+                                        ?.required &&
+                                    formCompanyExpense.get('description').dirty
+                                "
+                            >
+                                Este campo é obrigatório
+                            </app-invalid-feedback>
                         </div>
                     </div>
                     <div class="po-row po-mb-3">
@@ -37,7 +53,18 @@
                                 p-placeholder="000,00"
                                 formControlName="value"
                                 p-label="Valor"
+                                (p-blur)="dirtyMe('value')"
                             ></po-number>
+                            <app-invalid-feedback
+                                [formCtrl]="formCompanyExpense.get('value')"
+                                [hasError]="
+                                    formCompanyExpense.get('value').errors
+                                        ?.required &&
+                                    formCompanyExpense.get('value').dirty
+                                "
+                            >
+                                Este campo é obrigatório
+                            </app-invalid-feedback>
                         </div>
                     </div>
                     <div class="po-row po-mb-3">
@@ -47,7 +74,18 @@
                                 formControlName="date"
                                 p-label="Data"
                                 [p-min-date]="startDate"
+                                (p-blur)="dirtyMe('date')"
                             ></po-datepicker>
+                            <app-invalid-feedback
+                                [formCtrl]="formCompanyExpense.get('date')"
+                                [hasError]="
+                                    formCompanyExpense.get('date').errors
+                                        ?.required &&
+                                    formCompanyExpense.get('date').dirty
+                                "
+                            >
+                                Este campo é obrigatório
+                            </app-invalid-feedback>
                         </div>
                     </div>
                 </form>
@@ -57,6 +95,7 @@
                             p-label="Póximo"
                             p-type="primary"
                             (p-click)="submitForm()"
+                            p
                         ></po-button>
                     </div>
                 </div>

@@ -41,7 +41,7 @@
                 <app-card-dashboard
                     routerLink="/admin/extratos"
                     text="Extratos Pendente"
-                    icon="po-icon po-icon-clock"
+                    icon="po-icon po-icon-exclamation"
                     [quantity]="extratoPendente"
                     pendente="true"
                 ></app-card-dashboard>
@@ -50,18 +50,18 @@
                 <app-card-dashboard
                     routerLink="/admin/nota-fiscal"
                     text="Notas Fiscais em Cancelamento"
-                    icon="po-icon po-icon-clock"
+                    icon="po-icon po-icon-exclamation"
                     [quantity]="notaFiscalCancelamento"
-                    cancelado="true"
+                    cancelamento="true"
                 ></app-card-dashboard>
             </div>
             <div class="po-col po-lg-6 po-mb-5">
                 <app-card-dashboard
                     routerLink="/admin/funcionarios/confirmar-demissao"
                     text="Demissões Solicitadas"
-                    icon="po-icon po-icon-clock"
+                    icon="po-icon po-icon-exclamation"
                     [quantity]="funcionarioDemissao"
-                    cancelado="true"
+                    cancelamento="true"
                 ></app-card-dashboard>
             </div>
         </div>

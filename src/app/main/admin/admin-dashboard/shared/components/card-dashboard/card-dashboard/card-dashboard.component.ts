@@ -12,7 +12,7 @@ export class CardDashboardComponent implements OnInit {
     @Input() routerLink: string;
 
     @Input() pendente: boolean;
-    @Input() cancelado: boolean;
+    @Input() cancelamento: boolean;
     @Input() analise: boolean;
 
     constructor() {}

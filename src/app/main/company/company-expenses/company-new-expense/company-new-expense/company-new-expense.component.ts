@@ -91,4 +91,8 @@ export class CompanyNewExpenseComponent implements OnInit {
         this.poNotificationService.success(message);
         this.location.back();
     }
+
+    dirtyMe(input): void {
+        this.formCompanyExpense.get(input).markAsDirty();
+    }
 }

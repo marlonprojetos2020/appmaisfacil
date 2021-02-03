@@ -95,7 +95,7 @@
                             p-label="Póximo"
                             p-type="primary"
                             (p-click)="submitForm()"
-                            p
+                            [p-disabled]="formCompanyExpense.invalid"
                         ></po-button>
                     </div>
                 </div>

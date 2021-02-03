@@ -23,8 +23,7 @@ export class AdminCompanyExpenseComponent implements OnInit {
     @Input() tipoDespesa: string = '';
     @Input() dataDespesa: string = '';
     @Input() valorDespesa: number;
-    @Input() imagemDespesa: string =
-        'https://pm1.narvii.com/6371/6ec0cd87bdc53c03fefa243aa0c9412b707c76eb_00.jpg';
+    @Input() imagemDespesa: string = '';
     @ViewChild('modalDespesa', { static: true })
     poModalDespesa: PoModalComponent;
 
@@ -44,7 +43,13 @@ export class AdminCompanyExpenseComponent implements OnInit {
                 this.dataDespesa = item.date;
                 this.nomeEmpresa = this.companyName;
                 this.tipoDespesa = item['type.label'];
+                this.imagemDespesa = item.proofOfPaymentUrl;
             },
+        },
+        {
+            label: 'Baixar Despesa',
+            action: (item) => window.open(item.proofOfPaymentUrl, '_blank'),
+            disabled: (item) => !item.proofOfPaymentUrl,
         },
     ];
     columns: DatatableColumn[] = [

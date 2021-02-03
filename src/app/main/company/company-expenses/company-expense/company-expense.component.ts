@@ -63,7 +63,7 @@ export class CompanyExpenseComponent implements OnInit {
             },
         },
         {
-            label: 'Baixar Cobrança',
+            label: 'Baixar Despesa',
             action: (item) => window.open(item.proofOfPaymentUrl, '_blank'),
         },
     ];

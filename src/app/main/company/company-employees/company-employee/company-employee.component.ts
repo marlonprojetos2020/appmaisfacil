@@ -30,7 +30,7 @@ export class CompanyEmployeeComponent implements OnInit {
             this.companyEmployeeService
                 .requestFired(this.companyEmployee.id)
                 .subscribe(
-                    (data) => (this.companyEmployee.status = data.status)
+                    (data) => (this.companyEmployee.status = data.statusText)
                 );
             this.poModalEmployee.close();
         },
@@ -68,7 +68,7 @@ export class CompanyEmployeeComponent implements OnInit {
     columns: DatatableColumn[] = [
         {
             label: 'Situação',
-            property: 'status',
+            property: 'statusText',
         },
         {
             label: 'Nome',

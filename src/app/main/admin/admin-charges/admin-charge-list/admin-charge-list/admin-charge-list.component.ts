@@ -75,7 +75,7 @@ export class AdminChargeListComponent implements OnInit {
     columns: DatatableColumn[] = [
         {
             label: 'Situação',
-            property: 'status',
+            property: 'statusText',
         },
         {
             label: 'Título',
@@ -116,7 +116,7 @@ export class AdminChargeListComponent implements OnInit {
                 label: 'Confirmar Pagamento',
                 action: (item) => {
                     this.prepareModal(item);
-                    this.status = item.status;
+                    this.status = item.statusText;
                     this.tipo = item['type.label'];
                     this.valor = item.value;
                     this.vencimento = item.dueDate;
@@ -139,7 +139,7 @@ export class AdminChargeListComponent implements OnInit {
                 label: 'Visualizar Comprovante',
                 action: (item) => {
                     this.poModalVisualizarComprovante.open();
-                    this.status = item.status;
+                    this.status = item.statusText;
                     this.tipo = item['type.label'];
                     this.valor = item.value;
                     this.vencimento = item.dueDate;
@@ -151,7 +151,7 @@ export class AdminChargeListComponent implements OnInit {
                     this.idCharge = item.id;
                     this.charge = item;
                 },
-                disabled: (item) => item.status !== 'PENDING_REVIEW',
+                disabled: (item) => item.status !== 'PAID',
             }
         );
     }
@@ -173,7 +173,7 @@ export class AdminChargeListComponent implements OnInit {
         this.poNotificationService.success(message);
         this.adminChargeService
             .paidCharge(this.idCharge)
-            .subscribe((data) => (this.status = data.status));
+            .subscribe((data) => (this.status = data.statusText));
         this.poModalComprovante.close();
     }
 }

@@ -20,7 +20,7 @@ export class AdminCompanyBankStatementComponent implements OnInit {
     columns: DatatableColumn[] = [
         {
             label: 'Status',
-            property: 'status',
+            property: 'statusText',
         },
         {
             label: 'Banco',

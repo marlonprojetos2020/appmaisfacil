@@ -33,7 +33,7 @@ export class AdminBankStatementListComponent implements OnInit {
         action: () => {
             this.adminBankStatementService
                 .aprovedStatement(this.idStatement)
-                .subscribe((data) => (this.status = data.status));
+                .subscribe((data) => (this.status = data.statusText));
             this.poModalExtrato.close();
         },
     };
@@ -60,7 +60,7 @@ export class AdminBankStatementListComponent implements OnInit {
             action: (item) => {
                 console.log(item);
                 this.prepareModal(item);
-                this.status = item.status;
+                this.status = item.statusText;
                 this.bankName = item['bankAccount.bankName'];
                 this.companyName = item.bankAccountCompanyName;
                 this.month = item.month;
@@ -87,7 +87,7 @@ export class AdminBankStatementListComponent implements OnInit {
     columns: DatatableColumn[] = [
         {
             label: 'Status',
-            property: 'status',
+            property: 'statusText',
         },
         {
             label: 'Empresa',

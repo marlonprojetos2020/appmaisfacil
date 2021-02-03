@@ -50,7 +50,7 @@ export class ChargeListComponent implements OnInit {
     columns: DatatableColumn[] = [
         {
             label: 'Situação',
-            property: 'status',
+            property: 'statusText',
         },
         {
             label: 'Título',
@@ -82,7 +82,7 @@ export class ChargeListComponent implements OnInit {
                 label: 'Pagar Cobrança',
                 action: (item) => {
                     this.prepareModal(item);
-                    this.status = item.status;
+                    this.status = item.statusText;
                     this.tipo = item['type.label'];
                     this.valor = item.value;
                     this.vencimento = item.dueDate;

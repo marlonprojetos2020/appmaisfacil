@@ -61,7 +61,7 @@ export class AdminInvoiceListComponent implements OnInit {
                 this.companyName = item.companyName;
                 this.clientName = item['client.name'];
                 this.clientDocument = item['client.document'];
-                this.status = item.status;
+                this.status = item.statusText;
                 this.adminInvoiceService
                     .getCompany(item.companyId)
                     .subscribe((data) => {
@@ -92,7 +92,7 @@ export class AdminInvoiceListComponent implements OnInit {
                 this.companyName = item.companyName;
                 this.clientName = item['client.name'];
                 this.clientDocument = item['client.document'];
-                this.status = item.status;
+                this.status = item.statusText;
                 this.totalAmount = item.totalAmount;
                 this.adminInvoiceService
                     .getCompany(item.companyId)
@@ -115,7 +115,7 @@ export class AdminInvoiceListComponent implements OnInit {
     columns: DatatableColumn[] = [
         {
             label: 'Situação',
-            property: 'status',
+            property: 'statusText',
         },
         {
             label: 'Empresa',

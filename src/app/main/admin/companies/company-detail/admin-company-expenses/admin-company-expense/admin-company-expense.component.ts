@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import {
     PoBreadcrumb,
+    PoModalAction,
     PoModalComponent,
     PoTableAction,
 } from '@po-ui/ng-components';
@@ -73,6 +74,11 @@ export class AdminCompanyExpenseComponent implements OnInit {
 
     breadcrumb: PoBreadcrumb = {
         items: [],
+    };
+
+    primaryAction: PoModalAction = {
+        label: 'Fechar',
+        action: () => this.poModalDespesa.close(),
     };
 
     constructor(

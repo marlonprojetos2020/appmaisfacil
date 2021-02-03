@@ -25,7 +25,7 @@ export class AdminCompanyInvoiceComponent implements OnInit {
     columns: DatatableColumn[] = [
         {
             label: 'Situação',
-            property: 'status',
+            property: 'statusText',
         },
         {
             label: 'Valor',

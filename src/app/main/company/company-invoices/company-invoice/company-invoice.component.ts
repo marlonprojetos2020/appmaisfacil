@@ -35,7 +35,7 @@ export class CompanyInvoiceComponent {
             action: (item) =>
                 this.companyInvoiceService
                     .cancelInvoice(item.id)
-                    .subscribe((data) => (item.status = data.status)),
+                    .subscribe((data) => (item.status = data.statusText)),
             disabled: (item) =>
                 item.status === 'CANCELED' ||
                 item.status === 'WAITING_CANCELEMENT',
@@ -45,7 +45,7 @@ export class CompanyInvoiceComponent {
     columns: DatatableColumn[] = [
         {
             label: 'Situação',
-            property: 'status',
+            property: 'statusText',
         },
         {
             label: 'Cliente',

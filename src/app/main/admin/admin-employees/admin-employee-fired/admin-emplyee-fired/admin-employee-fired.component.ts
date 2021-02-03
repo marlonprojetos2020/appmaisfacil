@@ -64,7 +64,7 @@ export class AdminEmployeeFiredComponent implements OnInit {
     columns: DatatableColumn[] = [
         {
             label: 'Situação',
-            property: 'status',
+            property: 'statusText',
         },
         {
             label: 'Empresa',

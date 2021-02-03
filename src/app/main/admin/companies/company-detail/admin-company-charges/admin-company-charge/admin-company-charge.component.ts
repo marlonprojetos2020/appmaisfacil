@@ -27,7 +27,8 @@ export class AdminCompanyChargeComponent implements OnInit {
             action: (item) =>
                 this.chargeService
                     .canceledCharge(item.id)
-                    .subscribe((data) => (item.status = data.status)),
+                    .subscribe((data) => (item.statusText = data.statusText)),
+            disabled: (item) => item.status === 'CANCELED',
         },
         {
             label: 'Baixar Cobraça',
@@ -38,7 +39,7 @@ export class AdminCompanyChargeComponent implements OnInit {
     columns: DatatableColumn[] = [
         {
             label: 'Status',
-            property: 'status',
+            property: 'statusText',
         },
         {
             label: 'Titulo',

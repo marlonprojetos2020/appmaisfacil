@@ -50,14 +50,16 @@
                 [p-columns]="modalTableColumns"
                 [p-items]="modalTableItems"
             ></po-table>
-            <hr />
-            <div class="div-totalPrice">
+
+            <div class="div-totalPrice po-mt-2">
                 <span>Total</span>
                 <p>R$ {{ totalAmount }}</p>
             </div>
         </div>
         <div class="po-md-12">
             <po-upload
+                p-drag-drop
+                p-drag-drop-height="150"
                 p-label="Anexar Nota Fiscal"
                 [p-url]="uploadDocumentUrl"
                 (p-success)="success()"

@@ -99,6 +99,8 @@
                             p-label="Solicitar Nota"
                             p-type="primary"
                             (p-click)="submitInvoice()"
+                            [p-disabled]="disabledButtonSubmitInvoice"
+                            [p-loading]="loading"
                         ></po-button>
                     </div>
                 </div>

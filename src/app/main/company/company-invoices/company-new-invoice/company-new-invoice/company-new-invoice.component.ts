@@ -12,6 +12,7 @@ import { Invoice } from '../models/invoice';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CompanyNewInvoiceService } from '../company-new-invoice.service';
 import { Product } from '../models/product';
+import { finalize } from 'rxjs/operators';
 
 @Component({
     templateUrl: 'company-new-invoice.component.html',
@@ -20,6 +21,10 @@ import { Product } from '../models/product';
 export class CompanyNewInvoiceComponent implements OnInit {
     @ViewChild('modalProduct', { static: true })
     poModalProduto: PoModalComponent;
+
+    disabledButtonSubmitInvoice = true;
+
+    loading = false;
 
     breadcrumb: PoBreadcrumb = {
         items: [
@@ -118,9 +123,15 @@ export class CompanyNewInvoiceComponent implements OnInit {
                 this.atuzalizaTotal();
 
                 if (this.itemsStepTwo.length === 0) {
-                    return (this.disabledStepTwo = true);
+                    return (
+                        (this.disabledStepTwo = true),
+                        (this.disabledButtonSubmitInvoice = true)
+                    );
                 } else {
-                    return (this.disabledStepTwo = false);
+                    return (
+                        (this.disabledStepTwo = false),
+                        (this.disabledButtonSubmitInvoice = false)
+                    );
                 }
             },
         },
@@ -222,6 +233,7 @@ export class CompanyNewInvoiceComponent implements OnInit {
         this.atuzalizaTotal();
 
         this.disabledStepTwo = false;
+        this.disabledButtonSubmitInvoice = false;
     }
 
     nextForm(): void {
@@ -229,13 +241,15 @@ export class CompanyNewInvoiceComponent implements OnInit {
     }
 
     submitInvoice(): void {
+        this.loading = true;
+
         this.newInvoice.items = this.itemsStepTwo;
 
         this.newInvoice.client = { id: this.idClient };
 
         this.companyNewInvoiceService
             .createInvoice(this.newInvoice)
-            .pipe()
+            .pipe(finalize(() => (this.loading = false)))
             .subscribe();
 
         this.router.navigateByUrl('/empresa/nota-fiscal');

@@ -1,17 +1,18 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { PoBreadcrumb } from '@po-ui/ng-components';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Client } from '../models/client';
-import { CompanyInvoicesNewClientService } from '../company-invoices-new-client.service';
+import { PoBreadcrumb } from '@po-ui/ng-components';
 import { Location } from '@angular/common';
+import { CompaniesService } from '../../../../main/admin/companies/companies.service';
 import { filter, tap } from 'rxjs/operators';
-import { AddressApiResponse } from '../../../../../admin/companies/model/address-api-response';
-import { CompaniesService } from '../../../../../admin/companies/companies.service';
+import { AddressApiResponse } from '../../../../main/admin/companies/model/address-api-response';
+import { ClientFormService } from '../client-form.service';
+import { Client } from '../models/client';
 
 @Component({
-    templateUrl: 'company-invoices-new-client.component.html',
+    templateUrl: 'client-form.component.html',
+    selector: 'app-client-form',
 })
-export class CompanyInvoicesNewClientComponent implements OnInit {
+export class ClientFormComponent implements OnInit {
     formClient: FormGroup;
 
     newClient: Client;
@@ -22,117 +23,6 @@ export class CompanyInvoicesNewClientComponent implements OnInit {
 
     @ViewChild('streetInput', { static: true }) streetInput: HTMLInputElement;
     @ViewChild('numberInput', { static: true }) numberInput: HTMLInputElement;
-
-    // options = [
-    //     {
-    //         label: 'Acre',
-    //         value: 'AC',
-    //     },
-    //     {
-    //         label: 'Alagoas',
-    //         value: 'AL',
-    //     },
-    //     {
-    //         label: 'Amazonas',
-    //         value: 'AM',
-    //     },
-    //     {
-    //         label: 'Amapá',
-    //         value: 'AP',
-    //     },
-    //     {
-    //         label: 'Bahia',
-    //         value: 'BA',
-    //     },
-    //     {
-    //         label: 'Ceará',
-    //         value: 'CE',
-    //     },
-    //     {
-    //         label: 'Distrito Federal',
-    //         value: 'DF',
-    //     },
-    //     {
-    //         label: 'Espírito Santo',
-    //         value: 'ES',
-    //     },
-    //     {
-    //         label: 'Goiás',
-    //         value: 'GO',
-    //     },
-    //     {
-    //         label: 'Maranhão',
-    //         value: 'MA',
-    //     },
-    //     {
-    //         label: 'Minas Gerais',
-    //         value: 'MG',
-    //     },
-    //     {
-    //         label: 'Mato Grosso do Sul',
-    //         value: 'MS',
-    //     },
-    //     {
-    //         label: 'Mato Grosso',
-    //         value: 'MT',
-    //     },
-    //     {
-    //         label: 'Pará',
-    //         value: 'PA',
-    //     },
-    //     {
-    //         label: 'Paraíba',
-    //         value: 'PB',
-    //     },
-    //     {
-    //         label: 'Pernambuco',
-    //         value: 'PE',
-    //     },
-    //     {
-    //         label: 'Piauí',
-    //         value: 'PI',
-    //     },
-    //     {
-    //         label: 'Paraná',
-    //         value: 'PR',
-    //     },
-    //     {
-    //         label: 'Rio de Janeiro',
-    //         value: 'RJ',
-    //     },
-    //     {
-    //         label: 'Rio Grande do Norte',
-    //         value: 'RN',
-    //     },
-    //     {
-    //         label: 'Rondônia',
-    //         value: 'RO',
-    //     },
-    //     {
-    //         label: 'Roraima',
-    //         value: 'RR',
-    //     },
-    //     {
-    //         label: 'Rio Grande do Sul',
-    //         value: 'RS',
-    //     },
-    //     {
-    //         label: 'Santa Catarina',
-    //         value: 'SC',
-    //     },
-    //     {
-    //         label: 'Sergipe',
-    //         value: 'SE',
-    //     },
-    //     {
-    //         label: 'São Paulo',
-    //         value: 'SP',
-    //     },
-    //     {
-    //         label: 'Tocatins',
-    //         value: 'TO',
-    //     },
-    // ];
 
     breadcrumb: PoBreadcrumb = {
         items: [
@@ -148,7 +38,7 @@ export class CompanyInvoicesNewClientComponent implements OnInit {
 
     constructor(
         private formBuilder: FormBuilder,
-        private companyInvoicesNewClient: CompanyInvoicesNewClientService,
+        private clientFormService: ClientFormService,
         private location: Location,
         private companiesService: CompaniesService
     ) {}
@@ -225,7 +115,7 @@ export class CompanyInvoicesNewClientComponent implements OnInit {
 
         console.log(this.newClient);
 
-        this.companyInvoicesNewClient
+        this.clientFormService
             .createClient(this.newClient)
             .subscribe((data) => console.log(data));
 

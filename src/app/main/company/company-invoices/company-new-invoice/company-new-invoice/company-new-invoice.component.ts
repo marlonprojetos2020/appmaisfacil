@@ -12,6 +12,7 @@ import { Invoice } from '../models/invoice';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CompanyNewInvoiceService } from '../company-new-invoice.service';
 import { Product } from '../models/product';
+import { finalize } from 'rxjs/operators';
 
 @Component({
     templateUrl: 'company-new-invoice.component.html',
@@ -74,6 +75,15 @@ export class CompanyNewInvoiceComponent implements OnInit {
             },
             disabled: () => !this.podeSelecionar,
         },
+        {
+            label: 'Editar',
+            action: (item) => {
+                const id = item.id;
+                this.router.navigateByUrl(
+                    `/empresa/nota-fiscal/emitir-nota/editar-cliente/${id}`
+                );
+            },
+        },
     ];
 
     // CONFIG STEP 2
@@ -102,7 +112,17 @@ export class CompanyNewInvoiceComponent implements OnInit {
         {
             label: 'Deletar',
             action: (item) => {
-                console.log(this.itemsStepTwo, item);
+                this.itemsStepTwo = this.itemsStepTwo.filter(
+                    (product) => product !== item
+                );
+
+                this.atuzalizaTotal();
+
+                if (this.itemsStepTwo.length === 0) {
+                    return (this.disabledStepTwo = true);
+                } else {
+                    return (this.disabledStepTwo = false);
+                }
             },
         },
     ];
@@ -216,6 +236,7 @@ export class CompanyNewInvoiceComponent implements OnInit {
 
         this.companyNewInvoiceService
             .createInvoice(this.newInvoice)
+            .pipe()
             .subscribe();
 
         this.router.navigateByUrl('/empresa/nota-fiscal');

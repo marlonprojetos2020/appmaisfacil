@@ -1,0 +1,285 @@
+<form [formGroup]="formClient">
+    <div class="po-row po-mb-4">
+        <div class="po-md-12">
+            <h2>Dados Básicos</h2>
+        </div>
+    </div>
+    <div class="po-row po-mb-4">
+        <div class="po-md-6">
+            <po-input
+                p-label="Nome"
+                formControlName="name"
+                p-clean="true"
+                p-placeholder="Digite seu nome"
+                p-required="true"
+                p-minlength="4"
+                p-maxlength="100"
+                p-error-pattern="Digite um nome válido"
+                (p-blur)="dirtyMe('name')"
+            ></po-input>
+            <app-invalid-feedback
+                [formCtrl]="formClient.get('name')"
+                [hasError]="
+                    formClient.get('name').errors?.required &&
+                    formClient.get('name').dirty
+                "
+            >
+                Este campo é obrigatório
+            </app-invalid-feedback>
+        </div>
+    </div>
+    <div class="po-row po-mb-4">
+        <div class="po-md-3">
+            <po-input
+                p-label="CPF ou CNPJ"
+                formControlName="document"
+                p-clean="true"
+                p-placeholder="Digite um documento"
+                p-required="true"
+                p-minlength="11"
+                p-maxlength="14"
+                p-mask="999999999999-99"
+                p-error-pattern="Digite um documento válido"
+                (p-blur)="dirtyMe('document')"
+            ></po-input>
+            <app-invalid-feedback
+                [formCtrl]="formClient.get('document')"
+                [hasError]="
+                    formClient.get('document').errors?.required &&
+                    formClient.get('document').dirty
+                "
+            >
+                Este campo é obrigatório
+            </app-invalid-feedback>
+        </div>
+    </div>
+    <div class="po-row po-mb-4">
+        <div class="po-md-12">
+            <h2>Incrições Municipal e Estadual</h2>
+        </div>
+    </div>
+    <div class="po-row po-mb-4">
+        <div class="po-md-6">
+            <po-input
+                p-label="Inscrição Municipal (IM)"
+                formControlName="municipalInscription"
+                p-clean="true"
+                p-placeholder="Digite o documento"
+                p-minlength="6"
+                p-maxlength="100"
+                p-required="true"
+                p-error-pattern="Digite um documento válido"
+                (p-blur)="dirtyMe('municipalInscription')"
+            ></po-input>
+            <app-invalid-feedback
+                [formCtrl]="formClient.get('municipalInscription')"
+                [hasError]="
+                    formClient.get('municipalInscription').errors?.required &&
+                    formClient.get('municipalInscription').dirty
+                "
+            >
+                Este campo é obrigatório
+            </app-invalid-feedback>
+        </div>
+        <div class="po-md-6 po-mb-4">
+            <po-input
+                p-label="Inscrição Estadual (IE)"
+                formControlName="stateInscription"
+                p-clean="true"
+                p-placeholder="Digite o documento"
+                p-minlength="6"
+                p-maxlength="100"
+                p-required="true"
+                p-error-pattern="Digite um documento válido"
+                (p-blur)="dirtyMe('stateInscription')"
+            ></po-input>
+            <app-invalid-feedback
+                [formCtrl]="formClient.get('stateInscription')"
+                [hasError]="
+                    formClient.get('stateInscription').errors?.required &&
+                    formClient.get('stateInscription').dirty
+                "
+            >
+                Este campo é obrigatório
+            </app-invalid-feedback>
+        </div>
+    </div>
+    <div class="po-row po-mb-4">
+        <div class="po-md-12">
+            <h2>Endereço</h2>
+        </div>
+    </div>
+    <ng-container formGroupName="address">
+        <div class="po-md-3 po-mt-2">
+            <po-input
+                p-label="CEP"
+                p-placeholder="00000-000"
+                p-clean
+                p-mask="99999-999"
+                p-pattern="^[0-9]{8}$"
+                p-error-pattern="Digite um cep válido"
+                formControlName="zipcode"
+                (p-blur)="dirtyMe('zipcode')"
+            ></po-input>
+            <app-invalid-feedback [hasError]="zipcodeError === true">
+                CEP não encontrado
+            </app-invalid-feedback>
+        </div>
+
+        <ng-container
+            *ngIf="
+                formClient.get('address.zipcode').valid && zipcodeError !== true
+            "
+        >
+            <po-input
+                #streetInput
+                class="po-md-12 po-mt-2"
+                p-label="Logradouro"
+                p-placeholder="Rua, Avenida, Alameda..."
+                p-clean
+                formControlName="street"
+            ></po-input>
+            <div>
+                <po-input
+                    #numberInput
+                    class="po-md-4 po-mt-2"
+                    p-label="Número"
+                    p-placeholder="0000"
+                    p-mask="999999999"
+                    p-clean
+                    p-minlength="1"
+                    p-maxlength="6"
+                    formControlName="number"
+                    p-required="true"
+                    (p-blur)="dirtyMe('address.number')"
+                ></po-input>
+                <app-invalid-feedback
+                    [formCtrl]="formClient.get('address.number')"
+                    [hasError]="
+                        formClient.get('address.number').errors?.required &&
+                        formClient.get('address.number').dirty
+                    "
+                >
+                    Este campo é obrigatório
+                </app-invalid-feedback>
+            </div>
+            <po-input
+                class="po-md-8 po-mt-2"
+                p-label="Complemento"
+                p-placeholder="Ap. 10"
+                p-clean
+                formControlName="complement"
+            ></po-input>
+
+            <po-input
+                class="po-md-4 po-mt-2"
+                p-label="Bairro"
+                p-placeholder="Digite o bairro"
+                p-clean
+                formControlName="neighborhood"
+            ></po-input>
+
+            <ng-container formGroupName="city">
+                <po-input
+                    class="po-md-4 po-mt-2"
+                    p-label="Cidade"
+                    p-placeholder="Digite a cidade"
+                    formControlName="name"
+                ></po-input>
+
+                <po-input
+                    class="po-md-4 po-mt-2"
+                    p-label="Estado"
+                    p-placeholder="Digite o estado"
+                    formControlName="stateProvince"
+                ></po-input>
+            </ng-container>
+        </ng-container>
+    </ng-container>
+
+    <div class="po-row po-mb-4">
+        <div class="po-md-12">
+            <h2 class="po-mt-4">Contato</h2>
+        </div>
+    </div>
+    <div class="po-row po-mb-4">
+        <div class="po-md-5">
+            <po-email
+                p-label="E-mail"
+                formControlName="email"
+                p-clean="true"
+                p-placeholder="Email..."
+                p-required="true"
+                p-error-pattern="Digite um e-mail válido"
+                (p-blur)="dirtyMe('email')"
+            ></po-email>
+            <app-invalid-feedback
+                [formCtrl]="formClient.get('email')"
+                [hasError]="
+                    formClient.get('email').errors?.required &&
+                    formClient.get('email').dirty
+                "
+            >
+                Este campo é obrigatório
+            </app-invalid-feedback>
+        </div>
+    </div>
+    <div class="po-row po-mb-4">
+        <div class="po-md-4">
+            <po-input
+                p-label="Telefone"
+                formControlName="phone"
+                p-mask="(99)99999?-9999"
+                p-clean="true"
+                p-placeholder="(00) 0000-0000"
+                p-required="true"
+                p-error-pattern="Digite um telefone válido"
+                (p-blur)="dirtyMe('phone')"
+            ></po-input>
+
+            <app-invalid-feedback
+                [formCtrl]="formClient.get('phone')"
+                [hasError]="
+                    formClient.get('phone').errors?.required &&
+                    formClient.get('phone').dirty
+                "
+            >
+                Este campo é obrigatório
+            </app-invalid-feedback>
+        </div>
+    </div>
+    <div class="po-row po-mb-4">
+        <div class="po-md-6">
+            <po-input
+                p-label="Nome pra Contato"
+                formControlName="contactName"
+                p-clean="true"
+                p-placeholder="Digite um nome"
+                p-minlength="4"
+                p-maxlength="100"
+                p-error-pattern="Digite um nome válido"
+                (p-blur)="dirtyMe('contactName')"
+            ></po-input>
+
+            <app-invalid-feedback
+                [formCtrl]="formClient.get('contactName')"
+                [hasError]="
+                    formClient.get('contactName').errors?.required &&
+                    formClient.get('contactName').dirty
+                "
+            >
+                Este campo é obrigatório
+            </app-invalid-feedback>
+        </div>
+    </div>
+    <div class="po-row">
+        <div class="po-md-3">
+            <po-button
+                p-type="primary"
+                p-label="Salvar"
+                (p-click)="submitForm()"
+                [p-disabled]="formClient.invalid"
+            ></po-button>
+        </div>
+    </div>
+</form>

@@ -9,6 +9,7 @@ import {
     PoUploadFileRestrictions,
 } from '@po-ui/ng-components';
 import { Location } from '@angular/common';
+import { finalize } from 'rxjs/operators';
 
 @Component({
     templateUrl: 'company-new-expense.component.html',
@@ -19,6 +20,8 @@ export class CompanyNewExpenseComponent implements OnInit {
     urlUploadDocument: string;
     restrictions: PoUploadFileRestrictions;
     startDate: any = '';
+
+    loading = false;
 
     breadcrumb: PoBreadcrumb = {
         items: [
@@ -68,10 +71,13 @@ export class CompanyNewExpenseComponent implements OnInit {
     }
 
     submitForm(): any {
+        this.loading = true;
+
         this.newCompanyExpense = this.formCompanyExpense.getRawValue() as CompanyExpense;
 
         this.companyExpenseService
             .createCompanyExpense(this.newCompanyExpense)
+            .pipe(finalize(() => (this.loading = false)))
             .subscribe((data) => {
                 this.setUrlDocument(data.id);
             });

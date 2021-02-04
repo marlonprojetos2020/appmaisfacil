@@ -23,4 +23,10 @@ export class ClientFormService {
             client
         );
     }
+
+    getCLient(id: number): Observable<Client> {
+        return this.httpClient.get<Client>(
+            `${environment.apiUrl}/company/client/${id}`
+        );
+    }
 }

@@ -12,7 +12,6 @@ import { Invoice } from '../models/invoice';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CompanyNewInvoiceService } from '../company-new-invoice.service';
 import { Product } from '../models/product';
-import { finalize } from 'rxjs/operators';
 
 @Component({
     templateUrl: 'company-new-invoice.component.html',

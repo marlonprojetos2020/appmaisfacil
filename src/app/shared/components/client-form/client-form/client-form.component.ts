@@ -1,12 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PoBreadcrumb } from '@po-ui/ng-components';
 import { Location } from '@angular/common';
 import { CompaniesService } from '../../../../main/admin/companies/companies.service';
-import { filter, tap } from 'rxjs/operators';
+import { filter, finalize, tap } from 'rxjs/operators';
 import { AddressApiResponse } from '../../../../main/admin/companies/model/address-api-response';
 import { ClientFormService } from '../client-form.service';
 import { Client } from '../models/client';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     templateUrl: 'client-form.component.html',
@@ -15,9 +16,13 @@ import { Client } from '../models/client';
 export class ClientFormComponent implements OnInit {
     formClient: FormGroup;
 
+    @Input() editedClient: Client;
+
     newClient: Client;
 
     zipcodeError = false;
+
+    loading = false;
 
     latestZipCode = '';
 
@@ -40,30 +45,59 @@ export class ClientFormComponent implements OnInit {
         private formBuilder: FormBuilder,
         private clientFormService: ClientFormService,
         private location: Location,
-        private companiesService: CompaniesService
+        private companiesService: CompaniesService,
+        private activatedRoute: ActivatedRoute
     ) {}
 
     ngOnInit(): void {
         this.formClient = this.formBuilder.group({
-            name: ['', Validators.required],
-            email: ['', Validators.required],
-            document: ['', Validators.required],
-            phone: ['', Validators.required],
-            contactName: ['', Validators.required],
-            municipalInscription: ['', Validators.required],
-            stateInscription: ['', Validators.required],
+            name: [this.editedClient?.name, Validators.required],
+            email: [this.editedClient?.email, Validators.required],
+            document: [this.editedClient?.document, Validators.required],
+            phone: [this.editedClient?.phone, Validators.required],
+            contactName: [this.editedClient?.contactName, Validators.required],
+            municipalInscription: [
+                this.editedClient?.municipalInscription,
+                Validators.required,
+            ],
+            stateInscription: [
+                this.editedClient?.stateInscription,
+                Validators.required,
+            ],
             address: this.formBuilder.group({
-                zipcode: ['', Validators.required],
-                street: ['', Validators.required],
-                number: ['', Validators.required],
-                neighborhood: ['', Validators.required],
-                complement: ['', Validators.required],
+                zipcode: [
+                    this.editedClient?.address.zipcode,
+                    Validators.required,
+                ],
+                street: [
+                    this.editedClient?.address.street,
+                    Validators.required,
+                ],
+                number: [
+                    this.editedClient?.address.number,
+                    Validators.required,
+                ],
+                neighborhood: [
+                    this.editedClient?.address.neighborhood,
+                    Validators.required,
+                ],
+                complement: [
+                    this.editedClient?.address.complement,
+                    Validators.required,
+                ],
                 city: this.formBuilder.group({
-                    name: ['', Validators.required],
-                    stateProvince: ['', Validators.required],
+                    name: [
+                        this.editedClient?.address.city.name,
+                        Validators.required,
+                    ],
+                    stateProvince: [
+                        this.editedClient?.address.city.stateProvince,
+                        Validators.required,
+                    ],
                 }),
             }),
         });
+
         this.formClient
             .get('address.zipcode')
             .valueChanges.pipe(filter((data) => data !== this.latestZipCode))
@@ -111,15 +145,26 @@ export class ClientFormComponent implements OnInit {
     }
 
     submitForm(): void {
+        this.loading = true;
+
         this.newClient = this.formClient.getRawValue() as Client;
 
-        console.log(this.newClient);
-
-        this.clientFormService
-            .createClient(this.newClient)
-            .subscribe((data) => console.log(data));
-
-        this.location.back();
+        if (!this.editedClient) {
+            this.clientFormService
+                .createClient(this.newClient)
+                .pipe(finalize(() => (this.loading = false)))
+                .subscribe();
+            this.location.back();
+        } else {
+            this.clientFormService
+                .editClient(
+                    this.newClient,
+                    this.activatedRoute.snapshot.params.id
+                )
+                .pipe(finalize(() => (this.loading = false)))
+                .subscribe();
+            this.location.back();
+        }
     }
 
     dirtyMe(input): void {

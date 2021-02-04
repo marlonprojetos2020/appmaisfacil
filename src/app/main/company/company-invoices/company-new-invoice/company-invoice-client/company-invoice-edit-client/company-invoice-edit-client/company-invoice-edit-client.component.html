@@ -4,6 +4,9 @@
     class="breadcrumb"
 >
     <po-container>
-        <app-client-form></app-client-form>
+        <app-client-form
+            *ngIf="client$ | async as client"
+            [editedClient]="client"
+        ></app-client-form>
     </po-container>
 </po-page-default>

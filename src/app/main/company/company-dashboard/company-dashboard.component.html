@@ -57,5 +57,35 @@
             >
             </app-dashboard-accordion>
         </div>
+        <div class="po-md-6">
+            <app-dashboard-accordion
+                [isPending]="true"
+                title="Demissões Solicitadas"
+                text="Você tem Demissões Solicitadas"
+                [items]="employeePendingFired"
+            >
+            </app-dashboard-accordion>
+        </div>
+    </div>
+    <div class="po-row po-mb-3">
+        <div class="po-md-6">
+            <app-dashboard-accordion
+                [isPending]="true"
+                title="Nota Fiscal"
+                text="Você tem Notas fiscais canceladas"
+                [items]="notaFiscalCancelada"
+            >
+            </app-dashboard-accordion>
+        </div>
+
+        <div class="po-md-6">
+            <app-dashboard-accordion
+                [isPending]="true"
+                title="Nota Fiscal"
+                text="Você tem Notas Fiscais em analise"
+                [items]="notaFiscalProcessando"
+            >
+            </app-dashboard-accordion>
+        </div>
     </div>
 </po-page-default>

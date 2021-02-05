@@ -8,33 +8,27 @@ import { environment } from '../../../../environments/environment';
 export class CompanyDashboardService {
     constructor(private httpClient: HttpClient) {}
 
-    getBillingPending(): any {
+    getBillingStatus(status: string): any {
         return this.httpClient.get(
-            `${environment.apiUrl}/company/billing/p/search?status=PENDING`
+            `${environment.apiUrl}/company/billing/p/search?status=${status}`
         );
     }
 
-    getBillingRefused(): any {
+    getStatementsStatus(status: string): any {
         return this.httpClient.get(
-            `${environment.apiUrl}/company/billing/p/search?status=REFUSED`
+            `${environment.apiUrl}/company/statement/p/search?status=${status}`
         );
     }
 
-    getBillingPendingReview(): any {
+    getEmployessStatus(status: string): any {
         return this.httpClient.get(
-            `${environment.apiUrl}/company/billing/p/search?status=PENDING_REVIEW`
+            `${environment.apiUrl}/company/employee/p/search?status=${status}`
         );
     }
 
-    getStatementsPending(): any {
+    getNotaFiscalStatus(status: string): any {
         return this.httpClient.get(
-            `${environment.apiUrl}/company/statement/p/search?status=PENDING`
-        );
-    }
-
-    getStatementsPendingReview(): any {
-        return this.httpClient.get(
-            `${environment.apiUrl}/company/statement/p/search?status=PENDING_REVIEW`
+            `${environment.apiUrl}/company/nota-fiscal/p/search?status=${status}`
         );
     }
 }

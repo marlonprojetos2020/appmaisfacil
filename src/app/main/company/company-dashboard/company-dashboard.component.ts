@@ -19,6 +19,12 @@ export class CompanyDashboardComponent implements OnInit {
 
     statementsPendingReview = [];
 
+    employeePendingFired = [];
+
+    notaFiscalCancelada = [];
+
+    notaFiscalProcessando = [];
+
     items: [];
 
     // Verifica se esta tudo ok pra alterar o estilo do accordion
@@ -32,14 +38,16 @@ export class CompanyDashboardComponent implements OnInit {
     ngOnInit(): void {
         // Get billings
 
-        this.companyDashboardService.getBillingPending().subscribe((data) =>
-            data.items.map((billing) => {
-                this.billingPending.push(billing.description);
-            })
-        );
+        this.companyDashboardService
+            .getBillingStatus('PENDING')
+            .subscribe((data) =>
+                data.items.map((billing) => {
+                    this.billingPending.push(billing.description);
+                })
+            );
 
         this.companyDashboardService
-            .getBillingRefused()
+            .getBillingStatus('REFUSED')
             .subscribe((data) =>
                 data.items.map((billing) =>
                     this.billingRefused.push(billing.description)
@@ -47,7 +55,7 @@ export class CompanyDashboardComponent implements OnInit {
             );
 
         this.companyDashboardService
-            .getBillingPendingReview()
+            .getBillingStatus('PENDING_REVIEW')
             .subscribe((data) => {
                 data.items.map((billing) =>
                     this.billingPendingReview.push(billing.description)
@@ -57,7 +65,7 @@ export class CompanyDashboardComponent implements OnInit {
         // Get Statements
 
         this.companyDashboardService
-            .getStatementsPending()
+            .getStatementsStatus('PENDING')
             .subscribe((data) =>
                 data.items.map((statements) =>
                     this.statementsPending.push(
@@ -73,7 +81,7 @@ export class CompanyDashboardComponent implements OnInit {
             );
 
         this.companyDashboardService
-            .getBillingPendingReview()
+            .getStatementsStatus('PENDING_REVIEW')
             .subscribe((data) =>
                 data.items.map((statements) =>
                     this.statementsPendingReview.push(
@@ -85,6 +93,36 @@ export class CompanyDashboardComponent implements OnInit {
                             ' ' +
                             statements.month
                     )
+                )
+            );
+
+        this.companyDashboardService
+            .getEmployessStatus('PENDING_FIRED')
+            .subscribe((data) =>
+                data.items.map((employee) =>
+                    this.employeePendingFired.push(employee.name)
+                )
+            );
+
+        this.companyDashboardService
+            .getNotaFiscalStatus('PROCESSING')
+            .subscribe((data) =>
+                data.items.map((nota) =>
+                    this.notaFiscalProcessando.push(
+                        nota.client.name +
+                            ' ' +
+                            'total' +
+                            ' ' +
+                            nota.totalAmount
+                    )
+                )
+            );
+
+        this.companyDashboardService
+            .getNotaFiscalStatus('WAITING_CANCELEMENT')
+            .subscribe((data) =>
+                data.items.map((nota) =>
+                    this.notaFiscalCancelada.push(nota.client.name)
                 )
             );
     }

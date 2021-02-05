@@ -1,5 +1,10 @@
 <po-accordion [ngClass]="isPending ? 'pending' : 'done'">
     <po-accordion-item [p-label]="title">
         {{ text }}
+        <ul>
+            <li *ngFor="let item of items">
+                {{ item }}
+            </li>
+        </ul>
     </po-accordion-item>
 </po-accordion>

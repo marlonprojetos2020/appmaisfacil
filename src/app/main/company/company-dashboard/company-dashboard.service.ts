@@ -22,7 +22,19 @@ export class CompanyDashboardService {
 
     getBillingPendingReview(): any {
         return this.httpClient.get(
-            `${environment.apiUrl}/comapny/billing/p/search?status=PENDING_REVIEW`
+            `${environment.apiUrl}/company/billing/p/search?status=PENDING_REVIEW`
+        );
+    }
+
+    getStatementsPending(): any {
+        return this.httpClient.get(
+            `${environment.apiUrl}/company/statement/p/search?status=PENDING`
+        );
+    }
+
+    getStatementsPendingReview(): any {
+        return this.httpClient.get(
+            `${environment.apiUrl}/company/statement/p/search?status=PENDING_REVIEW`
         );
     }
 }

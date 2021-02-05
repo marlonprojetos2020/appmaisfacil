@@ -1,6 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { PoTableAction } from '@po-ui/ng-components';
-import { DatatableColumn } from '../page-datatable/datatable-column';
 
 @Component({
     selector: 'app-dashboard-accordion',
@@ -10,7 +8,8 @@ import { DatatableColumn } from '../page-datatable/datatable-column';
 export class DashboardAccordionComponent implements OnInit {
     @Input() title = '';
     @Input() text = '';
-    @Input() isPending: boolean;
+    @Input() isPending;
+    @Input() items = [];
 
     constructor() {}
 

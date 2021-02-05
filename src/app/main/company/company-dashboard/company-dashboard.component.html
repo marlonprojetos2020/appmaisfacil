@@ -7,20 +7,53 @@
         disclaimerTextSuccess="Sucesso"
         disclaimerTextWarning="Erro"
     ></app-disclaimer>
-    <div class="po-row po-mt-2">
-        <div class="po-md-6 po-pl-0">
+    <div class="po-row po-mb-3 po-mt-2">
+        <div class="po-md-6">
             <app-dashboard-accordion
-                [isPending]="true"
-                title="Cobrança"
-                [text]="billingPending"
+                [isPending]="billingPendingOk"
+                title="Cobranças Pendentes"
+                text="Você tem Cobranças Pendentes"
+                [items]="billingPending"
             >
             </app-dashboard-accordion>
         </div>
-        <div class="po-md-6 po-pr-0">
+        <div class="po-md-6">
             <app-dashboard-accordion
-                [isPending]="false"
-                title="Extratos"
-                text="Olá esse é o acordion"
+                [isPending]="true"
+                title="Cobranças Recusadas"
+                text="Você tem Cobranças Recusadas"
+                [items]="billingRefused"
+            >
+            </app-dashboard-accordion>
+        </div>
+    </div>
+    <div class="po-row po-mb-3">
+        <div class="po-md-6">
+            <app-dashboard-accordion
+                [isPending]="billingPendingReviewOk"
+                title="Cobranças em Analise"
+                text="Você tem Cobranças Analise"
+                [items]="billingPendingReview"
+            >
+            </app-dashboard-accordion>
+        </div>
+        <div class="po-md-6">
+            <app-dashboard-accordion
+                [isPending]="true"
+                title="Extratos Pendentes"
+                text="Você tem Cobranças Pendentes"
+                [items]="statementsPending"
+            >
+            </app-dashboard-accordion>
+        </div>
+    </div>
+    <div class="po-row po-mb-3">
+        <div class="po-md-6">
+            <app-dashboard-accordion
+                [isPending]="true"
+                title="Extratos em Analise"
+                text="Você tem Extratos Bancario em Analise"
+                [items]="statementsPendingReview"
             >
             </app-dashboard-accordion>
         </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CompanyDashboardService } from './company-dashboard.service';
 
 @Component({
     templateUrl: './company-dashboard.component.html',
@@ -6,7 +7,19 @@ import { Component, OnInit } from '@angular/core';
 export class CompanyDashboardComponent implements OnInit {
     helpText = `Painel utilizado para transmitir todas as informações de contabilidade da sua empresa`;
 
-    constructor() {}
+    billingPending = '';
 
-    ngOnInit(): void {}
+    items: [];
+
+    constructor(private companyDashboardService: CompanyDashboardService) {}
+
+    ngOnInit(): void {
+        this.companyDashboardService
+            .getBillingPending()
+            .subscribe((data) =>
+                data.items.map(
+                    (billing) => (this.billingPending = billing.description)
+                )
+            );
+    }
 }

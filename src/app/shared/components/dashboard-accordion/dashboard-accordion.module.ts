@@ -5,10 +5,7 @@ import { PoAccordionModule } from '@po-ui/ng-components';
 
 @NgModule({
     declarations: [DashboardAccordionComponent],
-    imports: [
-        CommonModule,
-        PoAccordionModule,
-    ],
+    imports: [CommonModule, PoAccordionModule],
     exports: [DashboardAccordionComponent],
 })
 export class DashboardAccordionModule {}

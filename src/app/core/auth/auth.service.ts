@@ -1,41 +1,38 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { PoPageLogin } from '@po-ui/ng-templates';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
-import { environment } from '../../../environments/environment';
-import { JwtService } from './jwt.service';
-import { Credentials } from './model/credentials';
-import { UserDetails } from './model/user-details';
-import { RoleType } from './model/role-type';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Credentials} from './model/credentials';
+import {environment} from '../../../environments/environment';
+import {BehaviorSubject, Observable, throwError} from 'rxjs';
+import {PoPageLogin} from '@po-ui/ng-templates';
+import {catchError, tap} from 'rxjs/operators';
+import {JwtService} from './jwt.service';
+import {UserDetails} from './model/user-details';
+import {RoleType} from './model/role-type';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthService {
+
     private userDetails = new BehaviorSubject<UserDetails>(null);
 
     constructor(
-        private httpClient: HttpClient,
-        private jwtService: JwtService
+        private http: HttpClient,
+        private tokenService: JwtService,
     ) {
-        // verifica se já tem algo salvo
         this.notifyUserDetails();
-        this.isAdmin();
     }
 
     login(poPageLogin: PoPageLogin): Observable<Credentials> {
-        return this.httpClient
-            .post<Credentials>(`${environment.apiUrl}/auth`, poPageLogin)
-            .pipe(
-                tap((credentials) =>
-                    this.jwtService.saveCredentials(credentials)
-                )
-            )
-            .pipe(tap(() => this.notifyUserDetails()));
+        return this.loginTapPipe(this.http.post<Credentials>(`${environment.apiUrl}/auth`, poPageLogin));
     }
 
-    //  Retornando os dados do usuário e forma de usuário para que ele faça um subscribe
+    loginTapPipe(response: Observable<Credentials>): Observable<Credentials> {
+        return response
+            .pipe(tap(this.tokenService.saveCredentials.bind(this.tokenService)))
+            .pipe(tap(this.notifyUserDetails.bind(this)));
+    }
+
     getUserDetails(): Observable<UserDetails> {
         return this.userDetails.asObservable();
     }
@@ -45,77 +42,59 @@ export class AuthService {
     }
 
     logout(): void {
-        this.jwtService.clearStorage();
+        this.tokenService.clearStorage();
         this.userDetails.next(null);
     }
 
-    private notifyUserDetails(): void {
-        this.userDetails.next(this.jwtService.getUserDetails());
-    }
-
-    // AUTH GUARD && LOGIN GUARD - Confere se está logado
     isLogged(): boolean {
         return this.userDetails.value !== null;
     }
 
-    // ADMIN GUARD - confere se é ADMIN
+    isAnonymous(): boolean {
+        return !this.isLogged();
+    }
+
     isAdmin(): boolean {
-        if (!this.isLogged()) {
-            return false;
-        }
         return this.getUserDetailsSnapshot()
-            .roles.map((role) => role.value)
+            .roles.map(role => role.value)
             .includes(RoleType.ROLE_ADMIN);
     }
 
-    // COMPANY GUARD - confere se é CLIENT
     isCompany(): boolean {
-        if (!this.isLogged) {
-            return false;
-        }
         return this.getUserDetailsSnapshot()
-            .roles.map((role) => role.value)
+            .roles.map(role => role.value)
             .includes(RoleType.ROLE_COMPANY);
     }
 
-    // AUTH INTERCEPTOR - Retorna o acess token para o interceptor
     getAccessToken(): string {
-        const credentials = this.jwtService.getCredentials();
+        const credentials = this.tokenService.getCredentials();
         return credentials && credentials.accessToken;
     }
 
-    refreshToken(): Observable<any> {
-        // busca o novo token
-        const refreshToken = this.getRefreshToken();
-        // comando para retirar eventuais notificações de erro
-        const headers = { 'X-PO-No-Message': 'true' };
+    refreshToken(): string {
+        const credentials = this.tokenService.getCredentials();
+        return credentials && credentials.refreshToken;
+    }
 
-        return (
-            this.httpClient
-                .post<Credentials>(
-                    `${environment.apiUrl}/auth/refresh`,
-                    { refreshToken },
-                    { headers }
-                )
-                .pipe(
-                    tap((credentials) =>
-                        this.jwtService.saveCredentials(credentials)
-                    )
-                )
-                .pipe(tap(() => this.notifyUserDetails()))
-                //  em caso de erro faz logou e pede pra fazer um novo login
-                .pipe(
-                    catchError((err) => {
-                        this.logout();
-                        return throwError(err);
-                    })
-                )
+    refresh(): Observable<any> {
+        const refreshToken = this.refreshToken();
+        const headers = {'X-PO-No-Message': 'true'};
+
+        return this.loginTapPipe(this.http.post<Credentials>(`${environment.apiUrl}/auth/refresh`, {refreshToken}, {headers})
+            .pipe(catchError(err => {
+                this.logout();
+                return throwError(err);
+            })),
         );
     }
 
-    // Retorna o token
-    getRefreshToken(): string {
-        const credentials = this.jwtService.getCredentials();
-        return credentials && credentials.refreshToken;
+    updateUserDetails(userDetails: UserDetails): void {
+        this.tokenService.saveCredentials({...this.tokenService.getCredentials(), userDetails});
+        this.notifyUserDetails();
     }
+
+    private notifyUserDetails(): void {
+        this.userDetails.next(this.tokenService.getUserDetails());
+    }
+
 }

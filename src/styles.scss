@@ -112,6 +112,31 @@ body,
         margin-left: 0;
         width: 100%;
         padding-left: 50px;
+
+        span.po-icon.po-icon-lock.po-popup-icon-item {
+            color: var(--color-primary) !important;
+            stroke: var(--color-primary) !important;
+        }
+
+        span.po-icon.po-icon-user.po-popup-icon-item {
+            color: var(--color-primary) !important;
+            stroke: var(--color-primary) !important;
+        }
+
+        span.po-icon.po-icon-desktop.po-popup-icon-item {
+            color: var(--color-primary) !important;
+            stroke: var(--color-primary) !important;
+        }
+
+        span.po-icon.po-icon-exit.po-popup-icon-item {
+            color: var(--color-primary) !important;
+            stroke: var(--color-primary) !important;
+        }
+
+        span.po-icon.po-icon-device-desktop.po-popup-icon-item {
+            color: var(--color-primary) !important;
+            stroke: var(--color-primary) !important;
+        }
     }
 
     .po-menu-mobile {

@@ -29,7 +29,7 @@ export class CompanyLayoutComponent {
             url: '/alterar-senha',
         },
         {
-            icon: 'po-icon-desktop',
+            icon: 'po-icon-device-desktop',
             label: 'Acessar como Admin',
             url: '/admin',
             visible: this.authService.isAdmin(),

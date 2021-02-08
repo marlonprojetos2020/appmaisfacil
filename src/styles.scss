@@ -202,7 +202,7 @@ body,
         .po-accordion-item-header {
             padding-left: 28px;
             .po-accordion-item-header-title {
-                color: var(--color-danger);
+                color: var(--color-danger) !important;
             }
         }
     }
@@ -253,10 +253,6 @@ body,
         background-color: var(--color-backgorund);
         border: none;
         box-shadow: none;
-    }
-
-    .po-accordion-item-header {
-        background-color: #fff;
     }
 }
 
@@ -416,4 +412,8 @@ po-datepicker.ng-invalid.ng-dirty .po-input {
         max-width: 255px;
         overflow: auto;
     }
+}
+
+.po-accordion.po-container.po-container-no-padding {
+    background-color: #ffffff !important;
 }

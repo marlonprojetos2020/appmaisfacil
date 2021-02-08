@@ -38,34 +38,85 @@
                     </div>
                 </div>
             </div>
-            <div class="po-row">
-                <div class="po-lg-6 po-mt-5">
+            <div class="po-row po-mb-3 po-mt-2">
+                <div class="po-md-6">
                     <app-dashboard-accordion
-                        title="Cobranças"
-                        [isPending]="false"
-                        text="Olá esse é o acordion"
-                    ></app-dashboard-accordion>
+                        [isPending]="billingPendingOk"
+                        title="Cobranças Pendentes"
+                        [text]="billingPendingText"
+                        [items]="billingPending"
+                    >
+                    </app-dashboard-accordion>
                 </div>
-                <div class="po-lg-6 po-mt-5">
+                <div class="po-md-6">
                     <app-dashboard-accordion
-                        title="Extratos"
-                        [isPending]="false"
-                        text="Olá esse é o acordion"
-                    ></app-dashboard-accordion>
+                        [isPending]="billingRefusedOk"
+                        title="Cobranças Recusadas"
+                        [text]="billingRefusedText"
+                        [items]="billingRefused"
+                    >
+                    </app-dashboard-accordion>
                 </div>
-                <div class="po-lg-6 po-mt-5">
+            </div>
+            <div class="po-row po-mb-3">
+                <div class="po-md-6">
                     <app-dashboard-accordion
-                        title="Despesas"
-                        [isPending]="false"
-                        text="Olá esse é o acordion"
-                    ></app-dashboard-accordion>
+                        [isPending]="billingPendingReviewOk"
+                        title="Cobranças em Analise"
+                        [text]="billingPendingReviewText"
+                        [items]="billingPendingReview"
+                    >
+                    </app-dashboard-accordion>
                 </div>
-                <div class="po-lg-6 po-mt-5">
+                <div class="po-md-6">
                     <app-dashboard-accordion
+                        [isPending]="statementsPendingOk"
+                        title="Extratos Pendentes"
+                        [text]="statementsPendingText"
+                        [items]="statementsPending"
+                    >
+                    </app-dashboard-accordion>
+                </div>
+            </div>
+            <div class="po-row po-mb-3">
+                <div class="po-md-6">
+                    <app-dashboard-accordion
+                        [isPending]="statementsPendingReviewOk"
+                        title="Extratos em Analise"
+                        [text]="statementsPendingReviewText"
+                        [items]="statementsPendingReview"
+                    >
+                    </app-dashboard-accordion>
+                </div>
+                <div class="po-md-6">
+                    <app-dashboard-accordion
+                        [isPending]="employeePendingFiredOk"
+                        title="Demissões Solicitadas"
+                        [text]="employeePendingFiredText"
+                        [items]="employeePendingFired"
+                    >
+                    </app-dashboard-accordion>
+                </div>
+            </div>
+            <div class="po-row po-mb-3">
+                <div class="po-md-6">
+                    <app-dashboard-accordion
+                        [isPending]="notaFiscalCanceladaOk"
                         title="Nota Fiscal"
-                        [isPending]="false"
-                        text="Olá esse é o acordion"
-                    ></app-dashboard-accordion>
+                        [text]="notaFiscalCanceladaText"
+                        [items]="notaFiscalCancelada"
+                    >
+                    </app-dashboard-accordion>
+                </div>
+
+                <div class="po-md-6">
+                    <app-dashboard-accordion
+                        [isPending]="notaFiscalProcessandoOk"
+                        title="Nota Fiscal"
+                        [text]="notaFiscalProcessandoText"
+                        [items]="notaFiscalProcessando"
+                    >
+                    </app-dashboard-accordion>
                 </div>
             </div>
         </po-container>

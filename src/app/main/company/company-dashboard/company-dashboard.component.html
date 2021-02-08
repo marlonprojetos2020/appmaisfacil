@@ -12,16 +12,16 @@
             <app-dashboard-accordion
                 [isPending]="billingPendingOk"
                 title="Cobranças Pendentes"
-                text="Você tem Cobranças Pendentes"
+                [text]="billingPendingText"
                 [items]="billingPending"
             >
             </app-dashboard-accordion>
         </div>
         <div class="po-md-6">
             <app-dashboard-accordion
-                [isPending]="true"
+                [isPending]="billingRefusedOk"
                 title="Cobranças Recusadas"
-                text="Você tem Cobranças Recusadas"
+                [text]="billingRefusedText"
                 [items]="billingRefused"
             >
             </app-dashboard-accordion>
@@ -32,16 +32,16 @@
             <app-dashboard-accordion
                 [isPending]="billingPendingReviewOk"
                 title="Cobranças em Analise"
-                text="Você tem Cobranças Analise"
+                [text]="billingPendingReviewText"
                 [items]="billingPendingReview"
             >
             </app-dashboard-accordion>
         </div>
         <div class="po-md-6">
             <app-dashboard-accordion
-                [isPending]="true"
+                [isPending]="statementsPendingOk"
                 title="Extratos Pendentes"
-                text="Você tem Cobranças Pendentes"
+                [text]="statementsPendingText"
                 [items]="statementsPending"
             >
             </app-dashboard-accordion>
@@ -50,18 +50,18 @@
     <div class="po-row po-mb-3">
         <div class="po-md-6">
             <app-dashboard-accordion
-                [isPending]="true"
+                [isPending]="statementsPendingReviewOk"
                 title="Extratos em Analise"
-                text="Você tem Extratos Bancario em Analise"
+                [text]="statementsPendingReviewText"
                 [items]="statementsPendingReview"
             >
             </app-dashboard-accordion>
         </div>
         <div class="po-md-6">
             <app-dashboard-accordion
-                [isPending]="true"
+                [isPending]="employeePendingFiredOk"
                 title="Demissões Solicitadas"
-                text="Você tem Demissões Solicitadas"
+                [text]="employeePendingFiredText"
                 [items]="employeePendingFired"
             >
             </app-dashboard-accordion>
@@ -70,9 +70,9 @@
     <div class="po-row po-mb-3">
         <div class="po-md-6">
             <app-dashboard-accordion
-                [isPending]="true"
+                [isPending]="notaFiscalCanceladaOk"
                 title="Nota Fiscal"
-                text="Você tem Notas fiscais canceladas"
+                [text]="notaFiscalCanceladaText"
                 [items]="notaFiscalCancelada"
             >
             </app-dashboard-accordion>
@@ -80,9 +80,9 @@
 
         <div class="po-md-6">
             <app-dashboard-accordion
-                [isPending]="true"
+                [isPending]="notaFiscalProcessandoOk"
                 title="Nota Fiscal"
-                text="Você tem Notas Fiscais em analise"
+                [text]="notaFiscalProcessandoText"
                 [items]="notaFiscalProcessando"
             >
             </app-dashboard-accordion>

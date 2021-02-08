@@ -249,7 +249,7 @@ export class CompanyDetailDashboardComponent implements OnInit {
             { label: 'Inicio', link: '/admin' },
             { label: 'Empresas', link: '/admin/empresas' },
             {
-                label: user.name,
+                label: user.userCompany.fantasyName,
                 link: `/admin/empresa/${user.id}`,
             }
         );

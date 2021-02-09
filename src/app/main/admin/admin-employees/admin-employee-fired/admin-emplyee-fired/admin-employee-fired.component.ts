@@ -81,6 +81,8 @@ export class AdminEmployeeFiredComponent implements OnInit {
         {
             label: 'Admissão',
             property: 'admissionAt',
+            type: 'date',
+            format: 'dd/MM/yyyy',
         },
     ];
 

@@ -35,6 +35,8 @@ export class AdminCompanyEmployeeComponent implements OnInit {
         {
             label: 'Admissão',
             property: 'admissionAt',
+            type: 'date',
+            format: 'dd/MM/yyyy',
         },
     ];
 

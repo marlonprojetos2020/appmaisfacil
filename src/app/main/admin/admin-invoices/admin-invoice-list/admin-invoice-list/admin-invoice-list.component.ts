@@ -122,10 +122,14 @@ export class AdminInvoiceListComponent implements OnInit {
         {
             label: 'Valor',
             property: 'totalAmount',
+            type: 'currency',
+            format: 'BRL',
         },
         {
             label: 'Emissão',
             property: 'emissionAt',
+            type: 'date',
+            format: 'dd/MM/yyyy',
         },
     ];
 
@@ -143,6 +147,8 @@ export class AdminInvoiceListComponent implements OnInit {
         {
             label: 'Valor Unitário',
             property: 'amount',
+            type: 'currency',
+            format: 'BRL',
         },
     ];
 

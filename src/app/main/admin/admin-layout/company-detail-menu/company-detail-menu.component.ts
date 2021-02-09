@@ -68,7 +68,7 @@ export class CompanyDetailMenuComponent implements OnInit {
         this.companyDetailService.getUserCompany(this.id).subscribe((data) =>
             this.menuCompanyDetail.unshift({
                 icon: 'po-icon-arrow-left',
-                label: data.name,
+                label: data.userCompany.fantasyName,
                 link: `/admin/empresas`,
             })
         );

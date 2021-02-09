@@ -65,10 +65,14 @@ export class AdminCompanyExpenseComponent implements OnInit {
         {
             label: 'Vencimento',
             property: 'date',
+            type: 'date',
+            format: 'dd/MM/yyyy',
         },
         {
             label: 'Valor',
             property: 'value',
+            type: 'currency',
+            format: 'BRL',
         },
     ];
 

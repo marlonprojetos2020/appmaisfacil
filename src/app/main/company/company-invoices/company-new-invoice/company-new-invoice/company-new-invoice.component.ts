@@ -105,10 +105,14 @@ export class CompanyNewInvoiceComponent implements OnInit {
         {
             label: 'Valor unitário',
             property: 'amount',
+            type: 'currency',
+            format: 'BRL',
         },
         {
             label: 'Total',
             property: 'total',
+            type: 'currency',
+            format: 'BRL',
         },
     ];
 

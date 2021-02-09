@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {
     PoBreadcrumb,
+    PoNotificationService,
     PoPageAction,
     PoTableAction,
 } from '@po-ui/ng-components';
@@ -25,9 +26,12 @@ export class AdminCompanyChargeComponent implements OnInit {
         {
             label: 'Cancelar',
             action: (item) =>
-                this.chargeService
-                    .canceledCharge(item.id)
-                    .subscribe((data) => (item.statusText = data.statusText)),
+                this.chargeService.canceledCharge(item.id).subscribe((data) => {
+                    item.statusText = data.statusText;
+                    this.poNotificationService.success(
+                        'Cobrança cancelada com sucesso'
+                    );
+                }),
             disabled: (item) => item.status === 'CANCELED',
         },
         {
@@ -67,7 +71,8 @@ export class AdminCompanyChargeComponent implements OnInit {
         private router: Router,
         private activetedRoute: ActivatedRoute,
         private chargeService: AdminCompanyChargeService,
-        private companiesService: CompaniesService
+        private companiesService: CompaniesService,
+        private poNotificationService: PoNotificationService
     ) {}
 
     ngOnInit(): void {

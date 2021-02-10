@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PoBreadcrumb, PoNotificationService } from '@po-ui/ng-components';
-import { filter, tap } from 'rxjs/operators';
+import { filter, finalize, tap } from 'rxjs/operators';
 import { Company } from '../../../model/company';
 import { User } from '../../../model/user';
 import { CompaniesService } from '../../../companies.service';
@@ -29,6 +29,7 @@ export class CompanyFormComponent implements OnInit {
     newCompany: User;
     latestZipCode = '';
     zipcodeError = false;
+    loading = false;
 
     @Input() editedUser: User;
 
@@ -145,6 +146,8 @@ export class CompanyFormComponent implements OnInit {
     }
 
     submitForm(): void {
+        this.loading = true;
+
         this.newCompany.userCompany = this.formDadosEmpresa.getRawValue() as Company;
         if (!this.editedUser) {
             this.newCompany.roles = [
@@ -153,16 +156,20 @@ export class CompanyFormComponent implements OnInit {
                     label: 'Empresa',
                 },
             ];
-            this.companiesService.createUser(this.newCompany).subscribe(() => {
-                this.notificationService.success(
-                    `Usuário adicionado com sucesso`
-                );
-                this.router.navigate(['/admin', 'empresas']);
-            });
+            this.companiesService
+                .createUser(this.newCompany)
+                .pipe(finalize(() => (this.loading = false)))
+                .subscribe(() => {
+                    this.notificationService.success(
+                        `Usuário adicionado com sucesso`
+                    );
+                    this.router.navigate(['/admin', 'empresas']);
+                });
         } else {
             this.newCompany.version = this.editedUser.version;
             this.companiesService
                 .editUser(this.newCompany, this.editedUser.id)
+                .pipe(finalize(() => (this.loading = false)))
                 .subscribe(() => {
                     this.notificationService.success(
                         `Usuário editado com sucesso`

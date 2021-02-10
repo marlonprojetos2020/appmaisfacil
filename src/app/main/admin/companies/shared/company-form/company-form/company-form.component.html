@@ -1,18 +1,13 @@
 <po-page-edit
-<<<<<<< HEAD
-    [p-title]="editedUser ? editedUser.userCompany.fantasyName : 'Novo Usuário'"
+    [p-title]="editedUser ? editedUser.userCompany.fantasyName : 'Nova Empresa'"
     [p-breadcrumb]="breadcrumb"
     class="breadcrumb"
-=======
-    [p-title]="editedUser ? editedUser.userCompany.fantasyName : 'Nova Empresa'"
-    [p-breadcrumb]="breadcrumb" class="breadcrumb"
->>>>>>> 736c794eaf0b874fd7788d0b981d8baef02e95d4
 >
     <po-stepper #stepper>
         <po-step
             p-label="Usuário"
-            [p-can-active-next-step]="formDadosPessoais.invalid"
         >
+<!--            [p-can-active-next-step]="formDadosPessoais.invalid"-->
             <po-container>
                 <h2 class="po-ml-1 po-mb-3">Dados Pessoais</h2>
                 <form [formGroup]="formDadosPessoais">
@@ -135,8 +130,9 @@
                                 [hasError]="
                                     formDadosPessoais.get('userExtraData.cpf')
                                         .errors?.cpfInvalido &&
-                                        formDadosPessoais.get('userExtraData.cpf')
-                                        .dirty"
+                                    formDadosPessoais.get('userExtraData.cpf')
+                                        .dirty
+                                "
                             >
                                 Este CPF não existe
                             </app-invalid-feedback>
@@ -173,6 +169,18 @@
                         p-optional="true"
                     >
                     </po-input>
+<!--                        (p-blur)="dirtyMe('userCompany.cnpj')"-->
+
+<!--                    <app-invalid-feedback-->
+<!--                        [formCtrl]="formDadosPessoais.get('userCompany.cnpj')"-->
+<!--                        [hasError]="-->
+<!--                            formDadosPessoais.get('userCompany.cnpj').value-->
+<!--                                ?.cnpjInvalido &&-->
+<!--                            formDadosPessoais.get('userCompany.cnpj').dirty-->
+<!--                        "-->
+<!--                    >-->
+<!--                        Este CNPJ não existe-->
+<!--                    </app-invalid-feedback>-->
 
                     <po-input
                         class="po-sm-12 po-mt-2"
@@ -264,15 +272,19 @@
                                 formControlName="zipcode"
                                 p-optional="true"
                             ></po-input>
-                            <app-invalid-feedback [hasError]="zipcodeError === true">
+                            <app-invalid-feedback
+                                [hasError]="zipcodeError === true"
+                            >
                                 CEP não encontrado
                             </app-invalid-feedback>
                         </div>
 
-                        <ng-container *ngIf="
+                        <ng-container
+                            *ngIf="
                                 formDadosEmpresa.get('address.zipcode').valid &&
                                 zipcodeError !== true
-                            ">
+                            "
+                        >
                             <po-input
                                 #streetInput
                                 class="po-md-12 po-mt-2"

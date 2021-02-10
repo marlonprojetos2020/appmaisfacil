@@ -8,8 +8,8 @@ import { User } from '../../../model/user';
 import { CompaniesService } from '../../../companies.service';
 import { AddressApiResponse } from '../../../model/address-api-response';
 import { RoleType } from 'src/app/core/auth/model/role-type';
-// import { cpfValidator } from 'src/app/shared/validators/cpfValidator.directive';
 import { cpfValidator } from 'src/app/shared/validators/cpfValidator.validator';
+import { cnpjValidator } from '../../../../../../shared/validators/cnpjValidator.validator';
 
 @Component({
     selector: 'app-company-form',
@@ -40,7 +40,7 @@ export class CompanyFormComponent implements OnInit {
         private formBuilder: FormBuilder,
         private companiesService: CompaniesService,
         private notificationService: PoNotificationService,
-        private router: Router,
+        private router: Router
     ) {}
 
     ngOnInit(): void {
@@ -56,12 +56,18 @@ export class CompanyFormComponent implements OnInit {
                     this.editedUser?.userExtraData.phone,
                     Validators.required,
                 ],
-                cpf: [this.editedUser?.userExtraData.cpf, [Validators.required, cpfValidator]],
+                cpf: [
+                    this.editedUser?.userExtraData.cpf,
+                    [Validators.required, cpfValidator],
+                ],
             }),
         });
 
         this.formDadosEmpresa = this.formBuilder.group({
-            cnpj: [this.editedUser?.userCompany.cnpj],
+            cnpj: [
+                this.editedUser?.userCompany.cnpj,
+                [Validators.required, cnpjValidator],
+            ],
             socialReason: [this.editedUser?.userCompany.socialReason],
             fantasyName: [this.editedUser?.userCompany.fantasyName],
             type: [this.editedUser?.userCompany.type],
@@ -141,10 +147,12 @@ export class CompanyFormComponent implements OnInit {
     submitForm(): void {
         this.newCompany.userCompany = this.formDadosEmpresa.getRawValue() as Company;
         if (!this.editedUser) {
-            this.newCompany.roles = [{
-                value: RoleType.ROLE_COMPANY,
-                label: 'Empresa',
-            }];
+            this.newCompany.roles = [
+                {
+                    value: RoleType.ROLE_COMPANY,
+                    label: 'Empresa',
+                },
+            ];
             this.companiesService.createUser(this.newCompany).subscribe(() => {
                 this.notificationService.success(
                     `Usuário adicionado com sucesso`

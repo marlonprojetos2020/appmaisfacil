@@ -142,7 +142,6 @@ export class CompanyFormComponent implements OnInit {
     nextForm(): void {
         this.stepper.next();
         this.newCompany = this.formDadosPessoais.getRawValue() as User;
-        console.log(this.newCompany);
     }
 
     submitForm(): void {

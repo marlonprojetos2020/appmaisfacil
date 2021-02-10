@@ -130,7 +130,7 @@ export class CompanyDashboardComponent implements OnInit {
                                 ' - ' +
                                 'Mês Referente:' +
                                 ' ' +
-                                statements.month
+                                statements.monthText
                         );
                         this.statementsPendingOk = true;
                         this.statementsPendingText =
@@ -154,7 +154,7 @@ export class CompanyDashboardComponent implements OnInit {
                                 ' - ' +
                                 'Mês Referente:' +
                                 ' ' +
-                                statements.month
+                                statements.monthText
                         );
                         this.statementsPendingReviewOk = true;
                         this.statementsPendingReviewText =

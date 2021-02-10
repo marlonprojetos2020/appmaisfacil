@@ -114,7 +114,7 @@ export class AdminBankStatementListComponent implements OnInit {
         },
         {
             label: 'Mês de Referência',
-            property: 'month',
+            property: 'monthText',
         },
     ];
 

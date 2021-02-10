@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { PoBreadcrumb, PoPageAction, PoTableAction } from '@po-ui/ng-components';
+import {
+    PoBreadcrumb,
+    PoPageAction,
+    PoTableAction,
+} from '@po-ui/ng-components';
 import { environment } from '../../../../../../../../environments/environment';
 import { DatatableColumn } from '../../../../../../../shared/components/page-datatable/datatable-column';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,7 +19,10 @@ export class AdminCompanyAssociateComponent implements OnInit {
     tableActions: PoTableAction[] = [
         {
             label: 'Editar',
-            action: (item) => this.router.navigate(['editar', item.id], { relativeTo: this.activetedRoute }),
+            action: (item) =>
+                this.router.navigate(['editar', item.id], {
+                    relativeTo: this.activetedRoute,
+                }),
         },
         {
             label: 'Baixar RG',
@@ -59,12 +66,14 @@ export class AdminCompanyAssociateComponent implements OnInit {
     constructor(
         private router: Router,
         private activetedRoute: ActivatedRoute,
-        private companiesService: CompaniesService,
+        private companiesService: CompaniesService
     ) {}
 
     ngOnInit(): void {
         const id = this.activetedRoute.snapshot.params.id;
-        this.companiesService.getUserCompany(id).subscribe(data => this.setBreadcrumb(data));
+        this.companiesService
+            .getUserCompany(id)
+            .subscribe((data) => this.setBreadcrumb(data));
         this.pageActions.push({
             label: 'Adicionar Sócio',
             icon: 'po-icon-plus-circle',
@@ -77,9 +86,8 @@ export class AdminCompanyAssociateComponent implements OnInit {
         this.breadcrumb.items.push(
             { label: 'Inicio', link: '/admin' },
             { label: 'Empresas', link: '/admin/empresas' },
-            { label: user.userCompany.fantasyName, link: `/admin/empresa/${user.id}` },
-            { label: 'Sócios' },
+            { label: user.name, link: `/admin/empresa/${user.id}` },
+            { label: 'Sócios' }
         );
-
     }
 }

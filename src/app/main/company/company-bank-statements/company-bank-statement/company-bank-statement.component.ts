@@ -74,7 +74,7 @@ export class CompanyBankStatementComponent implements OnInit {
         },
         {
             label: 'Mês de Referência',
-            property: 'month',
+            property: 'monthText',
         },
     ];
 

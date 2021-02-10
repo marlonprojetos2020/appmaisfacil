@@ -89,6 +89,7 @@ export class AdminChargeListComponent implements OnInit {
             format: 'dd/MM/yyyy',
         },
         { label: 'Valor', property: 'value', type: 'currency', format: 'BRL' },
+        { label: 'Empresa', property: 'companyName' },
     ];
 
     restrictions: PoUploadFileRestrictions = {
@@ -157,6 +158,14 @@ export class AdminChargeListComponent implements OnInit {
                     this.charge = item;
                 },
                 disabled: (item) => item.status !== 'PAID',
+            },
+            {
+                label: 'Visitar Empresa',
+                action: (item) => {
+                    this.router.navigateByUrl(
+                        `/admin/empresa/${item.companyId}`
+                    );
+                },
             }
         );
     }

@@ -1,6 +1,7 @@
 <po-page-edit
     [p-title]="editedUser ? editedUser.userCompany.fantasyName : 'Novo Usuário'"
-    [p-breadcrumb]="breadcrumb" class="breadcrumb"
+    [p-breadcrumb]="breadcrumb"
+    class="breadcrumb"
 >
     <po-stepper #stepper>
         <po-step
@@ -106,8 +107,6 @@
                                 p-placeholder="000.000.000-00"
                                 p-clean
                                 p-mask="999.999.999-99"
-                                p-pattern="^[0-9]{11}$"
-                                p-error-pattern="Digite um CPF válido"
                                 p-required="true"
                                 (p-blur)="dirtyMe('userExtraData.cpf')"
                             ></po-input>
@@ -123,6 +122,18 @@
                                 "
                             >
                                 Este campo é obrigatório
+                            </app-invalid-feedback>
+                            <app-invalid-feedback
+                                [formCtrl]="
+                                    formDadosPessoais.get('userExtraData.cpf')
+                                "
+                                [hasError]="
+                                    formDadosPessoais.get('userExtraData.cpf')
+                                        .errors?.cpfInvalido &&
+                                        formDadosPessoais.get('userExtraData.cpf')
+                                        .dirty"
+                            >
+                                Este CPF não existe
                             </app-invalid-feedback>
                         </div>
                     </div>
@@ -248,19 +259,15 @@
                                 formControlName="zipcode"
                                 p-optional="true"
                             ></po-input>
-                            <app-invalid-feedback
-                                [hasError]="zipcodeError === true"
-                            >
+                            <app-invalid-feedback [hasError]="zipcodeError === true">
                                 CEP não encontrado
                             </app-invalid-feedback>
                         </div>
 
-                        <ng-container
-                            *ngIf="
+                        <ng-container *ngIf="
                                 formDadosEmpresa.get('address.zipcode').valid &&
                                 zipcodeError !== true
-                            "
-                        >
+                            ">
                             <po-input
                                 #streetInput
                                 class="po-md-12 po-mt-2"

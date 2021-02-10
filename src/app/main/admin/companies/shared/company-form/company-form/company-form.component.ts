@@ -8,6 +8,8 @@ import { User } from '../../../model/user';
 import { CompaniesService } from '../../../companies.service';
 import { AddressApiResponse } from '../../../model/address-api-response';
 import { RoleType } from 'src/app/core/auth/model/role-type';
+// import { cpfValidator } from 'src/app/shared/validators/cpfValidator.directive';
+import { cpfValidator } from 'src/app/shared/validators/cpfValidator.validator';
 
 @Component({
     selector: 'app-company-form',
@@ -38,7 +40,7 @@ export class CompanyFormComponent implements OnInit {
         private formBuilder: FormBuilder,
         private companiesService: CompaniesService,
         private notificationService: PoNotificationService,
-        private router: Router
+        private router: Router,
     ) {}
 
     ngOnInit(): void {
@@ -54,7 +56,7 @@ export class CompanyFormComponent implements OnInit {
                     this.editedUser?.userExtraData.phone,
                     Validators.required,
                 ],
-                cpf: [this.editedUser?.userExtraData.cpf, Validators.required],
+                cpf: [this.editedUser?.userExtraData.cpf, [Validators.required, cpfValidator]],
             }),
         });
 
@@ -133,15 +135,16 @@ export class CompanyFormComponent implements OnInit {
     nextForm(): void {
         this.stepper.next();
         this.newCompany = this.formDadosPessoais.getRawValue() as User;
+        console.log(this.newCompany);
     }
 
     submitForm(): void {
         this.newCompany.userCompany = this.formDadosEmpresa.getRawValue() as Company;
         if (!this.editedUser) {
-            this.newCompany.roles.push({
+            this.newCompany.roles = [{
                 value: RoleType.ROLE_COMPANY,
                 label: 'Empresa',
-            });
+            }];
             this.companiesService.createUser(this.newCompany).subscribe(() => {
                 this.notificationService.success(
                     `Usuário adicionado com sucesso`

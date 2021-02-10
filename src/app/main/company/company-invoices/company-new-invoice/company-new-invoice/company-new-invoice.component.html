@@ -122,6 +122,7 @@
                     p-label="Descrição do Produto"
                     formControlName="title"
                     p-clean="true"
+                    p-placeholder="Produto ..."
                     p-required="true"
                     (p-blur)="dirtyMe('title')"
                     p-error-pattern="Nome Inválido"
@@ -142,6 +143,7 @@
                 <po-number
                     p-label="Quantidade"
                     formControlName="quantity"
+                    p-placeholder="000"
                     p-clean="true"
                     p-required="true"
                     (p-blur)="dirtyMe('quantity')"
@@ -161,6 +163,7 @@
                     p-label="Valor Unitário"
                     formControlName="amount"
                     p-clean="true"
+                    p-placeholder="R$ 0000,00"
                     p-required="true"
                     (p-blur)="dirtyMe('amount')"
                 ></po-number>
@@ -180,6 +183,7 @@
                 <po-number
                     p-readonly="true"
                     p-label="Total"
+                    p-placeholder="R$ 0000,00"
                     formControlName="total"
                 ></po-number>
             </div>

@@ -54,10 +54,14 @@ export class CompanyInvoiceComponent {
         {
             label: 'Emissão',
             property: 'emissionAt',
+            type: 'date',
+            format: 'dd/MM/yyyy',
         },
         {
             label: 'Valor',
             property: 'totalAmount',
+            type: 'currency',
+            format: 'BRL',
         },
     ];
 

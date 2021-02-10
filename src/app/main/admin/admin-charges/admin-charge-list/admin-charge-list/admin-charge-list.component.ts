@@ -82,8 +82,13 @@ export class AdminChargeListComponent implements OnInit {
             property: 'description',
         },
         { label: 'Tipo', property: 'type.label' },
-        { label: 'Vencimento', property: 'dueDate' },
-        { label: 'Valor', property: 'value' },
+        {
+            label: 'Vencimento',
+            property: 'dueDate',
+            type: 'date',
+            format: 'dd/MM/yyyy',
+        },
+        { label: 'Valor', property: 'value', type: 'currency', format: 'BRL' },
     ];
 
     restrictions: PoUploadFileRestrictions = {

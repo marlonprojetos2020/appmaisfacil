@@ -37,7 +37,7 @@ export class ChargeFormComponent implements OnInit {
 
     ngOnInit(): void {
         this.restrictions = {
-            allowedExtensions: ['.txt', '.pdf', '.png', '.jpeg'],
+            allowedExtensions: ['.txt', '.pdf', '.png', '.jpeg', '.jpg'],
             maxFileSize: 5242880,
             maxFiles: 1,
         };

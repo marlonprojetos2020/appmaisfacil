@@ -4,7 +4,7 @@ import { PoBreadcrumb, PoPageAction } from '@po-ui/ng-components';
 import { Observable } from 'rxjs';
 import { CompaniesService } from '../../../companies.service';
 import { User } from '../../../model/user';
-import { CompanyDashboardService } from '../../../../../company/company-dashboard/company-dashboard.service';
+import { CompanyDetailDashboardService } from '../company-detail-dashboard.service';
 
 @Component({
     templateUrl: './company-detail-dashboard.component.html',
@@ -13,6 +13,8 @@ import { CompanyDashboardService } from '../../../../../company/company-dashboar
 export class CompanyDetailDashboardComponent implements OnInit {
     title = '';
     company$: Observable<User> = null;
+
+    companyId: number;
 
     breadcrumb: PoBreadcrumb = {
         items: [],
@@ -82,7 +84,7 @@ export class CompanyDetailDashboardComponent implements OnInit {
     constructor(
         private activetedRoute: ActivatedRoute,
         private companyDetailService: CompaniesService,
-        private companyDashboardService: CompanyDashboardService
+        private companyDetailDashboardService: CompanyDetailDashboardService
     ) {}
 
     ngOnInit(): void {
@@ -94,8 +96,10 @@ export class CompanyDetailDashboardComponent implements OnInit {
             .getUserCompany(this.activetedRoute.snapshot.params.id)
             .subscribe((data) => this.setBreadcrumb(data));
 
-        this.companyDashboardService
-            .getBillingStatus('PENDING')
+        this.companyId = this.activetedRoute.snapshot.params.id;
+
+        this.companyDetailDashboardService
+            .getBilling('PENDING', this.companyId)
             .subscribe((data) => {
                 if (data.items.length === 0) {
                     this.billingPendingText = 'Não há cobrancas pendentes';
@@ -109,8 +113,8 @@ export class CompanyDetailDashboardComponent implements OnInit {
                 }
             });
 
-        this.companyDashboardService
-            .getBillingStatus('REFUSED')
+        this.companyDetailDashboardService
+            .getBilling('REFUSED', this.companyId)
             .subscribe((data) => {
                 if (data.items.length === 0) {
                     this.billingRefusedText = 'Não há cobranças recusadas';
@@ -124,8 +128,8 @@ export class CompanyDetailDashboardComponent implements OnInit {
                 }
             });
 
-        this.companyDashboardService
-            .getBillingStatus('PENDING_REVIEW')
+        this.companyDetailDashboardService
+            .getBilling('PENDING_REVIEW', this.companyId)
             .subscribe((data) => {
                 if (data.items.length === 0) {
                     this.billingPendingReviewText =
@@ -142,8 +146,8 @@ export class CompanyDetailDashboardComponent implements OnInit {
 
         // Get Statements
 
-        this.companyDashboardService
-            .getStatementsStatus('PENDING')
+        this.companyDetailDashboardService
+            .getBankStatement('PENDING', this.companyId)
             .subscribe((data) => {
                 if (data.items.length === 0) {
                     this.statementsPendingText = 'Não há extratos pendentes';
@@ -165,8 +169,8 @@ export class CompanyDetailDashboardComponent implements OnInit {
                 }
             });
 
-        this.companyDashboardService
-            .getStatementsStatus('PENDING_REVIEW')
+        this.companyDetailDashboardService
+            .getBankStatement('PENDING_REVIEW', this.companyId)
             .subscribe((data) => {
                 if (data.items.length === 0) {
                     this.statementsPendingReviewText =
@@ -189,8 +193,8 @@ export class CompanyDetailDashboardComponent implements OnInit {
                 }
             });
 
-        this.companyDashboardService
-            .getEmployessStatus('PENDING_FIRED')
+        this.companyDetailDashboardService
+            .getEmployee('PENDING_FIRED', this.companyId)
             .subscribe((data) => {
                 if (data.items.length === 0) {
                     this.employeePendingFiredText =
@@ -205,8 +209,8 @@ export class CompanyDetailDashboardComponent implements OnInit {
                 }
             });
 
-        this.companyDashboardService
-            .getNotaFiscalStatus('PROCESSING')
+        this.companyDetailDashboardService
+            .getNotaFiscal('PROCESSING', this.companyId)
             .subscribe((data) => {
                 if (data.items.length === 0) {
                     this.notaFiscalProcessandoText =
@@ -227,8 +231,8 @@ export class CompanyDetailDashboardComponent implements OnInit {
                 }
             });
 
-        this.companyDashboardService
-            .getNotaFiscalStatus('WAITING_CANCELEMENT')
+        this.companyDetailDashboardService
+            .getNotaFiscal('WAITING_CANCELEMENT', this.companyId)
             .subscribe((data) => {
                 if (data.items.length === 0) {
                     this.notaFiscalCanceladaText =

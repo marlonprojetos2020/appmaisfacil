@@ -41,10 +41,14 @@ export class CompanyExpenseComponent implements OnInit {
         {
             label: 'Data',
             property: 'date',
+            type: 'date',
+            format: 'dd/MM/yyyy',
         },
         {
             label: 'Valor',
             property: 'value',
+            type: 'currency',
+            format: 'BRL',
         },
     ];
 

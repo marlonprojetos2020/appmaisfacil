@@ -24,7 +24,7 @@
                         </div>
                         <div class="info po-mb-2">
                             <span class="po-icon po-icon-mail"></span>
-                            <p>{{ company.email }}</p>
+                            <p>{{ company.userCompany.email }}</p>
                         </div>
                         <div class="info">
                             <span class="po-icon po-icon-home"></span>
@@ -102,7 +102,7 @@
                 <div class="po-md-6">
                     <app-dashboard-accordion
                         [isPending]="notaFiscalCanceladaOk"
-                        title="Nota Fiscal"
+                        title="Nota Fiscal cancelada"
                         [text]="notaFiscalCanceladaText"
                         [items]="notaFiscalCancelada"
                     >
@@ -112,7 +112,7 @@
                 <div class="po-md-6">
                     <app-dashboard-accordion
                         [isPending]="notaFiscalProcessandoOk"
-                        title="Nota Fiscal"
+                        title="Nota Fiscal em analise"
                         [text]="notaFiscalProcessandoText"
                         [items]="notaFiscalProcessando"
                     >

@@ -30,10 +30,14 @@ export class AdminCompanyInvoiceComponent implements OnInit {
         {
             label: 'Valor',
             property: 'totalAmount',
+            type: 'currency',
+            format: 'BRL',
         },
         {
             label: 'Emissão',
             property: 'emissionAt',
+            type: 'date',
+            format: 'dd/MM/yyyy',
         },
     ];
 

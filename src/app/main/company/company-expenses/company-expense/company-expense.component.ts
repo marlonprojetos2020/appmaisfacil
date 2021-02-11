@@ -21,6 +21,9 @@ export class CompanyExpenseComponent implements OnInit {
     @Input() dataDespesa: string = '';
     @Input() valorDespesa: number;
     @Input() imagemDespesa: string = '';
+    @Input() pdf: string;
+
+    ehPdf = false;
 
     @ViewChild('modalDespesa', { static: true })
     poModalDespesa: PoModalComponent;
@@ -57,7 +60,6 @@ export class CompanyExpenseComponent implements OnInit {
             label: 'Visualizar',
             action: (item) => {
                 this.prepareModal(item);
-                console.log(item);
                 this.valorDespesa = item.value;
                 this.tituloDespesa = item.description;
                 this.dataDespesa = item.date;
@@ -65,6 +67,12 @@ export class CompanyExpenseComponent implements OnInit {
                 this.tipoDespesa = item['type.label'];
                 this.imagemDespesa = item.proofOfPaymentUrl;
                 this.nomeEmpresa;
+                if (this.imagemDespesa.indexOf('pdf') < 0) {
+                    this.ehPdf = false;
+                } else {
+                    this.ehPdf = true;
+                    this.pdf = item.attachmentUrl;
+                }
             },
         },
         {
@@ -98,5 +106,9 @@ export class CompanyExpenseComponent implements OnInit {
 
     prepareModal(expense: Expense): void {
         this.poModalDespesa.open();
+    }
+
+    downloadPdf(): any {
+        window.open(this.pdf, '_blank');
     }
 }

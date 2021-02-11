@@ -11,9 +11,21 @@
 <po-modal #modalDespesa p-title="Despesa" [p-primary-action]="primaryAction">
     <div class="po-row">
         <div class="po-md-6">
-            <div class="img-modal">
-                <img [src]="imagemDespesa" alt="Despesa" class="img" />
-            </div>
+            <ng-template [ngIf]="ehPdf">
+                <div class="div-pdf">
+                    <img src="/assets/images/imgPdf.png" alt="Pdf" />
+                    <po-button
+                        (p-click)="downloadPdf()"
+                        p-icon="po-icon po-icon-download"
+                        p-label="Download PDF"
+                    ></po-button>
+                </div>
+            </ng-template>
+            <ng-template [ngIf]="!ehPdf">
+                <div class="img-modal">
+                    <img [src]="imagemDespesa" alt="Extrato Bancário" />
+                </div>
+            </ng-template>
         </div>
         <div class="po-md-6">
             <div class="po-row text-modal">

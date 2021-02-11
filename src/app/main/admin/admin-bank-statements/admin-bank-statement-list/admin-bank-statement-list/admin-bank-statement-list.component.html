@@ -16,17 +16,17 @@
 >
     <div class="po-row">
         <div class="po-md-6">
-            <ng-template [ngIf]="ehPdf">
+            <ng-template [ngIf]="ehPdfPendente">
                 <div class="div-pdf">
                     <img src="/assets/images/imgPdf.png" alt="Pdf" />
                     <po-button
-                        (p-click)="downloadPdf()"
+                        (p-click)="downloadPdfPendente()"
                         p-icon="po-icon po-icon-download"
                         p-label="Download PDF"
                     ></po-button>
                 </div>
             </ng-template>
-            <ng-template [ngIf]="!ehPdf">
+            <ng-template [ngIf]="!ehPdfPendente">
                 <div class="img-modal">
                     <img [src]="image" alt="Extrato Bancário" />
                 </div>
@@ -63,9 +63,21 @@
 >
     <div class="po-row">
         <div class="po-md-6">
-            <div class="img-modal">
-                <img [src]="image" alt="Extrato Bancário" />
-            </div>
+            <ng-template [ngIf]="ehPdfPago">
+                <div class="div-pdf">
+                    <img src="/assets/images/imgPdf.png" alt="Pdf" />
+                    <po-button
+                        (p-click)="downloadPdfPago()"
+                        p-icon="po-icon po-icon-download"
+                        p-label="Download PDF"
+                    ></po-button>
+                </div>
+            </ng-template>
+            <ng-template [ngIf]="!ehPdfPago">
+                <div class="img-modal">
+                    <img [src]="image" alt="Extrato Bancário" />
+                </div>
+            </ng-template>
         </div>
         <div class="po-md-6 text-modal">
             <div class="po-row">

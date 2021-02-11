@@ -33,6 +33,9 @@ export class AdminInvoiceListComponent implements OnInit {
     @Input() totalAmount: string;
     @Input() emissionAt: string;
     @Input() imageInvoice: string;
+    @Input() pdf: string;
+
+    ehPdf = false;
 
     idInvoice: number;
 
@@ -100,6 +103,12 @@ export class AdminInvoiceListComponent implements OnInit {
                     });
                 this.imageInvoice = item.attachmentUrl;
                 this.emissionAt = item.emissionAt;
+                if (this.imageInvoice.indexOf('pdf') < 0) {
+                    this.ehPdf = false;
+                } else {
+                    this.ehPdf = true;
+                    this.pdf = item.attachmentUrl;
+                }
             },
             disabled: (item) => item.status !== 'WAITING_CANCELEMENT',
         },
@@ -192,5 +201,9 @@ export class AdminInvoiceListComponent implements OnInit {
         const message = 'Documento carregado com sucesso';
         this.poNotificationService.success(message);
         this.poModalEnviarNota.close();
+    }
+
+    downloadPdf(): any {
+        window.open(this.pdf, '_blank');
     }
 }

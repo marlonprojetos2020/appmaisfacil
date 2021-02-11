@@ -21,7 +21,8 @@ export class AdminBankStatementListComponent implements OnInit {
     @Input() status: string;
     @Input() bankName: string;
     @Input() image: string;
-    @Input() pdf: string;
+    @Input() pdfPendente: string;
+    @Input() pdfPago: string;
     idStatement: number;
     @ViewChild('modalExtratoPendente', { static: true })
     poModalExtratoPendente: PoModalComponent;
@@ -29,7 +30,8 @@ export class AdminBankStatementListComponent implements OnInit {
     @ViewChild('modalExtratoAprovado', { static: true })
     poModalExtratoAprovado: PoModalComponent;
 
-    ehPdf = false;
+    ehPdfPendente = false;
+    ehPdfPago = false;
 
     primaryAction: PoModalAction = {
         label: 'Aprovar',
@@ -70,10 +72,10 @@ export class AdminBankStatementListComponent implements OnInit {
                 console.log(this.image.indexOf('pdf'));
                 this.idStatement = item.id;
                 if (this.image.indexOf('pdf') < 0) {
-                    this.ehPdf = false;
+                    this.ehPdfPendente = false;
                 } else {
-                    this.ehPdf = true;
-                    this.pdf = item.attachmentUrl;
+                    this.ehPdfPendente = true;
+                    this.pdfPendente = item.attachmentUrl;
                 }
             },
             disabled: (item) => item.status !== 'PENDING_REVIEW',
@@ -93,6 +95,12 @@ export class AdminBankStatementListComponent implements OnInit {
                 this.companyName = item.bankAccountCompanyName;
                 this.image = item.attachmentUrl;
                 this.month = item.month;
+                if (this.image.indexOf('pdf') < 0) {
+                    this.ehPdfPago = false;
+                } else {
+                    this.ehPdfPago = true;
+                    this.pdfPago = item.attachmentUrl;
+                }
             },
             disabled: (item) => item.status !== 'OK',
         },
@@ -134,7 +142,11 @@ export class AdminBankStatementListComponent implements OnInit {
         this.poModalExtratoPendente.open();
     }
 
-    downloadPdf(): any {
-        window.open(this.pdf, '_blank');
+    downloadPdfPendente(): any {
+        window.open(this.pdfPendente, '_blank');
+    }
+
+    downloadPdfPago(): any {
+        window.open(this.pdfPago, '_blank');
     }
 }

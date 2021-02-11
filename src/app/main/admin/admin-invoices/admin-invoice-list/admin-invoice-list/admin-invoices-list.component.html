@@ -79,9 +79,21 @@
 >
     <div class="po-row">
         <div class="po-md-6">
-            <div class="img-modal">
-                <img [src]="imageInvoice" alt="" />
-            </div>
+            <ng-template [ngIf]="ehPdf">
+                <div class="div-pdf">
+                    <img src="/assets/images/imgPdf.png" alt="Pdf" />
+                    <po-button
+                        (p-click)="downloadPdf()"
+                        p-icon="po-icon po-icon-download"
+                        p-label="Download PDF"
+                    ></po-button>
+                </div>
+            </ng-template>
+            <ng-template [ngIf]="!ehPdf">
+                <div class="img-modal">
+                    <img [src]="imageInvoice" alt="Nota Fiscal" />
+                </div>
+            </ng-template>
         </div>
         <div class="po-md-6 text-modal">
             <div class="po-row">

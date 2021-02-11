@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AdminInvoiceListComponent } from './admin-invoice-list/admin-invoice-list.component';
 import { PageDatatableModule } from '../../../../shared/components/page-datatable/page-datatable.module';
 import {
+    PoButtonModule,
     PoFieldModule,
     PoModalModule,
     PoTableModule,
@@ -15,6 +16,7 @@ import {
         PoModalModule,
         PoTableModule,
         PoFieldModule,
+        PoButtonModule,
     ],
     declarations: [AdminInvoiceListComponent],
     exports: [AdminInvoiceListComponent],

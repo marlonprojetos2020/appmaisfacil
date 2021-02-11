@@ -24,8 +24,13 @@ export class AdminChargeListComponent implements OnInit {
     @Input() vencimento: string;
     @Input() valor: number;
     @Input() titulo: string;
+    @Input() pdfCobranca: string;
+    @Input() pdfComprovante: string;
     @Input() imagemCobranca: string;
     @Input() imagemComprovante: string;
+
+    isPdfCobranca = false;
+    isPdfComprovante = false;
 
     charge;
 
@@ -128,11 +133,16 @@ export class AdminChargeListComponent implements OnInit {
                     this.vencimento = item.dueDate;
                     this.titulo = item.description;
                     this.nomeEmpresa;
-                    this.imagemComprovante = item.proofOfPaymentUrl;
                     this.imagemCobranca = item.billingFileUrl;
                     this.setUrlDocument(item.id);
                     this.idCharge = item.id;
                     this.charge = item;
+                    if (this.imagemCobranca.indexOf('pdf') < 0) {
+                        this.isPdfCobranca = false;
+                    } else {
+                        this.isPdfCobranca = true;
+                        this.pdfCobranca = item.attachmentUrl;
+                    }
                 },
                 disabled: (item) => item.status !== 'PENDING_REVIEW',
             },
@@ -152,10 +162,15 @@ export class AdminChargeListComponent implements OnInit {
                     this.titulo = item.description;
                     this.nomeEmpresa;
                     this.imagemComprovante = item.proofOfPaymentUrl;
-                    this.imagemCobranca = item.billingFilelUrl;
                     this.setUrlDocument(item.id);
                     this.idCharge = item.id;
                     this.charge = item;
+                    if (this.imagemComprovante.indexOf('pdf') < 0) {
+                        this.isPdfComprovante = false;
+                    } else {
+                        this.isPdfComprovante = true;
+                        this.pdfComprovante = item.attachmentUrl;
+                    }
                 },
                 disabled: (item) => item.status !== 'PAID',
             },
@@ -189,5 +204,13 @@ export class AdminChargeListComponent implements OnInit {
             .paidCharge(this.idCharge)
             .subscribe((data) => (this.status = data.statusText));
         this.poModalComprovante.close();
+    }
+
+    downloadPdfCobranca(): any {
+        window.open(this.pdfCobranca, '_blank');
+    }
+
+    downloadPdfComprovante(): any {
+        window.open(this.pdfComprovante, '_blank');
     }
 }

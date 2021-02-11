@@ -23,9 +23,21 @@
             ></po-button>
         </div>
         <div class="po-md-6">
-            <div class="img-modal">
-                <img [src]="imagemCobranca" alt="Corbança" />
-            </div>
+            <ng-template [ngIf]="isPdfCobranca">
+                <div class="div-pdf">
+                    <img src="/assets/images/imgPdf.png" alt="Pdf" />
+                    <po-button
+                        (p-click)="downloadPdfCobranca()"
+                        p-icon="po-icon po-icon-download"
+                        p-label="Download PDF"
+                    ></po-button>
+                </div>
+            </ng-template>
+            <ng-template [ngIf]="!isPdfCobranca">
+                <div class="img-modal">
+                    <img [src]="imagemCobranca" alt="Corbança" />
+                </div>
+            </ng-template>
         </div>
         <div class="po-md-6 text-modal">
             <div class="po-row">
@@ -72,9 +84,21 @@
 <po-modal #modalCobranca p-title="Cobrança" [p-primary-action]="closeAction">
     <div class="po-row">
         <div class="po-md-6">
-            <div class="img-modal">
-                <img [src]="imagemCobranca" alt="Cobrança" />
-            </div>
+            <ng-template [ngIf]="isPdfCobranca">
+                <div class="div-pdf">
+                    <img src="/assets/images/imgPdf.png" alt="Pdf" />
+                    <po-button
+                        (p-click)="downloadPdfCobranca()"
+                        p-icon="po-icon po-icon-download"
+                        p-label="Download PDF"
+                    ></po-button>
+                </div>
+            </ng-template>
+            <ng-template [ngIf]="!isPdfCobranca">
+                <div class="img-modal">
+                    <img [src]="imagemCobranca" alt="Corbança" />
+                </div>
+            </ng-template>
         </div>
         <div class="po-md-6 text-modal">
             <div class="po-row">
@@ -125,9 +149,21 @@
 >
     <div class="po-row">
         <div class="po-md-6">
-            <div class="img-modal">
-                <img [src]="imagemComprovante" alt="Cobrança" />
-            </div>
+            <ng-template [ngIf]="isPdfComprovante">
+                <div class="div-pdf">
+                    <img src="/assets/images/imgPdf.png" alt="Pdf" />
+                    <po-button
+                        (p-click)="downloadPdfComprovante()"
+                        p-icon="po-icon po-icon-download"
+                        p-label="Download PDF"
+                    ></po-button>
+                </div>
+            </ng-template>
+            <ng-template [ngIf]="!isPdfComprovante">
+                <div class="img-modal">
+                    <img [src]="imagemComprovante" alt="Comprovante" />
+                </div>
+            </ng-template>
         </div>
         <div class="po-md-6 text-modal">
             <div class="po-row">

@@ -332,13 +332,14 @@
                                     p-optional="true"
                                 ></po-input>
 
-                                <po-input
+                                <po-select
                                     class="po-md-4 po-mt-2"
                                     p-label="Estado"
-                                    p-placeholder="Digite o estado"
+                                    p-placeholder="Selecione o Estado"
                                     formControlName="stateProvince"
                                     p-optional="true"
-                                ></po-input>
+                                    [p-options]="options"
+                                ></po-select>
                             </ng-container>
                         </ng-container>
                     </ng-container>

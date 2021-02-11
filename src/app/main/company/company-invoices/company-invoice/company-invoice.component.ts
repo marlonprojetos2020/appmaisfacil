@@ -31,14 +31,17 @@ export class CompanyInvoiceComponent {
 
     tableActions: PoTableAction[] = [
         {
-            label: 'Solicitar Cancelamento',
+            label: 'Cancelar Nota',
             action: (item) =>
                 this.companyInvoiceService
                     .cancelInvoice(item.id)
-                    .subscribe((data) => (item.status = data.statusText)),
+                    .subscribe((data) => {
+                        item.statusText = data.statusText;
+                    }),
             disabled: (item) =>
-                item.status === 'CANCELED' ||
-                item.status === 'WAITING_CANCELEMENT',
+                item.statusText === 'CANCELADA' ||
+                item.status === 'WAITING_CANCELEMENT' ||
+                item.status === 'CANCELED',
         },
     ];
 

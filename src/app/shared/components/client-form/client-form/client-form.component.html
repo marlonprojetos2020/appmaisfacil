@@ -169,6 +169,7 @@
                 p-placeholder="Ap. 10"
                 p-clean
                 formControlName="complement"
+                p-optional="true"
             ></po-input>
 
             <po-input
@@ -187,12 +188,13 @@
                     formControlName="name"
                 ></po-input>
 
-                <po-input
+                <po-select
                     class="po-md-4 po-mt-2"
                     p-label="Estado"
                     p-placeholder="Digite o estado"
                     formControlName="stateProvince"
-                ></po-input>
+                    [p-options]="options"
+                ></po-select>
             </ng-container>
         </ng-container>
     </ng-container>

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PoBreadcrumb } from '@po-ui/ng-components';
+import { PoBreadcrumb, PoSelectOption } from '@po-ui/ng-components';
 import { Location } from '@angular/common';
 import { CompaniesService } from '../../../../main/admin/companies/companies.service';
 import { filter, finalize, tap } from 'rxjs/operators';
@@ -40,6 +40,117 @@ export class ClientFormComponent implements OnInit {
             },
         ],
     };
+
+    options: PoSelectOption[] = [
+        {
+            label: 'Acre',
+            value: 'AC',
+        },
+        {
+            label: 'Alagoas',
+            value: 'AL',
+        },
+        {
+            label: 'Amazonas',
+            value: 'AM',
+        },
+        {
+            label: 'Amapá',
+            value: 'AP',
+        },
+        {
+            label: 'Bahia',
+            value: 'BA',
+        },
+        {
+            label: 'Ceará',
+            value: 'CE',
+        },
+        {
+            label: 'Distrito Federal',
+            value: 'DF',
+        },
+        {
+            label: 'Espírito Santo',
+            value: 'ES',
+        },
+        {
+            label: 'Goías',
+            value: 'GO',
+        },
+        {
+            label: 'Maranhão',
+            value: 'MA',
+        },
+        {
+            label: 'Minas Gerais',
+            value: 'MG',
+        },
+        {
+            label: 'Mato Grosso do Sul',
+            value: 'MS',
+        },
+        {
+            label: 'Mato Grosso',
+            value: 'MT',
+        },
+        {
+            label: 'Pará',
+            value: 'PA',
+        },
+        {
+            label: 'Paraíba',
+            value: 'PB',
+        },
+        {
+            label: 'Pernambuco',
+            value: 'PB',
+        },
+        {
+            label: 'Piauí',
+            value: 'PI',
+        },
+        {
+            label: 'Paraná',
+            value: 'PR',
+        },
+        {
+            label: 'Rio de Janeiro',
+            value: 'RJ',
+        },
+        {
+            label: 'Rio Grande do Norte',
+            value: 'RN',
+        },
+        {
+            label: 'Rondônia',
+            value: 'RO',
+        },
+        {
+            label: 'Roraima',
+            value: 'RR',
+        },
+        {
+            label: 'Rio Grande do Sul',
+            value: 'RS',
+        },
+        {
+            label: 'Santa Catarina',
+            value: 'SC',
+        },
+        {
+            label: 'Sergipe',
+            value: 'SE',
+        },
+        {
+            label: 'São Paulo',
+            value: 'SP',
+        },
+        {
+            label: 'Tocantins',
+            value: 'TO',
+        },
+    ];
 
     constructor(
         private formBuilder: FormBuilder,
@@ -81,10 +192,7 @@ export class ClientFormComponent implements OnInit {
                     this.editedClient?.address.neighborhood,
                     Validators.required,
                 ],
-                complement: [
-                    this.editedClient?.address.complement,
-                    Validators.required,
-                ],
+                complement: [this.editedClient?.address.complement],
                 city: this.formBuilder.group({
                     name: [
                         this.editedClient?.address.city.name,

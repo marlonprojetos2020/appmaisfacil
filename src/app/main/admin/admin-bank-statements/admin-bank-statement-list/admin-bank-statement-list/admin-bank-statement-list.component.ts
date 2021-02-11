@@ -75,7 +75,6 @@ export class AdminBankStatementListComponent implements OnInit {
                     this.ehPdf = true;
                     this.pdf = item.attachmentUrl;
                 }
-                console.log(this.ehPdf);
             },
             disabled: (item) => item.status !== 'PENDING_REVIEW',
         },
@@ -133,5 +132,9 @@ export class AdminBankStatementListComponent implements OnInit {
 
     prepareModal(extrato: BankStatement): void {
         this.poModalExtratoPendente.open();
+    }
+
+    downloadPdf(): any {
+        window.open(this.pdf, '_blank');
     }
 }

@@ -45,24 +45,24 @@ export class CompanyCompanyComponent implements OnInit {
 
             cnae: [company?.cnae, Validators.required],
             address: this.formBuilder.group({
-                street: [company.address.street, Validators.required],
-                number: [company.address.number, Validators.required],
+                street: [company?.address.street, Validators.required],
+                number: [company?.address.number, Validators.required],
                 neighborhood: [
-                    company.address.neighborhood,
+                    company?.address.neighborhood,
                     Validators.required,
                 ],
-                complement: [company.address.complement, Validators.required],
-                zipcode: [company.address.zipcode, Validators.required],
+                complement: [company?.address.complement, Validators.required],
+                zipcode: [company?.address.zipcode, Validators.required],
                 city: this.formBuilder.group({
-                    name: [company.address.city.name, Validators.required],
+                    name: [company?.address.city.name, Validators.required],
                     stateProvince: [
-                        company.address.city.stateProvince,
+                        company?.address.city.stateProvince,
                         Validators.required,
                     ],
                 }),
             }),
-            email: [company.email, Validators.required],
-            phone: [company.phone, Validators.required],
+            email: [company?.email, Validators.required],
+            phone: [company?.phone, Validators.required],
         });
     }
 }

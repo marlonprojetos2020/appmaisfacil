@@ -1,7 +1,11 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { PoBreadcrumb, PoNotificationService } from '@po-ui/ng-components';
+import {
+    PoBreadcrumb,
+    PoNotificationService,
+    PoSelectOption,
+} from '@po-ui/ng-components';
 import { filter, finalize, tap } from 'rxjs/operators';
 import { Company } from '../../../model/company';
 import { User } from '../../../model/user';
@@ -36,6 +40,117 @@ export class CompanyFormComponent implements OnInit {
     @ViewChild('stepper', { static: true }) stepper;
     @ViewChild('streetInput', { static: true }) streetInput: HTMLInputElement;
     @ViewChild('numberInput', { static: true }) numberInput: HTMLInputElement;
+
+    options: PoSelectOption[] = [
+        {
+            label: 'Acre',
+            value: 'AC',
+        },
+        {
+            label: 'Alagoas',
+            value: 'AL',
+        },
+        {
+            label: 'Amazonas',
+            value: 'AM',
+        },
+        {
+            label: 'Amapá',
+            value: 'AP',
+        },
+        {
+            label: 'Bahia',
+            value: 'BA',
+        },
+        {
+            label: 'Ceará',
+            value: 'CE',
+        },
+        {
+            label: 'Distrito Federal',
+            value: 'DF',
+        },
+        {
+            label: 'Espírito Santo',
+            value: 'ES',
+        },
+        {
+            label: 'Goías',
+            value: 'GO',
+        },
+        {
+            label: 'Maranhão',
+            value: 'MA',
+        },
+        {
+            label: 'Minas Gerais',
+            value: 'MG',
+        },
+        {
+            label: 'Mato Grosso do Sul',
+            value: 'MS',
+        },
+        {
+            label: 'Mato Grosso',
+            value: 'MT',
+        },
+        {
+            label: 'Pará',
+            value: 'PA',
+        },
+        {
+            label: 'Paraíba',
+            value: 'PB',
+        },
+        {
+            label: 'Pernambuco',
+            value: 'PB',
+        },
+        {
+            label: 'Piauí',
+            value: 'PI',
+        },
+        {
+            label: 'Paraná',
+            value: 'PR',
+        },
+        {
+            label: 'Rio de Janeiro',
+            value: 'RJ',
+        },
+        {
+            label: 'Rio Grande do Norte',
+            value: 'RN',
+        },
+        {
+            label: 'Rondônia',
+            value: 'RO',
+        },
+        {
+            label: 'Roraima',
+            value: 'RR',
+        },
+        {
+            label: 'Rio Grande do Sul',
+            value: 'RS',
+        },
+        {
+            label: 'Santa Catarina',
+            value: 'SC',
+        },
+        {
+            label: 'Sergipe',
+            value: 'SE',
+        },
+        {
+            label: 'São Paulo',
+            value: 'SP',
+        },
+        {
+            label: 'Tocantins',
+            value: 'TO',
+        },
+    ];
 
     constructor(
         private formBuilder: FormBuilder,

@@ -17,7 +17,14 @@
     <div class="po-row">
         <div class="po-md-6">
             <ng-template [ngIf]="ehPdf">
-                <iframe [src]="pdf"></iframe>
+                <div class="div-pdf">
+                    <img src="/assets/images/imgPdf.png" alt="Pdf" />
+                    <po-button
+                        (p-click)="downloadPdf()"
+                        p-icon="po-icon po-icon-download"
+                        p-label="Download PDF"
+                    ></po-button>
+                </div>
             </ng-template>
             <ng-template [ngIf]="!ehPdf">
                 <div class="img-modal">

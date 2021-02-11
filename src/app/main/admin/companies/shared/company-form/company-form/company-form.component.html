@@ -4,10 +4,8 @@
     class="breadcrumb"
 >
     <po-stepper #stepper>
-        <po-step
-            p-label="Usuário"
-        >
-<!--            [p-can-active-next-step]="formDadosPessoais.invalid"-->
+        <po-step p-label="Usuário">
+            <!--            [p-can-active-next-step]="formDadosPessoais.invalid"-->
             <po-container>
                 <h2 class="po-ml-1 po-mb-3">Dados Pessoais</h2>
                 <form [formGroup]="formDadosPessoais">
@@ -169,18 +167,18 @@
                         p-optional="true"
                     >
                     </po-input>
-<!--                        (p-blur)="dirtyMe('userCompany.cnpj')"-->
+                    <!--                        (p-blur)="dirtyMe('userCompany.cnpj')"-->
 
-<!--                    <app-invalid-feedback-->
-<!--                        [formCtrl]="formDadosPessoais.get('userCompany.cnpj')"-->
-<!--                        [hasError]="-->
-<!--                            formDadosPessoais.get('userCompany.cnpj').value-->
-<!--                                ?.cnpjInvalido &&-->
-<!--                            formDadosPessoais.get('userCompany.cnpj').dirty-->
-<!--                        "-->
-<!--                    >-->
-<!--                        Este CNPJ não existe-->
-<!--                    </app-invalid-feedback>-->
+                    <!--                    <app-invalid-feedback-->
+                    <!--                        [formCtrl]="formDadosPessoais.get('userCompany.cnpj')"-->
+                    <!--                        [hasError]="-->
+                    <!--                            formDadosPessoais.get('userCompany.cnpj').value-->
+                    <!--                                ?.cnpjInvalido &&-->
+                    <!--                            formDadosPessoais.get('userCompany.cnpj').dirty-->
+                    <!--                        "-->
+                    <!--                    >-->
+                    <!--                        Este CNPJ não existe-->
+                    <!--                    </app-invalid-feedback>-->
 
                     <po-input
                         class="po-sm-12 po-mt-2"
@@ -372,7 +370,6 @@
                     ></po-input>
                     <div class="po-row po-ml-1">
                         <po-button
-                            [p-disabled]="formDadosEmpresa.invalid"
                             p-label="Finalizar"
                             p-type="primary"
                             (p-click)="submitForm()"

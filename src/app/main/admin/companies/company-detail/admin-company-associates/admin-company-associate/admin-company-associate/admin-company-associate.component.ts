@@ -19,10 +19,11 @@ export class AdminCompanyAssociateComponent implements OnInit {
     tableActions: PoTableAction[] = [
         {
             label: 'Editar',
-            action: (item) =>
+            action: (item) => {
                 this.router.navigate(['editar', item.id], {
                     relativeTo: this.activetedRoute,
-                }),
+                });
+            },
         },
         {
             label: 'Baixar RG',

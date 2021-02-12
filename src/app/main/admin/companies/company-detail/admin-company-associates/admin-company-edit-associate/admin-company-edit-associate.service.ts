@@ -8,6 +8,8 @@ export class AdminCompanyEditAssociateService {
     constructor(private httpClient: HttpClient) {}
 
     getAssociate(idCompany: string, idAssociate: string): Observable<any> {
-        return this.httpClient.get<any>(`${environment.apiUrl}/users/${idCompany}/company-partners/${idCompany}`);
+        return this.httpClient.get<any>(
+            `${environment.apiUrl}/users/${idCompany}/company-partners/${idAssociate}`
+        );
     }
 }

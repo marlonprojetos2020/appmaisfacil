@@ -1,4 +1,8 @@
-<po-page-edit p-title="Editar Sócio">
+<po-page-edit
+    p-title="Editar Sócio"
+    [p-breadcrumb]="breadcrumb"
+    class="breadcrumb"
+>
     <app-associate-form
         *ngIf="associate$ | async as editedAssociate"
         [editedAssociate]="editedAssociate"

@@ -18,6 +18,7 @@
                                 p-required="true"
                                 (p-blur)="dirtyMe('name')"
                                 p-error-pattern="Nome inválido"
+                                p-placeholder="Nome..."
                             ></po-input>
                             <app-invalid-feedback
                                 [formCtrl]="formCompanyEmployee.get('name')"
@@ -36,6 +37,7 @@
                                 formControlName="admissionAt"
                                 p-required="true"
                                 [p-min-date]="startDate"
+                                p-placeholder="Selecionar"
                             ></po-datepicker>
                             <app-invalid-feedback
                                 [formCtrl]="
@@ -57,6 +59,7 @@
                                 p-required="true"
                                 (p-blur)="dirtyMe('category')"
                                 p-error-pattern="Cargo  inválido"
+                                p-placeholder="Cargo..."
                             ></po-input>
                             <app-invalid-feedback
                                 [formCtrl]="formCompanyEmployee.get('category')"

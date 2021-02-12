@@ -25,6 +25,9 @@ export class AdminCompanyExpenseComponent implements OnInit {
     @Input() dataDespesa: string = '';
     @Input() valorDespesa: number;
     @Input() imagemDespesa: string = '';
+    @Input() pdf: string;
+
+    ehPdf = false;
     @ViewChild('modalDespesa', { static: true })
     poModalDespesa: PoModalComponent;
 
@@ -45,6 +48,12 @@ export class AdminCompanyExpenseComponent implements OnInit {
                 this.nomeEmpresa = this.companyName;
                 this.tipoDespesa = item['type.label'];
                 this.imagemDespesa = item.proofOfPaymentUrl;
+                if (this.imagemDespesa.indexOf('pdf') < 0) {
+                    this.ehPdf = false;
+                } else {
+                    this.ehPdf = true;
+                    this.pdf = item.attachmentUrl;
+                }
             },
         },
         {
@@ -115,5 +124,9 @@ export class AdminCompanyExpenseComponent implements OnInit {
             },
             { label: 'Minhas Despesas' }
         );
+    }
+
+    downloadPdf(): any {
+        window.open(this.pdf, '_blank');
     }
 }

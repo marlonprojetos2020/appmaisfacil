@@ -1,7 +1,11 @@
 <po-stepper #stepper>
     <po-step
         p-label="Dados Pessoais"
-        [p-can-active-next-step]="this.editedAssociate?  null:canActiveNextStep.bind(this, formAssociate)"
+        [p-can-active-next-step]="
+            this.editedAssociate
+                ? null
+                : canActiveNextStep.bind(this, formAssociate)
+        "
     >
         <div class="po-container po-mt-2">
             <h2 class="po-ml-1 po-mb-3">Dados Pessoais</h2>
@@ -24,9 +28,9 @@
                         <app-invalid-feedback
                             [formCtrl]="formAssociate.get('name')"
                             [hasError]="
-                                            formAssociate.get('name').errors?.required &&
-                                            formAssociate.get('name').dirty
-                                        "
+                                formAssociate.get('name').errors?.required &&
+                                formAssociate.get('name').dirty
+                            "
                         >
                             Este campo é obrigatório
                         </app-invalid-feedback>
@@ -49,9 +53,9 @@
                         <app-invalid-feedback
                             [formCtrl]="formAssociate.get('rg')"
                             [hasError]="
-                                            formAssociate.get('rg').errors?.required &&
-                                            formAssociate.get('rg').dirty
-                                        "
+                                formAssociate.get('rg').errors?.required &&
+                                formAssociate.get('rg').dirty
+                            "
                         >
                             Este campo é obrigatório
                         </app-invalid-feedback>
@@ -73,11 +77,20 @@
                         <app-invalid-feedback
                             [formCtrl]="formAssociate.get('cpf')"
                             [hasError]="
-                                            formAssociate.get('cpf').errors?.required &&
-                                            formAssociate.get('cpf').dirty
-                                        "
+                                formAssociate.get('cpf').errors?.required &&
+                                formAssociate.get('cpf').dirty
+                            "
                         >
                             Este campo é obrigatório
+                        </app-invalid-feedback>
+                        <app-invalid-feedback
+                            [formCtrl]="formAssociate.get('cpf')"
+                            [hasError]="
+                                formAssociate.get('cpf').errors?.cpfInvalido &&
+                                formAssociate.get('cpf').dirty
+                            "
+                        >
+                            Este CPF não existe
                         </app-invalid-feedback>
                     </div>
                     <div class="po-md-4 po-mb-4">
@@ -96,9 +109,10 @@
                         <app-invalid-feedback
                             [formCtrl]="formAssociate.get('voterTitle')"
                             [hasError]="
-                                            formAssociate.get('voterTitle').errors?.required &&
-                                            formAssociate.get('voterTitle').dirty
-                                        "
+                                formAssociate.get('voterTitle').errors
+                                    ?.required &&
+                                formAssociate.get('voterTitle').dirty
+                            "
                         >
                             Este campo é obrigatório
                         </app-invalid-feedback>
@@ -118,12 +132,14 @@
                             (p-blur)="dirtyMe('percentageInSociety')"
                         ></po-input>
                         <app-invalid-feedback
-                            [formCtrl]="formAssociate.get('percentageInSociety')"
+                            [formCtrl]="
+                                formAssociate.get('percentageInSociety')
+                            "
                             [hasError]="
-                                            formAssociate.get('percentageInSociety').errors
-                                                ?.required &&
-                                            formAssociate.get('percentageInSociety').dirty
-                                        "
+                                formAssociate.get('percentageInSociety').errors
+                                    ?.required &&
+                                formAssociate.get('percentageInSociety').dirty
+                            "
                         >
                             Este campo é obrigatório
                         </app-invalid-feedback>
@@ -140,7 +156,7 @@
                     </div>
                     <div
                         class="po-pr-md-1"
-                        [ngStyle]="{'margin-left': 'auto'}"
+                        [ngStyle]="{ 'margin-left': 'auto' }"
                     >
                         <po-button
                             *ngIf="this.editedAssociate"
@@ -150,7 +166,6 @@
                     </div>
                 </div>
             </form>
-
         </div>
     </po-step>
     <po-step p-label="RG">
@@ -168,10 +183,7 @@
                     (p-success)="success($event)"
                 ></po-upload>
             </div>
-            <po-button
-                (p-click)="nextForm()"
-                p-label="Pular"
-            ></po-button>
+            <po-button (p-click)="nextForm()" p-label="Pular"></po-button>
         </div>
     </po-step>
     <po-step p-label="CPF">
@@ -189,10 +201,7 @@
                     (p-success)="success($event)"
                 ></po-upload>
             </div>
-            <po-button
-                (p-click)="nextForm()"
-                p-label="Pular"
-            ></po-button>
+            <po-button (p-click)="nextForm()" p-label="Pular"></po-button>
         </div>
     </po-step>
     <po-step p-label="Ttitulo de Eleitor">
@@ -209,10 +218,7 @@
                     (p-success)="success($event)"
                 ></po-upload>
             </div>
-            <po-button
-                (p-click)="nextForm()"
-                p-label="Pular"
-            ></po-button>
+            <po-button (p-click)="nextForm()" p-label="Pular"></po-button>
         </div>
     </po-step>
     <po-step p-label="Comporovante de Moradia">

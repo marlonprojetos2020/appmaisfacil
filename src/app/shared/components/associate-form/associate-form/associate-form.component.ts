@@ -10,12 +10,12 @@ import {
 import { environment } from 'src/environments/environment';
 import { Associate } from '../models/associate';
 import { AssociateFormService } from '../associate-form.service';
+import { cpfValidator } from '../../../validators/cpfValidator.validator';
 
 @Component({
     selector: 'app-associate-form',
     templateUrl: './associate-form.component.html',
 })
-
 export class AssociateFormComponent implements OnInit {
     idCompany: string;
     formAssociate: FormGroup;
@@ -39,7 +39,7 @@ export class AssociateFormComponent implements OnInit {
         private associateFormService: AssociateFormService,
         private activatedRoute: ActivatedRoute,
         private location: Location,
-        private poNotificationService: PoNotificationService,
+        private poNotificationService: PoNotificationService
     ) {}
 
     ngOnInit(): void {
@@ -47,9 +47,15 @@ export class AssociateFormComponent implements OnInit {
         this.formAssociate = this.formBuilder.group({
             name: [this.editedAssociate?.name, Validators.required],
             rg: [this.editedAssociate?.rg, Validators.required],
-            cpf: [this.editedAssociate?.cpf, Validators.required],
+            cpf: [
+                this.editedAssociate?.cpf,
+                [Validators.required, cpfValidator],
+            ],
             voterTitle: [this.editedAssociate?.voterTitle, Validators.required],
-            percentageInSociety: [this.editedAssociate?.percentageInSociety, Validators.required],
+            percentageInSociety: [
+                this.editedAssociate?.percentageInSociety,
+                Validators.required,
+            ],
         });
         if (this.editedAssociate) {
             this.setRequestsUrl(this.editedAssociate.id);
@@ -57,7 +63,10 @@ export class AssociateFormComponent implements OnInit {
     }
 
     submitForm(): void {
-        this.formAssociate.value.percentageInSociety = parseInt(this.formAssociate.value.percentageInSociety, 10);
+        this.formAssociate.value.percentageInSociety = parseInt(
+            this.formAssociate.value.percentageInSociety,
+            10
+        );
         this.newAssociate = this.formAssociate.getRawValue() as Associate;
         this.newAssociate.rg = this.newAssociate.rg
             .toUpperCase()
@@ -65,15 +74,20 @@ export class AssociateFormComponent implements OnInit {
             .trim();
 
         // se estiver recebendo um associado editado faz o uso de update, senão cria um novo;
-        this.editedAssociate ?
-            this.associateFormService.updateAssociate(this.newAssociate, this.idCompany, this.editedAssociate.id)
-                .subscribe(data => this.nextForm())
-            :
-            this.associateFormService.createAssociate(this.newAssociate, this.idCompany)
-                .subscribe(data => {
-                    this.setRequestsUrl(data.id);
-                    this.nextForm();
-                });
+        this.editedAssociate
+            ? this.associateFormService
+                  .updateAssociate(
+                      this.newAssociate,
+                      this.idCompany,
+                      this.editedAssociate.id
+                  )
+                  .subscribe((data) => this.nextForm())
+            : this.associateFormService
+                  .createAssociate(this.newAssociate, this.idCompany)
+                  .subscribe((data) => {
+                      this.setRequestsUrl(data.id);
+                      this.nextForm();
+                  });
     }
 
     setRequestsUrl(idAssociate: number): void {
@@ -85,7 +99,9 @@ export class AssociateFormComponent implements OnInit {
     }
 
     success(result: HttpResponse<any>, last = false): void {
-        const message = this.editedAssociate ? 'Documento editado com sucesso' : 'Documento carregado com sucesso';
+        const message = this.editedAssociate
+            ? 'Documento editado com sucesso'
+            : 'Documento carregado com sucesso';
         this.poNotificationService.success(message);
         this.nextForm(last);
     }

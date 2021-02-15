@@ -7,6 +7,13 @@
     <po-container class="form">
         <form *ngIf="formCompany" [formGroup]="formCompany">
             <div class="po-row po-mb-4">
+                <ng-template [ngIf]="userCompanyExist === false">
+                    <div class="po-md-12">
+                        <h2 class="po-mb-3 danger">
+                            Clique no botão editar, para finalizar o cadastro
+                        </h2>
+                    </div></ng-template
+                >
                 <div class="po-md-12">
                     <h3 class="po-mb-4">Empresa</h3>
                 </div>
@@ -15,6 +22,7 @@
                         p-label="CNPJ"
                         formControlName="cnpj"
                         p-readonly="true"
+                        p-placeholder="Informar Cnpj"
                     >
                     </po-input>
                 </div>
@@ -25,6 +33,7 @@
                         p-label="Razão Social"
                         formControlName="socialReason"
                         p-readonly="true"
+                        p-placeholder="Informar Razão Social"
                     ></po-input>
                 </div>
             </div>
@@ -34,6 +43,7 @@
                         p-label="Nome Fantasia"
                         formControlName="fantasyName"
                         p-readonly="true"
+                        p-placeholder="Informar Nome Fantasia"
                     ></po-input>
                 </div>
             </div>
@@ -63,12 +73,14 @@
                         p-label="Ramo"
                         formControlName="lineOfBusiness"
                         p-readonly="true"
+                        p-placeholder="Informar Ramo"
                     ></po-input>
                 </div>
                 <div class="po-md-8">
                     <po-input
                         p-label="CNAE"
                         formControlName="cnae"
+                        p-placeholder="Informar CNAE"
                         p-readonly="true"
                     ></po-input>
                 </div>
@@ -84,6 +96,7 @@
                             p-label="CEP"
                             formControlName="zipcode"
                             p-readonly="true"
+                            p-placeholder="Informar CEP"
                         ></po-input>
                     </div>
                 </div>
@@ -93,6 +106,7 @@
                             p-label="Endereço"
                             formControlName="street"
                             p-readonly="true"
+                            p-placeholder="Informar Rua"
                         ></po-input>
                     </div>
                 </div>
@@ -102,6 +116,7 @@
                             p-label="Número"
                             formControlName="number"
                             p-readonly="true"
+                            p-placeholder="Informar Número"
                         ></po-input>
                     </div>
 
@@ -110,6 +125,7 @@
                             p-label="Complemento"
                             formControlName="complement"
                             p-readonly="true"
+                            p-placeholder="Informar Complemento"
                         ></po-input>
                     </div>
                 </div>
@@ -120,6 +136,7 @@
                             p-label="Bairro"
                             formControlName="neighborhood"
                             p-readonly="true"
+                            p-placeholder="Informar Bairro"
                         ></po-input>
                     </div>
                     <div class="po-md-8" formGroupName="city">
@@ -128,6 +145,7 @@
                                 p-label="Cidade"
                                 formControlName="name"
                                 p-readonly="true"
+                                p-placeholder="Informar Cidade"
                             ></po-input>
                         </div>
                         <div class="po-md-6">
@@ -135,6 +153,7 @@
                                 p-label="Estado"
                                 formControlName="stateProvince"
                                 p-readonly="true"
+                                p-placeholder="Informar Estado"
                             ></po-input>
                         </div>
                     </div>
@@ -151,6 +170,7 @@
                         p-label="E-mail"
                         formControlName="email"
                         p-readonly="true"
+                        p-placeholder="Informar E-mail"
                     ></po-input>
                 </div>
             </div>
@@ -160,6 +180,7 @@
                         p-label="Telefone"
                         formControlName="phone"
                         p-readonly="true"
+                        p-placeholder="Informar Telefone"
                     ></po-input>
                 </div>
             </div>

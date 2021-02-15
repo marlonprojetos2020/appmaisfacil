@@ -49,7 +49,7 @@ export class AdminCompanyBankStatementComponent implements OnInit {
             url: `/admin/empresa/${id}/extrato/nova-conta`,
         });
 
-        this.serviceApi = `${environment.apiUrl}/statement/p/search`;
+        this.serviceApi = `${environment.apiUrl}/statement/p/search?companyId=${id}`;
 
         this.companiesService
             .getUserCompany(this.activatedRoute.snapshot.params.id)

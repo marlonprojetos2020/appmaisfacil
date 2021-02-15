@@ -1,5 +1,11 @@
 <po-page-edit
-    [p-title]="editedUser ? editedUser.userCompany.fantasyName : 'Nova Empresa'"
+    [p-title]="
+        editedUser
+            ? editedUser.userCompany
+                ? editedUser.userCompany.fantasyName
+                : editedUser.name
+            : 'Nova Empresa'
+    "
     [p-breadcrumb]="breadcrumb"
     class="breadcrumb"
 >

@@ -49,7 +49,12 @@
                     <ng-template [ngIf]="!company.userCompany">
                         <div class="card-info po-mb-4">
                             <h2 class="po-mb-2">Cadastro não concluido!</h2>
-                            <p>Cadastrar dados da empresa</p>
+                            <p class="po-mb-2">Cadastrar dados da empresa</p>
+                            <po-button
+                                p-label="Terminar Cadastro"
+                                p-type="primary"
+                                (p-click)="editedCompany()"
+                            ></po-button>
                         </div>
                     </ng-template>
                 </div>

@@ -20,13 +20,7 @@ import { cnpjValidator } from '../../../../../../shared/validators/cnpjValidator
     templateUrl: './company-form.component.html',
 })
 export class CompanyFormComponent implements OnInit {
-    breadcrumb: PoBreadcrumb = {
-        items: [
-            { label: 'Início', link: '/admin' },
-            { label: 'Empresas', link: '/admin/empresas' },
-            { label: 'Nova Empresa', link: '/admin/empresas/nova-empresa' },
-        ],
-    };
+    @Input() breadcrumb: PoBreadcrumb;
 
     formDadosPessoais: FormGroup;
     formDadosEmpresa: FormGroup;
@@ -169,11 +163,11 @@ export class CompanyFormComponent implements OnInit {
             ],
             userExtraData: this.formBuilder.group({
                 phone: [
-                    this.editedUser?.userExtraData.phone,
+                    this.editedUser?.userExtraData?.phone,
                     Validators.required,
                 ],
                 cpf: [
-                    this.editedUser?.userExtraData.cpf,
+                    this.editedUser?.userExtraData?.cpf,
                     [Validators.required, cpfValidator],
                 ],
             }),
@@ -181,31 +175,32 @@ export class CompanyFormComponent implements OnInit {
 
         this.formDadosEmpresa = this.formBuilder.group({
             cnpj: [
-                this.editedUser?.userCompany.cnpj,
+                this.editedUser?.userCompany?.cnpj,
                 [Validators.required, cnpjValidator],
             ],
-            socialReason: [this.editedUser?.userCompany.socialReason],
-            fantasyName: [this.editedUser?.userCompany.fantasyName],
-            type: [this.editedUser?.userCompany.type],
-            lineOfBusiness: [this.editedUser?.userCompany.lineOfBusiness],
-            cnae: [this.editedUser?.userCompany.cnae],
+            socialReason: [this.editedUser?.userCompany?.socialReason],
+            fantasyName: [this.editedUser?.userCompany?.fantasyName],
+            type: [this.editedUser?.userCompany?.type],
+            lineOfBusiness: [this.editedUser?.userCompany?.lineOfBusiness],
+            cnae: [this.editedUser?.userCompany?.cnae],
             address: this.formBuilder.group({
-                complement: [this.editedUser?.userCompany.address.complement],
-                zipcode: [this.editedUser?.userCompany.address.zipcode],
-                street: [this.editedUser?.userCompany.address.street],
-                number: [this.editedUser?.userCompany.address.number],
+                complement: [this.editedUser?.userCompany?.address.complement],
+                zipcode: [this.editedUser?.userCompany?.address.zipcode],
+                street: [this.editedUser?.userCompany?.address.street],
+                number: [this.editedUser?.userCompany?.address.number],
                 neighborhood: [
-                    this.editedUser?.userCompany.address.neighborhood,
+                    this.editedUser?.userCompany?.address.neighborhood,
                 ],
                 city: this.formBuilder.group({
-                    name: [this.editedUser?.userCompany.address.city.name],
+                    name: [this.editedUser?.userCompany?.address.city.name],
                     stateProvince: [
-                        this.editedUser?.userCompany.address.city.stateProvince,
+                        this.editedUser?.userCompany?.address.city
+                            .stateProvince,
                     ],
                 }),
             }),
-            email: [this.editedUser?.userCompany.email],
-            phone: [this.editedUser?.userCompany.phone],
+            email: [this.editedUser?.userCompany?.email],
+            phone: [this.editedUser?.userCompany?.phone],
         });
 
         this.formDadosEmpresa

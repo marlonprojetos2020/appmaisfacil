@@ -11,28 +11,41 @@ import { User } from './model/user';
     providedIn: 'root',
 })
 export class CompaniesService {
-
     constructor(private httpClient: HttpClient) {}
 
     getAddressFromZipcode(zipcode: string): Observable<AddressApiResponse> {
         if (zipcode) {
             zipcode = zipcode.replace('-', '');
-            return this.httpClient.get<AddressApiResponse>(`https://viacep.com.br/ws/${zipcode}/json/`);
+            return this.httpClient.get<AddressApiResponse>(
+                `https://viacep.com.br/ws/${zipcode}/json/`
+            );
         }
 
         return of(null);
     }
 
     existEmail(email: string): Observable<boolean> {
-        return this.httpClient.get<boolean>(`${environment.apiUrl}/users/exists/email?email=${email}`);
+        return this.httpClient.get<boolean>(
+            `${environment.apiUrl}/users/exists/email?email=${email}`
+        );
     }
 
-    isEmailTaken(initialValue?: string): (control: AbstractControl) => Observable<{ isEmailTaken: boolean }> {
+    isEmailTaken(
+        initialValue?: string
+    ): (control: AbstractControl) => Observable<{ isEmailTaken: boolean }> {
         return (control: AbstractControl) =>
             of(control.value)
                 .pipe(debounceTime(300))
-                .pipe(switchMap(email => email === initialValue ? of(null) : this.existEmail(email)))
-                .pipe(map(isTaken => isTaken ? { isEmailTaken: true } : null));
+                .pipe(
+                    switchMap((email) =>
+                        email === initialValue
+                            ? of(null)
+                            : this.existEmail(email)
+                    )
+                )
+                .pipe(
+                    map((isTaken) => (isTaken ? { isEmailTaken: true } : null))
+                );
     }
 
     createUser(user: User): Observable<User> {
@@ -40,12 +53,19 @@ export class CompaniesService {
     }
 
     editUser(user: User, id: number): Observable<User> {
-        return this.httpClient.put<User>(`${environment.apiUrl}/users/${id}`, user);
+        return this.httpClient.put<User>(
+            `${environment.apiUrl}/users/${id}`,
+            user
+        );
     }
 
     getUserCompany(id: number): Observable<User> {
         return this.httpClient.get<User>(`${environment.apiUrl}/users/${id}`);
     }
+
+    getUserCompanyBreadcrumb(id: number): Observable<User> {
+        return this.httpClient.get<User>(
+            `${environment.apiUrl}/users/p/search?search=${id}&searchBy=id&sort=id,desc`
+        );
+    }
 }
-
-

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PoBreadcrumb, PoPageAction } from '@po-ui/ng-components';
 import { Observable } from 'rxjs';
 import { CompaniesService } from '../../../companies.service';
@@ -84,7 +84,8 @@ export class CompanyDetailDashboardComponent implements OnInit {
     constructor(
         private activetedRoute: ActivatedRoute,
         private companyDetailService: CompaniesService,
-        private companyDetailDashboardService: CompanyDetailDashboardService
+        private companyDetailDashboardService: CompanyDetailDashboardService,
+        private router: Router
     ) {}
 
     ngOnInit(): void {
@@ -253,9 +254,17 @@ export class CompanyDetailDashboardComponent implements OnInit {
             { label: 'Inicio', link: '/admin' },
             { label: 'Empresas', link: '/admin/empresas' },
             {
-                label: user.name,
+                label: user.userCompany
+                    ? user.userCompany.fantasyName
+                    : user.name,
                 link: `/admin/empresa/${user.id}`,
             }
+        );
+    }
+
+    editedCompany(): void {
+        this.router.navigateByUrl(
+            `admin/empresa/${this.activetedRoute.snapshot.params.id}/editar`
         );
     }
 }

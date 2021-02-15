@@ -2,11 +2,15 @@
     <div class="po-container admin-dashboard-container">
         <div class="po-row po-mb-5">
             <div class="po-col po-lg-12">
-                <div class="users">
-                    <span class="po-icon po-icon po-icon-users po-mr-2"></span>
-                    <h3>Usuarios Cadastrados</h3>
-                    <span class="number-users">{{ totalUsers }}</span>
-                </div>
+                <a routerLink="/admin/empresas">
+                    <div class="users">
+                        <span
+                            class="po-icon po-icon po-icon-users po-mr-2"
+                        ></span>
+                        <h3>Usuarios Cadastrados</h3>
+                        <span class="number-users">{{ totalUsers }}</span>
+                    </div>
+                </a>
             </div>
         </div>
         <div class="po-row">

@@ -149,20 +149,16 @@
                 <div class="po-row">
                     <div class="po-md-3">
                         <po-button
-                            p-label="Concluir"
-                            p-type="primary"
-                            (p-click)="submitForm()"
-                            [p-disabled]="formAssociate.invalid"
-                        ></po-button>
-                    </div>
-                    <div
-                        class="po-pr-md-1"
-                        [ngStyle]="{ 'margin-left': 'auto' }"
-                    >
-                        <po-button
                             *ngIf="this.editedAssociate"
                             (p-click)="nextForm()"
                             p-label="Pular"
+                        ></po-button>
+                        <po-button
+                            p-label="Concluir"
+                            p-type="primary"
+                            class="po-ml-3"
+                            (p-click)="submitForm()"
+                            [p-disabled]="formAssociate.invalid"
                         ></po-button>
                     </div>
                 </div>

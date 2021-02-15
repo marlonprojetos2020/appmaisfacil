@@ -34,10 +34,15 @@ export class CompanyListComponent {
             action: (item) =>
                 this.router.navigateByUrl(`/admin/empresa/${item.id}`),
         },
+        {
+            label: 'Editar Empresa',
+            action: (item) =>
+                this.router.navigateByUrl(`/admin/empresa/${item.id}/editar`),
+        },
     ];
     columns: DatatableColumn[] = [
         {
-            label: 'Nome',
+            label: 'Nome Fantasia',
             property: 'userCompany.fantasyName',
         },
         {

@@ -9,16 +9,20 @@
 >
     <div class="company-detail-dashboard">
         <po-container p-no-padding="true">
-            <div class="po-row ">
+            <div class="po-row">
                 <div class="po-lg-12">
-                    <ng-template [ngIf]="company.userCompany">
+                    <ng-template [ngIf]="company.userCompany.cnpj">
                         <span class="document">{{
                             company.userCompany?.cnpj | cpfcnpj
                         }}</span>
                     </ng-template>
                 </div>
                 <div class="po-lg-5 po-mb-3">
-                    <ng-template [ngIf]="company.userCompany">
+                    <ng-template
+                        [ngIf]="
+                            company.userCompany && company.userCompany.address
+                        "
+                    >
                         <div class="card-info">
                             <div class="info po-mb-2">
                                 <span class="po-icon po-icon-telephone"></span>
@@ -34,14 +38,16 @@
                             <div class="info">
                                 <span class="po-icon po-icon-home"></span>
                                 <p>
-                                    {{ company.userCompany?.address.street }},
-                                    {{ company.userCompany?.address.number }},
+                                    {{ company.userCompany?.address?.street }},
+                                    {{ company.userCompany?.address?.number }},
                                     {{
                                         company.userCompany?.address
-                                            .neighborhood
+                                            ?.neighborhood
                                     }}
                                     -
-                                    {{ company.userCompany?.address.city.name }}
+                                    {{
+                                        company.userCompany?.address?.city.name
+                                    }}
                                 </p>
                             </div>
                         </div>

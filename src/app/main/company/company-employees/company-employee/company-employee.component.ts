@@ -3,6 +3,7 @@ import {
     PoBreadcrumb,
     PoModalAction,
     PoModalComponent,
+    PoNotificationService,
     PoPageAction,
     PoTableAction,
 } from '@po-ui/ng-components';
@@ -10,6 +11,7 @@ import { environment } from '../../../../../environments/environment';
 import { DatatableColumn } from '../../../../shared/components/page-datatable/datatable-column';
 import { CompanyEmployee } from '../models/company-employee';
 import { CompanyEmployeeService } from '../company-employee.service';
+import { Router } from '@angular/router';
 
 @Component({
     templateUrl: './company-employee.component.html',
@@ -32,6 +34,7 @@ export class CompanyEmployeeComponent implements OnInit {
                 .subscribe(
                     (data) => (this.companyEmployee.status = data.statusText)
                 );
+            this.notification.success('Pedido de demissão concluído');
             this.poModalEmployee.close();
         },
     };
@@ -64,6 +67,19 @@ export class CompanyEmployeeComponent implements OnInit {
             disabled: (item) =>
                 item.status === 'PENDING_FIRED' || item.status === 'FIRED',
         },
+        {
+            label: 'Editar registo',
+            action: (item) => {
+                console.log(item);
+                this.router.navigateByUrl(
+                    `/empresa/funcionarios/editar-funcionario/${item.id}`
+                );
+            },
+        },
+        {
+            label: 'Baixar Termo de Contratação',
+            action: (item) => window.open(item.admissionFileUrl, '_blank'),
+        },
     ];
     columns: DatatableColumn[] = [
         {
@@ -86,7 +102,11 @@ export class CompanyEmployeeComponent implements OnInit {
         },
     ];
 
-    constructor(private companyEmployeeService: CompanyEmployeeService) {}
+    constructor(
+        private companyEmployeeService: CompanyEmployeeService,
+        private router: Router,
+        private notification: PoNotificationService
+    ) {}
 
     ngOnInit(): void {
         this.setBreadCrumbs();

@@ -18,7 +18,6 @@ import { finalize } from 'rxjs/operators';
 export class CompanyNewEmployeeComponent implements OnInit {
     formCompanyEmployee: FormGroup;
     newCompanyEmployee: CompanyEmployee;
-    startDate: any = '';
     restrictions: PoUploadFileRestrictions;
 
     loading = false;
@@ -65,8 +64,6 @@ export class CompanyNewEmployeeComponent implements OnInit {
                 ]),
             ],
         });
-
-        this.startDate = new Date();
 
         this.restrictions = {
             allowedExtensions: ['.txt', '.pdf', '.png', '.jpeg', '.jpg'],

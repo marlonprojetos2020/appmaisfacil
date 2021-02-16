@@ -36,7 +36,7 @@ export class AdminEmployeeComponent implements OnInit {
         },
         {
             label: 'Empresa',
-            property: 'companyName',
+            property: 'companyFantasyName',
         },
         {
             label: 'Funcionário',

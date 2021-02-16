@@ -44,7 +44,7 @@ export class AdminEmployeeFiredComponent implements OnInit {
 
     tableActions: PoTableAction[] = [
         {
-            label: 'Demitir',
+            label: 'Confirmar Demissão',
             action: (item) => {
                 this.poModalEmployeeFired.open();
                 this.employeeCompany = item.companyName;
@@ -68,7 +68,7 @@ export class AdminEmployeeFiredComponent implements OnInit {
         },
         {
             label: 'Empresa',
-            property: 'companyName',
+            property: 'companyFantasyName',
         },
         {
             label: 'Funcionário',

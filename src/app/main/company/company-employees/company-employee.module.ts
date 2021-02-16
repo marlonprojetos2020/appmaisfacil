@@ -9,6 +9,7 @@ import { CompanyEmployeeComponent } from './company-employee/company-employee.co
 import { PageDatatableModule } from '../../../shared/components/page-datatable/page-datatable.module';
 import { CompanyNewEmployeeModule } from './company-new-employee/company-new-employee.module';
 import { CompanyEmployeeRoutingModule } from './company-employee-routing.module';
+import { CompanyEditEmployeeModule } from './company-edit-employee/company-edit-employee.module';
 
 @NgModule({
     // tslint:disable-next-line:max-line-length
@@ -20,6 +21,7 @@ import { CompanyEmployeeRoutingModule } from './company-employee-routing.module'
         CompanyNewEmployeeModule,
         CompanyEmployeeRoutingModule,
         PoModalModule,
+        CompanyEditEmployeeModule,
     ],
     declarations: [CompanyEmployeeComponent],
 })

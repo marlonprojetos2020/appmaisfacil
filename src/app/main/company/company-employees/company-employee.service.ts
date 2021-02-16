@@ -25,4 +25,8 @@ export class CompanyEmployeeService {
             id
         );
     }
+
+    getCompanyEmployee(id: number): any {
+        return this.httpClient.get(`${environment.apiUrl}/`);
+    }
 }

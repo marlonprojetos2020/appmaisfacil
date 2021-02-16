@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CompanyDashboardService } from './company-dashboard.service';
+import { CurrencyPipe, formatCurrency } from '@angular/common';
 
 @Component({
     templateUrl: './company-dashboard.component.html',
@@ -63,7 +64,10 @@ export class CompanyDashboardComponent implements OnInit {
 
     notaFiscalProcessandoOk = false;
 
-    constructor(private companyDashboardService: CompanyDashboardService) {}
+    constructor(
+        private companyDashboardService: CompanyDashboardService,
+        private currencyPipe: CurrencyPipe
+    ) {}
 
     ngOnInit(): void {
         // Get billings
@@ -188,11 +192,17 @@ export class CompanyDashboardComponent implements OnInit {
                 } else {
                     data.items.map((nota) => {
                         this.notaFiscalProcessando.push(
-                            nota.client.name +
+                            'Cliente' +
                                 ' ' +
-                                'total' +
+                                nota.client.name +
                                 ' ' +
-                                nota.totalAmount
+                                ' - ' +
+                                'Valor' +
+                                ' ' +
+                                this.currencyPipe.transform(
+                                    nota.totalAmount,
+                                    'BRL'
+                                )
                         );
                         this.notaFiscalProcessandoText =
                             'Você tem notas fiscais em analise :';

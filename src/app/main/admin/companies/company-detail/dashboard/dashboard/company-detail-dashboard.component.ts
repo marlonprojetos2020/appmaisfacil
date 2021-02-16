@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { CompaniesService } from '../../../companies.service';
 import { User } from '../../../model/user';
 import { CompanyDetailDashboardService } from '../company-detail-dashboard.service';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
     templateUrl: './company-detail-dashboard.component.html',
@@ -85,7 +86,8 @@ export class CompanyDetailDashboardComponent implements OnInit {
         private activetedRoute: ActivatedRoute,
         private companyDetailService: CompaniesService,
         private companyDetailDashboardService: CompanyDetailDashboardService,
-        private router: Router
+        private router: Router,
+        private currencyPipe: CurrencyPipe
     ) {}
 
     ngOnInit(): void {
@@ -223,7 +225,10 @@ export class CompanyDetailDashboardComponent implements OnInit {
                                 ' ' +
                                 'total' +
                                 ' ' +
-                                nota.totalAmount
+                                this.currencyPipe.transform(
+                                    nota.totalAmount,
+                                    'BRL'
+                                )
                         );
                         this.notaFiscalProcessandoText =
                             'Você tem notas fiscais em analise :';

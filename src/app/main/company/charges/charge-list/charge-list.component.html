@@ -47,13 +47,13 @@
                 <div class="po-md-6 po-mb-2">
                     <h3>
                         <span>Vencimento</span>
-                        {{ vencimento }}
+                        {{ vencimento | date: "dd/MM/yy" }}
                     </h3>
                 </div>
                 <div class="po-md-6 po-mb-2">
                     <h3>
                         <span>Valor</span>
-                        {{ valor }}
+                        {{ valor | currency: "BRL" }}
                     </h3>
                 </div>
                 <div class="po-md-12">

@@ -47,13 +47,13 @@
                 <div class="po-md-12 po-mb-2">
                     <h3>
                         <span>Data</span>
-                        {{ dataDespesa }}
+                        {{ dataDespesa | date: "dd/MM/yy" }}
                     </h3>
                 </div>
                 <div class="po-md-12 po-mb-2">
                     <h3>
                         <span>Valor</span>
-                        R$ {{ valorDespesa }}
+                        {{ valorDespesa | currency: "BRL" }}
                     </h3>
                 </div>
             </div>

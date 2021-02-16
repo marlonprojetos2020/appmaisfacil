@@ -12,6 +12,7 @@ import { environment } from '../../../../../environments/environment';
 import { DatatableColumn } from '../../../../shared/components/page-datatable/datatable-column';
 import { Router } from '@angular/router';
 import { BankStatement } from '../models/bank-statements';
+import { CompanyBankStatementService } from '../company-bank-statement.service';
 
 @Component({
     templateUrl: './company-bank-statement.component.html',
@@ -55,7 +56,7 @@ export class CompanyBankStatementComponent implements OnInit {
                 this.prepareModal(item);
                 this.bankName = item['bankAccount.bankName'];
                 this.nomeEmpresa;
-                this.month = item.month;
+                this.month = item.monthText;
                 this.status = item.statusText;
                 this.setUrlDocument(item.id);
             },
@@ -86,13 +87,20 @@ export class CompanyBankStatementComponent implements OnInit {
 
     constructor(
         private router: Router,
-        private poNotificationService: PoNotificationService
+        private poNotificationService: PoNotificationService,
+        private companyBankStatement: CompanyBankStatementService
     ) {}
 
     ngOnInit(): void {
         const company = JSON.parse(sessionStorage.CREDENTIALS_KEY);
 
-        this.nomeEmpresa = company.userDetails.name;
+        this.companyBankStatement
+            .getCompany(company.userDetails.id)
+            .subscribe((data) =>
+                data.userCompany.fantasyName
+                    ? (this.nomeEmpresa = data.userCompany.fantasyName)
+                    : (this.nomeEmpresa = data.name)
+            );
     }
 
     prepareModal(extrato: BankStatement): void {

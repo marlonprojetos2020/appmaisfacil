@@ -31,9 +31,10 @@
                 <po-upload
                     p-drag-drop
                     p-drag-drop-height="150"
-                    p-auto-upload
+                    p-auto-upload="true"
                     [p-url]="urlUploadDocument"
                     [p-restrictions]="restrictions"
+                    (p-success)="success()"
                 ></po-upload>
             </div>
         </div>

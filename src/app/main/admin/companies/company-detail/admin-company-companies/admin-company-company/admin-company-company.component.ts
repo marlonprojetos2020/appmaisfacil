@@ -46,7 +46,7 @@ export class AdminCompanyCompanyComponent implements OnInit {
             .getUserCompany(this.activetedRoute.snapshot.params.id)
             .subscribe((data) => {
                 this.setBreadcrumb(data);
-                data.userCompany
+                data.userCompany && data.userCompany.cnpj
                     ? (this.userCompanyExist = true)
                     : (this.userCompanyExist = false);
             });

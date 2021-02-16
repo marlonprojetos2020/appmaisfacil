@@ -11,6 +11,7 @@ import { environment } from '../../../../../environments/environment';
 import { DatatableColumn } from '../../../../shared/components/page-datatable/datatable-column';
 import { Router } from '@angular/router';
 import { Charge } from '../../../../shared/components/charge-form/models/charge';
+import { ChargeListService } from '../charge-list.service';
 
 @Component({
     templateUrl: './charge-list.component.html',
@@ -74,13 +75,20 @@ export class ChargeListComponent implements OnInit {
 
     constructor(
         private router: Router,
-        private poNotificationService: PoNotificationService
+        private poNotificationService: PoNotificationService,
+        private chargeListService: ChargeListService
     ) {}
 
     ngOnInit(): void {
         const company = JSON.parse(sessionStorage.CREDENTIALS_KEY);
 
-        this.nomeEmpresa = company.userDetails.name;
+        this.chargeListService
+            .getCompany(company.userDetails.id)
+            .subscribe((data) =>
+                data.userCompany.fantasyName
+                    ? (this.nomeEmpresa = data.userCompany.fantasyName)
+                    : (this.nomeEmpresa = data.name)
+            );
 
         this.tableActions.push(
             {

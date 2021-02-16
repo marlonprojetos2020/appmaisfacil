@@ -8,6 +8,7 @@ import {
     PoModalModule,
     PoTableModule,
 } from '@po-ui/ng-components';
+import { PipeModule } from '../../../../shared/pipe/pipe.module';
 
 @NgModule({
     imports: [
@@ -17,6 +18,7 @@ import {
         PoTableModule,
         PoFieldModule,
         PoButtonModule,
+        PipeModule,
     ],
     declarations: [AdminInvoiceListComponent],
     exports: [AdminInvoiceListComponent],

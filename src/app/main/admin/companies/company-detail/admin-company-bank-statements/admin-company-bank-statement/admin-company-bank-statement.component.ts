@@ -61,7 +61,9 @@ export class AdminCompanyBankStatementComponent implements OnInit {
             { label: 'Inicio', link: '/admin' },
             { label: 'Empresas', link: '/admin/empresas' },
             {
-                label: user.name,
+                label: user.userCompany.fantasyName
+                    ? user.userCompany.fantasyName
+                    : user.name,
                 link: `/admin/empresa/${user.id}`,
             },
             { label: 'Extratos' }

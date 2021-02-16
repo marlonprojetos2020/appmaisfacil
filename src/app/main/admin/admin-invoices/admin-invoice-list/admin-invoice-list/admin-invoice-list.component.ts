@@ -60,8 +60,9 @@ export class AdminInvoiceListComponent implements OnInit {
         {
             label: 'Anexar Nota Fiscal',
             action: (item) => {
+                console.log(item);
                 this.poModalEnviarNota.open();
-                this.companyName = item.companyName;
+                this.companyName = item.companyFantasyName;
                 this.clientName = item['client.name'];
                 this.clientDocument = item['client.document'];
                 this.status = item.statusText;
@@ -91,7 +92,7 @@ export class AdminInvoiceListComponent implements OnInit {
             action: (item) => {
                 this.idInvoice = item.id;
                 this.poModalCancelarNota.open();
-                this.companyName = item.companyName;
+                this.companyName = item.companyFantasyName;
                 this.clientName = item['client.name'];
                 this.clientDocument = item['client.document'];
                 this.status = item.statusText;

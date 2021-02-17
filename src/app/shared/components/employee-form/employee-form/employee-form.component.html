@@ -1,7 +1,9 @@
 <po-stepper #stepper>
     <po-step
         p-label="Dados do Funcionário"
-        [p-can-active-next-step]="formCompanyEmployee.invalid"
+        [p-can-active-next-step]=" this.editedEmployee
+                ? null
+                : canActiveNextStep.bind(this, formCompanyEmployee)"
     >
         <div class="po-container po-mt-5">
             <form [formGroup]="formCompanyEmployee">
@@ -18,10 +20,10 @@
                         <app-invalid-feedback
                             [formCtrl]="formCompanyEmployee.get('name')"
                             [hasError]="
-                                    formCompanyEmployee.get('name').errors
-                                        ?.required &&
-                                    formCompanyEmployee.get('name').dirty
-                                "
+                                formCompanyEmployee.get('name').errors
+                                    ?.required &&
+                                formCompanyEmployee.get('name').dirty
+                            "
                         >
                             Este campo é obrigatório
                         </app-invalid-feedback>
@@ -34,14 +36,12 @@
                             p-placeholder="Selecionar"
                         ></po-datepicker>
                         <app-invalid-feedback
-                            [formCtrl]="
-                                    formCompanyEmployee.get('admissionAt')
-                                "
+                            [formCtrl]="formCompanyEmployee.get('admissionAt')"
                             [hasError]="
-                                    formCompanyEmployee.get('admissionAt')
-                                        .errors?.required &&
-                                    formCompanyEmployee.get('admissionAt').dirty
-                                "
+                                formCompanyEmployee.get('admissionAt').errors
+                                    ?.required &&
+                                formCompanyEmployee.get('admissionAt').dirty
+                            "
                         >
                             Este campo é obrigatório
                         </app-invalid-feedback>
@@ -58,10 +58,10 @@
                         <app-invalid-feedback
                             [formCtrl]="formCompanyEmployee.get('category')"
                             [hasError]="
-                                    formCompanyEmployee.get('category').errors
-                                        ?.required &&
-                                    formCompanyEmployee.get('category').dirty
-                                "
+                                formCompanyEmployee.get('category').errors
+                                    ?.required &&
+                                formCompanyEmployee.get('category').dirty
+                            "
                         >
                             Este campo é obrigatório
                         </app-invalid-feedback>

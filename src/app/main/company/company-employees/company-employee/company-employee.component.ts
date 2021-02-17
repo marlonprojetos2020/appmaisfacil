@@ -70,7 +70,6 @@ export class CompanyEmployeeComponent implements OnInit {
         {
             label: 'Editar registo',
             action: (item) => {
-                console.log(item);
                 this.router.navigateByUrl(
                     `/empresa/funcionarios/editar-funcionario/${item.id}`
                 );

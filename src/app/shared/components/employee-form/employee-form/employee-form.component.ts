@@ -1,8 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { CompanyEmployee } from '../../../../main/company/company-employees/models/company-employee';
 import {
-    PoBreadcrumb,
     PoNotificationService,
     PoUploadFileRestrictions,
 } from '@po-ui/ng-components';
@@ -22,6 +21,7 @@ export class EmployeeFormComponent implements OnInit {
     restrictions: PoUploadFileRestrictions;
     idEmployee: number;
     loading = false;
+    canActivated = false;
 
     urlUploadDocument: string;
 
@@ -109,6 +109,10 @@ export class EmployeeFormComponent implements OnInit {
               );
 
         this.location.back();
+    }
+
+    canActiveNextStep(form: NgForm): any {
+        return form.valid;
     }
 
     dirtyMe(input): void {

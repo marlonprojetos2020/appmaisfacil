@@ -1,10 +1,10 @@
 <po-page-default
-    p-title="Novo Funcionário"
+    p-title="Editar Funcionário"
     [p-breadcrumb]="breadcrumb"
     class="breadcrumb"
 >
-   <app-employee-form
-       *ngIf="employee$ | async as editedEmployee"
-       [editedEmployee]="editedEmployee"
-   ></app-employee-form>
+    <app-employee-form
+        *ngIf="employee$ | async as editedEmployee"
+        [editedEmployee]="editedEmployee"
+    ></app-employee-form>
 </po-page-default>

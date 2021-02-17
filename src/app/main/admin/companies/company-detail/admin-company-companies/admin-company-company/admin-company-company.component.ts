@@ -88,8 +88,8 @@ export class AdminCompanyCompanyComponent implements OnInit {
             { label: 'Inicio', link: '/admin' },
             { label: 'Empresas', link: '/admin/empresas' },
             {
-                label: user.userCompany.fantasyName
-                    ? user.userCompany.fantasyName
+                label: user.userCompany?.fantasyName
+                    ? user.userCompany?.fantasyName
                     : user.name,
                 link: `/admin/empresa/${user.id}`,
             },

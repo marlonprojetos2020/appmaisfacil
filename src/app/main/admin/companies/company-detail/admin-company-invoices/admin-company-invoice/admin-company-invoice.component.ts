@@ -20,7 +20,7 @@ export class AdminCompanyInvoiceComponent implements OnInit {
 
     pageActions: PoPageAction[] = [];
 
-    serviceApi = `${environment.apiUrl}/nota-fiscal/p/search`;
+    serviceApi = '';
     tableActions: PoTableAction[] = [];
     columns: DatatableColumn[] = [
         {
@@ -47,6 +47,8 @@ export class AdminCompanyInvoiceComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
+        this.serviceApi = `${environment.apiUrl}/nota-fiscal/p/search?companyId=${this.activatedRoute.snapshot.params.id}`;
+
         this.companiesService
             .getUserCompany(this.activatedRoute.snapshot.params.id)
             .subscribe((data) => this.setBreadcrumb(data));
@@ -57,8 +59,8 @@ export class AdminCompanyInvoiceComponent implements OnInit {
             { label: 'Inicio', link: '/admin' },
             { label: 'Empresas', link: '/admin/empresas' },
             {
-                label: user.userCompany.fantasyName
-                    ? user.userCompany.fantasyName
+                label: user.userCompany?.fantasyName
+                    ? user.userCompany?.fantasyName
                     : user.name,
                 link: `/admin/empresa/${user.id}`,
             },

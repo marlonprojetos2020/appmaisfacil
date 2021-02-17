@@ -27,6 +27,7 @@ export class AdminCompanyExpenseComponent implements OnInit {
     @Input() imagemDespesa: string = '';
     @Input() pdf: string;
 
+    idCompany: number;
     ehPdf = false;
     @ViewChild('modalDespesa', { static: true })
     poModalDespesa: PoModalComponent;
@@ -35,7 +36,7 @@ export class AdminCompanyExpenseComponent implements OnInit {
 
     companyName: string;
 
-    serviceApi = `${environment.apiUrl}/company/expense`;
+    serviceApi = '';
     tableActions: PoTableAction[] = [
         {
             label: 'Visualizar Despesa',
@@ -101,6 +102,8 @@ export class AdminCompanyExpenseComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
+        this.serviceApi = `${environment.apiUrl}/expense/p/search?companyId=${this.activatedRoute.snapshot.params.id}`;
+
         this.company$ = this.adminCompanyExpenseService
             .getCompany(this.activatedRoute.snapshot.params.id)
             .subscribe((data) => (this.companyName = data.name));
@@ -119,8 +122,8 @@ export class AdminCompanyExpenseComponent implements OnInit {
             { label: 'Inicio', link: '/admin' },
             { label: 'Empresas', link: '/admin/empresas' },
             {
-                label: user.userCompany.fantasyName
-                    ? user.userCompany.fantasyName
+                label: user.userCompany?.fantasyName
+                    ? user.userCompany?.fantasyName
                     : user.name,
                 link: `/admin/empresa/${user.id}`,
             },

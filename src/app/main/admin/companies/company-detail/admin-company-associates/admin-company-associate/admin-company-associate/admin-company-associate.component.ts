@@ -87,7 +87,12 @@ export class AdminCompanyAssociateComponent implements OnInit {
         this.breadcrumb.items.push(
             { label: 'Inicio', link: '/admin' },
             { label: 'Empresas', link: '/admin/empresas' },
-            { label: user.name, link: `/admin/empresa/${user.id}` },
+            {
+                label: user.userCompany?.fantasyName
+                    ? user.userCompany?.fantasyName
+                    : user.name,
+                link: `/admin/empresa/${user.id}`,
+            },
             { label: 'Sócios' }
         );
     }

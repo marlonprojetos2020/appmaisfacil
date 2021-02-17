@@ -1,7 +1,9 @@
 <po-page-default
     *ngIf="company$ | async as company"
     [p-title]="
-        company.userCompany ? company.userCompany.fantasyName : company.name
+        company.userCompany?.fantasyName
+            ? company.userCompany?.fantasyName
+            : company.name
     "
     [p-actions]="actions"
     [p-breadcrumb]="breadcrumb"
@@ -11,7 +13,7 @@
         <po-container p-no-padding="true">
             <div class="po-row">
                 <div class="po-lg-12">
-                    <ng-template [ngIf]="company.userCompany.cnpj">
+                    <ng-template [ngIf]="company.userCompany?.cnpj">
                         <span class="document">{{
                             company.userCompany?.cnpj | cpfcnpj
                         }}</span>

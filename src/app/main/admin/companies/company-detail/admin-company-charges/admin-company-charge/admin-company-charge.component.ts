@@ -21,7 +21,7 @@ export class AdminCompanyChargeComponent implements OnInit {
 
     pageActions: PoPageAction[] = [];
 
-    serviceApi = `${environment.apiUrl}/billing`;
+    serviceApi = '';
     tableActions: PoTableAction[] = [
         {
             label: 'Cancelar',
@@ -80,6 +80,8 @@ export class AdminCompanyChargeComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
+        this.serviceApi = `${environment.apiUrl}/billing/p/search?companyId=${this.activetedRoute.snapshot.params.id}`;
+
         const id = this.activetedRoute.snapshot.params.id;
 
         this.pageActions.push({
@@ -98,8 +100,8 @@ export class AdminCompanyChargeComponent implements OnInit {
             { label: 'Inicio', link: '/admin' },
             { label: 'Empresas', link: '/admin/empresas' },
             {
-                label: user.userCompany.fantasyName
-                    ? user.userCompany.fantasyName
+                label: user.userCompany?.fantasyName
+                    ? user.userCompany?.fantasyName
                     : user.name,
                 link: `/admin/empresa/${user.id}`,
             },

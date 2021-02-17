@@ -36,8 +36,8 @@ export class CompanyEditComponent implements OnInit {
                 { label: 'Início', link: '/admin' },
                 { label: 'Empresas', link: '/admin/empresas' },
                 {
-                    label: item.userCompany
-                        ? item.userCompany.fantasyName
+                    label: item.userCompany?.fantasyName
+                        ? item.userCompany?.fantasyName
                         : item.name,
                     link: '',
                 }

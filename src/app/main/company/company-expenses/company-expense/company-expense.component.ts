@@ -9,6 +9,7 @@ import {
 } from '@po-ui/ng-components';
 import { environment } from '../../../../../environments/environment';
 import { Expense } from '../../../admin/companies/company-detail/admin-company-expenses/models/expense';
+import { CompanyExpenseService } from '../company-expense.service';
 
 @Component({
     templateUrl: './company-expense.component.html',
@@ -96,12 +97,18 @@ export class CompanyExpenseComponent implements OnInit {
         action: () => this.poModalDespesa.close(),
     };
 
-    constructor() {}
+    constructor(private companyExpenseService: CompanyExpenseService) {}
 
     ngOnInit(): void {
         const company = JSON.parse(sessionStorage.CREDENTIALS_KEY);
 
-        this.nomeEmpresa = company.userDetails.name;
+        this.companyExpenseService
+            .getCompanyExpense(company.userDetails.id)
+            .subscribe((data) =>
+                data.userCompany.fantasyName
+                    ? (this.nomeEmpresa = data.userCompany.fantasyName)
+                    : (this.nomeEmpresa = data.name)
+            );
     }
 
     prepareModal(expense: Expense): void {
@@ -110,5 +117,9 @@ export class CompanyExpenseComponent implements OnInit {
 
     downloadPdf(): any {
         window.open(this.pdf, '_blank');
+    }
+
+    downloadImg(): any {
+        window.open(this.imagemDespesa, '_blank');
     }
 }

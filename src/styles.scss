@@ -407,10 +407,20 @@ po-datepicker.ng-invalid.ng-dirty .po-input {
     align-items: center;
     justify-content: center;
     background-color: var(--color-bgImage);
+    position: relative;
 
     img {
         max-width: 255px;
         overflow: auto;
+    }
+
+    .po-button.po-text-ellipsis {
+        background-color: var(--color-tertiary);
+        color: #ffffff;
+        border-radius: 50%;
+        position: absolute;
+        bottom: 25px;
+        right: 25px;
     }
 }
 
@@ -435,4 +445,21 @@ po-datepicker.ng-invalid.ng-dirty .po-input {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+po-upload {
+    .po-button.po-text-ellipsis {
+        background-color: var(--color-tertiary);
+        color: #ffffff !important;
+        box-shadow: 0 4px 8px 0 var(--color-black-alpha-15);
+        border-radius: 5px;
+    }
+}
+
+.modal-button {
+    .po-button.po-text-ellipsis.po-button-primary {
+        background-color: #ffffff;
+        color: var(--color-secondary);
+        border-color: var(--color-secondary);
+    }
 }

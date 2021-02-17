@@ -25,6 +25,8 @@ export class ChargeListComponent implements OnInit {
     @Input() valor: number;
     @Input() titulo: string;
     @Input() imagemCobranca: string;
+    @Input() pdfCobranca: string;
+    isPdfCobranca = false;
 
     idCharge: number;
 
@@ -104,6 +106,12 @@ export class ChargeListComponent implements OnInit {
                     this.imagemCobranca = item.billingFileUrl;
                     this.setUrlDocument(item.id);
                     this.idCharge = item.id;
+                    if (this.imagemCobranca.indexOf('pdf') < 0) {
+                        this.isPdfCobranca = false;
+                    } else {
+                        this.isPdfCobranca = true;
+                        this.pdfCobranca = item.billingFileUrl;
+                    }
                 },
                 disabled: (item) => item.status !== 'PENDING',
             },
@@ -111,6 +119,10 @@ export class ChargeListComponent implements OnInit {
                 label: 'Baixar Comprovante',
                 action: (item) => window.open(item.proofOfPaymentUrl, '_blank'),
                 disabled: (item) => !item.proofOfPaymentUrl,
+            },
+            {
+                label: 'Baixar Cobrança',
+                action: (item) => window.open(item.billingFileUrl, '_blank'),
             }
         );
     }
@@ -121,6 +133,14 @@ export class ChargeListComponent implements OnInit {
 
     setUrlDocument(id: number): void {
         this.urlUploadDocument = `${environment.apiUrl}/company/billing/${id}/proof-of-payment`;
+    }
+
+    downloadPdfCobranca(): any {
+        window.open(this.pdfCobranca, '_blank');
+    }
+
+    downloadImgCobranca(): any {
+        window.open(this.imagemCobranca, '_blank');
     }
 
     success(): void {

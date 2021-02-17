@@ -118,21 +118,19 @@ export class AdminChargeListComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        const company = JSON.parse(sessionStorage.CREDENTIALS_KEY);
-
-        this.nomeEmpresa = company.userDetails.name;
-
         this.tableActions.push(
             {
                 label: 'Confirmar Pagamento',
                 action: (item) => {
+                    item.companyFantasyName
+                        ? (this.nomeEmpresa = item.companyFantasyName)
+                        : (this.nomeEmpresa = item.companyName);
                     this.prepareModal(item);
                     this.status = item.statusText;
                     this.tipo = item['type.label'];
                     this.valor = item.value;
                     this.vencimento = item.dueDate;
                     this.titulo = item.description;
-                    this.nomeEmpresa;
                     this.imagemCobranca = item.billingFileUrl;
                     this.setUrlDocument(item.id);
                     this.idCharge = item.id;
@@ -141,7 +139,7 @@ export class AdminChargeListComponent implements OnInit {
                         this.isPdfCobranca = false;
                     } else {
                         this.isPdfCobranca = true;
-                        this.pdfCobranca = item.attachmentUrl;
+                        this.pdfCobranca = item.billingFileUrl;
                     }
                 },
                 disabled: (item) => item.status !== 'PENDING_REVIEW',
@@ -154,13 +152,15 @@ export class AdminChargeListComponent implements OnInit {
             {
                 label: 'Visualizar Comprovante',
                 action: (item) => {
+                    item.companyFantasyName
+                        ? (this.nomeEmpresa = item.companyFantasyName)
+                        : (this.nomeEmpresa = item.companyName);
                     this.poModalVisualizarComprovante.open();
                     this.status = item.statusText;
                     this.tipo = item['type.label'];
                     this.valor = item.value;
                     this.vencimento = item.dueDate;
                     this.titulo = item.description;
-                    this.nomeEmpresa;
                     this.imagemComprovante = item.proofOfPaymentUrl;
                     this.setUrlDocument(item.id);
                     this.idCharge = item.id;
@@ -169,7 +169,7 @@ export class AdminChargeListComponent implements OnInit {
                         this.isPdfComprovante = false;
                     } else {
                         this.isPdfComprovante = true;
-                        this.pdfComprovante = item.attachmentUrl;
+                        this.pdfComprovante = item.proofOfPaymentUrl;
                     }
                 },
                 disabled: (item) => item.status !== 'PAID',
@@ -210,7 +210,15 @@ export class AdminChargeListComponent implements OnInit {
         window.open(this.pdfCobranca, '_blank');
     }
 
+    downloadImgCobranca(): any {
+        window.open(this.imagemCobranca, '_blank');
+    }
+
     downloadPdfComprovante(): any {
         window.open(this.pdfComprovante, '_blank');
+    }
+
+    downloadImgComprovante(): any {
+        window.open(this.imagemComprovante, '_blank');
     }
 }

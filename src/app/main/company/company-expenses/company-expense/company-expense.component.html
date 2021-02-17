@@ -12,18 +12,21 @@
     <div class="po-row">
         <div class="po-md-6">
             <ng-template [ngIf]="ehPdf">
-                <div class="div-pdf">
+                <div class="img-modal">
                     <img src="/assets/images/imgPdf.png" alt="Pdf" />
                     <po-button
                         (p-click)="downloadPdf()"
                         p-icon="po-icon po-icon-download"
-                        p-label="Download PDF"
                     ></po-button>
                 </div>
             </ng-template>
             <ng-template [ngIf]="!ehPdf">
                 <div class="img-modal">
-                    <img [src]="imagemDespesa" alt="Extrato Bancário" />
+                    <img [src]="imagemDespesa" alt="Despesa" />
+                    <po-button
+                        (p-click)="downloadImg()"
+                        p-icon="po-icon po-icon-download"
+                    ></po-button>
                 </div>
             </ng-template>
         </div>

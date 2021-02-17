@@ -63,13 +63,14 @@ export class AdminBankStatementListComponent implements OnInit {
         {
             label: 'Aprovar Extrato',
             action: (item) => {
+                item.bankAccountCompanyFantasyName
+                    ? (this.companyName = item.bankAccountCompanyFantasyName)
+                    : (this.companyName = item.bankAccountCompanyName);
                 this.prepareModal(item);
                 this.status = item.statusText;
                 this.bankName = item['bankAccount.bankName'];
-                this.companyName = item.bankAccountCompanyName;
                 this.month = item.month;
                 this.image = item.attachmentUrl;
-                console.log(this.image.indexOf('pdf'));
                 this.idStatement = item.id;
                 if (this.image.indexOf('pdf') < 0) {
                     this.ehPdfPendente = false;
@@ -92,7 +93,9 @@ export class AdminBankStatementListComponent implements OnInit {
                 this.poModalExtratoAprovado.open();
                 this.status = item.statusText;
                 this.bankName = item['bankAccount.bankName'];
-                this.companyName = item.bankAccountCompanyName;
+                item.bankAccountCompanyFantasyName
+                    ? (this.companyName = item.bankAccountCompanyFantasyName)
+                    : (this.companyName = item.bankAccountCompanyName);
                 this.image = item.attachmentUrl;
                 this.month = item.month;
                 if (this.image.indexOf('pdf') < 0) {
@@ -144,6 +147,10 @@ export class AdminBankStatementListComponent implements OnInit {
 
     downloadPdfPendente(): any {
         window.open(this.pdfPendente, '_blank');
+    }
+
+    downloadImg(): any {
+        window.open(this.image, '_blank');
     }
 
     downloadPdfPago(): any {

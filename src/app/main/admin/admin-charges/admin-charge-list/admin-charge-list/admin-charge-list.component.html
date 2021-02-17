@@ -24,18 +24,21 @@
         </div>
         <div class="po-md-6">
             <ng-template [ngIf]="isPdfCobranca">
-                <div class="div-pdf">
+                <div class="img-modal">
                     <img src="/assets/images/imgPdf.png" alt="Pdf" />
                     <po-button
                         (p-click)="downloadPdfCobranca()"
                         p-icon="po-icon po-icon-download"
-                        p-label="Download PDF"
                     ></po-button>
                 </div>
             </ng-template>
             <ng-template [ngIf]="!isPdfCobranca">
                 <div class="img-modal">
                     <img [src]="imagemCobranca" alt="Corbança" />
+                    <po-button
+                        (p-click)="downloadImgCobranca()"
+                        p-icon="po-icon po-icon-download"
+                    ></po-button>
                 </div>
             </ng-template>
         </div>
@@ -68,7 +71,7 @@
             <div class="po-md-6 po-mb-2">
                 <h3>
                     <span>Vencimento</span>
-                    {{ vencimento  | date: "dd/MM/yy"  }}
+                    {{ vencimento | date: "dd/MM/yy" }}
                 </h3>
             </div>
             <div class="po-md-6">
@@ -85,18 +88,21 @@
     <div class="po-row">
         <div class="po-md-6">
             <ng-template [ngIf]="isPdfCobranca">
-                <div class="div-pdf">
+                <div class="img-modal">
                     <img src="/assets/images/imgPdf.png" alt="Pdf" />
                     <po-button
                         (p-click)="downloadPdfCobranca()"
                         p-icon="po-icon po-icon-download"
-                        p-label="Download PDF"
                     ></po-button>
                 </div>
             </ng-template>
             <ng-template [ngIf]="!isPdfCobranca">
                 <div class="img-modal">
                     <img [src]="imagemCobranca" alt="Corbança" />
+                    <po-button
+                        (p-click)="downloadImgCobranca()"
+                        p-icon="po-icon po-icon-download"
+                    ></po-button>
                 </div>
             </ng-template>
         </div>
@@ -129,7 +135,7 @@
             <div class="po-md-6 po-mb-2">
                 <h3>
                     <span>Vencimento</span>
-                    {{ vencimento  | date: "dd/MM/yy"  }}
+                    {{ vencimento | date: "dd/MM/yy" }}
                 </h3>
             </div>
             <div class="po-md-6">
@@ -150,18 +156,21 @@
     <div class="po-row">
         <div class="po-md-6">
             <ng-template [ngIf]="isPdfComprovante">
-                <div class="div-pdf">
+                <div class="img-modal">
                     <img src="/assets/images/imgPdf.png" alt="Pdf" />
                     <po-button
                         (p-click)="downloadPdfComprovante()"
                         p-icon="po-icon po-icon-download"
-                        p-label="Download PDF"
                     ></po-button>
                 </div>
             </ng-template>
             <ng-template [ngIf]="!isPdfComprovante">
                 <div class="img-modal">
                     <img [src]="imagemComprovante" alt="Comprovante" />
+                    <po-button
+                        (p-click)="downloadImgComprovante()"
+                        p-icon="po-icon po-icon-download"
+                    ></po-button>
                 </div>
             </ng-template>
         </div>

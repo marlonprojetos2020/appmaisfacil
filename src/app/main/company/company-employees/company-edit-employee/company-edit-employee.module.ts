@@ -10,6 +10,7 @@ import {
 } from '@po-ui/ng-components';
 import { InvalidFeedbackModule } from '../../../../shared/components/invalid-feedback/invalid-feedback.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EmployeeFormModule } from '../../../../shared/components/employee-form/employee-form.module';
 
 @NgModule({
     imports: [
@@ -21,6 +22,7 @@ import { ReactiveFormsModule } from '@angular/forms';
         PoButtonModule,
         PoStepperModule,
         PoContainerModule,
+        EmployeeFormModule,
     ],
     declarations: [CompanyEditEmployeeComponent],
 })

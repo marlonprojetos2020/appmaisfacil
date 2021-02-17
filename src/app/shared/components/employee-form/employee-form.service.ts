@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { CompanyEmployee } from '../../../main/company/company-employees/models/company-employee';
 import { Observable } from 'rxjs';
-import { CompanyEmployee } from './models/company-employee';
 import { environment } from '../../../../environments/environment';
 
 @Injectable({
     providedIn: 'root',
 })
-export class CompanyEmployeeService {
+export class EmployeeFormService {
     constructor(private httpClient: HttpClient) {}
 
     createCompanyEmployee(
@@ -29,6 +29,16 @@ export class CompanyEmployeeService {
     getCompanyEmployee(id: number): any {
         return this.httpClient.get(
             `${environment.apiUrl}/company/employee/${id}`
+        );
+    }
+
+    updateEmployee(
+        id: number,
+        companyEmployee: CompanyEmployee
+    ): Observable<CompanyEmployee> {
+        return this.httpClient.put<CompanyEmployee>(
+            `${environment.apiUrl}/company/employee/${id}`,
+            companyEmployee
         );
     }
 }

@@ -11,6 +11,7 @@ import {
 import { CompanyNewEmployeeComponent } from './company-new-employee/company-new-employee.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InvalidFeedbackModule } from '../../../../shared/components/invalid-feedback/invalid-feedback.module';
+import { EmployeeFormModule } from '../../../../shared/components/employee-form/employee-form.module';
 
 @NgModule({
     declarations: [CompanyNewEmployeeComponent],
@@ -24,6 +25,7 @@ import { InvalidFeedbackModule } from '../../../../shared/components/invalid-fee
         ReactiveFormsModule,
         InvalidFeedbackModule,
         PoBreadcrumbModule,
+        EmployeeFormModule,
     ],
 })
 export class CompanyNewEmployeeModule {}

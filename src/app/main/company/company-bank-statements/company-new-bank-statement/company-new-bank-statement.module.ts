@@ -9,6 +9,7 @@ import {
     PoStepperModule,
 } from '@po-ui/ng-components';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HelpPopoverModule } from '../../../../shared/directives/help-popover/help-popover.module';
 
 @NgModule({
     imports: [
@@ -19,6 +20,7 @@ import { ReactiveFormsModule } from '@angular/forms';
         ReactiveFormsModule,
         PoFieldModule,
         PoButtonModule,
+        HelpPopoverModule,
     ],
     declarations: [CompanyNewBankStatementComponent],
 })

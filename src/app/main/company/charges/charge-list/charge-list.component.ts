@@ -12,6 +12,7 @@ import { DatatableColumn } from '../../../../shared/components/page-datatable/da
 import { Router } from '@angular/router';
 import { Charge } from '../../../../shared/components/charge-form/models/charge';
 import { ChargeListService } from '../charge-list.service';
+import { PageDatatableComponent } from '../../../../shared/components/page-datatable/page-datatable/page-datatable.component';
 
 @Component({
     templateUrl: './charge-list.component.html',
@@ -27,6 +28,11 @@ export class ChargeListComponent implements OnInit {
     @Input() imagemCobranca: string;
     @Input() pdfCobranca: string;
     isPdfCobranca = false;
+
+    @ViewChild(PageDatatableComponent)
+    dataTableComponent: PageDatatableComponent;
+
+    helpText = `Painel utilizado para transmitir todas as informações de cobranças da sua empresa`;
 
     idCharge: number;
 
@@ -146,6 +152,7 @@ export class ChargeListComponent implements OnInit {
     success(): void {
         const message = 'Comprovante de pagamento carregado com sucesso';
         this.poNotificationService.success(message);
+        this.dataTableComponent.ngOnInit();
         this.poModalCobranca.close();
     }
 }

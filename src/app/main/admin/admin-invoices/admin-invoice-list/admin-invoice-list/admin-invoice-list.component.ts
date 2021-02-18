@@ -11,6 +11,7 @@ import {
 import { environment } from '../../../../../../environments/environment';
 import { DatatableColumn } from '../../../../../shared/components/page-datatable/datatable-column';
 import { AdminInvoiceService } from '../../admin-invoice.service';
+import { PageDatatableComponent } from '../../../../../shared/components/page-datatable/page-datatable/page-datatable.component';
 
 @Component({
     templateUrl: './admin-invoices-list.component.html',
@@ -19,6 +20,9 @@ import { AdminInvoiceService } from '../../admin-invoice.service';
 export class AdminInvoiceListComponent implements OnInit {
     @ViewChild('modalEnviarNota', { static: true })
     poModalEnviarNota: PoModalComponent;
+
+    @ViewChild(PageDatatableComponent)
+    dataTableComponent: PageDatatableComponent;
 
     @ViewChild('modalCancelarNota', { static: true })
     poModalCancelarNota: PoModalComponent;
@@ -204,6 +208,7 @@ export class AdminInvoiceListComponent implements OnInit {
     success(): void {
         const message = 'Documento carregado com sucesso';
         this.poNotificationService.success(message);
+        this.dataTableComponent.ngOnInit();
         this.poModalEnviarNota.close();
     }
 

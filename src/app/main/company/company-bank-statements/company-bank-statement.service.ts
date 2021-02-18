@@ -29,4 +29,10 @@ export class CompanyBankStatementService {
     getCompany(id: number): any {
         return this.httpCliente.get(`${environment.apiUrl}/users/${id}`);
     }
+
+    getBankStatements(): any {
+        return this.httpCliente.get(
+            `${environment.apiUrl}/company/statement/p/search`
+        );
+    }
 }

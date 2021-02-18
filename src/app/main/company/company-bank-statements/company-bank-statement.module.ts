@@ -5,6 +5,7 @@ import { PageDatatableModule } from '../../../shared/components/page-datatable/p
 import { PoFieldModule, PoModalModule } from '@po-ui/ng-components';
 import { CompanyNewBankStatementModule } from './company-new-bank-statement/company-new-bank-statement.module';
 import { CompanyBankStatementRoutingModule } from './company-bank-statement-routing.module';
+import { HelpPopoverModule } from '../../../shared/directives/help-popover/help-popover.module';
 
 @NgModule({
     imports: [
@@ -14,6 +15,7 @@ import { CompanyBankStatementRoutingModule } from './company-bank-statement-rout
         PoFieldModule,
         CompanyNewBankStatementModule,
         CompanyBankStatementRoutingModule,
+        HelpPopoverModule,
     ],
     declarations: [CompanyBankStatementComponent],
 })

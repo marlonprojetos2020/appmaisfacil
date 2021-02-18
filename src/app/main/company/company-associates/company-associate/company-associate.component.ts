@@ -11,6 +11,8 @@ import { DatatableColumn } from '../../../../shared/components/page-datatable/da
     templateUrl: './company-associate.component.html',
 })
 export class CompanyAssociateComponent {
+    helpText = `Painel utilizado para transmitir todas as informações dos sócios da sua empresa`;
+
     pageActions: PoPageAction[] = [];
 
     breadcrumb: PoBreadcrumb = {

@@ -3,16 +3,29 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CompanyBankStatementService } from '../../company-bank-statement.service';
 import { environment } from '../../../../../../environments/environment';
 import {
+    PoBreadcrumb,
     PoNotificationService,
     PoSelectOption,
     PoUploadFileRestrictions,
 } from '@po-ui/ng-components';
 import { Location } from '@angular/common';
+import { PageDatatableComponent } from '../../../../../shared/components/page-datatable/page-datatable/page-datatable.component';
 
 @Component({
     templateUrl: 'company-new-bank-statement.component.html',
 })
 export class CompanyNewBankStatementComponent implements OnInit {
+    @ViewChild(PageDatatableComponent)
+    dataTableComponent: PageDatatableComponent;
+
+    breadcrumb: PoBreadcrumb = {
+        items: [
+            { label: 'Início', link: '/empresa' },
+            { label: 'Meus Extratos', link: '/empresa/extrato' },
+            { label: 'Novo Extrato', link: '' },
+        ],
+    };
+
     formNewStatement: FormGroup;
 
     urlUploadDocument: string;

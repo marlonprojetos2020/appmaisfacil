@@ -12,6 +12,7 @@ import { DatatableColumn } from 'src/app/shared/components/page-datatable/datata
 import { environment } from 'src/environments/environment';
 import { Charge } from '../../../../../shared/components/charge-form/models/charge';
 import { AdminChargesService } from '../../admin-charges.service';
+import { PageDatatableComponent } from '../../../../../shared/components/page-datatable/page-datatable/page-datatable.component';
 
 @Component({
     styleUrls: ['./admin-carge-list.component.scss'],
@@ -28,6 +29,9 @@ export class AdminChargeListComponent implements OnInit {
     @Input() pdfComprovante: string;
     @Input() imagemCobranca: string;
     @Input() imagemComprovante: string;
+
+    @ViewChild(PageDatatableComponent)
+    dataTableComponent: PageDatatableComponent;
 
     isPdfCobranca = false;
     isPdfComprovante = false;
@@ -51,9 +55,12 @@ export class AdminChargeListComponent implements OnInit {
     primaryAction: PoModalAction = {
         label: 'Confirmar',
         action: () => {
-            this.adminChargeService
-                .paidCharge(this.idCharge)
-                .subscribe((data) => (this.status = data.status));
+            this.adminChargeService.paidCharge(this.idCharge).subscribe(() => {
+                this.dataTableComponent.ngOnInit();
+                this.poNotificationService.success(
+                    'Comprovante de pagamento aprovado com sucesso'
+                );
+            });
             this.poModalComprovante.close();
         },
     };
@@ -61,7 +68,14 @@ export class AdminChargeListComponent implements OnInit {
     secondaryAction: PoModalAction = {
         label: 'Recusar',
         action: () => {
-            this.adminChargeService.recuseCharge(this.idCharge).subscribe();
+            this.adminChargeService
+                .recuseCharge(this.idCharge)
+                .subscribe(() => {
+                    this.dataTableComponent.ngOnInit();
+                    this.poNotificationService.success(
+                        'Comprovante de pagamento recusado com sucesso'
+                    );
+                });
             this.poModalComprovante.close();
         },
     };
@@ -132,7 +146,6 @@ export class AdminChargeListComponent implements OnInit {
                     this.vencimento = item.dueDate;
                     this.titulo = item.description;
                     this.imagemCobranca = item.billingFileUrl;
-                    this.setUrlDocument(item.id);
                     this.idCharge = item.id;
                     this.charge = item;
                     if (this.imagemCobranca.indexOf('pdf') < 0) {
@@ -162,7 +175,6 @@ export class AdminChargeListComponent implements OnInit {
                     this.vencimento = item.dueDate;
                     this.titulo = item.description;
                     this.imagemComprovante = item.proofOfPaymentUrl;
-                    this.setUrlDocument(item.id);
                     this.idCharge = item.id;
                     this.charge = item;
                     if (this.imagemComprovante.indexOf('pdf') < 0) {
@@ -191,19 +203,6 @@ export class AdminChargeListComponent implements OnInit {
 
     openModalCobranca(): void {
         this.poModalCobranca.open();
-    }
-
-    setUrlDocument(id: number): void {
-        this.urlUploadDocument = `${environment.apiUrl}/company/billing/${id}/proof-of-payment`;
-    }
-
-    success(): void {
-        const message = 'Comprovante de pagamento carregado com sucesso';
-        this.poNotificationService.success(message);
-        this.adminChargeService
-            .paidCharge(this.idCharge)
-            .subscribe((data) => (this.status = data.statusText));
-        this.poModalComprovante.close();
     }
 
     downloadPdfCobranca(): any {

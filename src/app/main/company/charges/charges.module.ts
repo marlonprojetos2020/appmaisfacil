@@ -7,6 +7,7 @@ import {
     PoFieldModule,
     PoModalModule,
 } from '@po-ui/ng-components';
+import { HelpPopoverModule } from '../../../shared/directives/help-popover/help-popover.module';
 
 @NgModule({
     declarations: [ChargeListComponent],
@@ -16,6 +17,7 @@ import {
         PoModalModule,
         PoButtonModule,
         PoFieldModule,
+        HelpPopoverModule,
     ],
     exports: [ChargeListComponent],
 })

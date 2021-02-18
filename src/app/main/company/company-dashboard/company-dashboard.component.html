@@ -3,10 +3,10 @@
     appHelpPopOver
     [helpText]="helpText"
 >
-    <app-disclaimer
-        disclaimerTextSuccess="Sucesso"
-        disclaimerTextWarning="Erro"
-    ></app-disclaimer>
+    <!--    <app-disclaimer-->
+    <!--        disclaimerTextSuccess="Sucesso"-->
+    <!--        disclaimerTextWarning="Erro"-->
+    <!--    ></app-disclaimer>-->
     <div class="po-row po-mb-3 po-mt-2">
         <div class="po-md-6">
             <app-dashboard-accordion
@@ -71,7 +71,7 @@
         <div class="po-md-6">
             <app-dashboard-accordion
                 [isPending]="notaFiscalCanceladaOk"
-                title="Nota Fiscal"
+                title="Nota Fiscal em cancelamento"
                 [text]="notaFiscalCanceladaText"
                 [items]="notaFiscalCancelada"
             >
@@ -81,7 +81,7 @@
         <div class="po-md-6">
             <app-dashboard-accordion
                 [isPending]="notaFiscalProcessandoOk"
-                title="Nota Fiscal"
+                title="Nota Fiscal pendente"
                 [text]="notaFiscalProcessandoText"
                 [items]="notaFiscalProcessando"
             >

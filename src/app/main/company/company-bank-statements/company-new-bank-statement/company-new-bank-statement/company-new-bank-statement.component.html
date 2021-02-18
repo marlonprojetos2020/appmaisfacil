@@ -1,4 +1,8 @@
-<po-page-default p-title="Novo Extrato">
+<po-page-default
+    p-title="Novo Extrato"
+    [p-breadcrumb]="breadcrumb"
+    class="breadcrumb"
+>
     <po-stepper #stepper>
         <po-step
             p-label="Selecionar Conta Bancaria"

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
     PoBreadcrumb,
     PoNotificationService,
@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 import { User } from '../../../model/user';
 import { AdminCompanyChargeService } from '../admin-company-charge.service';
 import { CompaniesService } from '../../../companies.service';
+import { PageDatatableComponent } from '../../../../../../shared/components/page-datatable/page-datatable/page-datatable.component';
 
 @Component({
     templateUrl: './admin-company-charge.component.html',
@@ -19,19 +20,23 @@ import { CompaniesService } from '../../../companies.service';
 export class AdminCompanyChargeComponent implements OnInit {
     company$: Observable<User> = null;
 
+    @ViewChild(PageDatatableComponent)
+    dataTableComponent: PageDatatableComponent;
+
     pageActions: PoPageAction[] = [];
 
     serviceApi = '';
     tableActions: PoTableAction[] = [
         {
             label: 'Cancelar',
-            action: (item) =>
-                this.chargeService.canceledCharge(item.id).subscribe((data) => {
-                    item.statusText = data.statusText;
+            action: (item) => {
+                this.chargeService.canceledCharge(item.id).subscribe(() => {
                     this.poNotificationService.success(
                         'Cobrança cancelada com sucesso'
                     );
-                }),
+                    this.dataTableComponent.ngOnInit();
+                });
+            },
             disabled: (item) => item.status === 'CANCELED',
         },
         {

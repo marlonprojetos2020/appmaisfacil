@@ -47,7 +47,7 @@
                 <div class="po-row po-mb-5">
                     <div class="po-md-12">
                         <hr />
-                        <p>Total: R${{ total }}</p>
+                        <p>Total: {{ total | currency: "BRL" }}</p>
                         <span></span>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                 <div class="po-row po-mb-5">
                     <div class="po-md-12">
                         <hr />
-                        <p>Total: R${{ total }}</p>
+                        <p>Total:{{ total | currency: "BRL" }}</p>
                         <span></span>
                     </div>
                 </div>

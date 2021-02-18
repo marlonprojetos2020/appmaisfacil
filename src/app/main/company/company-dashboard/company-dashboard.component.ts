@@ -216,7 +216,7 @@ export class CompanyDashboardComponent implements OnInit {
             .subscribe((data) => {
                 if (data.items.length === 0) {
                     this.notaFiscalCanceladaText =
-                        'Não há notas ficais em analise';
+                        'Não há notas ficais em cancelamento';
                 } else {
                     data.items.map((nota) => {
                         this.notaFiscalCancelada.push(nota.client.name);

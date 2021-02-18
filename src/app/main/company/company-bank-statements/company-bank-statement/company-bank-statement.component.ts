@@ -13,6 +13,7 @@ import { DatatableColumn } from '../../../../shared/components/page-datatable/da
 import { Router } from '@angular/router';
 import { BankStatement } from '../models/bank-statements';
 import { CompanyBankStatementService } from '../company-bank-statement.service';
+import { PageDatatableComponent } from '../../../../shared/components/page-datatable/page-datatable/page-datatable.component';
 
 @Component({
     templateUrl: './company-bank-statement.component.html',
@@ -21,6 +22,10 @@ import { CompanyBankStatementService } from '../company-bank-statement.service';
 export class CompanyBankStatementComponent implements OnInit {
     @ViewChild('modalExtrato', { static: true })
     poModalExtrato: PoModalComponent;
+
+    @ViewChild(PageDatatableComponent)
+    dataTableComponent: PageDatatableComponent;
+
     @Input()
     bankName: string;
     @Input() status: string;
@@ -111,9 +116,10 @@ export class CompanyBankStatementComponent implements OnInit {
         this.urlUploadDocument = `${environment.apiUrl}/company/statement/${id}`;
     }
 
-    success(): void {
+    success(statement: BankStatement): void {
         const message = 'Comprovante de pagamento carregado com sucesso';
         this.poNotificationService.success(message);
+        this.dataTableComponent.ngOnInit();
         this.poModalExtrato.close();
     }
 }

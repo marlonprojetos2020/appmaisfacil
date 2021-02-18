@@ -1,17 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import {
     PoBreadcrumb,
+    PoNotificationService,
     PoPageAction,
     PoTableAction,
 } from '@po-ui/ng-components';
 import { environment } from '../../../../../environments/environment';
 import { DatatableColumn } from '../../../../shared/components/page-datatable/datatable-column';
 import { CompanyInvoiceService } from '../company-invoice.service';
+import { PageDatatableComponent } from '../../../../shared/components/page-datatable/page-datatable/page-datatable.component';
 
 @Component({
     templateUrl: './company-invoice.component.html',
 })
 export class CompanyInvoiceComponent {
+    @ViewChild(PageDatatableComponent)
+    dataTableComponent: PageDatatableComponent;
+
     pageActions: PoPageAction[] = [
         {
             label: 'Emitir Nota',
@@ -36,7 +41,10 @@ export class CompanyInvoiceComponent {
                 this.companyInvoiceService
                     .cancelInvoice(item.id)
                     .subscribe((data) => {
-                        item.statusText = data.statusText;
+                        this.dataTableComponent.ngOnInit();
+                        this.poNotificationService.success(
+                            'Nota Fiscal cancelada com seucesso'
+                        );
                     }),
             disabled: (item) =>
                 item.statusText === 'CANCELADA' ||
@@ -68,5 +76,8 @@ export class CompanyInvoiceComponent {
         },
     ];
 
-    constructor(private companyInvoiceService: CompanyInvoiceService) {}
+    constructor(
+        private companyInvoiceService: CompanyInvoiceService,
+        private poNotificationService: PoNotificationService
+    ) {}
 }

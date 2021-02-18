@@ -12,6 +12,7 @@ import { DatatableColumn } from '../../../../shared/components/page-datatable/da
 import { CompanyEmployee } from '../models/company-employee';
 import { CompanyEmployeeService } from '../company-employee.service';
 import { Router } from '@angular/router';
+import { PageDatatableComponent } from '../../../../shared/components/page-datatable/page-datatable/page-datatable.component';
 
 @Component({
     templateUrl: './company-employee.component.html',
@@ -19,6 +20,9 @@ import { Router } from '@angular/router';
 export class CompanyEmployeeComponent implements OnInit {
     companyEmployee: CompanyEmployee;
     setStatus: string;
+
+    @ViewChild(PageDatatableComponent)
+    dataTableComponent: PageDatatableComponent;
 
     breadcrumb: PoBreadcrumb = {
         items: [],
@@ -31,10 +35,10 @@ export class CompanyEmployeeComponent implements OnInit {
         action: () => {
             this.companyEmployeeService
                 .requestFired(this.companyEmployee.id)
-                .subscribe(
-                    (data) => (this.companyEmployee.status = data.statusText)
-                );
-            this.notification.success('Pedido de demissão concluído');
+                .subscribe(() => {
+                    this.dataTableComponent.ngOnInit();
+                    this.notification.success('Pedido de demissão concluído');
+                });
             this.poModalEmployee.close();
         },
     };

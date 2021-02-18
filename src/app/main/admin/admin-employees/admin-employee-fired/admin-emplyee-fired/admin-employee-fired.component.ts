@@ -12,6 +12,7 @@ import { environment } from '../../../../../../environments/environment';
 import { DatatableColumn } from '../../../../../shared/components/page-datatable/datatable-column';
 import { CompanyEmployee } from '../../../../company/company-employees/models/company-employee';
 import { AdminEmployeeService } from '../../admin-employee.service';
+import { PageDatatableComponent } from '../../../../../shared/components/page-datatable/page-datatable/page-datatable.component';
 
 @Component({
     templateUrl: 'admin-employee-fired.component.html',
@@ -19,6 +20,8 @@ import { AdminEmployeeService } from '../../admin-employee.service';
 export class AdminEmployeeFiredComponent implements OnInit {
     @Input() employeeName: string;
     @Input() employeeCompany: string;
+
+    @ViewChild(PageDatatableComponent) dataTable: PageDatatableComponent;
 
     employeeId: number;
 
@@ -109,6 +112,7 @@ export class AdminEmployeeFiredComponent implements OnInit {
     success(): void {
         const message = 'Documento carregado com sucesso';
         this.poNotificationService.success(message);
+        this.dataTable.ngOnInit();
         this.poModalEmployeeFired.close();
     }
 }

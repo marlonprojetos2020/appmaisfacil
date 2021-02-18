@@ -134,4 +134,8 @@ export class AdminCompanyExpenseComponent implements OnInit {
     downloadPdf(): any {
         window.open(this.pdf, '_blank');
     }
+
+    downloadImg(): any {
+        window.open(this.imagemDespesa, '_blank');
+    }
 }

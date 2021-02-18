@@ -184,17 +184,17 @@ export class CompanyFormComponent implements OnInit {
             lineOfBusiness: [this.editedUser?.userCompany?.lineOfBusiness],
             cnae: [this.editedUser?.userCompany?.cnae],
             address: this.formBuilder.group({
-                complement: [this.editedUser?.userCompany?.address.complement],
-                zipcode: [this.editedUser?.userCompany?.address.zipcode],
-                street: [this.editedUser?.userCompany?.address.street],
-                number: [this.editedUser?.userCompany?.address.number],
+                complement: [this.editedUser?.userCompany?.address?.complement],
+                zipcode: [this.editedUser?.userCompany?.address?.zipcode],
+                street: [this.editedUser?.userCompany?.address?.street],
+                number: [this.editedUser?.userCompany?.address?.number],
                 neighborhood: [
-                    this.editedUser?.userCompany?.address.neighborhood,
+                    this.editedUser?.userCompany?.address?.neighborhood,
                 ],
                 city: this.formBuilder.group({
-                    name: [this.editedUser?.userCompany?.address.city.name],
+                    name: [this.editedUser?.userCompany?.address?.city.name],
                     stateProvince: [
-                        this.editedUser?.userCompany?.address.city
+                        this.editedUser?.userCompany?.address?.city
                             .stateProvince,
                     ],
                 }),

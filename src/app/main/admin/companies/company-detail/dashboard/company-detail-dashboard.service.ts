@@ -10,25 +10,25 @@ export class CompanyDetailDashboardService {
 
     getBilling(status: string, id: number): any {
         return this.httpClient.get(
-            `${environment.apiUrl}/company/billing/p/search?status=${status}&companyId=${id}`
+            `${environment.apiUrl}/billing/p/search?status=${status}&companyId=${id}`
         );
     }
 
     getEmployee(status: string, id: number): any {
         return this.httpClient.get(
-            `${environment.apiUrl}/company/employee/p/search?status=${status}&companyId=${id}`
+            `${environment.apiUrl}/employee/p/search?status=${status}&companyId=${id}`
         );
     }
 
     getBankStatement(status: string, id: number): any {
         return this.httpClient.get(
-            `${environment.apiUrl}/company/statement/p/search?status=${status}&companyId=${id}`
+            `${environment.apiUrl}/statement/p/search?status=${status}&companyId=${id}`
         );
     }
 
     getNotaFiscal(status: string, id: number): any {
         return this.httpClient.get(
-            `${environment.apiUrl}/company/nota-fiscal/p/search?status=${status}&companyId=${id}`
+            `${environment.apiUrl}/nota-fiscal/p/search?status=${status}&companyId=${id}`
         );
     }
 }

@@ -3,6 +3,7 @@ import {
     PoBreadcrumb,
     PoModalAction,
     PoModalComponent,
+    PoNotificationService,
     PoPageAction,
     PoTableAction,
 } from '@po-ui/ng-components';
@@ -10,6 +11,7 @@ import { environment } from '../../../../../../environments/environment';
 import { DatatableColumn } from '../../../../../shared/components/page-datatable/datatable-column';
 import { AdminBankStatementsService } from '../../admin-bank-statements.service';
 import { BankStatement } from '../../../../company/company-bank-statements/models/bank-statements';
+import { PageDatatableComponent } from '../../../../../shared/components/page-datatable/page-datatable/page-datatable.component';
 
 @Component({
     templateUrl: './admin-bank-statement-list.component.html',
@@ -24,6 +26,10 @@ export class AdminBankStatementListComponent implements OnInit {
     @Input() pdfPendente: string;
     @Input() pdfPago: string;
     idStatement: number;
+
+    @ViewChild(PageDatatableComponent)
+    dataTableComponent: PageDatatableComponent;
+
     @ViewChild('modalExtratoPendente', { static: true })
     poModalExtratoPendente: PoModalComponent;
 
@@ -38,7 +44,10 @@ export class AdminBankStatementListComponent implements OnInit {
         action: () => {
             this.adminBankStatementService
                 .aprovedStatement(this.idStatement)
-                .subscribe((data) => (this.status = data.statusText));
+                .subscribe(() => {
+                    this.dataTableComponent.ngOnInit();
+                    this.poNotification.success('Extrato bancário aprovado');
+                });
             this.poModalExtratoPendente.close();
         },
     };
@@ -136,7 +145,8 @@ export class AdminBankStatementListComponent implements OnInit {
     };
 
     constructor(
-        private adminBankStatementService: AdminBankStatementsService
+        private adminBankStatementService: AdminBankStatementsService,
+        private poNotification: PoNotificationService
     ) {}
 
     ngOnInit(): void {}

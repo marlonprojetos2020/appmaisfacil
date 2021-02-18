@@ -117,7 +117,7 @@ export class CompanyBankStatementComponent implements OnInit {
     }
 
     success(statement: BankStatement): void {
-        const message = 'Comprovante de pagamento carregado com sucesso';
+        const message = 'Extrato bancário carregado com sucesso';
         this.poNotificationService.success(message);
         this.dataTableComponent.ngOnInit();
         this.poModalExtrato.close();

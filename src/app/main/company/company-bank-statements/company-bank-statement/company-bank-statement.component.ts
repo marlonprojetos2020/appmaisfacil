@@ -116,7 +116,7 @@ export class CompanyBankStatementComponent implements OnInit {
         this.urlUploadDocument = `${environment.apiUrl}/company/statement/${id}`;
     }
 
-    success(statement: BankStatement): void {
+    success(): void {
         const message = 'Extrato bancário carregado com sucesso';
         this.poNotificationService.success(message);
         this.dataTableComponent.ngOnInit();

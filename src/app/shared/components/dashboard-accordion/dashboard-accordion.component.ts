@@ -10,6 +10,7 @@ export class DashboardAccordionComponent implements OnInit {
     @Input() text = '';
     @Input() isPending;
     @Input() items = [];
+    @Input() routerLink: string;
 
     constructor() {}
 

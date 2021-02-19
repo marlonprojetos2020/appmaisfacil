@@ -171,6 +171,10 @@ body,
 
 .po-menu-header-container-logo {
     background-color: var(--color-primary);
+
+    @media (max-width: 1366px) {
+        height: 40px;
+    }
 }
 
 // popover component classes

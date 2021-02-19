@@ -16,11 +16,10 @@
                 title="Cobranças Pendentes"
                 [text]="billingPendingText"
                 [items]="billingPending"
-                routerlink="/empresa/cobrancas"
+                routerLink="/empresa/cobrancas"
             >
             </app-dashboard-accordion>
-        </div>
-        <div class="po-md-6">
+
             <app-dashboard-accordion
                 [isPending]="billingRefusedOk"
                 title="Cobranças Recusadas"
@@ -29,10 +28,7 @@
                 routerLink="/empresa/cobrancas"
             >
             </app-dashboard-accordion>
-        </div>
-    </div>
-    <div class="po-row po-mb-3">
-        <div class="po-md-6">
+
             <app-dashboard-accordion
                 [isPending]="billingPendingReviewOk"
                 title="Cobranças em Analise"
@@ -41,8 +37,7 @@
                 routerLink="/empresa/cobrancas"
             >
             </app-dashboard-accordion>
-        </div>
-        <div class="po-md-6">
+
             <app-dashboard-accordion
                 [isPending]="statementsPendingOk"
                 title="Extratos Pendentes"
@@ -52,8 +47,6 @@
             >
             </app-dashboard-accordion>
         </div>
-    </div>
-    <div class="po-row po-mb-3">
         <div class="po-md-6">
             <app-dashboard-accordion
                 [isPending]="statementsPendingReviewOk"
@@ -63,8 +56,7 @@
                 routerLink="/empresa/extrato"
             >
             </app-dashboard-accordion>
-        </div>
-        <div class="po-md-6">
+
             <app-dashboard-accordion
                 [isPending]="employeePendingFiredOk"
                 title="Demissões Solicitadas"
@@ -73,10 +65,7 @@
                 routerLink="/empresa/funcionarios"
             >
             </app-dashboard-accordion>
-        </div>
-    </div>
-    <div class="po-row po-mb-3">
-        <div class="po-md-6">
+
             <app-dashboard-accordion
                 [isPending]="notaFiscalCanceladaOk"
                 title="Nota Fiscal em cancelamento"
@@ -85,9 +74,7 @@
                 routerLink="/empresa/nota-fiscal"
             >
             </app-dashboard-accordion>
-        </div>
 
-        <div class="po-md-6">
             <app-dashboard-accordion
                 [isPending]="notaFiscalProcessandoOk"
                 title="Nota Fiscal pendente"

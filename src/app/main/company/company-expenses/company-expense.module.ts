@@ -11,6 +11,7 @@ import { AtentionCardModule } from '../../../shared/components/atention-card/ate
 import { PageDatatableModule } from '../../../shared/components/page-datatable/page-datatable.module';
 import { CompanyNewExpenseModule } from './company-new-expense/company-new-expense.module';
 import { CompanyExpensesRoutingModule } from './company-expenses-routing.module';
+import { HelpPopoverModule } from '../../../shared/directives/help-popover/help-popover.module';
 
 @NgModule({
     imports: [
@@ -23,6 +24,7 @@ import { CompanyExpensesRoutingModule } from './company-expenses-routing.module'
         CompanyNewExpenseModule,
         PoModalModule,
         PoButtonModule,
+        HelpPopoverModule,
     ],
     declarations: [CompanyExpenseComponent],
 })

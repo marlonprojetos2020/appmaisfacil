@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
     PoBreadcrumb,
     PoPageAction,
@@ -10,10 +10,12 @@ import { DatatableColumn } from '../../../../shared/components/page-datatable/da
 @Component({
     templateUrl: './company-associate.component.html',
 })
-export class CompanyAssociateComponent {
+export class CompanyAssociateComponent implements OnInit {
     helpText = `Painel utilizado para transmitir todas as informações dos sócios da sua empresa`;
 
     pageActions: PoPageAction[] = [];
+
+    idCompany: number;
 
     breadcrumb: PoBreadcrumb = {
         items: [
@@ -22,8 +24,7 @@ export class CompanyAssociateComponent {
         ],
     };
 
-    serviceApi = `${environment.apiUrl}/users/p/search`;
-
+    serviceApi = '';
     tableActions: PoTableAction[] = [];
     columns: DatatableColumn[] = [
         {
@@ -38,4 +39,14 @@ export class CompanyAssociateComponent {
             label: 'Participação na Sociedade',
         },
     ];
+
+    constructor() {}
+
+    ngOnInit(): void {
+        const company = JSON.parse(sessionStorage.CREDENTIALS_KEY);
+
+        this.idCompany = company.userDetails.id;
+
+        this.serviceApi = `${environment.apiUrl}/users/${this.idCompany}/company-partners`;
+    }
 }

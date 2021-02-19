@@ -1,7 +1,7 @@
 <po-page-default
     p-title="Serviços Disponíveis"
     [p-breadcrumb]="breadcrumb"
-    class="breadcrumb"
+    class="breadcrumb extra-service"
 >
     <po-container>
         <div class="po-row title-row po-mb-1">
@@ -77,11 +77,18 @@
                     </p>
                 </div>
             </div>
-            <div class="po-md-2 centralize">
-                <po-button
-                    p-label="Solicitar Orçamento"
-                    p-type="primary"
-                ></po-button>
+            <div class="po-md-2">
+                <a
+                    href="https://api.whatsapp.com/send?phone=5517991663337&text=Ol%C3%A1%2C%20gostaria%20de%20contratar%20alguns%20servi%C3%A7os%20extra%20!"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                >
+                    <po-button
+                        class="button-extra-service"
+                        p-label="Solicitar Orçamento"
+                        p-type="primary"
+                    ></po-button>
+                </a>
             </div>
         </div>
     </po-container>

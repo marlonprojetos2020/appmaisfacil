@@ -470,6 +470,20 @@ po-upload {
 
 .indication-button {
     .po-button.po-text-ellipsis.po-button-primary {
-        padding: 0 30px;
+        width: 100%;
+        height: 40px;
+    }
+}
+
+.extra-service {
+    .po-page-content {
+        padding-bottom: 50px !important;
+    }
+}
+
+.button-extra-service {
+    .po-button.po-text-ellipsis.po-button-primary {
+        width: 100%;
+        height: 100%;
     }
 }

@@ -21,6 +21,14 @@ export class CompanyDetailDashboardComponent implements OnInit {
         items: [],
     };
 
+    linkCobranca = '';
+
+    linkNota = '';
+
+    linkFuncionario = '';
+
+    linkExtrato = '';
+
     billingPending = [];
 
     billingRefused = [];
@@ -94,6 +102,16 @@ export class CompanyDetailDashboardComponent implements OnInit {
         this.company$ = this.companyDetailService.getUserCompany(
             this.activetedRoute.snapshot.params.id
         );
+
+        const idCompany = this.activetedRoute.snapshot.params.id;
+
+        this.linkCobranca = `/admin/empresa/${idCompany}/cobrancas`;
+
+        this.linkExtrato = `/admin/empresa/${idCompany}/extrato`;
+
+        this.linkFuncionario = `/admin/empresa/${idCompany}/funcionarios`;
+
+        this.linkNota = `/admin/empresa/${idCompany}/nota-fiscal`;
 
         this.companyDetailService
             .getUserCompany(this.activetedRoute.snapshot.params.id)

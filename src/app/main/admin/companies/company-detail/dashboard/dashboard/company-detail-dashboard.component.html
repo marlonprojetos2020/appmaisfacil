@@ -74,6 +74,7 @@
                         title="Cobranças Pendentes"
                         [text]="billingPendingText"
                         [items]="billingPending"
+                        [routerLink]="linkCobranca"
                     >
                     </app-dashboard-accordion>
                 </div>
@@ -83,6 +84,7 @@
                         title="Cobranças Recusadas"
                         [text]="billingRefusedText"
                         [items]="billingRefused"
+                        [routerLink]="linkCobranca"
                     >
                     </app-dashboard-accordion>
                 </div>
@@ -94,6 +96,7 @@
                         title="Cobranças em Analise"
                         [text]="billingPendingReviewText"
                         [items]="billingPendingReview"
+                        [routerLink]="linkCobranca"
                     >
                     </app-dashboard-accordion>
                 </div>
@@ -103,6 +106,7 @@
                         title="Extratos Pendentes"
                         [text]="statementsPendingText"
                         [items]="statementsPending"
+                        [routerLink]="linkExtrato"
                     >
                     </app-dashboard-accordion>
                 </div>
@@ -114,6 +118,7 @@
                         title="Extratos em Analise"
                         [text]="statementsPendingReviewText"
                         [items]="statementsPendingReview"
+                        [routerLink]="linkExtrato"
                     >
                     </app-dashboard-accordion>
                 </div>
@@ -123,6 +128,7 @@
                         title="Demissões Solicitadas"
                         [text]="employeePendingFiredText"
                         [items]="employeePendingFired"
+                        [routerLink]="linkFuncionario"
                     >
                     </app-dashboard-accordion>
                 </div>
@@ -134,6 +140,7 @@
                         title="Nota Fiscal cancelada"
                         [text]="notaFiscalCanceladaText"
                         [items]="notaFiscalCancelada"
+                        [routerLink]="linkNota"
                     >
                     </app-dashboard-accordion>
                 </div>
@@ -144,6 +151,7 @@
                         title="Nota Fiscal em analise"
                         [text]="notaFiscalProcessandoText"
                         [items]="notaFiscalProcessando"
+                        [routerLink]="linkNota"
                     >
                     </app-dashboard-accordion>
                 </div>

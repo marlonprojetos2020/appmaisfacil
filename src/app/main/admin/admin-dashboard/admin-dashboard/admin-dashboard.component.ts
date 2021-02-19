@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminDashboardService } from '../admin-dashboard.service';
+import { PoBreadcrumb } from '@po-ui/ng-components';
 
 @Component({
     templateUrl: './admin-dashboard.component.html',
@@ -14,6 +15,10 @@ export class AdminDashboardComponent implements OnInit {
     notaFiscalAnalise;
     notaFiscalCancelamento;
     totalUsers;
+
+    breadcrumb: PoBreadcrumb = {
+        items: [{ label: 'Início' }],
+    };
 
     constructor(private adminDashbobardService: AdminDashboardService) {}
 

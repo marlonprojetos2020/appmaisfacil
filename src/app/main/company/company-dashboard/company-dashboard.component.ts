@@ -1,12 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { CompanyDashboardService } from './company-dashboard.service';
 import { CurrencyPipe, formatCurrency } from '@angular/common';
+import { PoBreadcrumb } from '@po-ui/ng-components';
 
 @Component({
     templateUrl: './company-dashboard.component.html',
 })
 export class CompanyDashboardComponent implements OnInit {
     helpText = `Painel utilizado para transmitir todas as informações de contabilidade da sua empresa`;
+
+    breadcrumb: PoBreadcrumb = {
+        items: [{ label: 'Início' }],
+    };
 
     isPending = true;
 

@@ -467,3 +467,9 @@ po-upload {
         border-color: var(--color-secondary);
     }
 }
+
+.indication-button {
+    .po-button.po-text-ellipsis.po-button-primary {
+        padding: 0 30px;
+    }
+}

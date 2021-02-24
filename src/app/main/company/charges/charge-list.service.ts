@@ -8,7 +8,7 @@ import { environment } from '../../../../environments/environment';
 export class ChargeListService {
     constructor(private httpClient: HttpClient) {}
 
-    getCompany(id: number): any {
-        return this.httpClient.get(`${environment.apiUrl}/users/${id}`);
+    getCompany(): any {
+        return this.httpClient.get(`${environment.apiUrl}/profile`);
     }
 }

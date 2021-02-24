@@ -23,7 +23,7 @@ export class CompanyExpenseService {
         );
     }
 
-    getCompanyExpense(id: number): any {
-        return this.httpClient.get(`${environment.apiUrl}/users/${id}`);
+    getCompanyExpense(): any {
+        return this.httpClient.get(`${environment.apiUrl}/profile`);
     }
 }

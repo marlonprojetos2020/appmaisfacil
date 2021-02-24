@@ -82,7 +82,7 @@ export class CompanyExpenseComponent implements OnInit {
         },
     ];
 
-    serviceApi = `${environment.apiUrl}/company/expense`;
+    serviceApi = `${environment.apiUrl}/company/expense/p/search`;
 
     actions: PoPageAction[] = [
         {
@@ -100,10 +100,8 @@ export class CompanyExpenseComponent implements OnInit {
     constructor(private companyExpenseService: CompanyExpenseService) {}
 
     ngOnInit(): void {
-        const company = JSON.parse(sessionStorage.CREDENTIALS_KEY);
-
         this.companyExpenseService
-            .getCompanyExpense(company.userDetails.id)
+            .getCompanyExpense()
             .subscribe((data) =>
                 data.userCompany.fantasyName
                     ? (this.nomeEmpresa = data.userCompany.fantasyName)

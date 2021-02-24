@@ -8,7 +8,6 @@ import {NeedHelpComponent} from './company-layout/need-help/need-help.component'
 import {ChargesModule} from './charges/charges.module';
 import {CompanyMyAccountMoudle} from './company-my-account/company-my-account.module';
 import {CompanyExpenseModule} from './company-expenses/company-expense.module';
-import {CompanyAccountingModule} from './company-accounting/company-accounting.module';
 import {CompanyInvoiceModule} from './company-invoices/company-invoice.module';
 import {CompanyCompanyModule} from './company-company/company-company.module';
 import {CompanyBankStatementModule} from './company-bank-statements/company-bank-statement.module';
@@ -29,7 +28,6 @@ import {CompanyFaqModule} from './company-faq/company-faq.module';
         ChargesModule,
         CompanyMyAccountMoudle,
         CompanyExpenseModule,
-        CompanyAccountingModule,
         CompanyInvoiceModule,
         CompanyCompanyModule,
         CompanyBankStatementModule,

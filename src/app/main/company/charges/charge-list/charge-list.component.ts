@@ -88,10 +88,8 @@ export class ChargeListComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        const company = JSON.parse(sessionStorage.CREDENTIALS_KEY);
-
         this.chargeListService
-            .getCompany(company.userDetails.id)
+            .getCompany()
             .subscribe((data) =>
                 data.userCompany.fantasyName
                     ? (this.nomeEmpresa = data.userCompany.fantasyName)

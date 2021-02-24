@@ -14,6 +14,7 @@ export class CompanyCompanyComponent implements OnInit {
     formCompany: FormGroup;
     actions: PoPageAction[] = [];
 
+
     breadcrumb: PoBreadcrumb = {
         items: [
             { label: 'Início', link: '/empresa' },
@@ -30,7 +31,8 @@ export class CompanyCompanyComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.companyService.getUserCompany('1').subscribe((data) => {
+
+        this.companyService.getUserCompany().subscribe((data) => {
             this.setFields(data.userCompany);
         });
     }

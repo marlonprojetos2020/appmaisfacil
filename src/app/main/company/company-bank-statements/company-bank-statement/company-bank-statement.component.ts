@@ -97,10 +97,8 @@ export class CompanyBankStatementComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        const company = JSON.parse(sessionStorage.CREDENTIALS_KEY);
-
         this.companyBankStatement
-            .getCompany(company.userDetails.id)
+            .getCompany()
             .subscribe((data) =>
                 data.userCompany.fantasyName
                     ? (this.nomeEmpresa = data.userCompany.fantasyName)

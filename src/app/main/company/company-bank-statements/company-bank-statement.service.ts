@@ -26,8 +26,8 @@ export class CompanyBankStatementService {
         );
     }
 
-    getCompany(id: number): any {
-        return this.httpCliente.get(`${environment.apiUrl}/users/${id}`);
+    getCompany(): any {
+        return this.httpCliente.get(`${environment.apiUrl}/profile`);
     }
 
     getBankStatements(): any {

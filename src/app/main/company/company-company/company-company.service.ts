@@ -10,7 +10,7 @@ import { environment } from '../../../../environments/environment';
 export class CompanyCompanyService {
     constructor(private httpClient: HttpClient) {}
 
-    getUserCompany(id: string): Observable<User> {
-        return this.httpClient.get<User>(`${environment.apiUrl}/users/${id}`);
+    getUserCompany(): Observable<User> {
+        return this.httpClient.get<User>(`${environment.apiUrl}/profile`);
     }
 }

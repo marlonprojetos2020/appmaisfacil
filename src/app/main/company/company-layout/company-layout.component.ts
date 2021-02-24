@@ -68,11 +68,6 @@ export class CompanyLayoutComponent {
             link: '/empresa/extrato',
         },
         {
-            icon: 'po-icon-database',
-            label: 'Contabilidade',
-            link: '/empresa/contabilidade',
-        },
-        {
             icon: 'po-icon-document',
             label: 'Nota Fiscal',
             link: '/empresa/nota-fiscal',

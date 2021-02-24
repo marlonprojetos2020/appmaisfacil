@@ -6,7 +6,6 @@ import {CompanyEditModule} from '../company-edit/company-edit.module';
 import {AdminCompanyChargeModule} from './admin-company-charges/admin-company-charge.module';
 import {AdminCompanyExpenseModule} from './admin-company-expenses/admin-company-expense.module';
 import {AdminCompanyBankStatementModule} from './admin-company-bank-statements/admin-company-bank-statement.module';
-import {AdminCompanyAccountingModule} from './admin-company-accounting/admin-company-accounting.module';
 import {AdminCompanyInvoiceModule} from './admin-company-invoices/admin-company-invoice.module';
 import {AdminCompanyCompanyModule} from './admin-company-companies/admin-company-company.module';
 import {AdminCompanyAssociateModule} from './admin-company-associates/admin-company-associate.module';
@@ -25,7 +24,6 @@ import {AdminCompanyFaqModule} from './admin-company-faq/admin-company-faq.modul
         AdminCompanyChargeModule,
         AdminCompanyExpenseModule,
         AdminCompanyBankStatementModule,
-        AdminCompanyAccountingModule,
         AdminCompanyInvoiceModule,
         AdminCompanyCompanyModule,
         AdminCompanyAssociateModule,

@@ -32,11 +32,6 @@ export class CompanyDetailMenuComponent implements OnInit {
             link: `extrato`,
         },
         {
-            icon: 'po-icon-database',
-            label: 'Contabilidade',
-            link: `contabilidade`,
-        },
-        {
             icon: 'po-icon-document',
             label: 'Nota Fiscal',
             link: `nota-fiscal`,

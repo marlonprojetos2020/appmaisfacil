@@ -100,7 +100,7 @@ export class CompanyBankStatementComponent implements OnInit {
         this.companyBankStatement
             .getCompany()
             .subscribe((data) =>
-                data.userCompany.fantasyName
+                data.userCompany?.fantasyName
                     ? (this.nomeEmpresa = data.userCompany.fantasyName)
                     : (this.nomeEmpresa = data.name)
             );

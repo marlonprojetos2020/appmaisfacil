@@ -103,7 +103,7 @@ export class CompanyExpenseComponent implements OnInit {
         this.companyExpenseService
             .getCompanyExpense()
             .subscribe((data) =>
-                data.userCompany.fantasyName
+                data.userCompany?.fantasyName
                     ? (this.nomeEmpresa = data.userCompany.fantasyName)
                     : (this.nomeEmpresa = data.name)
             );

@@ -91,7 +91,7 @@ export class ChargeListComponent implements OnInit {
         this.chargeListService
             .getCompany()
             .subscribe((data) =>
-                data.userCompany.fantasyName
+                data.userCompany?.fantasyName
                     ? (this.nomeEmpresa = data.userCompany.fantasyName)
                     : (this.nomeEmpresa = data.name)
             );

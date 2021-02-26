@@ -241,15 +241,15 @@ body,
     font-family: "roboto";
     font-weight: bold;
     position: relative;
-    &:after {
-        font-family: PoIcon !important;
-        content: "\e90b";
-        position: absolute;
-        right: -2rem;
-        font-size: 1.5rem;
-        font-weight: lighter;
-        color: var(--color-secondary);
-    }
+    // &:after {
+    //     font-family: PoIcon !important;
+    //     content: "\e90b";
+    //     position: absolute;
+    //     right: -2rem;
+    //     font-size: 1.5rem;
+    //     font-weight: lighter;
+    //     color: var(--color-secondary);
+    // }
 }
 
 .company-detail-dashboard {

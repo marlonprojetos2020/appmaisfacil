@@ -1,7 +1,5 @@
 <app-page-datatable
     title="Cobranças"
-    appHelpPopOver
-    [helpText]="helpText"
     [serviceApi]="serviceApi"
     [columns]="columns"
     [tableActions]="tableActions"
@@ -19,7 +17,10 @@
         <div class="po-md-6">
             <ng-template [ngIf]="isPdfCobranca">
                 <div class="img-modal">
-                    <img src="/assets/images/imgPdf.png" alt="Pdf" />
+                    <img
+                        src="/assets/images/imgPdf.png"
+                        alt="Pdf"
+                    />
                     <po-button
                         (p-click)="downloadPdfCobranca()"
                         p-icon="po-icon po-icon-download"
@@ -28,7 +29,10 @@
             </ng-template>
             <ng-template [ngIf]="!isPdfCobranca">
                 <div class="img-modal">
-                    <img [src]="imagemCobranca" alt="Corbança" />
+                    <img
+                        [src]="imagemCobranca"
+                        alt="Corbança"
+                    />
                     <po-button
                         p-icon="po-icon-download"
                         (p-click)="downloadImgCobranca()"

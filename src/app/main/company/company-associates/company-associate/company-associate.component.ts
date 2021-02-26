@@ -11,7 +11,6 @@ import { DatatableColumn } from '../../../../shared/components/page-datatable/da
     templateUrl: './company-associate.component.html',
 })
 export class CompanyAssociateComponent implements OnInit {
-    helpText = `Painel utilizado para transmitir todas as informações dos sócios da sua empresa`;
 
     pageActions: PoPageAction[] = [];
 
@@ -47,6 +46,7 @@ export class CompanyAssociateComponent implements OnInit {
 
         this.idCompany = company.userDetails.id;
 
-        this.serviceApi = `${environment.apiUrl}/users/${this.idCompany}/company-partners`;
+        // this.serviceApi = `${environment.apiUrl}/users/${this.idCompany}/company-partners`;
+        this.serviceApi = `${environment.apiUrl}/company/partners`;
     }
 }

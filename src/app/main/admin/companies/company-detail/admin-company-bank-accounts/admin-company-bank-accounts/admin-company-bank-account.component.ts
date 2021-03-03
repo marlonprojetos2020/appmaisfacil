@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
     PoBreadcrumb,
     PoPageAction,
@@ -23,6 +23,10 @@ export class AdminCompanyBankAccountComponent implements OnInit {
             property: 'bankName',
         },
         {
+            label: 'Tipo',
+            property: 'accountType',
+        },
+        {
             label: 'Conta',
             property: 'accountNumber',
         },
@@ -39,6 +43,7 @@ export class AdminCompanyBankAccountComponent implements OnInit {
     constructor(
         private activatedRoute: ActivatedRoute,
         private companiesService: CompaniesService,
+        private router: Router,
     ) {}
 
     ngOnInit(): void {
@@ -48,6 +53,19 @@ export class AdminCompanyBankAccountComponent implements OnInit {
             label: 'Nova Conta',
             icon: 'po-icon-plus-circle',
             url: `/admin/empresa/${id}/contas-bancarias/nova-conta`,
+        }];
+        this.tableActions = [{
+            label: 'Editar Conta',
+            action: (item) => {
+                this.router.navigate(['editar-conta'], { relativeTo: this.activatedRoute });
+            },
+            disabled: (item) => item.status === 'CANCELED',
+        },
+        {
+            label: 'Cancelar Conta',
+            action: (item) => {
+            },
+            disabled: (item) => item.status === 'CANCELED',
         }];
         this.companiesService
             .getUserCompany(this.activatedRoute.snapshot.params.id)

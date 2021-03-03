@@ -63,6 +63,16 @@ export class CompanyLayoutComponent {
             link: '/empresa/despesas',
         },
         {
+            icon: 'po-icon po-icon-text-bold',
+            label: 'Minhas Contas Bancárias',
+            link: `/empresa/contas-bancarias`,
+        },
+        {
+            icon: 'po-icon-finance-secure',
+            label: 'Meus Extratos',
+            link: '/empresa/extrato',
+        },
+        {
             icon: 'po-icon-finance-secure',
             label: 'Meus Extratos',
             link: '/empresa/extrato',

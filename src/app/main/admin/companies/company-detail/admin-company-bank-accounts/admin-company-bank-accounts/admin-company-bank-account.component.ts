@@ -5,31 +5,30 @@ import {
     PoPageAction,
     PoTableAction,
 } from '@po-ui/ng-components';
-
 import { environment } from '../../../../../../../environments/environment';
 import { DatatableColumn } from '../../../../../../shared/components/page-datatable/datatable-column';
 import { User } from '../../../model/user';
 import { CompaniesService } from '../../../companies.service';
 
 @Component({
-    templateUrl: './admin-company-bank-statement.component.html',
+    templateUrl: './admin-company-bank-account.component.html',
 })
-export class AdminCompanyBankStatementComponent implements OnInit {
+export class AdminCompanyBankAccountComponent implements OnInit {
     pageActions: PoPageAction[] = [];
     serviceApi = '';
     tableActions: PoTableAction[] = [];
     columns: DatatableColumn[] = [
         {
-            label: 'Status',
-            property: 'statusText',
-        },
-        {
             label: 'Banco',
-            property: 'bankAccount.bankName',
+            property: 'bankName',
         },
         {
-            label: 'Mês de Referência',
-            property: 'monthText',
+            label: 'Conta',
+            property: 'accountNumber',
+        },
+        {
+            label: 'Agência',
+            property: 'agency',
         },
     ];
 
@@ -44,7 +43,12 @@ export class AdminCompanyBankStatementComponent implements OnInit {
 
     ngOnInit(): void {
         const id = this.activatedRoute.snapshot.paramMap.get('id');
-        this.serviceApi = `${environment.apiUrl}/statement/p/search?companyId=${id}`;
+        this.serviceApi = `${environment.apiUrl}/users/${id}/bank-accounts/p/search`;
+        this.pageActions = [{
+            label: 'Nova Conta',
+            icon: 'po-icon-plus-circle',
+            url: `/admin/empresa/${id}/contas-bancarias/nova-conta`,
+        }];
         this.companiesService
             .getUserCompany(this.activatedRoute.snapshot.params.id)
             .subscribe((data) => this.setBreadcrumb(data));
@@ -60,7 +64,7 @@ export class AdminCompanyBankStatementComponent implements OnInit {
                     : user.name,
                 link: `/admin/empresa/${user.id}`,
             },
-            { label: 'Extratos' }
+            { label: 'Contas Bancárias' }
         );
     }
 }

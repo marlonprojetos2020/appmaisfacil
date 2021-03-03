@@ -1,19 +1,22 @@
 <po-page-default
-    p-title="Minha Empresa"
+    p-title="Empresa"
     [p-actions]="actions"
     [p-breadcrumb]="breadcrumb"
     class="breadcrumb"
 >
     <po-container class="form">
-        <form *ngIf="formCompany" [formGroup]="formCompany">
+        <form
+            *ngIf="formCompany"
+            [formGroup]="formCompany"
+        >
             <div class="po-row po-mb-4">
                 <ng-template [ngIf]="userCompanyExist === false">
                     <div class="po-md-12">
                         <h2 class="po-mb-3 danger">
                             Clique no botão editar, para finalizar o cadastro
                         </h2>
-                    </div></ng-template
-                >
+                    </div>
+                </ng-template>
                 <div class="po-md-12">
                     <h3 class="po-mb-4">Empresa</h3>
                 </div>
@@ -139,7 +142,10 @@
                             p-placeholder="Informar Bairro"
                         ></po-input>
                     </div>
-                    <div class="po-md-8" formGroupName="city">
+                    <div
+                        class="po-md-8"
+                        formGroupName="city"
+                    >
                         <div class="po-md-6">
                             <po-input
                                 p-label="Cidade"

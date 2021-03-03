@@ -2,17 +2,17 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthInterceptor } from 'src/app/core/auth/auth.interceptor';
-import { AdminCompanyBankStatementComponent } from './admin-company-bank-statement/admin-company-bank-statement.component';
-import { AdminCompanyNewBankComponent } from './admin-company-new-bank/admin-company-new-bank/admin-company-new-bank.component';
+import { AdminCompanyBankAccountComponent } from './admin-company-bank-accounts/admin-company-bank-account.component'
+import { AdminCompanyNewBankAccountComponent } from './admin-company-new-bank/admin-company-new-bank-account/admin-company-new-bank-account.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: AdminCompanyBankStatementComponent,
+        component: AdminCompanyBankAccountComponent,
     },
     {
         path: 'nova-conta',
-        component: AdminCompanyNewBankComponent,
+        component: AdminCompanyNewBankAccountComponent,
     },
 ];
 
@@ -27,4 +27,4 @@ const routes: Routes = [
         },
     ],
 })
-export class AdminCompanyBankStatementRoutingModule {}
+export class AdminCompanyBankRoutingModule {}

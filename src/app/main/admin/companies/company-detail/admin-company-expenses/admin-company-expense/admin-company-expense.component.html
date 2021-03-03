@@ -1,5 +1,5 @@
 <app-page-datatable
-    title="Minhas Despesas"
+    title="Despesas"
     [serviceApi]="serviceApi"
     [columns]="columns"
     [tableActions]="tableActions"
@@ -7,12 +7,19 @@
     class="breadcrumb page-no-action"
 ></app-page-datatable>
 
-<po-modal #modalDespesa p-title="Despesa" [p-primary-action]="primaryAction">
+<po-modal
+    #modalDespesa
+    p-title="Despesa"
+    [p-primary-action]="primaryAction"
+>
     <div class="po-row">
         <div class="po-md-6">
             <ng-template [ngIf]="ehPdf">
                 <div class="img-modal">
-                    <img src="/assets/images/imgPdf.png" alt="Pdf" />
+                    <img
+                        src="/assets/images/imgPdf.png"
+                        alt="Pdf"
+                    />
                     <po-button
                         (p-click)="downloadPdf()"
                         p-icon="po-icon po-icon-download"
@@ -21,7 +28,10 @@
             </ng-template>
             <ng-template [ngIf]="!ehPdf">
                 <div class="img-modal">
-                    <img [src]="imagemDespesa" alt="Despesa" />
+                    <img
+                        [src]="imagemDespesa"
+                        alt="Despesa"
+                    />
                     <po-button
                         (p-click)="downloadImg()"
                         p-icon="po-icon po-icon-download"

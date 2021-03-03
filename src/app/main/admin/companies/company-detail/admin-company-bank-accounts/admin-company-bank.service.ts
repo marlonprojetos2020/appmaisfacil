@@ -4,7 +4,9 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { BankAccount } from './model/BankAccount';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class AdminCompanyBankService {
     constructor(private httpClient: HttpClient) {}
 

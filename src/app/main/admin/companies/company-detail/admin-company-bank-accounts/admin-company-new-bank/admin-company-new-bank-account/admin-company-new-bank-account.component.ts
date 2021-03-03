@@ -3,15 +3,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { PoBreadcrumb, PoNotificationService } from '@po-ui/ng-components';
-import { AdminCompanyBankService } from '../../admin-company-bank-statement.service';
-import { BankAccount } from '../../model/BankAccount';
+
+import { AdminCompanyBankService } from '../../admin-company-bank.service';
 import { User } from '../../../../model/user';
 import { CompaniesService } from '../../../../companies.service';
+import { BankAccount } from '../../model/BankAccount';
 
 @Component({
-    templateUrl: './admin-company-new-bank.component.html',
+    templateUrl: './admin-company-new-bank-account.component.html',
 })
-export class AdminCompanyNewBankComponent implements OnInit {
+export class AdminCompanyNewBankAccountComponent implements OnInit {
     options = [];
     id: string = '';
     loading: boolean;
@@ -27,7 +28,7 @@ export class AdminCompanyNewBankComponent implements OnInit {
         private adminCompanyBankService: AdminCompanyBankService,
         private location: Location,
         private notificationService: PoNotificationService,
-        private companiesService: CompaniesService
+        private companiesService: CompaniesService,
     ) {}
 
     ngOnInit(): void {
@@ -81,7 +82,7 @@ export class AdminCompanyNewBankComponent implements OnInit {
                     : user.name,
                 link: `/admin/empresa/${user.id}`,
             },
-            { label: 'Extratos', link: `/admin/empresa/${user.id}/extratos` },
+            { label: 'Contas Bancárias', link: `/admin/empresa/${user.id}/contas-bancarias` },
             { label: 'Nova Conta' }
         );
     }

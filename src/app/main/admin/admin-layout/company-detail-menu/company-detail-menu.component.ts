@@ -23,12 +23,17 @@ export class CompanyDetailMenuComponent implements OnInit {
         },
         {
             icon: 'po-icon-finance',
-            label: 'Minhas Despesas',
+            label: 'Despesas',
             link: `pedidos`,
         },
         {
+            icon: 'po-icon po-icon-text-bold',
+            label: 'Contas Bancárias',
+            link: `contas-bancarias`,
+        },
+        {
             icon: 'po-icon-finance-secure',
-            label: 'Meus Extratos',
+            label: 'Extratos',
             link: `extrato`,
         },
         {
@@ -38,7 +43,7 @@ export class CompanyDetailMenuComponent implements OnInit {
         },
         {
             icon: 'po-icon-company',
-            label: 'Minha Empresa',
+            label: 'Empresa',
             link: `empresa`,
         },
         {

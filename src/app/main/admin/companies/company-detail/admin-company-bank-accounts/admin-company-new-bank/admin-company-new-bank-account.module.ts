@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AdminCompanyNewBankComponent } from './admin-company-new-bank/admin-company-new-bank.component';
+import { AdminCompanyNewBankAccountComponent } from './admin-company-new-bank-account/admin-company-new-bank-account.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PoButtonModule, PoContainerModule, PoFieldModule, PoNotificationModule, PoPageModule } from '@po-ui/ng-components';
 import { InvalidFeedbackModule } from 'src/app/shared/components/invalid-feedback/invalid-feedback.module';
 
 @NgModule({
     declarations: [
-        AdminCompanyNewBankComponent,
+        AdminCompanyNewBankAccountComponent,
     ],
     imports: [
         CommonModule,
@@ -20,7 +20,7 @@ import { InvalidFeedbackModule } from 'src/app/shared/components/invalid-feedbac
         PoNotificationModule,
     ],
     exports: [
-        AdminCompanyNewBankComponent,
+        AdminCompanyNewBankAccountComponent,
     ],
 })
-export class AdminCompanyNewBankModule {}
+export class AdminCompanyNewBankAccountModule {}

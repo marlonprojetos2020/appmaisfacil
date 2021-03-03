@@ -16,7 +16,7 @@ const routes: Routes = [
         component: AdminCompanyNewBankAccountComponent,
     },
     {
-        path: 'editar-conta',
+        path: 'editar-conta/:bankAccountId',
         component: AdminCompanyEditBankAccountComponent,
     },
 ];

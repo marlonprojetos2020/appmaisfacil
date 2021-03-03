@@ -7,7 +7,7 @@ import { BankAccount } from './model/BankAccount';
 @Injectable({
     providedIn: 'root'
 })
-export class AdminCompanyBankService {
+export class AdminBankAccountFormService {
     constructor(private httpClient: HttpClient) {}
 
     listBankAccounts(id: string): Observable<any> {

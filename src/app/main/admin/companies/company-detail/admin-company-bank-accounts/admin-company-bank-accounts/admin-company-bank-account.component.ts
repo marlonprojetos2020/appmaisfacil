@@ -57,7 +57,7 @@ export class AdminCompanyBankAccountComponent implements OnInit {
         this.tableActions = [{
             label: 'Editar Conta',
             action: (item) => {
-                this.router.navigate(['editar-conta'], { relativeTo: this.activatedRoute });
+                this.router.navigate(['editar-conta', item.id], { relativeTo: this.activatedRoute });
             },
             disabled: (item) => item.status === 'CANCELED',
         },

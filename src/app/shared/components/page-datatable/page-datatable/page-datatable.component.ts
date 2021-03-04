@@ -123,9 +123,9 @@ export class PageDatatableComponent implements OnInit {
                             // não parece uma boa opção
                             item.cpf
                                 ? (item.cpf = item.cpf.replace(
-                                      /(\d{3})(\d{3})(\d{3})(\d{2})/g,
-                                      '$1.$2.$3-$4'
-                                  ))
+                                    /(\d{3})(\d{3})(\d{3})(\d{2})/g,
+                                    '$1.$2.$3-$4'
+                                ))
                                 : null;
                             return this.flattenObject(item);
                         })
@@ -152,9 +152,8 @@ export class PageDatatableComponent implements OnInit {
         }
 
         return {
-            sort: `${
-                this.tableColumnSort.column.property
-            },${this.tableColumnSortType(this.tableColumnSort.type)}`,
+            sort: `${this.tableColumnSort.column.property
+                },${this.tableColumnSortType(this.tableColumnSort.type)}`,
         };
     }
 

@@ -73,11 +73,6 @@ export class CompanyLayoutComponent {
             link: '/empresa/extrato',
         },
         {
-            icon: 'po-icon-finance-secure',
-            label: 'Meus Extratos',
-            link: '/empresa/extrato',
-        },
-        {
             icon: 'po-icon-document',
             label: 'Nota Fiscal',
             link: '/empresa/nota-fiscal',

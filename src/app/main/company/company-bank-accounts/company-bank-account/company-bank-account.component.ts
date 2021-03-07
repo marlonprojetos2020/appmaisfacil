@@ -43,13 +43,7 @@ export class CompanyBankAccountComponent implements OnInit {
             property: 'agency',
         },
     ];
-    pageActions: PoPageAction[] = [
-        {
-            label: 'Novo Extrato',
-            icon: 'po-icon-plus',
-            url: '/empresa/extrato/novo-extrato',
-        },
-    ];
+    pageActions: PoPageAction[] = [];
     serviceApi = `${environment.apiUrl}/company/bank-account`;
 
     constructor() {}

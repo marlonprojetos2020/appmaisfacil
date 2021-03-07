@@ -36,12 +36,11 @@ export class AdminBankAccountFormComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        console.log(this.editedAccount);
         this.formNewBankAccount = this.formBuilder.group({
-            bankId: ['', Validators.required],
-            accountType: ['', Validators.required],
-            agency: ['', Validators.required],
-            accountNumber: ['', Validators.required],
+            bankId: [this.editedAccount?.bankId, Validators.required],
+            accountType: [this.editedAccount?.accountType, Validators.required],
+            agency: [this.editedAccount?.agency, Validators.required],
+            accountNumber: [this.editedAccount?.accountNumber, Validators.required],
         });
 
         this.id = this.activatedRoute.snapshot.params.id;
@@ -63,14 +62,18 @@ export class AdminBankAccountFormComponent implements OnInit {
     SubmitBank(): void {
         this.loading = true;
         const account = this.formNewBankAccount.getRawValue() as BankAccount;
-        this.adminCompanyBankService
-            .newAccount(this.id, account)
-            .subscribe((data) => {
-                this.notificationService.success(
-                    `Banco Cadastrado com sucesso!`
-                );
-                this.location.back();
-            });
+        if (this.editedAccount) {
+            this.adminCompanyBankService.editAccount(this.id, account).subscribe()
+        } else {
+            this.adminCompanyBankService
+                .newAccount(this.id, account)
+                .subscribe((data) => {
+                    this.notificationService.success(
+                        `Banco Cadastrado com sucesso!`
+                    );
+                });
+        }
+        this.location.back();
     }
 
     dirtyMe(input): void {

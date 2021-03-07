@@ -22,6 +22,13 @@ export class AdminBankAccountFormService {
             bankAccount
         );
     }
+    
+    editAccount(id: string, bankAccount: BankAccount): Observable<any> {
+        return this.httpClient.post<any>(
+            `${environment.apiUrl}/users/${id}/bank-accounts`,
+            bankAccount
+        );
+    }
 
     selectBank(): Observable<any> {
         return this.httpClient.get(`${environment.apiUrl}/banks`);

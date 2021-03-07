@@ -19,6 +19,10 @@ export class AdminCompanyBankAccountComponent implements OnInit {
     tableActions: PoTableAction[] = [];
     columns: DatatableColumn[] = [
         {
+            label: 'Status',
+            property: 'enabled',
+        },
+        {
             label: 'Banco',
             property: 'bankName',
         },

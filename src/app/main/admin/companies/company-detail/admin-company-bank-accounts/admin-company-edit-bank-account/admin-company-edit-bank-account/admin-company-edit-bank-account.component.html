@@ -3,5 +3,7 @@
     [p-breadcrumb]="breadcrumb"
     class="breadcrumb"
 >
-    <app-bank-account-form [editedAccount]=""></app-bank-account-form>
+    <ng-container *ngIf="(bank$ | async ) as bank">
+        <app-bank-account-form [editedAccount]="bank"></app-bank-account-form>
+    </ng-container>
 </po-page-edit>

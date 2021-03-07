@@ -3,7 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { PoBreadcrumb } from '@po-ui/ng-components';
 
 import { CompaniesService } from '../../../../companies.service';
+import { AdminCompanyEditBankAccountService } from '../admin-company-edit-bank-account.service';
 import { User } from '../../../../model/user';
+import { Observable } from 'rxjs';
 
 @Component({
     templateUrl: './admin-company-edit-bank-account.component.html',
@@ -14,16 +16,19 @@ export class AdminCompanyEditBankAccountComponent implements OnInit {
     breadcrumb: PoBreadcrumb = {
         items: [],
     };
+    bank$: Observable<any>;
+
 
     constructor(
         private activatedRoute: ActivatedRoute,
         private companiesService: CompaniesService,
+        private editBankService: AdminCompanyEditBankAccountService,
     ) {}
 
     ngOnInit(): void {
         this.id = this.activatedRoute.snapshot.params.id;
         const bankAccountId = this.activatedRoute.snapshot.params.bankAccountId;
-        // TODO: serviço find
+        this.bank$ = this.editBankService.findBank(this.id, bankAccountId);
         this.companiesService
             .getUserCompany(this.activatedRoute.snapshot.params.id)
             .subscribe((data) => this.setBreadcrumb(data));

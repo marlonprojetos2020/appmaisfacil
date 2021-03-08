@@ -22,10 +22,10 @@ export class AdminBankAccountFormService {
             bankAccount
         );
     }
-    
-    editAccount(id: string, bankAccount: BankAccount): Observable<any> {
-        return this.httpClient.post<any>(
-            `${environment.apiUrl}/users/${id}/bank-accounts`,
+
+    editAccount(userId: string, bankId: number, bankAccount: BankAccount): Observable<any> {
+        return this.httpClient.put<any>(
+            `${environment.apiUrl}/users/${userId}/bank-accounts/${bankId}`,
             bankAccount
         );
     }

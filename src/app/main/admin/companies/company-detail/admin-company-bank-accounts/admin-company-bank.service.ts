@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { BankAccount } from './model/BankAccount';
+import { BankAccount } from './shared/admin-bank-account-form/model/BankAccount';
 
 @Injectable({
     providedIn: 'root'

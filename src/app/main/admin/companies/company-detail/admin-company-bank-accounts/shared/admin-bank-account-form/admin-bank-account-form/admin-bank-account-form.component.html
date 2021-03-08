@@ -91,7 +91,7 @@
                 [p-disabled]="formNewBankAccount.invalid"
                 p-type="primary"
                 (p-click)="SubmitBank()"
-                p-label="Cadastrar Banco"
+                [p-label]="editedAccount? 'Editar Conta' : 'Cadastrar Conta'"
                 [p-loading]="loading"
             >
             </po-button>

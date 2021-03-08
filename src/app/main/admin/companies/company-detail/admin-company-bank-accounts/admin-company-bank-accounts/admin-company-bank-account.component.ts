@@ -68,6 +68,8 @@ export class AdminCompanyBankAccountComponent implements OnInit {
         {
             label: 'Cancelar Conta',
             action: (item) => {
+                // TODO evento de cancelamento de conta
+                item.status = 'CANCELED';
             },
             disabled: (item) => item.status === 'CANCELED',
         }];

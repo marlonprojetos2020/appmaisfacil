@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { PoBreadcrumb, PoNotificationService } from '@po-ui/ng-components';
+import { PoBreadcrumb, PoNotificationService, PoSelectOption } from '@po-ui/ng-components';
 
 import { AdminBankAccountFormService } from '../admin-bank-account-form.service';
 import { User } from '../../../../../model/user';
@@ -17,7 +17,7 @@ export class AdminBankAccountFormComponent implements OnInit {
 
     @Input() editedAccount: BankAccount = null;
 
-    options = [];
+    options: PoSelectOption[] = [];
     id: string = '';
     loading: boolean;
     formNewBankAccount: FormGroup;
@@ -36,8 +36,9 @@ export class AdminBankAccountFormComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
+        console.log(this.editedAccount);
         this.formNewBankAccount = this.formBuilder.group({
-            bankId: [this.editedAccount?.bankId, Validators.required],
+            bankId: ['', Validators.required],
             accountType: [this.editedAccount?.accountType, Validators.required],
             agency: [this.editedAccount?.agency, Validators.required],
             accountNumber: [this.editedAccount?.accountNumber, Validators.required],
@@ -52,7 +53,10 @@ export class AdminBankAccountFormComponent implements OnInit {
                     value: item.id,
                 }))
             );
+            this.formNewBankAccount.get('bankId').setValue(this.editedAccount?.bankId);
         });
+
+
 
         this.companiesService
             .getUserCompany(this.activatedRoute.snapshot.params.id)
@@ -63,7 +67,9 @@ export class AdminBankAccountFormComponent implements OnInit {
         this.loading = true;
         const account = this.formNewBankAccount.getRawValue() as BankAccount;
         if (this.editedAccount) {
-            this.adminCompanyBankService.editAccount(this.id, account).subscribe()
+            this.adminCompanyBankService.editAccount(this.id, this.editedAccount.id, account)
+                .subscribe(
+                    () => this.notificationService.success('Banco Editado com sucesso!'));
         } else {
             this.adminCompanyBankService
                 .newAccount(this.id, account)

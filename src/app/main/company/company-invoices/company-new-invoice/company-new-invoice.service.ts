@@ -17,7 +17,6 @@ export class CompanyNewInvoiceService {
     }
 
     createInvoice(invoice: Invoice): Observable<Invoice> {
-        console.log(invoice);
         return this.httpClient.post<Invoice>(
             `${environment.apiUrl}/company/nota-fiscal`,
             invoice

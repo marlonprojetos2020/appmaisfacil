@@ -36,7 +36,6 @@ export class AdminBankAccountFormComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        console.log(this.editedAccount);
         this.formNewBankAccount = this.formBuilder.group({
             bankId: ['', Validators.required],
             accountType: [this.editedAccount?.accountType, Validators.required],

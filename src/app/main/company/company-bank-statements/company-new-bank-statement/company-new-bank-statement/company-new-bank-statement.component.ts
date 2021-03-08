@@ -76,9 +76,6 @@ export class CompanyNewBankStatementComponent implements OnInit {
 
     submitForm(): any {
         const idBankAccount = this.formNewStatement.getRawValue();
-
-        console.log(idBankAccount);
-
         this.setUrlDocument(idBankAccount.id);
     }
 

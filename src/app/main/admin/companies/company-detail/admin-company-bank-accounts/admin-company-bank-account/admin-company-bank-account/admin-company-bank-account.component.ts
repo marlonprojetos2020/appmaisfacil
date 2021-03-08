@@ -23,8 +23,22 @@ export class AdminCompanyBankAccountComponent implements OnInit {
         {
             label: 'Status',
             property: 'enabled',
-            // color: (row, column) => { row[column] == false ? 'color-07' : 'color-12' }
-            // customValue: (item) => item? 'Ativa' : 'Inativa'
+            color: (item) => item.enabled ? 'color-12' : 'color-07',
+            type: 'boolean', boolean: {
+                trueLabel: 'Ativa',
+                falseLabel: 'Inativa'
+            },
+            icons: [
+                {
+                    value: 'true',
+                    icon: 'po-icon-ok'
+                },
+                {
+                    value: 'false',
+                    icon: 'po-icon-close'
+                }
+            ],
+            // label
         },
         {
             label: 'Banco',
@@ -33,7 +47,11 @@ export class AdminCompanyBankAccountComponent implements OnInit {
         {
             label: 'Tipo',
             property: 'accountType',
-
+            type: 'label',
+            labels: [
+                { value: 'POUPANÇA', color: 'color-11', label: 'Poupança' },
+                { value: 'CORRENTE', color: 'color-08', label: 'Corrente' }
+            ]
         },
         {
             label: 'Conta',
@@ -78,9 +96,7 @@ export class AdminCompanyBankAccountComponent implements OnInit {
             label: 'Desativar Conta',
             action: (item) => {
                 this.bankService.toggleAccount(id, item.id).subscribe(data => {
-                    console.log(data)
                     item.enabled = false;
-
                 });
             },
             disabled: (item) => !item.enabled
@@ -89,7 +105,6 @@ export class AdminCompanyBankAccountComponent implements OnInit {
             label: 'Ativar Conta',
             action: (item) => {
                 this.bankService.toggleAccount(id, item.id).subscribe(data => {
-                    console.log(data)
                     item.enabled = true;
                 });
             },

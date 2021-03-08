@@ -2,13 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
     PoBreadcrumb,
+    PoNotificationService,
     PoPageAction,
     PoTableAction,
 } from '@po-ui/ng-components';
-import { environment } from '../../../../../../../environments/environment';
-import { DatatableColumn } from '../../../../../../shared/components/page-datatable/datatable-column';
-import { User } from '../../../model/user';
-import { CompaniesService } from '../../../companies.service';
+import { environment } from '../../../../../../../../environments/environment';
+import { DatatableColumn } from '../../../../../../../shared/components/page-datatable/datatable-column';
+import { User } from '../../../../model/user';
+import { CompaniesService } from '../../../../companies.service';
+import { adminCompanyBankAccountService } from '../admin-company-bank-account.service'
 
 @Component({
     templateUrl: './admin-company-bank-account.component.html',
@@ -21,6 +23,8 @@ export class AdminCompanyBankAccountComponent implements OnInit {
         {
             label: 'Status',
             property: 'enabled',
+            // color: (row, column) => { row[column] == false ? 'color-07' : 'color-12' }
+            // customValue: (item) => item? 'Ativa' : 'Inativa'
         },
         {
             label: 'Banco',
@@ -29,6 +33,7 @@ export class AdminCompanyBankAccountComponent implements OnInit {
         {
             label: 'Tipo',
             property: 'accountType',
+
         },
         {
             label: 'Conta',
@@ -47,32 +52,50 @@ export class AdminCompanyBankAccountComponent implements OnInit {
     constructor(
         private activatedRoute: ActivatedRoute,
         private companiesService: CompaniesService,
+        private bankService: adminCompanyBankAccountService,
         private router: Router,
     ) {}
 
     ngOnInit(): void {
         const id = this.activatedRoute.snapshot.paramMap.get('id');
+
         this.serviceApi = `${environment.apiUrl}/users/${id}/bank-accounts/p/search`;
+
         this.pageActions = [{
             label: 'Nova Conta',
             icon: 'po-icon-plus-circle',
             url: `/admin/empresa/${id}/contas-bancarias/nova-conta`,
         }];
+
         this.tableActions = [{
             label: 'Editar Conta',
             action: (item) => {
                 this.router.navigate(['editar-conta', item.id], { relativeTo: this.activatedRoute });
             },
-            disabled: (item) => item.status === 'CANCELED',
+            disabled: (item) => item.enabled === false,
         },
         {
-            label: 'Cancelar Conta',
+            label: 'Desativar Conta',
             action: (item) => {
-                // TODO evento de cancelamento de conta
-                item.status = 'CANCELED';
+                this.bankService.toggleAccount(id, item.id).subscribe(data => {
+                    console.log(data)
+                    item.enabled = false;
+
+                });
             },
-            disabled: (item) => item.status === 'CANCELED',
+            disabled: (item) => !item.enabled
+        },
+        {
+            label: 'Ativar Conta',
+            action: (item) => {
+                this.bankService.toggleAccount(id, item.id).subscribe(data => {
+                    console.log(data)
+                    item.enabled = true;
+                });
+            },
+            disabled: (item) => item.enabled
         }];
+
         this.companiesService
             .getUserCompany(this.activatedRoute.snapshot.params.id)
             .subscribe((data) => this.setBreadcrumb(data));

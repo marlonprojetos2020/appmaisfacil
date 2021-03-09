@@ -36,7 +36,7 @@ export class AdminCompanyNewChargeComponent implements OnInit {
                     : user.name,
                 link: `/admin/empresa/${user.id}`,
             },
-            { label: 'Cobranças', link: `/admin/empresa/${user.id}/cobranca` },
+            { label: 'Cobranças', link: `/admin/empresa/${user.id}/cobrancas` },
             { label: 'Nova Cobrança' }
         );
     }

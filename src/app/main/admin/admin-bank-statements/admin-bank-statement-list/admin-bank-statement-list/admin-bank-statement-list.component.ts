@@ -132,6 +132,7 @@ export class AdminBankStatementListComponent implements OnInit {
         {
             label: 'Empresa',
             property: 'bankAccountCompanyFantasyName',
+            disableSort: true,
         },
         {
             label: 'Banco',

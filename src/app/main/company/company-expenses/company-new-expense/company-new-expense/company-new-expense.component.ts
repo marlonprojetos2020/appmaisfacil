@@ -19,7 +19,6 @@ export class CompanyNewExpenseComponent implements OnInit {
     newCompanyExpense: CompanyExpense;
     urlUploadDocument: string;
     restrictions: PoUploadFileRestrictions;
-    startDate: any = '';
 
     loading = false;
 
@@ -66,8 +65,6 @@ export class CompanyNewExpenseComponent implements OnInit {
                 }))
             )
         );
-
-        this.startDate = new Date();
     }
 
     submitForm(): any {

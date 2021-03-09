@@ -131,7 +131,7 @@ export class AdminBankStatementListComponent implements OnInit {
         },
         {
             label: 'Empresa',
-            property: 'bankAccountCompanyName',
+            property: 'bankAccountCompanyFantasyName',
         },
         {
             label: 'Banco',

@@ -1,116 +1,49 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import {
-    PoBreadcrumb,
-    PoNotificationService,
-    PoPageAction,
-    PoTableAction,
-} from '@po-ui/ng-components';
-import { environment } from '../../../../../../../environments/environment';
-import { DatatableColumn } from '../../../../../../shared/components/page-datatable/datatable-column';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { User } from '../../../model/user';
-import { AdminCompanyChargeService } from '../admin-company-charge.service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { PoBreadcrumb } from '@po-ui/ng-components';
+import { environment } from 'src/environments/environment';
 import { CompaniesService } from '../../../companies.service';
-import { PageDatatableComponent } from '../../../../../../shared/components/page-datatable/page-datatable/page-datatable.component';
-
+import { User } from '../../../model/user';
 @Component({
     templateUrl: './admin-company-charge.component.html',
 })
 export class AdminCompanyChargeComponent implements OnInit {
-    company$: Observable<User> = null;
 
-    @ViewChild(PageDatatableComponent)
-    dataTableComponent: PageDatatableComponent;
+    id = this.activetedRoute.snapshot.params.id;
+    serviceApi = `${environment.apiUrl}/billing/p/search?companyId=${this.id}`;
+    breadcrumb: PoBreadcrumb = null;
 
-    pageActions: PoPageAction[] = [];
-
-    serviceApi = '';
-    tableActions: PoTableAction[] = [
+    pageActions = [
         {
-            label: 'Cancelar',
-            action: (item) => {
-                this.chargeService.canceledCharge(item.id).subscribe(() => {
-                    this.poNotificationService.success(
-                        'Cobrança cancelada com sucesso'
-                    );
-                    this.dataTableComponent.ngOnInit();
-                });
-            },
-            disabled: (item) => item.status === 'CANCELED',
-        },
-        {
-            label: 'Baixar Cobraça',
-            action: (item) => window.open(item.billingFileUrl, '_blank'),
-            disabled: (item) => !item.billingFileUrl,
-        },
-    ];
-    columns: DatatableColumn[] = [
-        {
-            label: 'Status',
-            property: 'statusText',
-        },
-        {
-            label: 'Titulo',
-            property: 'description',
-        },
-        {
-            label: 'Tipo',
-            property: 'type.label',
-        },
-        {
-            label: 'Vencimento',
-            property: 'dueDate',
-            type: 'date',
-            format: 'dd/MM/yyyy',
-        },
-        {
-            label: 'Valor',
-            property: 'value',
-            type: 'currency',
-            format: 'BRL',
-        },
-    ];
-
-    breadcrumb: PoBreadcrumb = {
-        items: [],
-    };
-
-    constructor(
-        private router: Router,
-        private activetedRoute: ActivatedRoute,
-        private chargeService: AdminCompanyChargeService,
-        private companiesService: CompaniesService,
-        private poNotificationService: PoNotificationService
-    ) {}
-
-    ngOnInit(): void {
-        this.serviceApi = `${environment.apiUrl}/billing/p/search?companyId=${this.activetedRoute.snapshot.params.id}`;
-
-        const id = this.activetedRoute.snapshot.params.id;
-
-        this.pageActions.push({
             label: 'Nova Cobrança',
             icon: 'po-icon-plus-circle',
-            url: `admin/empresa/${id}/cobrancas/nova-cobranca`,
-        });
+            url: `admin/empresa/${this.id}/cobrancas/nova-cobranca`,
+        }
+    ];
 
+    constructor(
+        private activetedRoute: ActivatedRoute,
+        private companiesService: CompaniesService) {}
+
+    ngOnInit(): void {
         this.companiesService
             .getUserCompany(this.activetedRoute.snapshot.params.id)
             .subscribe((data) => this.setBreadcrumb(data));
     }
 
     setBreadcrumb(user: User): void {
-        this.breadcrumb.items.push(
-            { label: 'Inicio', link: '/admin' },
-            { label: 'Empresas', link: '/admin/empresas' },
-            {
-                label: user.userCompany?.fantasyName
-                    ? user.userCompany?.fantasyName
-                    : user.name,
-                link: `/admin/empresa/${user.id}`,
-            },
-            { label: 'Cobranças' }
-        );
+        this.breadcrumb = {
+            items: [
+                { label: 'Inicio', link: '/admin' },
+                { label: 'Empresas', link: '/admin/empresas' },
+                {
+                    label: user.userCompany?.fantasyName
+                        ? user.userCompany?.fantasyName
+                        : user.name,
+                    link: `/admin/empresa/${user.id}`,
+                },
+                { label: 'Cobranças' },
+            ],
+        };
     }
 }

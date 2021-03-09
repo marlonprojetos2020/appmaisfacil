@@ -59,7 +59,16 @@ export class ChargeListComponent implements OnInit {
     columns: DatatableColumn[] = [
         {
             label: 'Situação',
-            property: 'statusText',
+            property: 'status',
+            type: 'label',
+            labels: [
+                { value: 'NOT_FINALIZED', color: 'color-03', label: 'Incompleto' },
+                { value: 'PENDING', color: 'color-07', label: 'Pendente' },
+                { value: 'PENDING_REVIEW', color: 'color-08', label: 'Revisão' },
+                { value: 'PAID', color: 'color-12', label: 'Pago' },
+                { value: 'REFUSED', color: 'color-05', label: 'Recusado' },
+                { value: 'CANCELED', color: 'color-06', label: 'Cancelado' },
+            ],
         },
         {
             label: 'Título',
@@ -127,6 +136,7 @@ export class ChargeListComponent implements OnInit {
             {
                 label: 'Baixar Cobrança',
                 action: (item) => window.open(item.billingFileUrl, '_blank'),
+                disabled: (item) => item.status === 'NOT_FINALIZED',
             }
         );
     }

@@ -8,3 +8,114 @@
         [breadcrumb]="breadcrumb"
     ></app-page-datatable>
 </ng-container>
+
+<po-modal
+    #modalExtratoPendente
+    p-title="Extrato"
+    [p-primary-action]="primaryAction"
+    [p-secondary-action]="secondaryAction"
+>
+    <div class="po-row">
+        <div class="po-md-6">
+            <ng-template [ngIf]="ehPdfPendente">
+                <div class="img-modal">
+                    <img
+                        src="/assets/images/imgPdf.png"
+                        alt="Pdf"
+                    />
+                    <po-button
+                        (p-click)="downloadPdfPendente()"
+                        p-icon="po-icon po-icon-download"
+                    ></po-button>
+                </div>
+            </ng-template>
+            <ng-template [ngIf]="!ehPdfPendente">
+                <div class="img-modal">
+                    <img
+                        [src]="image"
+                        alt="Extrato Bancário"
+                    />
+                    <po-button
+                        (p-click)="downloadImg()"
+                        p-icon="po-icon po-icon-download"
+                    ></po-button>
+                </div>
+            </ng-template>
+        </div>
+        <div class="po-md-6 text-modal">
+            <div class="po-row">
+                <div class="po-md-12">
+                    <h1 class="po-mb-3">
+                        Extrato {{ month }} - {{ bankName }}
+                    </h1>
+                </div>
+                <div class="po-md-12 po-mb-2">
+                    <h2>
+                        <span>Cliente</span>
+                        {{ companyName }}
+                    </h2>
+                </div>
+                <div class="po-md-12">
+                    <h3>
+                        <span>Situação</span>
+                        {{ status }}
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</po-modal>
+
+<po-modal
+    #modalExtratoAprovado
+    p-title="Extrato Aprovado"
+    [p-primary-action]="closeModalExtratoAprovado"
+>
+    <div class="po-row">
+        <div class="po-md-6">
+            <ng-template [ngIf]="ehPdfPago">
+                <div class="img-modal">
+                    <img
+                        src="/assets/images/imgPdf.png"
+                        alt="Pdf"
+                    />
+                    <po-button
+                        (p-click)="downloadPdfPago()"
+                        p-icon="po-icon po-icon-download"
+                    ></po-button>
+                </div>
+            </ng-template>
+            <ng-template [ngIf]="!ehPdfPago">
+                <div class="img-modal">
+                    <img
+                        [src]="image"
+                        alt="Extrato Bancário"
+                    />
+                    <po-button
+                        (p-click)="downloadImg()"
+                        p-icon="po-icon po-icon-download"
+                    ></po-button>
+                </div>
+            </ng-template>
+        </div>
+        <div class="po-md-6 text-modal">
+            <div class="po-row">
+                <div class="po-md-12 po-mb-3">
+                    <h1>Extrato {{ month }} - {{ bankName }}</h1>
+                </div>
+                <div class="po-md-12 po-mb-2">
+                    <h2>
+                        <span>Empresa</span>
+                        {{ companyName }}
+                    </h2>
+                </div>
+                <div class="po-md-12">
+                    <h3>
+                        <span>Status</span>
+                        {{ status }}
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</po-modal>

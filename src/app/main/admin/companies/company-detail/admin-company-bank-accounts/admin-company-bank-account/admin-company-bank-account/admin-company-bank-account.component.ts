@@ -26,19 +26,18 @@ export class AdminCompanyBankAccountComponent implements OnInit {
             color: (item) => item.enabled ? 'color-12' : 'color-07',
             type: 'boolean', boolean: {
                 trueLabel: 'Ativa',
-                falseLabel: 'Inativa'
+                falseLabel: 'Inativa',
             },
             icons: [
                 {
                     value: 'true',
-                    icon: 'po-icon-ok'
+                    icon: 'po-icon-ok',
                 },
                 {
                     value: 'false',
-                    icon: 'po-icon-close'
-                }
+                    icon: 'po-icon-close',
+                },
             ],
-            // label
         },
         {
             label: 'Banco',
@@ -50,8 +49,8 @@ export class AdminCompanyBankAccountComponent implements OnInit {
             type: 'label',
             labels: [
                 { value: 'POUPANÇA', color: 'color-11', label: 'Poupança' },
-                { value: 'CORRENTE', color: 'color-08', label: 'Corrente' }
-            ]
+                { value: 'CORRENTE', color: 'color-08', label: 'Corrente' },
+            ],
         },
         {
             label: 'Conta',

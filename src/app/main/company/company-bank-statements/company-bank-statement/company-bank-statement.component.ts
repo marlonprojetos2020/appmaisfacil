@@ -72,11 +72,25 @@ export class CompanyBankStatementComponent implements OnInit {
     columns: DatatableColumn[] = [
         {
             label: 'Status',
-            property: 'statusText',
+            property: 'status',
+            type: 'label',
+            labels: [
+                { value: 'PENDING', color: 'color-07', label: 'Pendente' },
+                { value: 'PENDING_REVIEW', color: 'color-08', label: 'Revisão' },
+                { value: 'OK', color: 'color-12', label: 'OK' },
+            ],
         },
         {
             label: 'Banco',
             property: 'bankAccount.bankName',
+        },
+        {
+            label: 'Conta',
+            property: 'bankAccount.accountNumber',
+        },
+        {
+            label: 'Agência',
+            property: 'bankAccount.agency',
         },
         {
             label: 'Mês de Referência',

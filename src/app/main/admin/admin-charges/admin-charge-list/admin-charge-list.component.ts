@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 })
 
 export class AdminChargeListComponent {
-    serviceApi = `${environment.apiUrl}/billing/p/search`;
+    serviceApi = `${environment.apiUrl}/billing/p/search?status=PENDING_REVIEW`;
     breadcrumb: PoBreadcrumb = {
         items: [
             { label: 'Início', link: '/admin' },

@@ -7,8 +7,7 @@ import { CompanyDetailMenuComponent } from './admin-layout/company-detail-menu/c
 import { AdminMyAccountComponent } from './admin-my-account/admin-my-account/admin-my-account.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from 'src/app/core/auth/auth.interceptor';
-import { AdminEmployeeComponent } from './admin-employees/admin-employee/admin-employee.component';
-// import { CompanyDetailResolver } from './company-detail/company-detail-resolver';
+import { AdminChargeListComponent } from './admin-charges/admin-charge-list/admin-charge-list.component';
 
 const routes: Routes = [
     {
@@ -50,10 +49,7 @@ const routes: Routes = [
                     },
                     {
                         path: 'cobrancas',
-                        loadChildren: () =>
-                            import('./admin-charges/admin-charges.module').then(
-                                (m) => m.AdminChargesModule
-                            ),
+                        component: AdminChargeListComponent,
                     },
                     {
                         path: 'funcionarios',

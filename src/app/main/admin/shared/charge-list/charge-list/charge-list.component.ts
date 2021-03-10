@@ -12,7 +12,7 @@ import {
 } from '@po-ui/ng-components';
 
 import { DatatableColumn } from 'src/app/shared/components/page-datatable/datatable-column';
-import { Charge } from '../../../../../shared/components/charge-form/models/charge';
+import { Charge } from '../charge';
 import { AdminChargesService } from '../admin-charges.service';
 import { PageDatatableComponent } from '../../../../../shared/components/page-datatable/page-datatable/page-datatable.component';
 import { AdminCompanyChargeService } from '../../../companies/company-detail/admin-company-charges/admin-company-charge.service';
@@ -29,17 +29,7 @@ export class ChargeListComponent implements OnInit {
     @Input() breadcrumb: PoBreadcrumb;
     @Input() pageActions: PoPageAction[] = null;
 
-    idCharge: number;
-    nomeEmpresa: string;
-    status: string;
-    tipo: string;
-    vencimento: string;
-    valor: number;
-    titulo: string;
-    pdfCobranca: string;
-    pdfComprovante: string;
-    imagemCobranca: string;
-    imagemComprovante: string;
+    modalCharge: Charge = null;
     charge;
 
     isPdfCobranca = false;
@@ -55,11 +45,10 @@ export class ChargeListComponent implements OnInit {
     @ViewChild(PageDatatableComponent)
     dataTableComponent: PageDatatableComponent;
 
-
     primaryAction: PoModalAction = {
         label: 'Confirmar',
         action: () => {
-            this.adminChargeService.paidCharge(this.idCharge).subscribe(() => {
+            this.adminChargeService.paidCharge(this.modalCharge.id).subscribe(() => {
                 this.dataTableComponent.loadItems();
                 this.poNotificationService.success('Comprovante de pagamento aprovado com sucesso');
             });
@@ -75,7 +64,7 @@ export class ChargeListComponent implements OnInit {
                 message: `Tem certeza que deseja recusar a cobrança ?`,
                 confirm: () => {
                     this.adminChargeService
-                        .recuseCharge(this.idCharge)
+                        .recuseCharge(this.modalCharge.id)
                         .subscribe(() => {
                             this.dataTableComponent.loadItems();
                             this.poNotificationService.success('Comprovante de pagamento recusado com sucesso');
@@ -148,7 +137,7 @@ export class ChargeListComponent implements OnInit {
                     title: 'Cancelar Cobrança',
                     message: `Tem certeza que deseja cancelar a cobrança "${item.description}"?`,
                     confirm: () => {
-                        this.chargeService.canceledCharge(item.id).subscribe(() => {
+                        this.adminChargeService.canceledCharge(item.id).subscribe(() => {
                             this.poNotificationService.success(
                                 'Cobrança cancelada com sucesso',
                             );
@@ -165,7 +154,6 @@ export class ChargeListComponent implements OnInit {
         private router: Router,
         private poNotificationService: PoNotificationService,
         private adminChargeService: AdminChargesService,
-        private chargeService: AdminCompanyChargeService,
         private poDialogService: PoDialogService,
     ) {}
 
@@ -196,63 +184,41 @@ export class ChargeListComponent implements OnInit {
                 format: 'dd/MM/yyyy',
             },
             { label: 'Valor', property: 'value', type: 'currency', format: 'BRL' },
-            { label: 'Empresa', property: 'companyFantasyName', visible: this.showCompanyField },
+            { label: 'Empresa', property: 'companyFantasyName', visible: this.showCompanyField, disableSort: true },
         ];
 
     }
 
     prepareModal(charge: Charge): void {
-        charge.companyFantasyName
-            ? (this.nomeEmpresa = charge.companyFantasyName)
-            : (this.nomeEmpresa = charge.companyName);
-        this.status = charge.statusText;
-        this.tipo = charge['type.label'];
-        this.valor = charge.value;
-        this.vencimento = charge.dueDate;
-        this.titulo = charge.description;
-        this.imagemCobranca = charge.billingFileUrl;
-        this.imagemComprovante = charge.proofOfPaymentUrl;
-        this.idCharge = charge.id;
-        this.charge = charge;
-        if (this.imagemCobranca.indexOf('pdf') < 0) {
-            this.isPdfCobranca = false;
+        this.modalCharge = charge;
+        console.log(this.modalCharge);
+        if (this.modalCharge.proofOfPaymentUrl.indexOf('pdf') < 0) {
+            this.isPdfComprovante = false;
         } else {
-            this.isPdfCobranca = true;
-            this.pdfCobranca = charge.billingFileUrl;
+            this.isPdfComprovante = true;
         }
         this.poModalComprovante.open();
     }
 
     openModalCobranca(charge: Charge = null): void {
         if (charge) {
-            charge.companyFantasyName
-                ? (this.nomeEmpresa = charge.companyFantasyName)
-                : (this.nomeEmpresa = charge.companyName);
-            this.status = charge.statusText;
-            this.tipo = charge['type.label'];
-            this.valor = charge.value;
-            this.vencimento = charge.dueDate;
-            this.titulo = charge.description;
-            this.imagemCobranca = charge.billingFileUrl;
-            this.idCharge = charge.id;
+            this.modalCharge = charge;
+            if (this.modalCharge.billingFileUrl.indexOf('pdf') < 0) {
+                this.isPdfCobranca = false;
+            } else {
+                this.isPdfCobranca = true;
+            }
         }
         this.poModalCobranca.open();
     }
 
-    downloadPdfCobranca(): any {
-        window.open(this.pdfCobranca, '_blank');
-    }
 
     downloadImgCobranca(): any {
-        window.open(this.imagemCobranca, '_blank');
-    }
-
-    downloadPdfComprovante(): any {
-        window.open(this.pdfComprovante, '_blank');
+        window.open(this.modalCharge.billingFileUrl, '_blank');
     }
 
     downloadImgComprovante(): any {
-        window.open(this.imagemComprovante, '_blank');
+        window.open(this.modalCharge.proofOfPaymentUrl, '_blank');
     }
 }
 

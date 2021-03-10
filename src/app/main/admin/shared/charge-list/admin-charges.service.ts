@@ -22,4 +22,11 @@ export class AdminChargesService {
             id
         );
     }
+
+    canceledCharge(id: number): Observable<any> {
+        return this.httpClient.post(
+            `${environment.apiUrl}/billing/${id}/canceled`,
+            id
+        );
+    }
 }

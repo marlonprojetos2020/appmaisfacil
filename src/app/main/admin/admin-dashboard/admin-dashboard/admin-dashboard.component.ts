@@ -11,6 +11,7 @@ export class AdminDashboardComponent implements OnInit {
     extratoPendente;
     extratoAnalise;
     cobrancaAnalise;
+    cobrancaPendente;
     funcionarioDemissao;
     notaFiscalAnalise;
     notaFiscalCancelamento;
@@ -27,6 +28,7 @@ export class AdminDashboardComponent implements OnInit {
             .getQuantityServiceDashboard()
             .subscribe((data) => {
                 this.cobrancaAnalise = data.countPendingReviewBillings;
+                this.cobrancaPendente = data.countPendingBillings;
                 this.funcionarioDemissao = data.countPendingFiredEmployees;
                 this.notaFiscalAnalise = data.countProcessingNotaFiscal;
                 this.notaFiscalCancelamento =

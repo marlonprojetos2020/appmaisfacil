@@ -44,11 +44,11 @@ export class CompanyChargeListComponent {
 
     tableActions: PoTableAction[] = [
         {
-            label: 'Pagar Cobrança',
+            label: 'Enviar Comprovante de Pagamento',
             action: (item) => {
                 this.prepareModal(item);
             },
-            disabled: (item) => item.status !== 'PENDING' && item.status !== 'REFUSED',
+            disabled: (item) => item.status !== 'PENDING' && item.status !== 'REFUSED' && item.status !== 'PENDING_REVIEW',
         },
         {
             label: 'Baixar Comprovante',

@@ -8,6 +8,7 @@ import { AdminMyAccountComponent } from './admin-my-account/admin-my-account/adm
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from 'src/app/core/auth/auth.interceptor';
 import { AdminChargeListComponent } from './admin-charges/admin-charge-list/admin-charge-list.component';
+import { AdminBankStatementListComponent } from './admin-bank-statements/admin-bank-statement-list/admin-bank-statement-list.component';
 
 const routes: Routes = [
     {
@@ -34,18 +35,21 @@ const routes: Routes = [
                             ),
                     },
                     {
-                        path: 'extratos',
-                        loadChildren: () =>
-                            import(
-                                './admin-bank-statements/admin-bank-statements.module'
-                            ).then((m) => m.AdminBankStatementsModule),
-                    },
-                    {
                         path: 'nota-fiscal',
                         loadChildren: () =>
                             import(
                                 './admin-invoices/admin-invoices.module'
                             ).then((m) => m.AdminInvoicesModule),
+                    },
+                    {
+                        path: 'extratos',
+                        pathMatch: 'full',
+                        component: AdminBankStatementListComponent,
+                    },
+                    {
+                        path: 'extratos/:filter',
+                        pathMatch: 'full',
+                        component: AdminBankStatementListComponent,
                     },
                     {
                         path: 'cobrancas',

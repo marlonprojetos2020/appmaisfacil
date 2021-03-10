@@ -10,6 +10,7 @@ import { CompanyDetailMenuComponent } from './admin-layout/company-detail-menu/c
 import { AdminMyAccountModule } from './admin-my-account/admin-my-account.module';
 import { AdminEmployeeModule } from './admin-employees/admin-employee.module';
 import { AdminChargeListModule } from './admin-charges/admin-charge-list.module'
+import { AdminBankStatementListModule } from './admin-bank-statements/admin-bank-statement-list.module'
 
 @NgModule({
     declarations: [
@@ -25,6 +26,7 @@ import { AdminChargeListModule } from './admin-charges/admin-charge-list.module'
         AdminDashboardModule,
         AdminMyAccountModule,
         AdminChargeListModule,
+        AdminBankStatementListModule,
         AdminEmployeeModule,
     ],
     exports: [

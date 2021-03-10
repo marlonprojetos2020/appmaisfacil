@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable({
     providedIn: 'root',
 })
-export class AdminBankStatementsService {
+export class BankStatementListService {
     constructor(private httpClient: HttpClient) {}
 
     aprovedStatement(id: number): Observable<any> {

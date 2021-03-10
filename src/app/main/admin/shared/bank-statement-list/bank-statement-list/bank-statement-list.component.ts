@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
     PoBreadcrumb,
     PoModalAction,
@@ -9,22 +9,24 @@ import {
 } from '@po-ui/ng-components';
 import { environment } from '../../../../../../environments/environment';
 import { DatatableColumn } from '../../../../../shared/components/page-datatable/datatable-column';
-import { AdminBankStatementsService } from '../../admin-bank-statements.service';
+import { BankStatementListService } from '../bank-statement-list.service';
 import { BankStatement } from '../../../../company/company-bank-statements/models/bank-statements';
 import { PageDatatableComponent } from '../../../../../shared/components/page-datatable/page-datatable/page-datatable.component';
 
 @Component({
-    templateUrl: './admin-bank-statement-list.component.html',
-    styleUrls: ['admin-bank-statement.component.scss'],
+    selector: 'app-bank-statement-list',
+    templateUrl: './bank-statement-list.component.html'
 })
-export class AdminBankStatementListComponent implements OnInit {
-    @Input() companyName: string;
-    @Input() month: string;
-    @Input() status: string;
-    @Input() bankName: string;
-    @Input() image: string;
-    @Input() pdfPendente: string;
-    @Input() pdfPago: string;
+
+export class BankStatementListComponent {
+
+    companyName: string;
+    month: string;
+    status: string;
+    bankName: string;
+    image: string;
+    pdfPendente: string;
+    pdfPago: string;
     idStatement: number;
 
     @ViewChild(PageDatatableComponent)
@@ -42,7 +44,7 @@ export class AdminBankStatementListComponent implements OnInit {
     primaryAction: PoModalAction = {
         label: 'Aprovar',
         action: () => {
-            this.adminBankStatementService
+            this.bankStatementListService
                 .aprovedStatement(this.idStatement)
                 .subscribe(() => {
                     this.dataTableComponent.ngOnInit();
@@ -145,18 +147,15 @@ export class AdminBankStatementListComponent implements OnInit {
     ];
 
     // ModalExtratoAprovado
-
     closeModalExtratoAprovado: PoModalAction = {
         label: 'Fechar',
         action: () => this.poModalExtratoAprovado.close(),
     };
 
     constructor(
-        private adminBankStatementService: AdminBankStatementsService,
+        private bankStatementListService: BankStatementListService,
         private poNotification: PoNotificationService
     ) {}
-
-    ngOnInit(): void {}
 
     prepareModal(extrato: BankStatement): void {
         this.poModalExtratoPendente.open();
@@ -173,4 +172,5 @@ export class AdminBankStatementListComponent implements OnInit {
     downloadPdfPago(): any {
         window.open(this.pdfPago, '_blank');
     }
+
 }

@@ -18,7 +18,10 @@
         <div class="po-md-6">
             <ng-template [ngIf]="ehPdfPendente">
                 <div class="img-modal">
-                    <img src="/assets/images/imgPdf.png" alt="Pdf" />
+                    <img
+                        src="/assets/images/imgPdf.png"
+                        alt="Pdf"
+                    />
                     <po-button
                         (p-click)="downloadPdfPendente()"
                         p-icon="po-icon po-icon-download"
@@ -27,7 +30,10 @@
             </ng-template>
             <ng-template [ngIf]="!ehPdfPendente">
                 <div class="img-modal">
-                    <img [src]="image" alt="Extrato Bancário" />
+                    <img
+                        [src]="image"
+                        alt="Extrato Bancário"
+                    />
                     <po-button
                         (p-click)="downloadImg()"
                         p-icon="po-icon po-icon-download"
@@ -68,7 +74,10 @@
         <div class="po-md-6">
             <ng-template [ngIf]="ehPdfPago">
                 <div class="img-modal">
-                    <img src="/assets/images/imgPdf.png" alt="Pdf" />
+                    <img
+                        src="/assets/images/imgPdf.png"
+                        alt="Pdf"
+                    />
                     <po-button
                         (p-click)="downloadPdfPago()"
                         p-icon="po-icon po-icon-download"
@@ -77,7 +86,10 @@
             </ng-template>
             <ng-template [ngIf]="!ehPdfPago">
                 <div class="img-modal">
-                    <img [src]="image" alt="Extrato Bancário" />
+                    <img
+                        [src]="image"
+                        alt="Extrato Bancário"
+                    />
                     <po-button
                         (p-click)="downloadImg()"
                         p-icon="po-icon po-icon-download"

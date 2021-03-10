@@ -49,6 +49,11 @@ const routes: Routes = [
                     },
                     {
                         path: 'cobrancas',
+                        pathMatch: 'full',
+                        component: AdminChargeListComponent,
+                    },
+                    {
+                        path: 'cobrancas/:filter',
                         component: AdminChargeListComponent,
                     },
                     {

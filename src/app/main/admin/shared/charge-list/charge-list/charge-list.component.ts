@@ -15,7 +15,6 @@ import { DatatableColumn } from 'src/app/shared/components/page-datatable/datata
 import { Charge } from '../charge';
 import { AdminChargesService } from '../admin-charges.service';
 import { PageDatatableComponent } from '../../../../../shared/components/page-datatable/page-datatable/page-datatable.component';
-import { AdminCompanyChargeService } from '../../../companies/company-detail/admin-company-charges/admin-company-charge.service';
 
 @Component({
     selector: 'app-charge-list',
@@ -30,7 +29,6 @@ export class ChargeListComponent implements OnInit {
     @Input() pageActions: PoPageAction[] = null;
 
     modalCharge: Charge = null;
-    charge;
 
     isPdfCobranca = false;
     isPdfComprovante = false;
@@ -49,7 +47,7 @@ export class ChargeListComponent implements OnInit {
         label: 'Confirmar',
         action: () => {
             this.adminChargeService.paidCharge(this.modalCharge.id).subscribe(() => {
-                this.dataTableComponent.loadItems();
+                this.ReloadTable();
                 this.poNotificationService.success('Comprovante de pagamento aprovado com sucesso');
             });
             this.poModalComprovante.close();
@@ -66,7 +64,7 @@ export class ChargeListComponent implements OnInit {
                     this.adminChargeService
                         .recuseCharge(this.modalCharge.id)
                         .subscribe(() => {
-                            this.dataTableComponent.loadItems();
+                            this.ReloadTable();
                             this.poNotificationService.success('Comprovante de pagamento recusado com sucesso');
                         });
                     this.poModalComprovante.close();
@@ -100,7 +98,7 @@ export class ChargeListComponent implements OnInit {
         {
             label: 'Visualizar Comprovante',
             action: (item) => {
-                this.prepareModal(item);
+                this.openModalComprovante(item);
             },
             disabled: (item) => item.status !== 'PAID' && item.status !== 'PENDING_REVIEW',
         },
@@ -186,12 +184,10 @@ export class ChargeListComponent implements OnInit {
             { label: 'Valor', property: 'value', type: 'currency', format: 'BRL' },
             { label: 'Empresa', property: 'companyFantasyName', visible: this.showCompanyField, disableSort: true },
         ];
-
     }
 
-    prepareModal(charge: Charge): void {
+    openModalComprovante(charge: Charge): void {
         this.modalCharge = charge;
-        console.log(this.modalCharge);
         if (this.modalCharge.proofOfPaymentUrl.indexOf('pdf') < 0) {
             this.isPdfComprovante = false;
         } else {
@@ -212,13 +208,12 @@ export class ChargeListComponent implements OnInit {
         this.poModalCobranca.open();
     }
 
-
-    downloadImgCobranca(): any {
-        window.open(this.modalCharge.billingFileUrl, '_blank');
+    ReloadTable(): void {
+        this.dataTableComponent.loadItems();
     }
 
-    downloadImgComprovante(): any {
-        window.open(this.modalCharge.proofOfPaymentUrl, '_blank');
+    download(docummentLink: string): any {
+        window.open(docummentLink, '_blank');
     }
 }
 

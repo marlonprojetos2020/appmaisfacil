@@ -12,6 +12,7 @@ import { environment } from '../../../../../environments/environment';
 import { DatatableColumn } from '../../../../shared/components/page-datatable/datatable-column';
 import { Charge } from '../../../../shared/components/charge-form/models/charge';
 import { PageDatatableComponent } from '../../../../shared/components/page-datatable/page-datatable/page-datatable.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     templateUrl: './company-charge-list.component.html',
@@ -21,6 +22,7 @@ export class CompanyChargeListComponent {
     modalCharge: Charge = null;
     isPdfCobranca = false;
     urlUploadDocument: string;
+    serviceApi = `${environment.apiUrl}/company/billing/p/search?status=${this.activatedRoute.snapshot.params.filter ? this.activatedRoute.snapshot.params.filter : ''}`;
 
     @ViewChild(PageDatatableComponent)
     dataTableComponent: PageDatatableComponent;
@@ -39,8 +41,6 @@ export class CompanyChargeListComponent {
         label: 'Fechar',
         action: () => this.poModalCobranca.close(),
     };
-
-    serviceApi = `${environment.apiUrl}/company/billing/p/search`;
 
     tableActions: PoTableAction[] = [
         {
@@ -96,7 +96,10 @@ export class CompanyChargeListComponent {
         maxFiles: 1,
     };
 
-    constructor(private poNotificationService: PoNotificationService) {}
+    constructor(
+        private poNotificationService: PoNotificationService,
+        private activatedRoute: ActivatedRoute,
+    ) {}
 
     prepareModal(charge: Charge): void {
         this.modalCharge = charge;

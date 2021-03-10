@@ -24,6 +24,11 @@ const routes: Routes = [
             },
             {
                 path: 'cobrancas',
+                pathMatch: 'full',
+                component: CompanyChargeListComponent,
+            },
+            {
+                path: 'cobrancas/:filter',
                 component: CompanyChargeListComponent,
             },
             {

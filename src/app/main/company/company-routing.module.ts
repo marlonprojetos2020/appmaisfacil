@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CompanyLayoutComponent } from './company-layout/company-layout.component';
 import { CompanyDashboardComponent } from './company-dashboard/company-dashboard.component';
-import { ChargeListComponent } from './charges/charge-list/charge-list.component';
+import { CompanyChargeListComponent } from './company-charges/company-charge-list/company-charge-list.component';
 import { CompanyMyAccountComponent } from './company-my-account/company-my-account/company-my-account.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '../../core/auth/auth.interceptor';
@@ -24,7 +24,7 @@ const routes: Routes = [
             },
             {
                 path: 'cobrancas',
-                component: ChargeListComponent,
+                component: CompanyChargeListComponent,
             },
             {
                 path: 'minha-conta',

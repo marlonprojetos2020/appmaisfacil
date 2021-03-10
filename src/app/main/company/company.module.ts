@@ -5,7 +5,7 @@ import { CompanyLayoutComponent } from './company-layout/company-layout.componen
 import { PoMenuModule, PoToolbarModule } from '@po-ui/ng-components';
 import { CompanyDashboardModule } from './company-dashboard/company-dashboard.module';
 import { NeedHelpComponent } from './company-layout/need-help/need-help.component';
-import { ChargesModule } from './charges/charges.module';
+import { CompanyChargesModule } from './company-charges/company-charges.module';
 import { CompanyMyAccountMoudle } from './company-my-account/company-my-account.module';
 import { CompanyExpenseModule } from './company-expenses/company-expense.module';
 import { CompanyInvoiceModule } from './company-invoices/company-invoice.module';
@@ -26,7 +26,7 @@ import { CompanyBankAccountModule } from './company-bank-accounts/company-bank-a
         PoToolbarModule,
         PoMenuModule,
         CompanyDashboardModule,
-        ChargesModule,
+        CompanyChargesModule,
         CompanyMyAccountMoudle,
         CompanyExpenseModule,
         CompanyInvoiceModule,

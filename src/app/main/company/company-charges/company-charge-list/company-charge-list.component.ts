@@ -11,14 +11,13 @@ import { environment } from '../../../../../environments/environment';
 import { DatatableColumn } from '../../../../shared/components/page-datatable/datatable-column';
 import { Router } from '@angular/router';
 import { Charge } from '../../../../shared/components/charge-form/models/charge';
-import { ChargeListService } from '../charge-list.service';
+import { CompanyChargeListService } from '../company-charge-list.service';
 import { PageDatatableComponent } from '../../../../shared/components/page-datatable/page-datatable/page-datatable.component';
 
 @Component({
-    templateUrl: './charge-list.component.html',
-    styleUrls: ['charge-list.component.scss'],
+    templateUrl: './company-charge-list.component.html',
 })
-export class ChargeListComponent implements OnInit {
+export class CompanyChargeListComponent implements OnInit {
     @Input() nomeEmpresa: string;
     @Input() status: string;
     @Input() tipo: string;
@@ -93,7 +92,7 @@ export class ChargeListComponent implements OnInit {
     constructor(
         private router: Router,
         private poNotificationService: PoNotificationService,
-        private chargeListService: ChargeListService
+        private chargeListService: CompanyChargeListService
     ) {}
 
     ngOnInit(): void {

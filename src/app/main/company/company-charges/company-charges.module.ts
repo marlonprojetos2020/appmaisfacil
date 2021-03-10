@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ChargeListComponent } from './charge-list/charge-list.component';
+import { CompanyChargeListComponent } from './company-charge-list/company-charge-list.component';
 import { PageDatatableModule } from '../../../shared/components/page-datatable/page-datatable.module';
 import {
     PoButtonModule,
@@ -10,7 +10,7 @@ import {
 import { HelpPopoverModule } from '../../../shared/directives/help-popover/help-popover.module';
 
 @NgModule({
-    declarations: [ChargeListComponent],
+    declarations: [CompanyChargeListComponent],
     imports: [
         CommonModule,
         PageDatatableModule,
@@ -19,6 +19,6 @@ import { HelpPopoverModule } from '../../../shared/directives/help-popover/help-
         PoFieldModule,
         HelpPopoverModule,
     ],
-    exports: [ChargeListComponent],
+    exports: [CompanyChargeListComponent],
 })
-export class ChargesModule {}
+export class CompanyChargesModule {}

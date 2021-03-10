@@ -188,22 +188,14 @@ export class ChargeListComponent implements OnInit {
 
     openModalComprovante(charge: Charge): void {
         this.modalCharge = charge;
-        if (this.modalCharge.proofOfPaymentUrl.indexOf('pdf') < 0) {
-            this.isPdfComprovante = false;
-        } else {
-            this.isPdfComprovante = true;
-        }
+        this.modalCharge.proofOfPaymentUrl.indexOf('pdf') < 0 ? this.isPdfComprovante = false : this.isPdfComprovante = true;
         this.poModalComprovante.open();
     }
 
     openModalCobranca(charge: Charge = null): void {
         if (charge) {
             this.modalCharge = charge;
-            if (this.modalCharge.billingFileUrl.indexOf('pdf') < 0) {
-                this.isPdfCobranca = false;
-            } else {
-                this.isPdfCobranca = true;
-            }
+            this.modalCharge.billingFileUrl.indexOf('pdf') < 0 ? this.isPdfCobranca = false : this.isPdfCobranca = true;
         }
         this.poModalCobranca.open();
     }

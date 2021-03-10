@@ -13,55 +13,46 @@
     p-title="Pagar Cobrança"
     [p-primary-action]="closeAction"
 >
-    <div class="po-row">
+    <div
+        class="po-row"
+        *ngIf="modalCharge"
+    >
         <div class="po-md-6">
-            <ng-template [ngIf]="isPdfCobranca">
-                <div class="img-modal">
+            <div class="img-modal">
+                <ng-container *ngIf="!isPdfCobranca; else elseBlock">
                     <img
-                        src="/assets/images/imgPdf.png"
-                        alt="Pdf"
+                        [src]="modalCharge.billingFileUrl"
+                        alt="Cobrança"
                     />
-                    <po-button
-                        (p-click)="downloadPdfCobranca()"
-                        p-icon="po-icon po-icon-download"
-                    ></po-button>
-                </div>
-            </ng-template>
-            <ng-template [ngIf]="!isPdfCobranca">
-                <div class="img-modal">
-                    <img
-                        [src]="imagemCobranca"
-                        alt="Corbança"
-                    />
-                    <po-button
-                        p-icon="po-icon-download"
-                        (p-click)="downloadImgCobranca()"
-                    ></po-button>
-                </div>
-            </ng-template>
+                </ng-container>
+                <po-button
+                    (p-click)="download(modalCharge.billingFileUrl)"
+                    p-icon="po-icon po-icon-download"
+                ></po-button>
+            </div>
         </div>
         <div class="po-md-6 text-modal">
             <div class="po-row">
                 <div class="po-md-12">
-                    <h1>{{ titulo }}</h1>
+                    <h1>{{ modalCharge.description }}</h1>
                 </div>
                 <div class="po-md-12">
                     <h2 class="po-mb-2">
                         <span>Empresa</span>
-                        <!-- adicionar router link para o nome -->
-                        {{ nomeEmpresa }}
+                        {{ modalCharge.companyFantasyName? modalCharge.companyFantasyName : modalCharge.companyName
+                        }}
                     </h2>
                 </div>
                 <div class="po-md-6 po-mb-2">
                     <h3>
                         <span>Status</span>
-                        {{ status }}
+                        {{ modalCharge.statusText }}
                     </h3>
                 </div>
                 <div class="po-md-6 po-mb-2">
                     <h3>
                         <span>Tipo</span>
-                        {{ tipo }}
+                        {{ modalCharge['type.label']}}
                     </h3>
                 </div>
             </div>
@@ -69,13 +60,13 @@
                 <div class="po-md-6 po-mb-2">
                     <h3>
                         <span>Vencimento</span>
-                        {{ vencimento | date: "dd/MM/yy" }}
+                        {{ modalCharge.dueDate | date: "dd/MM/yy" }}
                     </h3>
                 </div>
                 <div class="po-md-6 po-mb-2">
                     <h3>
                         <span>Valor</span>
-                        {{ valor | currency: "BRL" }}
+                        {{ modalCharge.value | currency: "BRL" }}
                     </h3>
                 </div>
                 <div class="po-md-12">
@@ -91,3 +82,9 @@
         </div>
     </div>
 </po-modal>
+<ng-template #elseBlock>
+    <img
+        src="/assets/images/imgPdf.png"
+        alt="Pdf"
+    />
+</ng-template>

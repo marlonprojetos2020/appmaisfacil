@@ -3,75 +3,90 @@
     [p-breadcrumb]="breadcrumb"
     class="breadcrumb"
 >
-    <div class="po-container admin-dashboard-container">
-        <div class="po-row po-mb-5">
-            <div class="po-col po-lg-12">
-                <a routerLink="/admin/empresas">
-                    <div class="users">
-                        <span
-                            class="po-icon po-icon po-icon-company po-mr-2"
-                        ></span>
-                        <h3>Empresas Cadastradas</h3>
-                        <span class="number-users">{{ totalUsers }}</span>
-                    </div>
-                </a>
-            </div>
+
+    <div class="po-row po-mb-5">
+        <div class="po-col po-lg-12">
+            <a routerLink="/admin/empresas">
+                <div class="users">
+                    <span class="po-icon po-icon po-icon-company po-mr-2"></span>
+                    <h3>Empresas Cadastradas</h3>
+                    <span class="number-users">{{ totalUsers }}</span>
+                </div>
+            </a>
         </div>
-        <div class="po-row">
-            <div class="po-col po-lg-6 po-mb-5">
-                <app-card-dashboard
-                    routerLink="/admin/cobrancas"
-                    text="Cobranças em Análise"
-                    icon="po-icon po-icon-clock"
-                    [quantity]="cobrancaAnalise"
-                    analise="true"
-                ></app-card-dashboard>
-            </div>
-            <div class="po-col po-lg-6 po-mb-5">
-                <app-card-dashboard
-                    routerLink="/admin/extratos"
-                    text="Extrato Análise"
-                    icon="po-icon po-icon-clock"
-                    [quantity]="extratoAnalise"
-                    analise="true"
-                ></app-card-dashboard>
-            </div>
-            <div class="po-col po-lg-6 po-mb-5">
-                <app-card-dashboard
-                    routerLink="/admin/nota-fiscal"
-                    text="Notas Fiscais em Análise"
-                    icon="po-icon po-icon-clock"
-                    [quantity]="notaFiscalAnalise"
-                    analise="true"
-                ></app-card-dashboard>
-            </div>
-            <div class="po-col po-lg-6 po-mb-5">
-                <app-card-dashboard
-                    routerLink="/admin/extratos"
-                    text="Extratos Pendente"
-                    icon="po-icon po-icon-exclamation"
-                    [quantity]="extratoPendente"
-                    pendente="true"
-                ></app-card-dashboard>
-            </div>
-            <div class="po-col po-lg-6 po-mb-5">
-                <app-card-dashboard
-                    routerLink="/admin/nota-fiscal"
-                    text="Notas Fiscais em Cancelamento"
-                    icon="po-icon po-icon-exclamation"
-                    [quantity]="notaFiscalCancelamento"
-                    cancelamento="true"
-                ></app-card-dashboard>
-            </div>
-            <div class="po-col po-lg-6 po-mb-5">
-                <app-card-dashboard
-                    routerLink="/admin/funcionarios/confirmar-demissao"
-                    text="Demissões Solicitadas"
-                    icon="po-icon po-icon-exclamation"
-                    [quantity]="funcionarioDemissao"
-                    cancelamento="true"
-                ></app-card-dashboard>
-            </div>
+    </div>
+
+    <div class="po-row po-mb-5">
+        <div class="po-col po-lg-6">
+            <app-card-dashboard
+                routerLink="/admin/cobrancas"
+                text="Cobranças Pendentes"
+                icon="po-icon po-icon-exclamation"
+                [quantity]="cobrancaAnalise"
+                pendente="true"
+            ></app-card-dashboard>
+        </div>
+        <div class="po-col po-lg-6">
+            <app-card-dashboard
+                routerLink="/admin/cobrancas"
+                text="Cobranças em Análise"
+                icon="po-icon po-icon-clock"
+                [quantity]="cobrancaAnalise"
+                analise="true"
+            ></app-card-dashboard>
+        </div>
+    </div>
+
+    <div class="po-row po-mb-5">
+        <div class="po-col po-lg-6">
+            <app-card-dashboard
+                routerLink="/admin/extratos"
+                text="Extratos Pendente"
+                icon="po-icon po-icon-exclamation"
+                [quantity]="extratoPendente"
+                pendente="true"
+            ></app-card-dashboard>
+        </div>
+        <div class="po-col po-lg-6">
+            <app-card-dashboard
+                routerLink="/admin/extratos"
+                text="Extrato Análise"
+                icon="po-icon po-icon-clock"
+                [quantity]="extratoAnalise"
+                analise="true"
+            ></app-card-dashboard>
+        </div>
+    </div>
+    <div class="po-row po-mb-5">
+        <div class="po-col po-lg-6">
+            <app-card-dashboard
+                routerLink="/admin/nota-fiscal"
+                text="Notas Fiscais em Cancelamento"
+                icon="po-icon po-icon-exclamation"
+                [quantity]="notaFiscalCancelamento"
+                cancelamento="true"
+            ></app-card-dashboard>
+        </div>
+        <div class="po-col po-lg-6">
+            <app-card-dashboard
+                routerLink="/admin/nota-fiscal"
+                text="Notas Fiscais em Análise"
+                icon="po-icon po-icon-clock"
+                [quantity]="notaFiscalAnalise"
+                analise="true"
+            ></app-card-dashboard>
+        </div>
+    </div>
+
+    <div class="po-row po-mb-5">
+        <div class="po-col po-lg-12">
+            <app-card-dashboard
+                routerLink="/admin/funcionarios/confirmar-demissao"
+                text="Demissões Solicitadas"
+                icon="po-icon po-icon-exclamation"
+                [quantity]="funcionarioDemissao"
+                cancelamento="true"
+            ></app-card-dashboard>
         </div>
     </div>
 </po-page-default>

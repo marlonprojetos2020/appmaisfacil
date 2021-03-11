@@ -1,45 +1,33 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
     PoBreadcrumb,
     PoModalAction,
     PoModalComponent,
     PoNotificationService,
-    PoPageAction,
     PoTableAction,
     PoUploadFileRestrictions,
 } from '@po-ui/ng-components';
+
 import { environment } from '../../../../../environments/environment';
 import { DatatableColumn } from '../../../../shared/components/page-datatable/datatable-column';
-import { Router } from '@angular/router';
-import { BankStatement } from '../models/bank-statements';
-import { CompanyBankStatementService } from '../company-bank-statement.service';
+import { BankStatement } from '../models/bank-statement';
 import { PageDatatableComponent } from '../../../../shared/components/page-datatable/page-datatable/page-datatable.component';
 
 @Component({
     templateUrl: './company-bank-statement.component.html',
     styleUrls: ['company-bank-statement.component.scss'],
 })
-export class CompanyBankStatementComponent implements OnInit {
+export class CompanyBankStatementComponent {
+
+    serviceApi = `${environment.apiUrl}/company/statement/p/search`;
+    urlUploadDocument = null;
+    modalBankStatement: BankStatement = null;
+
     @ViewChild('modalExtrato', { static: true })
     poModalExtrato: PoModalComponent;
 
     @ViewChild(PageDatatableComponent)
     dataTableComponent: PageDatatableComponent;
-
-    @Input()
-    bankName: string;
-    @Input() status: string;
-    @Input() month: string;
-    @Input() nomeEmpresa: string;
-    // pageActions: PoPageAction[] = [
-    //     {
-    //         label: 'Novo Extrato',
-    //         icon: 'po-icon-plus',
-    //         url: '/empresa/extrato/novo-extrato',
-    //     },
-    // ];
-
-    urlUploadDocument: string;
 
     primaryAction: PoModalAction = {
         label: 'Cancelar',
@@ -53,19 +41,21 @@ export class CompanyBankStatementComponent implements OnInit {
         ],
     };
 
-    serviceApi = `${environment.apiUrl}/company/statement/p/search`;
     tableActions: PoTableAction[] = [
         {
             label: 'Anexar Extrato',
-            action: (item) => {
-                this.prepareModal(item);
-                this.bankName = item['bankAccount.bankName'];
-                this.nomeEmpresa;
-                this.month = item.monthText;
-                this.status = item.statusText;
-                this.setUrlDocument(item.id);
-            },
-            disabled: (item) => item.status !== 'PENDING',
+            action: (item) => this.prepareModal(item),
+            disabled: (item) => item.status === 'OK',
+        },
+        // {
+        //     label: 'Ver Extrato',
+        //     action: (item) => this.prepareModal(item),
+        //     disabled: (item) => item.status === 'OK',
+        // },
+        {
+            label: 'Baixar Extrato',
+            action: (item) => window.open(item.attachmentUrl, '_blank'),
+            disabled: (item) => item.status === 'PENDING',
         },
     ];
 
@@ -105,33 +95,19 @@ export class CompanyBankStatementComponent implements OnInit {
     };
 
     constructor(
-        private router: Router,
         private poNotificationService: PoNotificationService,
-        private companyBankStatement: CompanyBankStatementService
     ) {}
 
-    ngOnInit(): void {
-        this.companyBankStatement
-            .getCompany()
-            .subscribe((data) =>
-                data.userCompany?.fantasyName
-                    ? (this.nomeEmpresa = data.userCompany.fantasyName)
-                    : (this.nomeEmpresa = data.name)
-            );
-    }
-
     prepareModal(extrato: BankStatement): void {
+        this.modalBankStatement = extrato;
+        this.urlUploadDocument = `${environment.apiUrl}/company/statement/${extrato.id}`;
         this.poModalExtrato.open();
-    }
-
-    setUrlDocument(id: number): void {
-        this.urlUploadDocument = `${environment.apiUrl}/company/statement/${id}`;
     }
 
     success(): void {
         const message = 'Extrato bancário carregado com sucesso';
         this.poNotificationService.success(message);
-        this.dataTableComponent.ngOnInit();
+        this.dataTableComponent.loadItems();
         this.poModalExtrato.close();
     }
 }

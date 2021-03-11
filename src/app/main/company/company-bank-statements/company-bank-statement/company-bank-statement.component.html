@@ -1,6 +1,6 @@
 <app-page-datatable
     title="Meus Extratos"
-    [pageActions]="pageActions"
+    [pageActions]=""
     [serviceApi]="serviceApi"
     [columns]="columns"
     [tableActions]="tableActions"
@@ -9,22 +9,39 @@
 >
 </app-page-datatable>
 
-<po-modal #modalExtrato [p-primary-action]="primaryAction">
-    <div class="po-row text-modal">
+<po-modal
+    #modalExtrato
+    [p-primary-action]="primaryAction"
+>
+    <div
+        class="po-row text-modal"
+        *ngIf="modalBankStatement"
+    >
         <div class="po-md-12">
             <div class="po-md-12 po-mb-2">
-                <h2><span>Extrato</span> {{ month }} - {{ bankName }}</h2>
+                <h2>
+                    <span>
+                        Extrato
+                    </span>
+                    {{ modalBankStatement.monthText }} - {{ modalBankStatement['bankAccount.bankName']}}
+                </h2>
             </div>
-            <div class="po-md-12 po-mb-2">
+            <div class="po-md-6 po-mb-2">
                 <h3>
-                    <span>Cliente</span>
-                    {{ nomeEmpresa }}
+                    <span>Agência</span>
+                    {{ modalBankStatement['bankAccount.agency']}}
+                </h3>
+            </div>
+            <div class="po-md-6 po-mb-2">
+                <h3>
+                    <span>Conta</span>
+                    {{modalBankStatement['bankAccount.accountNumber']}}
                 </h3>
             </div>
             <div class="po-md-12 po-mb-2">
                 <h3>
                     <span>Situação</span>
-                    {{ status }}
+                    {{ modalBankStatement.statusText }}
                 </h3>
             </div>
             <div class="po-md-12">

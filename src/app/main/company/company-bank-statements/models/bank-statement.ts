@@ -10,9 +10,6 @@ export interface BankStatement {
         accountNumber: number;
         enabled: boolean;
     };
-    bankAccountCompanyId: number;
-    bankAccountCompanyName: string;
-    bankAccountCompanyFantasyName: string;
     month: any;
     monthText: string;
     year: string;

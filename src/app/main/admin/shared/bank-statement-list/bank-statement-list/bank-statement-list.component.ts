@@ -10,7 +10,7 @@ import {
 
 import { DatatableColumn } from '../../../../../shared/components/page-datatable/datatable-column';
 import { BankStatementListService } from '../bank-statement-list.service';
-import { BankStatement } from '../../../../company/company-bank-statements/models/bank-statements';
+import { BankStatement } from '../bank-statement';
 import { PageDatatableComponent } from '../../../../../shared/components/page-datatable/page-datatable/page-datatable.component';
 
 @Component({
@@ -24,34 +24,28 @@ export class BankStatementListComponent implements OnInit {
     @Input() breadcrumb: PoBreadcrumb = null;
     @Input() showCompanyField: boolean;
 
-    companyName: string;
-    month: string;
-    status: string;
-    bankName: string;
-    image: string;
-    pdfPendente: string;
-    pdfPago: string;
-    idStatement: number;
+    modalBankStatement: BankStatement = null;
+    ehPdfPendente = false;
+    ehPdfPago = false;
+    pageActions: PoPageAction[] = [];
+    columns: DatatableColumn[] = [];
 
     @ViewChild(PageDatatableComponent)
     dataTableComponent: PageDatatableComponent;
 
-    @ViewChild('modalExtratoPendente', { static: true })
+    @ViewChild('modalExtratoPendenteRevisao', { static: true })
     poModalExtratoPendente: PoModalComponent;
 
     @ViewChild('modalExtratoAprovado', { static: true })
     poModalExtratoAprovado: PoModalComponent;
 
-    ehPdfPendente = false;
-    ehPdfPago = false;
-
     primaryAction: PoModalAction = {
         label: 'Aprovar',
         action: () => {
             this.bankStatementListService
-                .aprovedStatement(this.idStatement)
+                .aprovedStatement(this.modalBankStatement.id)
                 .subscribe(() => {
-                    this.dataTableComponent.ngOnInit();
+                    this.refreshTable();
                     this.poNotification.success('Extrato bancário aprovado');
                 });
             this.poModalExtratoPendente.close();
@@ -59,69 +53,40 @@ export class BankStatementListComponent implements OnInit {
     };
 
     secondaryAction: PoModalAction = {
-        label: 'Fechar',
-        action: () => this.poModalExtratoPendente.close(),
+        label: 'Reprovar',
+        action: () => {
+            // this.bankStatementListService.
+            // refreshTable();
+            // this.poModalExtratoPendente.close();
+        },
     };
-
-    pageActions: PoPageAction[] = [];
-
-    tableActions: PoTableAction[] = [
-        {
-            label: 'Aprovar Extrato',
-            action: (item) => {
-                item.bankAccountCompanyFantasyName
-                    ? (this.companyName = item.bankAccountCompanyFantasyName)
-                    : (this.companyName = item.bankAccountCompanyName);
-                this.prepareModal(item);
-                this.status = item.statusText;
-                this.bankName = item['bankAccount.bankName'];
-                this.month = item.month;
-                this.image = item.attachmentUrl;
-                this.idStatement = item.id;
-                if (this.image.indexOf('pdf') < 0) {
-                    this.ehPdfPendente = false;
-                } else {
-                    this.ehPdfPendente = true;
-                    this.pdfPendente = item.attachmentUrl;
-                }
-            },
-            disabled: (item) => item.status !== 'PENDING_REVIEW',
-        },
-        {
-            label: 'Baixar Comprovante',
-            action: (item) => window.open(item.attachmentUrl, '_blank'),
-            disabled: (item) =>
-                item.status !== 'OK' && item.status !== 'PENDING_REVIEW',
-        },
-        {
-            label: 'Visualizar Extrato',
-            action: (item) => {
-                this.poModalExtratoAprovado.open();
-                this.status = item.statusText;
-                this.bankName = item['bankAccount.bankName'];
-                item.bankAccountCompanyFantasyName
-                    ? (this.companyName = item.bankAccountCompanyFantasyName)
-                    : (this.companyName = item.bankAccountCompanyName);
-                this.image = item.attachmentUrl;
-                this.month = item.month;
-                if (this.image.indexOf('pdf') < 0) {
-                    this.ehPdfPago = false;
-                } else {
-                    this.ehPdfPago = true;
-                    this.pdfPago = item.attachmentUrl;
-                }
-            },
-            disabled: (item) => item.status !== 'OK',
-        },
-    ];
-
-    columns: DatatableColumn[] = [];
 
     // ModalExtratoAprovado
     closeModalExtratoAprovado: PoModalAction = {
         label: 'Fechar',
         action: () => this.poModalExtratoAprovado.close(),
     };
+
+    tableActions: PoTableAction[] = [
+        {
+            label: 'Aprovar Extrato',
+            action: (item) => this.prepareModal(item),
+            disabled: (item) => item.status !== 'PENDING_REVIEW',
+        },
+        {
+            label: 'Visualizar Extrato',
+            action: (item) => {
+                this.poModalExtratoAprovado.open();
+            },
+            disabled: (item) => item.status !== 'OK',
+        },
+        {
+            label: 'Baixar Extrato',
+            action: (item) => window.open(item.attachmentUrl, '_blank'),
+            disabled: (item) =>
+                item.status !== 'OK' && item.status !== 'PENDING_REVIEW',
+        },
+    ];
 
     constructor(
         private bankStatementListService: BankStatementListService,
@@ -156,7 +121,7 @@ export class BankStatementListComponent implements OnInit {
                 type: 'label',
                 labels: [
                     { value: 'POUPANÇA', color: 'color-11', label: 'Poupança' },
-                    { value: 'CORRENTE', color: 'color-08', label: 'Corrente' }
+                    { value: 'CORRENTE', color: 'color-08', label: 'Corrente' },
                 ],
             },
             {
@@ -175,19 +140,20 @@ export class BankStatementListComponent implements OnInit {
     }
 
     prepareModal(extrato: BankStatement): void {
+        this.modalBankStatement = extrato;
+        if (this.modalBankStatement.attachmentUrl.indexOf('pdf') < 0) {
+            this.ehPdfPendente = false;
+        } else {
+            this.ehPdfPendente = true;
+        }
         this.poModalExtratoPendente.open();
     }
 
-    downloadPdfPendente(): any {
-        window.open(this.pdfPendente, '_blank');
+    download(link: string): void {
+        window.open(link, '_blank');
     }
 
-    downloadImg(): any {
-        window.open(this.image, '_blank');
+    refreshTable(): void {
+        this.dataTableComponent.loadItems();
     }
-
-    downloadPdfPago(): any {
-        window.open(this.pdfPago, '_blank');
-    }
-
 }

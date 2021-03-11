@@ -1,33 +1,43 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PoBreadcrumb, PoSelectOption } from '@po-ui/ng-components';
+import { PoBreadcrumb, PoRadioGroupOption, PoSelectOption } from '@po-ui/ng-components';
 import { Location } from '@angular/common';
-import { CompaniesService } from '../../../../main/admin/companies/companies.service';
+import { ActivatedRoute } from '@angular/router';
 import { filter, finalize, tap } from 'rxjs/operators';
+
+import { CompaniesService } from '../../../../main/admin/companies/companies.service';
 import { AddressApiResponse } from '../../../../main/admin/companies/model/address-api-response';
 import { ClientFormService } from '../client-form.service';
 import { Client } from '../models/client';
-import { ActivatedRoute } from '@angular/router';
+import { cpfAndcnpjValidator } from 'src/app/shared/validators/cpfAndCnpjValidator.validator';
 
 @Component({
     templateUrl: 'client-form.component.html',
     selector: 'app-client-form',
 })
 export class ClientFormComponent implements OnInit {
+
     formClient: FormGroup;
-
     @Input() editedClient: Client;
-
     newClient: Client;
-
     zipcodeError = false;
-
     loading = false;
-
     latestZipCode = '';
+    documentMask = '';
 
     @ViewChild('streetInput', { static: true }) streetInput: HTMLInputElement;
     @ViewChild('numberInput', { static: true }) numberInput: HTMLInputElement;
+
+    radioOptions: PoRadioGroupOption[] = [
+        {
+            label: 'CPF',
+            value: 'CPF',
+        },
+        {
+            label: 'CNPJ',
+            value: 'CNPJ',
+        },
+    ];
 
     breadcrumb: PoBreadcrumb = {
         items: [
@@ -157,51 +167,28 @@ export class ClientFormComponent implements OnInit {
         private clientFormService: ClientFormService,
         private location: Location,
         private companiesService: CompaniesService,
-        private activatedRoute: ActivatedRoute
+        private activatedRoute: ActivatedRoute,
     ) {}
 
     ngOnInit(): void {
         this.formClient = this.formBuilder.group({
             name: [this.editedClient?.name, Validators.required],
             email: [this.editedClient?.email, Validators.required],
-            document: [this.editedClient?.document, Validators.required],
+            radioDocumment: ['CPF'],
+            document: [this.editedClient?.document, [Validators.required, cpfAndcnpjValidator]],
             phone: [this.editedClient?.phone, Validators.required],
             contactName: [this.editedClient?.contactName, Validators.required],
-            municipalInscription: [
-                this.editedClient?.municipalInscription,
-                Validators.required,
-            ],
-            stateInscription: [
-                this.editedClient?.stateInscription,
-                Validators.required,
-            ],
+            municipalInscription: [this.editedClient?.municipalInscription, Validators.required],
+            stateInscription: [this.editedClient?.stateInscription, Validators.required],
             address: this.formBuilder.group({
-                zipcode: [
-                    this.editedClient?.address.zipcode,
-                    Validators.required,
-                ],
-                street: [
-                    this.editedClient?.address.street,
-                    Validators.required,
-                ],
-                number: [
-                    this.editedClient?.address.number,
-                    Validators.required,
-                ],
-                neighborhood: [
-                    this.editedClient?.address.neighborhood,
-                    Validators.required,
-                ],
+                zipcode: [this.editedClient?.address.zipcode, Validators.required],
+                street: [this.editedClient?.address.street, Validators.required],
+                number: [this.editedClient?.address.number, Validators.required],
+                neighborhood: [this.editedClient?.address.neighborhood, Validators.required],
                 complement: [this.editedClient?.address.complement],
                 city: this.formBuilder.group({
-                    name: [
-                        this.editedClient?.address.city.name,
-                        Validators.required,
-                    ],
-                    stateProvince: [
-                        this.editedClient?.address.city.stateProvince,
-                        Validators.required,
-                    ],
+                    name: [this.editedClient?.address.city.name, Validators.required],
+                    stateProvince: [this.editedClient?.address.city.stateProvince, Validators.required],
                 }),
             }),
         });
@@ -279,3 +266,4 @@ export class ClientFormComponent implements OnInit {
         this.formClient.get(input).markAsDirty();
     }
 }
+

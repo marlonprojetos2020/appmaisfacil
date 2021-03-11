@@ -1,13 +1,16 @@
-<form *ngIf="formClient" [formGroup]="formClient">
-    <div class="po-row po-mb-4">
+<form
+    *ngIf="formClient"
+    [formGroup]="formClient"
+>
+    <div class="po-row po-mb-2 po-mt-2">
         <div class="po-md-12">
             <h2>Dados Básicos</h2>
         </div>
     </div>
-    <div class="po-row po-mb-4">
+    <div class="po-row po-mb-2">
         <div class="po-md-6">
             <po-input
-                p-label="Nome"
+                p-label="Nome Cliente"
                 formControlName="name"
                 p-clean="true"
                 p-placeholder="Digite seu nome"
@@ -28,17 +31,25 @@
             </app-invalid-feedback>
         </div>
     </div>
+    <div class="po-row po-mb-2">
+        <div class="po-md-6">
+            <po-radio-group
+                formControlName="radioDocumment"
+                p-label="Tipo de documento"
+                [p-options]="radioOptions"
+            >
+            </po-radio-group>
+        </div>
+    </div>
     <div class="po-row po-mb-4">
-        <div class="po-md-3">
+        <div class="po-md-4">
             <po-input
-                p-label="CPF ou CNPJ"
+                [p-label]="formClient.get('radioDocumment')?.value === 'CPF' ? 'CPF':'CNPJ'"
                 formControlName="document"
                 p-clean="true"
                 p-placeholder="Digite um documento"
                 p-required="true"
-                p-minlength="11"
-                p-maxlength="14"
-                p-mask="999999999999-99"
+                [p-mask]="formClient.get('radioDocumment')?.value === 'CPF' ? '999.999.999-99':'99.999.999/9999-99'"
                 p-error-pattern="Digite um documento válido"
                 (p-blur)="dirtyMe('document')"
             ></po-input>
@@ -51,9 +62,17 @@
             >
                 Este campo é obrigatório
             </app-invalid-feedback>
+            <app-invalid-feedback
+                [formCtrl]="formClient.get('document')"
+                [hasError]="formClient.get('document').value?.documentoInvalido 
+                                           && formClient.get('document').dirty"
+            >
+                Este documento não existe
+            </app-invalid-feedback>
         </div>
     </div>
-    <div class="po-row po-mb-4">
+
+    <div class="po-row po-mb-2 po-pt-2">
         <div class="po-md-12">
             <h2>Incrições Municipal e Estadual</h2>
         </div>
@@ -81,7 +100,7 @@
                 Este campo é obrigatório
             </app-invalid-feedback>
         </div>
-        <div class="po-md-6 po-mb-4">
+        <div class="po-md-6">
             <po-input
                 p-label="Inscrição Estadual (IE)"
                 formControlName="stateInscription"
@@ -104,13 +123,14 @@
             </app-invalid-feedback>
         </div>
     </div>
-    <div class="po-row po-mb-4">
+
+    <div class="po-row po-mb-2 po-pt-2">
         <div class="po-md-12">
             <h2>Endereço</h2>
         </div>
     </div>
     <ng-container formGroupName="address">
-        <div class="po-md-3 po-mt-2">
+        <div class="po-md-3">
             <po-input
                 p-label="CEP"
                 p-placeholder="00000-000"
@@ -125,11 +145,9 @@
             </app-invalid-feedback>
         </div>
 
-        <ng-container
-            *ngIf="
+        <ng-container *ngIf="
                 formClient.get('address.zipcode').valid && zipcodeError !== true
-            "
-        >
+            ">
             <po-input
                 #streetInput
                 class="po-md-12 po-mt-2"
@@ -198,12 +216,12 @@
         </ng-container>
     </ng-container>
 
-    <div class="po-row po-mb-4">
+    <div class="po-row po-mb-2 po-pt-4">
         <div class="po-md-12">
-            <h2 class="po-mt-4">Contato</h2>
+            <h2 class="">Contato</h2>
         </div>
     </div>
-    <div class="po-row po-mb-4">
+    <div class="po-row po-mb-2">
         <div class="po-md-5">
             <po-email
                 p-label="E-mail"
@@ -225,7 +243,7 @@
             </app-invalid-feedback>
         </div>
     </div>
-    <div class="po-row po-mb-4">
+    <div class="po-row po-mb-2">
         <div class="po-md-4">
             <po-input
                 p-label="Telefone"

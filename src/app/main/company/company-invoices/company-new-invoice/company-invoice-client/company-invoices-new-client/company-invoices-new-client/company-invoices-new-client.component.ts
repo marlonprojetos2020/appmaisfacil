@@ -4,7 +4,7 @@ import { PoBreadcrumb } from '@po-ui/ng-components';
 @Component({
     templateUrl: 'company-invoices-new-client.component.html',
 })
-export class CompanyInvoicesNewClientComponent implements OnInit {
+export class CompanyInvoicesNewClientComponent {
     breadcrumb: PoBreadcrumb = {
         items: [
             { label: 'Início', link: '/empresa' },
@@ -18,5 +18,4 @@ export class CompanyInvoicesNewClientComponent implements OnInit {
     };
 
     constructor() {}
-    ngOnInit(): void {}
 }

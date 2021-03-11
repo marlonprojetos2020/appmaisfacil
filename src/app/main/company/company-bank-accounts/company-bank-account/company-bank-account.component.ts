@@ -4,23 +4,26 @@ import {
     PoPageAction,
     PoTableAction,
 } from '@po-ui/ng-components';
+
 import { environment } from '../../../../../environments/environment';
 import { DatatableColumn } from '../../../../shared/components/page-datatable/datatable-column';
-import { PageDatatableComponent } from '../../../../shared/components/page-datatable/page-datatable/page-datatable.component';
 
 @Component({
     templateUrl: './company-bank-account.component.html',
 })
-export class CompanyBankAccountComponent implements OnInit {
+export class CompanyBankAccountComponent {
 
-    id: string = '';
+    serviceApi = `${environment.apiUrl}/company/bank-account`;
+    pageActions: PoPageAction[] = [];
+    tableActions: PoTableAction[] = [];
+
     breadcrumb: PoBreadcrumb = {
         items: [
             { label: 'Inicio', link: '/empresa' },
             { label: 'Contas Bancárias', link: `` },
         ],
     };
-    tableActions: PoTableAction[] = [];
+
     columns: DatatableColumn[] = [
         {
             label: 'Status',
@@ -28,17 +31,17 @@ export class CompanyBankAccountComponent implements OnInit {
             color: (item) => item.enabled ? 'color-12' : 'color-07',
             type: 'boolean', boolean: {
                 trueLabel: 'Ativa',
-                falseLabel: 'Inativa'
+                falseLabel: 'Inativa',
             },
             icons: [
                 {
                     value: 'true',
-                    icon: 'po-icon-ok'
+                    icon: 'po-icon-ok',
                 },
                 {
                     value: 'false',
-                    icon: 'po-icon-close'
-                }
+                    icon: 'po-icon-close',
+                },
             ],
         },
         {
@@ -51,8 +54,8 @@ export class CompanyBankAccountComponent implements OnInit {
             type: 'label',
             labels: [
                 { value: 'POUPANÇA', color: 'color-11', label: 'Poupança' },
-                { value: 'CORRENTE', color: 'color-08', label: 'Corrente' }
-            ]
+                { value: 'CORRENTE', color: 'color-08', label: 'Corrente' },
+            ],
         },
         {
             label: 'Conta',
@@ -63,12 +66,7 @@ export class CompanyBankAccountComponent implements OnInit {
             property: 'agency',
         },
     ];
-    pageActions: PoPageAction[] = [];
-    serviceApi = `${environment.apiUrl}/company/bank-account`;
 
     constructor() {}
-
-    ngOnInit(): void {
-    }
 
 }

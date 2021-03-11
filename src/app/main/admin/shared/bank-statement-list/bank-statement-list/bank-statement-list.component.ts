@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import {
     PoBreadcrumb,
     PoModalAction,
@@ -7,7 +7,7 @@ import {
     PoPageAction,
     PoTableAction,
 } from '@po-ui/ng-components';
-import { environment } from '../../../../../../environments/environment';
+
 import { DatatableColumn } from '../../../../../shared/components/page-datatable/datatable-column';
 import { BankStatementListService } from '../bank-statement-list.service';
 import { BankStatement } from '../../../../company/company-bank-statements/models/bank-statements';
@@ -18,7 +18,11 @@ import { PageDatatableComponent } from '../../../../../shared/components/page-da
     templateUrl: './bank-statement-list.component.html'
 })
 
-export class BankStatementListComponent {
+export class BankStatementListComponent implements OnInit {
+
+    @Input() serviceApi = null;
+    @Input() breadcrumb: PoBreadcrumb = null;
+    @Input() showCompanyField: boolean;
 
     companyName: string;
     month: string;
@@ -60,15 +64,6 @@ export class BankStatementListComponent {
     };
 
     pageActions: PoPageAction[] = [];
-
-    breadcrumb: PoBreadcrumb = {
-        items: [
-            { label: 'Início', link: '/admin' },
-            { label: 'Extratos', link: 'admin/extratos' },
-        ],
-    };
-
-    serviceApi = `${environment.apiUrl}/statement/p/search`;
 
     tableActions: PoTableAction[] = [
         {
@@ -120,31 +115,7 @@ export class BankStatementListComponent {
         },
     ];
 
-    columns: DatatableColumn[] = [
-        {
-            label: 'Status',
-            property: 'status',
-            type: 'label',
-            labels: [
-                { value: 'PENDING', color: 'color-07', label: 'Pendente' },
-                { value: 'PENDING_REVIEW', color: 'color-08', label: 'Revisão' },
-                { value: 'OK', color: 'color-12', label: 'OK' },
-            ],
-        },
-        {
-            label: 'Empresa',
-            property: 'bankAccountCompanyFantasyName',
-            disableSort: true,
-        },
-        {
-            label: 'Banco',
-            property: 'bankAccount.bankName',
-        },
-        {
-            label: 'Mês de Referência',
-            property: 'monthText',
-        },
-    ];
+    columns: DatatableColumn[] = [];
 
     // ModalExtratoAprovado
     closeModalExtratoAprovado: PoModalAction = {
@@ -154,8 +125,54 @@ export class BankStatementListComponent {
 
     constructor(
         private bankStatementListService: BankStatementListService,
-        private poNotification: PoNotificationService
+        private poNotification: PoNotificationService,
     ) {}
+
+    ngOnInit(): void {
+        this.columns = [
+            {
+                label: 'Status',
+                property: 'status',
+                type: 'label',
+                labels: [
+                    { value: 'PENDING', color: 'color-07', label: 'Pendente' },
+                    { value: 'PENDING_REVIEW', color: 'color-08', label: 'Revisão' },
+                    { value: 'OK', color: 'color-12', label: 'OK' },
+                ],
+            },
+            {
+                label: 'Empresa',
+                property: 'bankAccountCompanyFantasyName',
+                disableSort: true,
+                visible: this.showCompanyField,
+            },
+            {
+                label: 'Banco',
+                property: 'bankAccount.bankName',
+            },
+            {
+                label: 'Tipo de Conta',
+                property: 'bankAccount.accountType',
+                type: 'label',
+                labels: [
+                    { value: 'POUPANÇA', color: 'color-11', label: 'Poupança' },
+                    { value: 'CORRENTE', color: 'color-08', label: 'Corrente' }
+                ],
+            },
+            {
+                label: 'Agência',
+                property: 'bankAccount.agency',
+            },
+            {
+                label: 'Conta',
+                property: 'bankAccount.accountNumber',
+            },
+            {
+                label: 'Mês de Referência',
+                property: 'monthText',
+            },
+        ];
+    }
 
     prepareModal(extrato: BankStatement): void {
         this.poModalExtratoPendente.open();

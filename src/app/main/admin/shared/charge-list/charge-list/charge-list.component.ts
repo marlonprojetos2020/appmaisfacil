@@ -170,6 +170,7 @@ export class ChargeListComponent implements OnInit {
                     { value: 'CANCELED', color: 'color-06', label: 'Cancelado' },
                 ],
             },
+            { label: 'Empresa', property: 'companyFantasyName', visible: this.showCompanyField, disableSort: true },
             {
                 label: 'Título',
                 property: 'description',
@@ -182,7 +183,6 @@ export class ChargeListComponent implements OnInit {
                 format: 'dd/MM/yyyy',
             },
             { label: 'Valor', property: 'value', type: 'currency', format: 'BRL' },
-            { label: 'Empresa', property: 'companyFantasyName', visible: this.showCompanyField, disableSort: true },
         ];
     }
 

@@ -79,20 +79,16 @@ export class AdminCompanyBankAccountComponent implements OnInit {
     {
         label: 'Desativar Conta',
         action: (item) => {
-            this.bankService.toggleAccount(this.id, item.id).subscribe(data => {
-                item.enabled = false;
-            });
+            this.bankService.toggleAccount(this.id, item.id).subscribe(() => item.enabled = false);
         },
-        disabled: (item) => !item.enabled
+        disabled: (item) => !item.enabled,
     },
     {
         label: 'Ativar Conta',
         action: (item) => {
-            this.bankService.toggleAccount(this.id, item.id).subscribe(data => {
-                item.enabled = true;
-            });
+            this.bankService.toggleAccount(this.id, item.id).subscribe(() => item.enabled = true);
         },
-        disabled: (item) => item.enabled
+        disabled: (item) => item.enabled,
     }];
 
     breadcrumb: PoBreadcrumb = {
@@ -109,7 +105,7 @@ export class AdminCompanyBankAccountComponent implements OnInit {
     ngOnInit(): void {
         this.companiesService
             .getUserCompany(this.activatedRoute.snapshot.params.id)
-            .subscribe((data) => this.setBreadcrumb(data));
+            .subscribe(data => this.setBreadcrumb(data));
     }
 
     setBreadcrumb(user: User): void {

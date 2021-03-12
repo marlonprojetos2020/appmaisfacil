@@ -6,25 +6,35 @@ import {
     PoNotificationService,
     PoTableAction,
 } from '@po-ui/ng-components';
-import { DatatableColumn } from '../../../../../shared/components/page-datatable/datatable-column';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Invoice } from '../models/invoice';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import { DatatableColumn } from '../../../../../shared/components/page-datatable/datatable-column';
+import { Invoice } from '../models/invoice';
 import { CompanyNewInvoiceService } from '../company-new-invoice.service';
 import { Product } from '../models/product';
 import { finalize } from 'rxjs/operators';
 
 @Component({
     templateUrl: 'company-new-invoice.component.html',
-    styleUrls: ['company-new-invoice.component.scss'],
+    styleUrls: ['./company-new-invoice.component.scss'],
 })
+
 export class CompanyNewInvoiceComponent implements OnInit {
+
+    newInvoice: Invoice = {} as Invoice;
+    total = 0;
+    podeSelecionar = true;
+    cliente = [];
+    formProduct: FormGroup;
+    idClient: number;
+    disabledButtonSubmitInvoice = true;
+    loading = false;
+
     @ViewChild('modalProduct', { static: true })
     poModalProduto: PoModalComponent;
 
-    disabledButtonSubmitInvoice = true;
-
-    loading = false;
+    @ViewChild('stepper', { static: true }) stepper;
 
     breadcrumb: PoBreadcrumb = {
         items: [
@@ -34,23 +44,7 @@ export class CompanyNewInvoiceComponent implements OnInit {
         ],
     };
 
-    @ViewChild('stepper', { static: true }) stepper;
-
-    newInvoice: Invoice = {} as Invoice;
-
-    total = 0;
-
-    podeSelecionar = true;
-
-    chageToStep2 = false;
-
-    cliente = [];
-
-    formProduct: FormGroup;
-
-    idClient: number;
-
-    // Config Step 1
+    // CONFIG STEP 1
     itemsStepOne: Array<any> = [];
 
     columnsStepOne: DatatableColumn[] = [
@@ -89,6 +83,9 @@ export class CompanyNewInvoiceComponent implements OnInit {
             },
         },
     ];
+
+    chageToStep2 = false;
+
 
     // CONFIG STEP 2
     itemsStepTwo: Array<any> = [];
@@ -143,6 +140,7 @@ export class CompanyNewInvoiceComponent implements OnInit {
 
     disabledStepTwo = true;
 
+
     // CONFIG STEP 3
     columnsStepThree: DatatableColumn[] = [
         {
@@ -166,7 +164,6 @@ export class CompanyNewInvoiceComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private companyNewInvoiceService: CompanyNewInvoiceService,
-        private activatedRoute: ActivatedRoute,
         private router: Router,
         private poNotificationService: PoNotificationService
     ) {}

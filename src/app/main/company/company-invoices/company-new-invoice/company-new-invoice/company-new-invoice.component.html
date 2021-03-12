@@ -5,16 +5,23 @@
 >
     <po-stepper #stepper>
         <po-step p-label="Selecionar Cliente">
-            <po-container>
-                <div class="po-row">
-                    <div class="po-md-12">
-                        <h2 class="po-mb-2">Escolha um Cliente</h2>
+            <po-container class="margin-top">
+                <div class="po-row po-mb-2 align-items-center">
+                    <div class="po-md-6">
+                        <h2 class="">Escolha um Cliente</h2>
+                    </div>
+                    <div class="po-md-6 po-align-button">
                         <po-button
                             p-label="Novo Cliente"
                             p-icon="po-icon-plus"
                             p-type="primary"
                             (p-click)="newClient()"
                         ></po-button>
+                    </div>
+                </div>
+
+                <div class="po-row">
+                    <div class="po-md-12">
                         <po-table
                             [p-items]="itemsStepOne"
                             [p-columns]="columnsStepOne"

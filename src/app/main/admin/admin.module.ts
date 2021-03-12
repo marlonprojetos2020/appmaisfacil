@@ -9,8 +9,9 @@ import { AdminMenuComponent } from './admin-layout/admin-menu/admin-menu.compone
 import { CompanyDetailMenuComponent } from './admin-layout/company-detail-menu/company-detail-menu.component';
 import { AdminMyAccountModule } from './admin-my-account/admin-my-account.module';
 import { AdminEmployeeModule } from './admin-employees/admin-employee.module';
-import { AdminChargeListModule } from './admin-charges/admin-charge-list.module'
-import { AdminBankStatementListModule } from './admin-bank-statements/admin-bank-statement-list.module'
+import { AdminChargeListModule } from './admin-charges/admin-charge-list.module';
+import { AdminBankStatementListModule } from './admin-bank-statements/admin-bank-statement-list.module';
+import { AdminInvoiceListModule } from './admin-invoices/admin-invoice-list.module';
 
 @NgModule({
     declarations: [
@@ -27,6 +28,7 @@ import { AdminBankStatementListModule } from './admin-bank-statements/admin-bank
         AdminMyAccountModule,
         AdminChargeListModule,
         AdminBankStatementListModule,
+        AdminInvoiceListModule,
         AdminEmployeeModule,
     ],
     exports: [

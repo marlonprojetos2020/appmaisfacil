@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core'
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { PoBreadcrumb, PoModalAction, PoModalComponent, PoNotificationService, PoPageAction, PoTableAction, PoUploadFileRestrictions } from '@po-ui/ng-components';
 
 import { DatatableColumn } from 'src/app/shared/components/page-datatable/datatable-column';
@@ -9,10 +9,13 @@ import { InvoiceListService } from '../invoice-list.service';
 @Component({
     selector: 'app-invoice-list',
     templateUrl: './invoice-list.component.html',
-    styleUrls: ['./invoice-list.component.scss']
+    styleUrls: ['./invoice-list.component.scss'],
 })
 
 export class InvoiceListComponent implements OnInit {
+
+    @Input() serviceApi: string;
+    @Input() breadcrumb: PoBreadcrumb;
 
     companyName: string;
     clientName: string;
@@ -41,14 +44,6 @@ export class InvoiceListComponent implements OnInit {
 
     pageActions: PoPageAction[] = [];
 
-    breadcrumb: PoBreadcrumb = {
-        items: [
-            { label: 'Início', link: '/admin' },
-            { label: 'Nota Fiscal', link: '/admin/nota-fiscal' },
-        ],
-    };
-
-    serviceApi = `${environment.apiUrl}/nota-fiscal/p/search`;
 
     restrictions: PoUploadFileRestrictions = {
         allowedExtensions: ['.txt', '.pdf', '.png', '.jpeg', '.jpg'],
@@ -125,8 +120,15 @@ export class InvoiceListComponent implements OnInit {
 
     columns: DatatableColumn[] = [
         {
-            label: 'Situação',
-            property: 'statusText',
+            label: 'Status',
+            property: 'status',
+            type: 'label',
+            labels: [
+                { value: 'PROCESSING', color: 'color-08', label: 'Processando' },
+                { value: 'OK', color: 'color-12', label: 'OK' },
+                { value: 'WAITING_CANCELEMENT', color: 'color-01', label: 'Esperando Cancelamento' },
+                { value: 'CANCELED', color: 'color-06', label: 'Cancelada' },
+            ],
         },
         {
             label: 'Empresa',

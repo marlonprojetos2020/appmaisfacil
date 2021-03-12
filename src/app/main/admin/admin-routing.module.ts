@@ -9,6 +9,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from 'src/app/core/auth/auth.interceptor';
 import { AdminChargeListComponent } from './admin-charges/admin-charge-list/admin-charge-list.component';
 import { AdminBankStatementListComponent } from './admin-bank-statements/admin-bank-statement-list/admin-bank-statement-list.component';
+import { AdminInvoiceListComponent } from './admin-invoices/admin-invoice-list/admin-invoice-list.component';
 
 const routes: Routes = [
     {
@@ -36,10 +37,13 @@ const routes: Routes = [
                     },
                     {
                         path: 'nota-fiscal',
-                        loadChildren: () =>
-                            import(
-                                './admin-invoices/admin-invoices.module'
-                            ).then((m) => m.AdminInvoicesModule),
+                        pathMatch: 'full',
+                        component: AdminInvoiceListComponent,
+                    },
+                    {
+                        path: 'nota-fiscal/:filter',
+                        pathMatch: 'full',
+                        component: AdminInvoiceListComponent,
                     },
                     {
                         path: 'extratos',

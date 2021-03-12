@@ -9,10 +9,7 @@ export class CpfCnpjPipe implements PipeTransform {
             return value;
         }
         if (value.length < 12) {
-            return `${value.substr(0, 3)}.${value.substr(3, 3)}.${value.substr(
-                6,
-                3
-            )}-${value.substr(-1)}`;
+            return `${value.substr(0, 3)}.${value.substr(3, 3)}.${value.substr(6, 3)}-${value.substr(9, 2)}`;
         } else {
             return `${value.substr(0, 2)}.${value.substr(2, 3)}.${value.substr(
                 5,

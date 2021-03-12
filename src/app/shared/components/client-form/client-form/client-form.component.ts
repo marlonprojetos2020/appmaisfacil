@@ -1,8 +1,7 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PoBreadcrumb, PoRadioGroupOption, PoSelectOption } from '@po-ui/ng-components';
-import { Location } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { filter, finalize, tap } from 'rxjs/operators';
 
 import { CompaniesService } from '../../../../main/admin/companies/companies.service';
@@ -17,8 +16,8 @@ import { cpfAndcnpjValidator } from 'src/app/shared/validators/cpfAndCnpjValidat
 })
 export class ClientFormComponent implements OnInit {
 
-    formClient: FormGroup;
     @Input() editedClient: Client;
+    formClient: FormGroup;
     newClient: Client;
     zipcodeError = false;
     loading = false;
@@ -165,7 +164,7 @@ export class ClientFormComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private clientFormService: ClientFormService,
-        private location: Location,
+        private router: Router,
         private companiesService: CompaniesService,
         private activatedRoute: ActivatedRoute,
     ) {}
@@ -248,8 +247,7 @@ export class ClientFormComponent implements OnInit {
             this.clientFormService
                 .createClient(this.newClient)
                 .pipe(finalize(() => (this.loading = false)))
-                .subscribe();
-            this.location.back();
+                .subscribe(() => this.router.navigate(['empresa', 'nota-fiscal', 'emitir-nota']));
         } else {
             this.clientFormService
                 .editClient(
@@ -257,8 +255,7 @@ export class ClientFormComponent implements OnInit {
                     this.activatedRoute.snapshot.params.id
                 )
                 .pipe(finalize(() => (this.loading = false)))
-                .subscribe();
-            this.location.back();
+                .subscribe(() => this.router.navigate(['empresa', 'nota-fiscal', 'emitir-nota']));
         }
     }
 

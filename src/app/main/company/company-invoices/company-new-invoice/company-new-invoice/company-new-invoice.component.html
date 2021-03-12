@@ -4,7 +4,10 @@
     class="breadcrumb"
 >
     <po-stepper #stepper>
-        <po-step p-label="Selecionar Cliente">
+        <po-step
+            p-label="Selecionar Cliente"
+            [p-can-active-next-step]="canAcessStepTwo.bind(this)"
+        >
             <po-container class="margin-top">
                 <div class="po-row po-mb-2 align-items-center">
                     <div class="po-md-6">
@@ -21,29 +24,42 @@
                 </div>
 
                 <div class="po-row">
-                    <div class="po-md-12">
+                    <div class="po-md-12 table-selectable-row">
                         <po-table
                             [p-items]="itemsStepOne"
                             [p-columns]="columnsStepOne"
                             [p-actions]="actionStepOne"
+                            p-selectable="true"
+                            p-single-select="true"
+                            p-hide-select-all="true"
+                            p-striped="true"
+                            (p-selected)="selecionaCliente($event)"
                         ></po-table>
                     </div>
                 </div>
             </po-container>
         </po-step>
-        <po-step p-label="Selecionar Produto">
-            <po-container>
+
+        <po-step
+            p-label="Selecionar Produto"
+            [p-can-active-next-step]="canAcessStepThree.bind(this)"
+        >
+            <po-container class="margin-top">
+                <div class="po-row po-mb-2 align-items-center">
+                    <div class="po-md-6">
+                        <h2>Adicione Produtos</h2>
+                    </div>
+                    <div class="po-md-6 po-align-button">
+                        <po-button
+                            p-label="Adicionar Produto"
+                            p-type="primary"
+                            p-icon="po-icon-plus"
+                            (p-click)="prepareModal()"
+                        ></po-button>
+                    </div>
+                </div>
                 <div class="po-row">
                     <div class="po-md-12">
-                        <h2 class="po-mb-4">Adicione Produtos</h2>
-                        <div class="po-mb-4">
-                            <po-button
-                                class=""
-                                p-label="Adicionar Produto"
-                                p-type="primary"
-                                (p-click)="prepareModal()"
-                            ></po-button>
-                        </div>
                         <po-table
                             [p-columns]="columnsStepTwo"
                             [p-actions]="actionsStepTwo"
@@ -64,17 +80,18 @@
                             p-label="Próximo"
                             p-type="primary"
                             (p-click)="nextForm()"
-                            [p-disabled]="disabledStepTwo"
+                            [p-disabled]="!changeToStep3"
                         ></po-button>
                     </div>
                 </div>
             </po-container>
         </po-step>
+
         <po-step p-label="Solicitar Nota">
-            <po-container>
+            <po-container class="margin-top">
                 <div class="po-row">
                     <div class="po-md-12">
-                        <h2 class="po-mb-3">Cliente</h2>
+                        <h2 class="po-mt-2 po-mb-1">Cliente</h2>
                         <po-table
                             [p-items]="itemsStepThree"
                             [p-columns]="itemsStepThree"
@@ -83,7 +100,7 @@
                 </div>
                 <div class="po-row">
                     <div class="po-md-12">
-                        <h2 class="po-mb-3 po-mt-3">Produto</h2>
+                        <h2 class="po-mb-1 po-mt-3">Produto</h2>
                         <po-table
                             [p-columns]="columnsStepTwo"
                             [p-items]="itemsStepTwo"
@@ -93,15 +110,20 @@
                 <div class="po-row po-mb-5">
                     <div class="po-md-12">
                         <hr />
-                        <p>Total:{{ total | currency: "BRL" }}</p>
+                        <p>Total: {{ total | currency: "BRL" }}</p>
                         <span></span>
                     </div>
                 </div>
                 <div class="po-row">
-                    <div class="po-md-1">
-                        <po-button p-label="Cancelar"></po-button>
+                    <div>
+                        <po-button
+                            p-label="Cancelar"
+                            p-type="secondary"
+                            (p-click)="cancelInvoice()"
+                        >
+                        </po-button>
                     </div>
-                    <div class="po-md-1">
+                    <div class="po-ml-3">
                         <po-button
                             p-label="Solicitar Nota"
                             p-type="primary"
@@ -110,6 +132,7 @@
                             [p-loading]="loading"
                         ></po-button>
                     </div>
+
                 </div>
             </po-container>
         </po-step>
@@ -167,10 +190,10 @@
             </div>
             <div class="po-md-6">
                 <po-number
-                    p-label="Valor Unitário"
+                    p-label="Valor Unitário (R$)"
                     formControlName="amount"
                     p-clean="true"
-                    p-placeholder="R$ 0000,00"
+                    p-placeholder="R$ 00,00"
                     p-required="true"
                     (p-blur)="dirtyMe('amount')"
                 ></po-number>
@@ -187,12 +210,12 @@
         </div>
         <div class="por-row po-mb-2">
             <div class="po-md-4">
-                <po-number
+                <po-input
                     p-readonly="true"
                     p-label="Total"
                     p-placeholder="R$ 0000,00"
                     formControlName="total"
-                ></po-number>
+                ></po-input>
             </div>
         </div>
     </form>

@@ -55,8 +55,15 @@ export class CompanyInvoiceComponent {
 
     columns: DatatableColumn[] = [
         {
-            label: 'Situação',
-            property: 'statusText',
+            label: 'Status',
+            property: 'status',
+            type: 'label',
+            labels: [
+                { value: 'PROCESSING', color: 'color-08', label: 'Processando' },
+                { value: 'OK', color: 'color-12', label: 'OK' },
+                { value: 'WAITING_CANCELEMENT', color: 'color-01', label: 'Esperando Cancelamento' },
+                { value: 'CANCELED', color: 'color-06', label: 'Cancelada' },
+            ],
         },
         {
             label: 'Cliente',

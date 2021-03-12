@@ -505,3 +505,8 @@ po-upload {
         margin-top: 2rem;
     }
 }
+.table-selectable-row {
+    .po-table-group-row {
+        cursor: pointer;
+    }
+}

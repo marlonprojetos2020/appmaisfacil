@@ -15,6 +15,7 @@ import { CompanyNewInvoiceService } from '../company-new-invoice.service';
 import { Product } from '../models/product';
 import { finalize } from 'rxjs/operators';
 import { CpfCnpjPipe } from 'src/app/shared/pipe/cpfcnpj-pipe/cpfcnpj.pipe';
+import { Observable, of } from 'rxjs';
 
 @Component({
     templateUrl: 'company-new-invoice.component.html',
@@ -31,6 +32,10 @@ export class CompanyNewInvoiceComponent implements OnInit {
     idClient: number;
     disabledButtonSubmitInvoice = true;
     loading = false;
+
+    changeToStep2 = false;
+    changeToStep3 = false;
+
 
     @ViewChild('modalProduct', { static: true })
     poModalProduto: PoModalComponent;
@@ -60,20 +65,20 @@ export class CompanyNewInvoiceComponent implements OnInit {
     ];
 
     actionStepOne: PoTableAction[] = [
-        {
-            label: 'Selecionar',
-            action: (item) => {
-                this.nextForm();
-                this.itemsStepThree.push({
-                    name: item.name,
-                    document: item.document,
-                });
-                this.idClient = item.id;
-                this.podeSelecionar = false;
-                this.chageToStep2 = true;
-            },
-            disabled: () => !this.podeSelecionar,
-        },
+        // {
+        //     label: 'Selecionar',
+        //     action: (item) => {
+        //         this.changeToStep2 = true;
+        //         this.itemsStepThree.push({
+        //             name: item.name,
+        //             document: item.document,
+        //         });
+        //         this.idClient = item.id;
+        //         this.podeSelecionar = false;
+        //         this.nextForm();
+        //     },
+        //     disabled: () => !this.podeSelecionar,
+        // },
         {
             label: 'Editar',
             action: (item) => {
@@ -85,7 +90,6 @@ export class CompanyNewInvoiceComponent implements OnInit {
         },
     ];
 
-    chageToStep2 = false;
 
 
     // CONFIG STEP 2
@@ -126,12 +130,12 @@ export class CompanyNewInvoiceComponent implements OnInit {
 
                 if (this.itemsStepTwo.length === 0) {
                     return (
-                        (this.disabledStepTwo = true),
+                        (this.changeToStep3 = true),
                         (this.disabledButtonSubmitInvoice = true)
                     );
                 } else {
                     return (
-                        (this.disabledStepTwo = false),
+                        (this.changeToStep3 = false),
                         (this.disabledButtonSubmitInvoice = false)
                     );
                 }
@@ -139,7 +143,7 @@ export class CompanyNewInvoiceComponent implements OnInit {
         },
     ];
 
-    disabledStepTwo = true;
+
 
 
     // CONFIG STEP 3
@@ -234,8 +238,7 @@ export class CompanyNewInvoiceComponent implements OnInit {
         this.itemsStepTwo.push(itemsProdct);
         this.poModalProduto.close();
         this.atuzalizaTotal();
-
-        this.disabledStepTwo = false;
+        this.changeToStep3 = true;
         this.disabledButtonSubmitInvoice = false;
     }
 
@@ -245,17 +248,12 @@ export class CompanyNewInvoiceComponent implements OnInit {
 
     submitInvoice(): void {
         this.loading = true;
-
         this.newInvoice.items = this.itemsStepTwo;
-
         this.newInvoice.client = { id: this.idClient };
-
         this.companyNewInvoiceService
             .createInvoice(this.newInvoice)
             .pipe(finalize(() => (this.loading = false)))
-            .subscribe();
-
-        this.router.navigateByUrl('/empresa/nota-fiscal');
+            .subscribe(() => this.router.navigateByUrl('/empresa/nota-fiscal'));
     }
 
     private totalCalc(): void {
@@ -286,13 +284,33 @@ export class CompanyNewInvoiceComponent implements OnInit {
             this.submitForm();
             this.primaryAction.loading = true;
             setTimeout(() => {
-                this.poNotificationService.success(
-                    'Produto adicionado com sucesso',
-                );
                 this.primaryAction.loading = false;
                 this.poModalProduto.close();
             }, 700);
         }
+    }
+
+    selecionaCliente(item): void {
+        this.changeToStep2 = true;
+        this.itemsStepThree.push({
+            name: item.name,
+            document: item.document,
+        });
+        this.idClient = item.id;
+        this.podeSelecionar = false;
+        this.nextForm();
+    }
+
+    canAcessStepTwo(): Observable<boolean> {
+        return of(this.changeToStep2);
+    }
+
+    canAcessStepThree(): Observable<boolean> {
+        return of(this.changeToStep3);
+    }
+
+    cancelInvoice(): void {
+        this.router.navigate(['empresa', 'nota-fiscal']);
     }
 }
 

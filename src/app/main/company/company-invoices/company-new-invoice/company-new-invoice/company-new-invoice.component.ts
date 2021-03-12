@@ -14,6 +14,7 @@ import { Invoice } from '../models/invoice';
 import { CompanyNewInvoiceService } from '../company-new-invoice.service';
 import { Product } from '../models/product';
 import { finalize } from 'rxjs/operators';
+import { CpfCnpjPipe } from 'src/app/shared/pipe/cpfcnpj-pipe/cpfcnpj.pipe';
 
 @Component({
     templateUrl: 'company-new-invoice.component.html',
@@ -165,7 +166,8 @@ export class CompanyNewInvoiceComponent implements OnInit {
         private formBuilder: FormBuilder,
         private companyNewInvoiceService: CompanyNewInvoiceService,
         private router: Router,
-        private poNotificationService: PoNotificationService
+        private poNotificationService: PoNotificationService,
+        private cpfCnpjPipe: CpfCnpjPipe,
     ) {}
 
     ngOnInit(): void {
@@ -180,9 +182,9 @@ export class CompanyNewInvoiceComponent implements OnInit {
             data.items.map((items) =>
                 this.itemsStepOne.push({
                     name: items.name,
-                    document: items.document,
+                    document: this.cpfCnpjPipe.transform(items.document),
                     id: items.id,
-                })
+                }),
             );
         });
 
@@ -285,7 +287,7 @@ export class CompanyNewInvoiceComponent implements OnInit {
             this.primaryAction.loading = true;
             setTimeout(() => {
                 this.poNotificationService.success(
-                    'Produto adicionado com sucesso'
+                    'Produto adicionado com sucesso',
                 );
                 this.primaryAction.loading = false;
                 this.poModalProduto.close();
@@ -293,3 +295,6 @@ export class CompanyNewInvoiceComponent implements OnInit {
         }
     }
 }
+
+
+

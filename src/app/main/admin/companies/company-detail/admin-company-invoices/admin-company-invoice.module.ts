@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { AdminCompanyInvoiceComponent } from './admin-company-invoice/admin-company-invoice.component';
-import { PageDatatableModule } from '../../../../../shared/components/page-datatable/page-datatable.module';
+import { InvoiceListModule } from '../../../shared/invoice-list/invoice-list.module';
 
 @NgModule({
-    imports: [CommonModule, PageDatatableModule],
     declarations: [AdminCompanyInvoiceComponent],
+    imports: [
+        CommonModule,
+        InvoiceListModule],
 })
-export class AdminCompanyInvoiceModule{}
+export class AdminCompanyInvoiceModule {}

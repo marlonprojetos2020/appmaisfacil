@@ -12,11 +12,10 @@ export interface Invoice {
             quantity: number;
             amount: number;
         }
-    ],
+    ];
     totalAmount: number;
     client:
     {
-        _messages: [],
         id: number;
         name: string;
         email: string;
@@ -36,11 +35,10 @@ export interface Invoice {
                 stateProvince: string;
             }
         }
-    },
+    };
     emissionAt: Date;
     attachmentUrl: string;
 }
-
 
 export enum statusType {
     PROCESSING = 'PROCESSANDO',

@@ -4,23 +4,25 @@ import {
     PoPageAction,
     PoTableAction,
 } from '@po-ui/ng-components';
+import { ActivatedRoute } from '@angular/router';
+
 import { environment } from '../../../../../../../environments/environment';
 import { DatatableColumn } from '../../../../../../shared/components/page-datatable/datatable-column';
 import { CompaniesService } from '../../../companies.service';
-import { ActivatedRoute } from '@angular/router';
 import { User } from '../../../model/user';
 
 @Component({
     templateUrl: './admin-company-invoice.component.html',
 })
 export class AdminCompanyInvoiceComponent implements OnInit {
+
+    serviceApi = `${environment.apiUrl}/nota-fiscal/p/search?companyId=${this.activatedRoute.snapshot.params.id}`;
+
     breadcrumb: PoBreadcrumb = {
         items: [],
     };
 
     pageActions: PoPageAction[] = [];
-
-    serviceApi = '';
     tableActions: PoTableAction[] = [];
     columns: DatatableColumn[] = [
         {
@@ -47,8 +49,6 @@ export class AdminCompanyInvoiceComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.serviceApi = `${environment.apiUrl}/nota-fiscal/p/search?companyId=${this.activatedRoute.snapshot.params.id}`;
-
         this.companiesService
             .getUserCompany(this.activatedRoute.snapshot.params.id)
             .subscribe((data) => this.setBreadcrumb(data));

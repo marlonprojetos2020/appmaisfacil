@@ -15,6 +15,7 @@ import { InvoiceListService } from '../invoice-list.service';
 export class InvoiceListComponent implements OnInit {
 
     @Input() serviceApi: string;
+    @Input() showCompanyField: boolean;
     @Input() breadcrumb: PoBreadcrumb;
 
     companyName: string;
@@ -26,6 +27,9 @@ export class InvoiceListComponent implements OnInit {
     emissionAt: string;
     imageInvoice: string;
     pdf: string;
+
+    columns: DatatableColumn[] = [];
+    pageActions: PoPageAction[] = [];
 
     @ViewChild('modalEnviarNota', { static: true })
     poModalEnviarNota: PoModalComponent;
@@ -41,9 +45,6 @@ export class InvoiceListComponent implements OnInit {
     ehPdf = false;
 
     idInvoice: number;
-
-    pageActions: PoPageAction[] = [];
-
 
     restrictions: PoUploadFileRestrictions = {
         allowedExtensions: ['.txt', '.pdf', '.png', '.jpeg', '.jpg'],
@@ -118,38 +119,7 @@ export class InvoiceListComponent implements OnInit {
         },
     ];
 
-    columns: DatatableColumn[] = [
-        {
-            label: 'Status',
-            property: 'status',
-            type: 'label',
-            labels: [
-                { value: 'PROCESSING', color: 'color-08', label: 'Processando' },
-                { value: 'OK', color: 'color-12', label: 'OK' },
-                { value: 'WAITING_CANCELEMENT', color: 'color-01', label: 'Esperando Cancelamento' },
-                { value: 'CANCELED', color: 'color-06', label: 'Cancelada' },
-            ],
-        },
-        {
-            label: 'Empresa',
-            property: 'companyName',
-        },
-        {
-            label: 'Valor',
-            property: 'totalAmount',
-            type: 'currency',
-            format: 'BRL',
-        },
-        {
-            label: 'Emissão',
-            property: 'emissionAt',
-            type: 'date',
-            format: 'dd/MM/yyyy',
-        },
-    ];
-
     // Tabela Modal
-
     modalTableColumns: DatatableColumn[] = [
         {
             label: 'Descrição',
@@ -194,10 +164,46 @@ export class InvoiceListComponent implements OnInit {
 
     constructor(
         private adminInvoiceService: InvoiceListService,
-        private poNotificationService: PoNotificationService
+        private poNotificationService: PoNotificationService,
     ) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+
+        this.columns = [
+            {
+                label: 'Status',
+                property: 'status',
+                type: 'label',
+                labels: [
+                    { value: 'PROCESSING', color: 'color-08', label: 'Processando' },
+                    { value: 'OK', color: 'color-12', label: 'OK' },
+                    { value: 'WAITING_CANCELEMENT', color: 'color-01', label: 'Esperando Cancelamento' },
+                    { value: 'CANCELED', color: 'color-06', label: 'Cancelada' },
+                ],
+            },
+            {
+                label: 'Empresa',
+                property: 'companyName',
+                visible: this.showCompanyField,
+            },
+            {
+                label: 'Cliente',
+                property: 'client.name',
+            },
+            {
+                label: 'Valor',
+                property: 'totalAmount',
+                type: 'currency',
+                format: 'BRL',
+            },
+            {
+                label: 'Emissão',
+                property: 'emissionAt',
+                type: 'date',
+                format: 'dd/MM/yyyy',
+            },
+        ];
+    }
 
     setUrlDocument(id: number): void {
         this.uploadDocumentUrl = `${environment.apiUrl}/nota-fiscal/${id}/file`;

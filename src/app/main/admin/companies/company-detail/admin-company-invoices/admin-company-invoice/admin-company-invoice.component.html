@@ -1,9 +1,5 @@
-<app-page-datatable
-    title="Nota Fiscal"
-    [pageActions]="pageActions"
+<app-invoice-list
     [serviceApi]="serviceApi"
-    [columns]="columns"
-    [tableActions]="tableActions"
-    class="breadcrumb page-no-action"
     [breadcrumb]="breadcrumb"
-></app-page-datatable>
+    [showCompanyField]="false"
+></app-invoice-list>

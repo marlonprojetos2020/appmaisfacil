@@ -17,31 +17,9 @@ import { User } from '../../../model/user';
 export class AdminCompanyInvoiceComponent implements OnInit {
 
     serviceApi = `${environment.apiUrl}/nota-fiscal/p/search?companyId=${this.activatedRoute.snapshot.params.id}`;
-
     breadcrumb: PoBreadcrumb = {
         items: [],
     };
-
-    pageActions: PoPageAction[] = [];
-    tableActions: PoTableAction[] = [];
-    columns: DatatableColumn[] = [
-        {
-            label: 'Situação',
-            property: 'statusText',
-        },
-        {
-            label: 'Valor',
-            property: 'totalAmount',
-            type: 'currency',
-            format: 'BRL',
-        },
-        {
-            label: 'Emissão',
-            property: 'emissionAt',
-            type: 'date',
-            format: 'dd/MM/yyyy',
-        },
-    ];
 
     constructor(
         private companiesService: CompaniesService,
@@ -64,7 +42,7 @@ export class AdminCompanyInvoiceComponent implements OnInit {
                     : user.name,
                 link: `/admin/empresa/${user.id}`,
             },
-            { label: 'Nota Fiscal' }
+            { label: 'Nota Fiscal' },
         );
     }
 }

@@ -120,13 +120,6 @@ export class PageDatatableComponent implements OnInit {
                 } else {
                     this.items.push(
                         ...result.map((item) => {
-                            // não parece uma boa opção
-                            item.cpf
-                                ? (item.cpf = item.cpf.replace(
-                                    /(\d{3})(\d{3})(\d{3})(\d{2})/g,
-                                    '$1.$2.$3-$4'
-                                ))
-                                : null;
                             return this.flattenObject(item);
                         })
                     );

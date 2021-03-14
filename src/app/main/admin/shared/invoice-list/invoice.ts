@@ -5,6 +5,7 @@ export interface Invoice {
     companyId: number;
     companyName: string;
     companyFantasyName: string;
+    companyDocument: string;
     items: [
         {
             id: number;

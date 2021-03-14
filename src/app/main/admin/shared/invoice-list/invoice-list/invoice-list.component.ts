@@ -1,10 +1,21 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { PoBreadcrumb, PoModalAction, PoModalComponent, PoNotificationService, PoPageAction, PoTableAction, PoUploadFileRestrictions } from '@po-ui/ng-components';
+import {
+    PoBreadcrumb,
+    PoDialogService,
+    PoModalAction,
+    PoModalComponent,
+    PoNotificationService,
+    PoPageAction,
+    PoTableAction,
+    PoUploadFileRestrictions,
+} from '@po-ui/ng-components';
 
+import { Invoice } from '../invoice';
 import { DatatableColumn } from 'src/app/shared/components/page-datatable/datatable-column';
 import { PageDatatableComponent } from 'src/app/shared/components/page-datatable/page-datatable/page-datatable.component';
 import { environment } from 'src/environments/environment';
 import { InvoiceListService } from '../invoice-list.service';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-invoice-list',
@@ -18,15 +29,12 @@ export class InvoiceListComponent implements OnInit {
     @Input() showCompanyField: boolean;
     @Input() breadcrumb: PoBreadcrumb;
 
-    companyName: string;
-    clientName: string;
-    clientDocument: string;
-    status: string;
-    companyDocument: string;
-    totalAmount: string;
-    emissionAt: string;
-    imageInvoice: string;
-    pdf: string;
+    companyDocument$: Observable<any>;
+    invoiceProductList$: Observable<any>;
+
+    modalInvoice: Invoice = null;
+    uploadDocumentUrl = '';
+    ehPdf = false;
 
     columns: DatatableColumn[] = [];
     pageActions: PoPageAction[] = [];
@@ -40,11 +48,6 @@ export class InvoiceListComponent implements OnInit {
     @ViewChild('modalCancelarNota', { static: true })
     poModalCancelarNota: PoModalComponent;
 
-    uploadDocumentUrl: string = '';
-
-    ehPdf = false;
-
-    idInvoice: number;
 
     restrictions: PoUploadFileRestrictions = {
         allowedExtensions: ['.txt', '.pdf', '.png', '.jpeg', '.jpg'],
@@ -56,59 +59,14 @@ export class InvoiceListComponent implements OnInit {
         {
             label: 'Anexar Nota Fiscal',
             action: (item) => {
-                this.poModalEnviarNota.open();
-                item.companyFantasyName
-                    ? (this.companyName = item.companyFantasyName)
-                    : (this.companyName = item.companyName);
-                this.clientName = item['client.name'];
-                this.clientDocument = item['client.document'];
-                this.status = item.statusText;
-                this.adminInvoiceService
-                    .getCompany(item.companyId)
-                    .subscribe((data) => {
-                        this.companyDocument = data.userCompany.cnpj;
-                    });
-                this.setUrlDocument(item.id);
-                if (this.modalTableItems.length === 0) {
-                    this.adminInvoiceService
-                        .getInvoice(item.id)
-                        .subscribe((data) => {
-                            data.items.map((nota) =>
-                                this.modalTableItems.push(nota)
-                            );
-                            this.totalAmount = data.totalAmount;
-                        });
-                } else {
-                    return;
-                }
+                this.openModal(item);
             },
             disabled: (item) => item.status !== 'PROCESSING',
         },
         {
             label: 'Confirmar Cancelamento',
             action: (item) => {
-                this.idInvoice = item.id;
-                this.poModalCancelarNota.open();
-                item.companyFantasyName
-                    ? (this.companyName = item.companyFantasyName)
-                    : (this.companyName = item.companyName);
-                this.clientName = item['client.name'];
-                this.clientDocument = item['client.document'];
-                this.status = item.statusText;
-                this.totalAmount = item.totalAmount;
-                this.adminInvoiceService
-                    .getCompany(item.companyId)
-                    .subscribe((data) => {
-                        this.companyDocument = data.userCompany.cnpj;
-                    });
-                this.imageInvoice = item.attachmentUrl;
-                this.emissionAt = item.emissionAt;
-                if (this.imageInvoice.indexOf('pdf') < 0) {
-                    this.ehPdf = false;
-                } else {
-                    this.ehPdf = true;
-                    this.pdf = item.attachmentUrl;
-                }
+                this.openModal(item);
             },
             disabled: (item) => item.status !== 'WAITING_CANCELEMENT',
         },
@@ -150,10 +108,17 @@ export class InvoiceListComponent implements OnInit {
     cancelInvoice: PoModalAction = {
         label: 'Cancelar Nota',
         action: () => {
-            this.adminInvoiceService
-                .cancelInvoiceAdmin(this.idInvoice)
-                .subscribe();
-            this.poModalCancelarNota.close();
+            this.poDialogService.confirm({
+                title: 'Recusar Cobrança',
+                message: `Tem certeza que deseja cancelar a nota fiscal ?`,
+                confirm: () => {
+                    this.adminInvoiceService
+                        .cancelInvoiceAdmin(this.modalInvoice.id)
+                        .subscribe(() => this.refreshTable());
+                    this.poModalCancelarNota.close();
+                },
+            });
+
         },
     };
 
@@ -165,10 +130,10 @@ export class InvoiceListComponent implements OnInit {
     constructor(
         private adminInvoiceService: InvoiceListService,
         private poNotificationService: PoNotificationService,
+        private poDialogService: PoDialogService,
     ) {}
 
     ngOnInit(): void {
-
         this.columns = [
             {
                 label: 'Status',
@@ -205,18 +170,26 @@ export class InvoiceListComponent implements OnInit {
         ];
     }
 
-    setUrlDocument(id: number): void {
-        this.uploadDocumentUrl = `${environment.apiUrl}/nota-fiscal/${id}/file`;
-    }
-
     success(): void {
+        this.refreshTable();
         const message = 'Documento carregado com sucesso';
         this.poNotificationService.success(message);
-        this.dataTableComponent.ngOnInit();
         this.poModalEnviarNota.close();
     }
 
-    downloadPdf(): any {
-        window.open(this.pdf, '_blank');
+    download(): any {
+        window.open(this.modalInvoice.attachmentUrl, '_blank');
+    }
+
+    openModal(item: Invoice): void {
+        this.modalInvoice = item;
+        this.uploadDocumentUrl = `${environment.apiUrl}/nota-fiscal/${this.modalInvoice.id}/file`;
+        this.companyDocument$ = this.adminInvoiceService.getCompany(this.modalInvoice.companyId);
+        this.invoiceProductList$ = this.adminInvoiceService.getInvoice(item.id);
+        this.modalInvoice.status == 'WAITING_CANCELEMENT' ? this.poModalCancelarNota.open() : this.poModalEnviarNota.open();
+    }
+
+    refreshTable(): void {
+        this.dataTableComponent.loadItems();
     }
 }

@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { AdminCompanyEmployeeComponent } from './admin-company-employee/admin-company-employee.component';
-import { PageDatatableModule } from '../../../../../shared/components/page-datatable/page-datatable.module';
+import { EmployeeListModule } from '../../../shared/employee-list/employee-list.module';
+
 
 @NgModule({
-    imports: [CommonModule, PageDatatableModule],
     declarations: [AdminCompanyEmployeeComponent],
+    imports: [
+        CommonModule,
+        EmployeeListModule],
 })
 export class AdminCompanyEmployeeModule {}

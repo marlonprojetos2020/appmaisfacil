@@ -2,44 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import {
     PoBreadcrumb,
     PoPageAction,
-    PoTableAction,
 } from '@po-ui/ng-components';
-import { environment } from '../../../../../../../environments/environment';
-import { DatatableColumn } from '../../../../../../shared/components/page-datatable/datatable-column';
+
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../../../model/user';
 import { CompaniesService } from '../../../companies.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
     templateUrl: './admin-company-employee.component.html',
-    styleUrls: ['admin-company-employee.component.scss'],
 })
 export class AdminCompanyEmployeeComponent implements OnInit {
+
+    serviceApi = `${environment.apiUrl}/employee/p/search?search=&companyId=${this.activatedRoute.snapshot.params.id}`;
     pageActions: PoPageAction[] = [];
-
-    serviceApi = '';
-    tableActions: PoTableAction[] = [];
-    columns: DatatableColumn[] = [
-        {
-            label: 'Situação',
-            property: 'statusText',
-        },
-        {
-            label: 'Funcionário',
-            property: 'name',
-        },
-        {
-            label: 'Categoria',
-            property: 'category',
-        },
-        {
-            label: 'Admissão',
-            property: 'admissionAt',
-            type: 'date',
-            format: 'dd/MM/yyyy',
-        },
-    ];
-
     breadcrumb: PoBreadcrumb = {
         items: [],
     };
@@ -50,8 +26,6 @@ export class AdminCompanyEmployeeComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.serviceApi = `${environment.apiUrl}/employee/p/search?search=&companyId=${this.activatedRoute.snapshot.params.id}`;
-
         this.companiesService
             .getUserCompany(this.activatedRoute.snapshot.params.id)
             .subscribe((data) => this.setBreadcrumb(data));

@@ -1,9 +1,5 @@
-<app-page-datatable
-    title="Funcionários"
-    [pageActions]="pageActions"
+<app-employee-list
     [serviceApi]="serviceApi"
-    [columns]="columns"
-    [tableActions]="tableActions"
-    class="page-no-action breadcrumb"
     [breadcrumb]="breadcrumb"
-></app-page-datatable>
+    [showCompanyField]="false"
+></app-employee-list>

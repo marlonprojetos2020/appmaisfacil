@@ -13,6 +13,7 @@ export class AdminDashboardComponent implements OnInit {
     cobrancaAnalise;
     cobrancaPendente;
     funcionarioDemissao;
+    funcionarioContratacao;
     notaFiscalAnalise;
     notaFiscalCancelamento;
     totalUsers;

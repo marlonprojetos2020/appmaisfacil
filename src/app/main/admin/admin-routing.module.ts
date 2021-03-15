@@ -1,15 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard/admin-dashboard.component';
 import { AdminToolbarComponent } from './admin-layout/admin-toolbar/admin-toolbar.component';
 import { AdminMenuComponent } from './admin-layout/admin-menu/admin-menu.component';
 import { CompanyDetailMenuComponent } from './admin-layout/company-detail-menu/company-detail-menu.component';
 import { AdminMyAccountComponent } from './admin-my-account/admin-my-account/admin-my-account.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from 'src/app/core/auth/auth.interceptor';
 import { AdminChargeListComponent } from './admin-charges/admin-charge-list/admin-charge-list.component';
 import { AdminBankStatementListComponent } from './admin-bank-statements/admin-bank-statement-list/admin-bank-statement-list.component';
 import { AdminInvoiceListComponent } from './admin-invoices/admin-invoice-list/admin-invoice-list.component';
+import { AdminEmployeeListComponent } from './admin-employees/admin-employee/admin-employee.component';
+
 
 const routes: Routes = [
     {
@@ -66,10 +69,12 @@ const routes: Routes = [
                     },
                     {
                         path: 'funcionarios',
-                        loadChildren: () =>
-                            import(
-                                './admin-employees/admin-employee.module'
-                            ).then((m) => m.AdminEmployeeModule),
+                        pathMatch: 'full',
+                        component: AdminEmployeeListComponent,
+                    },
+                    {
+                        path: 'funcionarios/:filter',
+                        component: AdminEmployeeListComponent,
                     },
                 ],
             },

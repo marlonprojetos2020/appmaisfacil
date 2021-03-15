@@ -77,15 +77,23 @@
             ></app-card-dashboard>
         </div>
     </div>
-
     <div class="po-row po-mb-5">
-        <div class="po-col po-lg-12">
+        <div class="po-col po-lg-6">
             <app-card-dashboard
-                routerLink="/admin/funcionarios/confirmar-demissao"
-                text="Demissões Solicitadas"
+                routerLink="/admin/funcionarios/PENDING_FIRED"
+                text="Demissões Pendentes"
                 icon="po-icon po-icon-exclamation"
                 [quantity]="funcionarioDemissao"
                 cancelamento="true"
+            ></app-card-dashboard>
+        </div>
+        <div class="po-col po-lg-6">
+            <app-card-dashboard
+                routerLink="/admin/funcionarios/PENDING_HIRED"
+                text="Contratações Pendentes"
+                icon="po-icon po-icon-clock"
+                [quantity]="funcionarioContratacao"
+                analise="true"
             ></app-card-dashboard>
         </div>
     </div>

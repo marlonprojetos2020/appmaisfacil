@@ -1,17 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PageDatatableModule } from '../../../shared/components/page-datatable/page-datatable.module';
-import { AdminEmployeeComponent } from './admin-employee/admin-employee.component';
-import { AdminEmployeeFiredModule } from './admin-employee-fired/admin-employee-fired.module';
-import { AdminEmployeeRoutingModule } from './admin-employee-routing.module';
+
+import { AdminEmployeeListComponent } from './admin-employee/admin-employee.component';
+import { EmployeeListModule } from '../shared/employee-list/employee-list.module';
+
 
 @NgModule({
+    declarations: [AdminEmployeeListComponent],
     imports: [
         CommonModule,
-        PageDatatableModule,
-        AdminEmployeeFiredModule,
-        AdminEmployeeRoutingModule,
+        EmployeeListModule,
     ],
-    declarations: [AdminEmployeeComponent],
+    exports: [AdminEmployeeListComponent],
 })
 export class AdminEmployeeModule {}

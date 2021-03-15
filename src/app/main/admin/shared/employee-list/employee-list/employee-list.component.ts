@@ -1,25 +1,20 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import {
-    PoBreadcrumb,
-    PoModalAction,
-    PoModalComponent,
-    PoNotificationService,
-    PoPageAction,
-    PoTableAction,
-    PoUploadFileRestrictions,
-} from '@po-ui/ng-components';
+import { PoBreadcrumb, PoModalAction, PoModalComponent, PoNotificationService, PoPageAction, PoTableAction, PoUploadFileRestrictions } from '@po-ui/ng-components';
+
+import { CompanyEmployee } from 'src/app/main/company/company-employees/models/company-employee';
+import { DatatableColumn } from 'src/app/shared/components/page-datatable/datatable-column';
+import { PageDatatableComponent } from 'src/app/shared/components/page-datatable/page-datatable/page-datatable.component';
+import { EmployeeListService } from '../employee-list.service';
 import { environment } from '../../../../../../environments/environment';
-import { DatatableColumn } from '../../../../../shared/components/page-datatable/datatable-column';
-import { CompanyEmployee } from '../../../../company/company-employees/models/company-employee';
-import { AdminEmployeeService } from '../../admin-employee.service';
-import { PageDatatableComponent } from '../../../../../shared/components/page-datatable/page-datatable/page-datatable.component';
 
 @Component({
-    templateUrl: 'admin-employee-fired.component.html',
+    selector: 'app-employee-list',
+    templateUrl: './employee-list.component.html',
 })
-export class AdminEmployeeFiredComponent implements OnInit {
-    @Input() employeeName: string;
-    @Input() employeeCompany: string;
+
+export class EmployeeListComponent implements OnInit {
+    employeeName: string;
+    employeeCompany: string;
 
     @ViewChild(PageDatatableComponent) dataTable: PageDatatableComponent;
 
@@ -96,7 +91,7 @@ export class AdminEmployeeFiredComponent implements OnInit {
 
     constructor(
         private poNotificationService: PoNotificationService,
-        private adminEmployeeService: AdminEmployeeService
+        private employeeListService: EmployeeListService,
     ) {}
 
     ngOnInit(): void {}
@@ -115,4 +110,5 @@ export class AdminEmployeeFiredComponent implements OnInit {
         this.dataTable.ngOnInit();
         this.poModalEmployeeFired.close();
     }
+
 }

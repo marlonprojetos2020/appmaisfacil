@@ -11,6 +11,7 @@ import { DatatableColumn } from '../../../../shared/components/page-datatable/da
 import { CompanyInvoiceService } from '../company-invoice.service';
 import { PageDatatableComponent } from '../../../../shared/components/page-datatable/page-datatable/page-datatable.component';
 
+
 @Component({
     templateUrl: './company-invoice.component.html',
 })
@@ -20,7 +21,7 @@ export class CompanyInvoiceComponent {
 
     pageActions: PoPageAction[] = [
         {
-            label: 'Emitir Nota',
+            label: 'Solicitar Nota',
             icon: 'po-icon-plus-circle',
             url: '/empresa/nota-fiscal/emitir-nota',
         },
@@ -46,16 +47,14 @@ export class CompanyInvoiceComponent {
                         this.companyInvoiceService.cancelInvoice(item.id).subscribe(() => {
                             this.dataTableComponent.ngOnInit();
                             this.poNotificationService.success('Nota Fiscal cancelada com seucesso');
-
                         });
                     },
                 });
             },
-
             disabled: (item) =>
-                item.statusText === 'CANCELADA' ||
-                item.status === 'WAITING_CANCELEMENT' ||
-                item.status === 'CANCELED',
+                item.status === 'WAITING_CANCELEMENT'
+                || item.status === 'CANCELED'
+                || (item.status === 'OK' && (this.getMonthsPassed(item.emissionAt) > 2)),
         },
         {
             label: 'Baixar Nota Fiscal',
@@ -99,4 +98,16 @@ export class CompanyInvoiceComponent {
         private poNotificationService: PoNotificationService,
         private poDialogService: PoDialogService,
     ) {}
+
+    getMonthsPassed(dateForCalc): number {
+        dateForCalc = new Date(dateForCalc);
+        const dataAtual = new Date();
+        // calcula se tem anos de diferença
+        let months = (dataAtual.getFullYear() - dateForCalc.getFullYear()) * 12;
+        // diferença entre anos
+        months = dataAtual.getMonth() - dateForCalc.getMonth();
+        // se não passou do dia de vencimento -1 mes
+        months += dataAtual.getDate() < dateForCalc.getDate() ? -1 : 0;
+        return months;
+    }
 }

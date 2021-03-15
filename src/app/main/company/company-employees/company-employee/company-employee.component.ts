@@ -87,7 +87,15 @@ export class CompanyEmployeeComponent implements OnInit {
     columns: DatatableColumn[] = [
         {
             label: 'Situação',
-            property: 'statusText',
+            property: 'status',
+            type: 'label',
+            labels: [
+                { value: 'FIRED', color: 'color-07', label: 'Demitido' },
+                { value: 'NOT_FINALIZED', color: 'color-03', label: 'Incompleto' },
+                { value: 'PENDING_HIRED', color: 'color-08', label: 'Pendente' },
+                { value: 'PENDING_FIRED', color: 'color-01', label: 'Pedido Demissão' },
+                { value: 'HIRED', color: 'color-12', label: 'Contratado' },
+            ],
         },
         {
             label: 'Nome',
@@ -122,7 +130,7 @@ export class CompanyEmployeeComponent implements OnInit {
     setBreadCrumbs(): void {
         this.breadcrumb.items.push(
             { label: 'Início', link: '/empresa' },
-            { label: 'Funcionários', link: '/empresa/funcionarios' }
+            { label: 'Funcionários', link: '/empresa/funcionarios' },
         );
     }
 }

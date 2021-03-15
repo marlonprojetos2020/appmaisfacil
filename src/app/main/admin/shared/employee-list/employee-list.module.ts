@@ -4,6 +4,7 @@ import { EmployeeListComponent } from './employee-list/employee-list.component';
 import {
     PoButtonModule,
     PoFieldModule,
+    PoLoadingModule,
     PoModalModule,
     PoPageModule,
 } from '@po-ui/ng-components';
@@ -17,6 +18,7 @@ import { PageDatatableModule } from 'src/app/shared/components/page-datatable/pa
         PoModalModule,
         PoFieldModule,
         PoButtonModule,
+        PoLoadingModule,
     ],
     exports: [EmployeeListComponent],
 })

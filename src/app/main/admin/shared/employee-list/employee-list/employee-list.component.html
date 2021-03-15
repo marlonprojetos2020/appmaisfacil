@@ -13,16 +13,19 @@
     p-title="Confirmar Demissão"
     [p-primary-action]="primaryAction"
 >
-    <p>
-        Demitir o funcionário {{ employeeName }} da empresa
-        {{ employeeCompany }}
+    <p *ngIf="modalEmployee">
+        Demitir o funcionário <strong>{{ modalEmployee.name }}</strong> da empresa
+        <strong>{{ modalEmployee.companyFantasyName}}</strong>
     </p>
     <po-upload
         p-drag-drop
         p-label="Anexar Ficha de Demissão"
         [p-url]="urlUploadDocument"
+        (p-upload)="onLoad()"
         (p-success)="success()"
         p-auto-upload="true"
         [p-restrictions]="restrictions"
     ></po-upload>
 </po-modal>
+
+<po-loading-overlay [hidden]="isHideLoading"></po-loading-overlay>

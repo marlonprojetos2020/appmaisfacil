@@ -14,7 +14,5 @@ export class AdminInvoiceListComponent {
             { label: 'Nota Fiscal', link: '/admin/nota-fiscal' },
         ],
     };
-    constructor(private activatedRoute: ActivatedRoute) {
-
-    }
+    constructor(private activatedRoute: ActivatedRoute) {}
 }

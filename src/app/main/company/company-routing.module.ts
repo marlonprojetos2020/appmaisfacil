@@ -84,10 +84,10 @@ const routes: Routes = [
                 path: 'indicacoes',
                 component: CompanyIndicationComponent,
             },
-            {
-                path: 'faq',
-                component: CompanyFaqComponent,
-            },
+            // {
+            //     path: 'faq',
+            //     component: CompanyFaqComponent,
+            // },
         ],
     },
 ];

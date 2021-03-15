@@ -102,11 +102,11 @@ export class CompanyLayoutComponent {
             label: 'Indicações',
             link: '/empresa/indicacoes',
         },
-        {
-            icon: 'po-icon-help',
-            label: 'F.A.Q.',
-            link: '/empresa/faq',
-        },
+        // {
+        //     icon: 'po-icon-help',
+        //     label: 'F.A.Q.',
+        //     link: '/empresa/faq',
+        // },
     ];
 
     constructor(private authService: AuthService, private router: Router) {}

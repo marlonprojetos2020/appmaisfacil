@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import {
     PoBreadcrumb,
+    PoDialogService,
     PoNotificationService,
     PoPageAction,
     PoTableAction,
@@ -37,19 +38,29 @@ export class CompanyInvoiceComponent {
     tableActions: PoTableAction[] = [
         {
             label: 'Cancelar Nota',
-            action: (item) =>
-                this.companyInvoiceService
-                    .cancelInvoice(item.id)
-                    .subscribe((data) => {
-                        this.dataTableComponent.ngOnInit();
-                        this.poNotificationService.success(
-                            'Nota Fiscal cancelada com seucesso'
-                        );
-                    }),
+            action: (item) => {
+                this.poDialogService.confirm({
+                    title: 'Cancelar Nota',
+                    message: `Tem certeza que deseja cancelar a nota fiscal ?`,
+                    confirm: () => {
+                        this.companyInvoiceService.cancelInvoice(item.id).subscribe(() => {
+                            this.dataTableComponent.ngOnInit();
+                            this.poNotificationService.success('Nota Fiscal cancelada com seucesso');
+
+                        });
+                    },
+                });
+            },
+
             disabled: (item) =>
                 item.statusText === 'CANCELADA' ||
                 item.status === 'WAITING_CANCELEMENT' ||
                 item.status === 'CANCELED',
+        },
+        {
+            label: 'Baixar Nota Fiscal',
+            action: (item) => window.open(item.attachmentUrl, '_blank'),
+            disabled: (item) => item.status !== 'OK',
         },
     ];
 
@@ -85,6 +96,7 @@ export class CompanyInvoiceComponent {
 
     constructor(
         private companyInvoiceService: CompanyInvoiceService,
-        private poNotificationService: PoNotificationService
+        private poNotificationService: PoNotificationService,
+        private poDialogService: PoDialogService,
     ) {}
 }

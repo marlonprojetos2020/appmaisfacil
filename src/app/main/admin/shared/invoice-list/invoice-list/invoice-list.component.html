@@ -128,12 +128,14 @@
                 p-drag-drop-height="150"
                 p-label="Anexar Nota Fiscal"
                 [p-url]="uploadDocumentUrl"
+                (p-upload)="onLoad()"
                 (p-success)="success()"
                 p-auto-upload="true"
                 p-multiple="false"
                 [p-restrictions]="restrictions"
             ></po-upload>
         </div>
+        <po-loading-overlay [hidden]="isHideLoading"></po-loading-overlay>
     </div>
 </po-modal>
 

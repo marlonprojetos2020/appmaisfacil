@@ -35,6 +35,7 @@ export class InvoiceListComponent implements OnInit {
     modalInvoice: Invoice = null;
     uploadDocumentUrl = '';
     ehPdf = false;
+    isHideLoading = true;
 
     columns: DatatableColumn[] = [];
     pageActions: PoPageAction[] = [];
@@ -109,7 +110,7 @@ export class InvoiceListComponent implements OnInit {
         label: 'Cancelar Nota',
         action: () => {
             this.poDialogService.confirm({
-                title: 'Recusar Cobrança',
+                title: 'Cancelar Nota',
                 message: `Tem certeza que deseja cancelar a nota fiscal ?`,
                 confirm: () => {
                     this.adminInvoiceService
@@ -148,7 +149,7 @@ export class InvoiceListComponent implements OnInit {
             },
             {
                 label: 'Empresa',
-                property: 'companyName',
+                property: 'companyFantasyName',
                 visible: this.showCompanyField,
             },
             {
@@ -170,8 +171,13 @@ export class InvoiceListComponent implements OnInit {
         ];
     }
 
+    onLoad(): void {
+        this.isHideLoading = false;
+    }
+
     success(): void {
         this.refreshTable();
+        this.isHideLoading = true;
         const message = 'Documento carregado com sucesso';
         this.poNotificationService.success(message);
         this.poModalEnviarNota.close();

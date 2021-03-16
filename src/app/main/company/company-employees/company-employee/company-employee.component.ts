@@ -73,7 +73,7 @@ export class CompanyEmployeeComponent implements OnInit {
         {
             label: 'Editar registo',
             action: (item) => this.router.navigateByUrl(`/empresa/funcionarios/editar-funcionario/${item.id}`),
-            disabled: (item) => item.status === 'FIRED',
+            disabled: (item) => item.status === 'FIRED' || item.status === 'HIRED',
         },
         {
             label: 'Baixar Termo de Contratação',

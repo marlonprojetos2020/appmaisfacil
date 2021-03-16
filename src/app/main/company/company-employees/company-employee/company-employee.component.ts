@@ -72,16 +72,18 @@ export class CompanyEmployeeComponent implements OnInit {
         },
         {
             label: 'Editar registo',
-            action: (item) => {
-                this.router.navigateByUrl(
-                    `/empresa/funcionarios/editar-funcionario/${item.id}`
-                );
-            },
+            action: (item) => this.router.navigateByUrl(`/empresa/funcionarios/editar-funcionario/${item.id}`),
+            disabled: (item) => item.status === 'FIRED',
         },
         {
             label: 'Baixar Termo de Contratação',
             action: (item) => window.open(item.admissionFileUrl, '_blank'),
             disabled: (item) => item.status === 'NOT_FINALIZED',
+        },
+        {
+            label: 'Baixar Ficha de Demissão',
+            action: (item) => window.open(item.firedFileUrl, '_blank'),
+            disabled: (item) => item.status !== 'FIRED',
         },
     ];
     columns: DatatableColumn[] = [

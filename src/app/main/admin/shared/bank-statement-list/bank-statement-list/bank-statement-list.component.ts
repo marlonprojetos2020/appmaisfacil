@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import {
     PoBreadcrumb,
+    PoDialogService,
     PoModalAction,
     PoModalComponent,
     PoNotificationService,
@@ -36,61 +37,50 @@ export class BankStatementListComponent implements OnInit {
     @ViewChild('modalExtratoPendenteRevisao', { static: true })
     poModalExtratoPendente: PoModalComponent;
 
-    @ViewChild('modalExtratoAprovado', { static: true })
-    poModalExtratoAprovado: PoModalComponent;
-
     primaryAction: PoModalAction = {
         label: 'Aprovar',
-        action: () => {
-            this.bankStatementListService
-                .aprovedStatement(this.modalBankStatement.id)
-                .subscribe(() => {
-                    this.refreshTable();
-                    this.poNotification.success('Extrato bancário aprovado');
-                });
-            this.poModalExtratoPendente.close();
-        },
+        action: () => this.aprovarExtrato(this.modalBankStatement.id),
     };
 
     secondaryAction: PoModalAction = {
         label: 'Reprovar',
-        action: () => {
-            // this.bankStatementListService.
-            // refreshTable();
-            // this.poModalExtratoPendente.close();
-        },
+        action: () => this.reprovarExtrato(this.modalBankStatement.id),
+        // disabled: this.modalBankStatement?.status !== 'PENDING_REVIEW' ? true : false,
     };
 
     // ModalExtratoAprovado
     closeModalExtratoAprovado: PoModalAction = {
         label: 'Fechar',
-        action: () => this.poModalExtratoAprovado.close(),
+        action: () => this.poModalExtratoPendente.close(),
     };
 
     tableActions: PoTableAction[] = [
         {
-            label: 'Aprovar Extrato',
+            label: 'Visualizar Extrato',
             action: (item) => this.prepareModal(item),
+            disabled: (item) => item.status === 'PENDING',
+        },
+        {
+            label: 'Aprovar Extrato',
+            action: (item) => this.aprovarExtrato(item.id),
             disabled: (item) => item.status !== 'PENDING_REVIEW',
         },
         {
-            label: 'Visualizar Extrato',
-            action: (item) => {
-                this.poModalExtratoAprovado.open();
-            },
-            disabled: (item) => item.status !== 'OK',
+            label: 'Reprovar Extrato',
+            action: (item) => this.reprovarExtrato(item.id),
+            disabled: (item) => item.status !== 'PENDING_REVIEW',
         },
         {
             label: 'Baixar Extrato',
             action: (item) => window.open(item.attachmentUrl, '_blank'),
-            disabled: (item) =>
-                item.status !== 'OK' && item.status !== 'PENDING_REVIEW',
+            disabled: (item) => item.status === 'PENDING',
         },
     ];
 
     constructor(
         private bankStatementListService: BankStatementListService,
         private poNotification: PoNotificationService,
+        private poDialogService: PoDialogService,
     ) {}
 
     ngOnInit(): void {
@@ -103,6 +93,7 @@ export class BankStatementListComponent implements OnInit {
                     { value: 'PENDING', color: 'color-07', label: 'Pendente' },
                     { value: 'PENDING_REVIEW', color: 'color-08', label: 'Revisão' },
                     { value: 'OK', color: 'color-12', label: 'OK' },
+                    { value: 'REFUSED', color: 'color-01', label: 'Recusado' },
                 ],
             },
             {
@@ -155,5 +146,35 @@ export class BankStatementListComponent implements OnInit {
 
     refreshTable(): void {
         this.dataTableComponent.loadItems();
+    }
+
+    aprovarExtrato(id): void {
+        this.poDialogService.confirm({
+            title: 'Aprovar Extrato',
+            message: `Tem certeza que deseja aprovar este extrato ?`,
+            confirm: () => {
+                this.bankStatementListService
+                    .aprovedStatement(id)
+                    .subscribe(() => {
+                        this.refreshTable();
+                        this.poNotification.success('Extrato bancário aprovado');
+                    });
+            },
+        });
+    }
+
+    reprovarExtrato(id): void {
+        this.poDialogService.confirm({
+            title: 'Rejeitar Extrato',
+            message: `Tem certeza que deseja rejeitar o extrato?`,
+            confirm: () => {
+                this.bankStatementListService
+                    .rejectStatement(id)
+                    .subscribe(() => {
+                        this.refreshTable();
+                        this.poNotification.success('Extrato bancário rejeitado');
+                    });
+            },
+        });
     }
 }

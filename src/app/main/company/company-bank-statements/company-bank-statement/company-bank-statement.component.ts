@@ -22,6 +22,7 @@ export class CompanyBankStatementComponent {
     serviceApi = `${environment.apiUrl}/company/statement/p/search`;
     urlUploadDocument = null;
     modalBankStatement: BankStatement = null;
+    isHideLoading = true;
 
     @ViewChild('modalExtrato', { static: true })
     poModalExtrato: PoModalComponent;
@@ -68,6 +69,7 @@ export class CompanyBankStatementComponent {
                 { value: 'PENDING', color: 'color-07', label: 'Pendente' },
                 { value: 'PENDING_REVIEW', color: 'color-08', label: 'Revisão' },
                 { value: 'OK', color: 'color-12', label: 'OK' },
+                { value: 'REFUSED', color: 'color-01', label: 'Recusado' },
             ],
         },
         {
@@ -104,7 +106,12 @@ export class CompanyBankStatementComponent {
         this.poModalExtrato.open();
     }
 
+    onLoad(): void {
+        this.isHideLoading = false;
+    }
+
     success(): void {
+        this.isHideLoading = true;
         const message = 'Extrato bancário carregado com sucesso';
         this.poNotificationService.success(message);
         this.dataTableComponent.loadItems();

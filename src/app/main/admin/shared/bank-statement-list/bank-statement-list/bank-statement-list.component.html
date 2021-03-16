@@ -11,8 +11,8 @@
 <po-modal
     #modalExtratoPendenteRevisao
     p-title="Extrato"
-    [p-primary-action]="primaryAction"
-    [p-secondary-action]="secondaryAction"
+    [p-primary-action]="modalBankStatement?.status !== 'PENDING_REVIEW' ? closeModalExtratoAprovado : primaryAction"
+    [p-secondary-action]="modalBankStatement?.status !== 'PENDING_REVIEW' ? '' : secondaryAction"
 >
     <div
         class="po-row"
@@ -20,12 +20,12 @@
     >
         <div class="po-md-6">
             <div class="img-modal">
-                <ng-template *ngIf="!ehPdfPendente; else elseBlock">
+                <ng-container *ngIf="!ehPdfPendente; else elseBlock">
                     <img
                         [src]="modalBankStatement.attachmentUrl"
                         alt="Extrato Bancário"
                     />
-                </ng-template>
+                </ng-container>
                 <po-button
                     (p-click)="download(modalBankStatement.attachmentUrl)"
                     p-icon="po-icon po-icon-download"
@@ -49,54 +49,6 @@
                 <div class="po-md-12">
                     <h3>
                         <span>Situação</span>
-                        {{ modalBankStatement.statusText }}
-                    </h3>
-                </div>
-            </div>
-        </div>
-    </div>
-</po-modal>
-
-<po-modal
-    #modalExtratoAprovado
-    p-title="Extrato Aprovado"
-    [p-primary-action]="closeModalExtratoAprovado"
->
-    <div
-        class="po-row"
-        *ngIf="modalBankStatement"
-    >
-        <div class="po-md-6">
-            <div class="img-modal">
-                <ng-template *ngIf="!ehPdfPago ; else elseBlock">
-                    <img
-                        [src]="modalBankStatement.attachmentUrl"
-                        alt="Extrato Bancário"
-                    />
-                </ng-template>
-                <po-button
-                    (p-click)="download(modalBankStatement.attachmentUrl)"
-                    p-icon="po-icon po-icon-download"
-                ></po-button>
-            </div>
-        </div>
-        <div class="po-md-6 text-modal">
-            <div class="po-row">
-                <div class="po-md-12 po-mb-3">
-                    <h1>Extrato {{ modalBankStatement.monthText }} - {{ modalBankStatement['bankAccount.bankName'] }}
-                    </h1>
-                </div>
-                <div class="po-md-12 po-mb-2">
-                    <h2>
-                        <span>Empresa</span>
-                        {{ modalBankStatement.bankAccountCompanyFantasyName?
-                        modalBankStatement.bankAccountCompanyFantasyName:
-                        modalBankStatement.bankAccountCompanyName}}
-                    </h2>
-                </div>
-                <div class="po-md-12">
-                    <h3>
-                        <span>Status</span>
                         {{ modalBankStatement.statusText }}
                     </h3>
                 </div>

@@ -51,9 +51,11 @@
                     p-auto-upload="true"
                     [p-url]="urlUploadDocument"
                     [p-restrictions]="restrictions"
+                    (p-upload)="onLoad()"
                     (p-success)="success()"
                 ></po-upload>
             </div>
         </div>
     </div>
 </po-modal>
+<po-loading-overlay [hidden]="isHideLoading"></po-loading-overlay>

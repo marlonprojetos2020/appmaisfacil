@@ -10,9 +10,10 @@ export class BankStatementListService {
     constructor(private httpClient: HttpClient) {}
 
     aprovedStatement(id: number): Observable<any> {
-        return this.httpClient.post(
-            `${environment.apiUrl}/statement/${id}/ok`,
-            id
-        );
+        return this.httpClient.post(`${environment.apiUrl}/statement/${id}/ok`, id);
+    }
+
+    rejectStatement(id: number): Observable<any> {
+        return this.httpClient.post(`${environment.apiUrl}/statement/${id}/refused`, id);
     }
 }

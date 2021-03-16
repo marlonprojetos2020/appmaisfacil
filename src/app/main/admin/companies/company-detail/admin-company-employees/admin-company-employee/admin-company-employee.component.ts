@@ -22,7 +22,7 @@ export class AdminCompanyEmployeeComponent implements OnInit {
 
     constructor(
         private activatedRoute: ActivatedRoute,
-        private companiesService: CompaniesService
+        private companiesService: CompaniesService,
     ) {}
 
     ngOnInit(): void {

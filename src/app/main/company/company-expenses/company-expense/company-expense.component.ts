@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatatableColumn } from '../../../../shared/components/page-datatable/datatable-column';
 import {
     PoBreadcrumb,
@@ -10,19 +10,17 @@ import {
 import { environment } from '../../../../../environments/environment';
 import { Expense } from '../../../admin/companies/company-detail/admin-company-expenses/models/expense';
 import { CompanyExpenseService } from '../company-expense.service';
+import { Router } from '@angular/router';
 
 @Component({
     templateUrl: './company-expense.component.html',
     styleUrls: ['company-expense.component.scss'],
 })
 export class CompanyExpenseComponent implements OnInit {
-    @Input() tituloDespesa: string = '';
-    @Input() nomeEmpresa: string = '';
-    @Input() tipoDespesa: string = '';
-    @Input() dataDespesa: string = '';
-    @Input() valorDespesa: number;
-    @Input() imagemDespesa: string = '';
-    @Input() pdf: string;
+
+    modalExpense: Expense = null;
+    nomeEmpresa: string = '';
+    pdf: string;
 
     ehPdf = false;
 
@@ -58,28 +56,18 @@ export class CompanyExpenseComponent implements OnInit {
 
     tableActions: PoTableAction[] = [
         {
-            label: 'Visualizar',
-            action: (item) => {
-                this.prepareModal(item);
-                this.valorDespesa = item.value;
-                this.tituloDespesa = item.description;
-                this.dataDespesa = item.date;
-                this.tipoDespesa = item.label;
-                this.tipoDespesa = item['type.label'];
-                this.imagemDespesa = item.proofOfPaymentUrl;
-                this.nomeEmpresa;
-                if (this.imagemDespesa.indexOf('pdf') < 0) {
-                    this.ehPdf = false;
-                } else {
-                    this.ehPdf = true;
-                    this.pdf = item.attachmentUrl;
-                }
-            },
+            label: 'Ver Despesa',
+            action: (item) => this.prepareModal(item),
+            disabled: (item) => item.proofOfPaymentUrl == null,
         },
         {
-            label: 'Baixar Despesa',
-            action: (item) => window.open(item.proofOfPaymentUrl, '_blank'),
+            label: 'Editar',
+            action: (item) => this.router.navigate(['empresa', 'editar-despesa', item.id]),
         },
+        // {
+        //     label: 'Baixar Despesa',
+        //     action: (item) => window.open(item.proofOfPaymentUrl, '_blank'),
+        // },
     ];
 
     serviceApi = `${environment.apiUrl}/company/expense/p/search`;
@@ -97,7 +85,11 @@ export class CompanyExpenseComponent implements OnInit {
         action: () => this.poModalDespesa.close(),
     };
 
-    constructor(private companyExpenseService: CompanyExpenseService) {}
+    constructor(
+        private companyExpenseService: CompanyExpenseService,
+        private router: Router,
+
+    ) {}
 
     ngOnInit(): void {
         this.companyExpenseService
@@ -110,14 +102,12 @@ export class CompanyExpenseComponent implements OnInit {
     }
 
     prepareModal(expense: Expense): void {
+        this.modalExpense = expense;
+        this.ehPdf = this.modalExpense.proofOfPaymentUrl.indexOf('pdf') < 0 ? false : true;
         this.poModalDespesa.open();
     }
 
-    downloadPdf(): any {
-        window.open(this.pdf, '_blank');
-    }
-
-    downloadImg(): any {
-        window.open(this.imagemDespesa, '_blank');
+    download(link): any {
+        window.open(link, '_blank');
     }
 }

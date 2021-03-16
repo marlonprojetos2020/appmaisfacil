@@ -20,4 +20,12 @@ export class EmployeeListService {
             id
         );
     }
+
+    acceptHired(id: number): any {
+        return this.httpCLient.post(`${environment.apiUrl}/employee/${id}/accept`, id);
+    }
+
+    refuseHired(id: number): any {
+        return this.httpCLient.post(`${environment.apiUrl}/employee/${id}/refuse`, id);
+    }
 }

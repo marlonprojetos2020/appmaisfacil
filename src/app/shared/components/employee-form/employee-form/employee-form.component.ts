@@ -22,6 +22,7 @@ export class EmployeeFormComponent implements OnInit {
     idEmployee: number;
     loading = false;
     canActivated = false;
+    isHideLoading = true;
 
     urlUploadDocument: string;
 
@@ -77,17 +78,17 @@ export class EmployeeFormComponent implements OnInit {
 
         this.editedEmployee
             ? this.employeeService
-                  .updateEmployee(this.idEmployee, this.newCompanyEmployee)
-                  .pipe(finalize(() => (this.loading = false)))
-                  .subscribe((data) => {
-                      this.setUrlDocument(data.id);
-                  })
+                .updateEmployee(this.idEmployee, this.newCompanyEmployee)
+                .pipe(finalize(() => (this.loading = false)))
+                .subscribe((data) => {
+                    this.setUrlDocument(data.id);
+                })
             : this.employeeService
-                  .createCompanyEmployee(this.newCompanyEmployee)
-                  .pipe(finalize(() => (this.loading = false)))
-                  .subscribe((data) => {
-                      this.setUrlDocument(data.id);
-                  });
+                .createCompanyEmployee(this.newCompanyEmployee)
+                .pipe(finalize(() => (this.loading = false)))
+                .subscribe((data) => {
+                    this.setUrlDocument(data.id);
+                });
     }
 
     nextForm(): void {
@@ -99,14 +100,19 @@ export class EmployeeFormComponent implements OnInit {
         this.nextForm();
     }
 
+    onLoad(): void {
+        this.isHideLoading = false;
+    }
+
     success(): void {
+        this.isHideLoading = true;
         this.editedEmployee
             ? this.poNotificationService.success(
-                  'Documento editado com sucesso'
-              )
+                'Documento editado com sucesso'
+            )
             : this.poNotificationService.success(
-                  'Documento carregado com sucesso'
-              );
+                'Documento carregado com sucesso'
+            );
 
         this.location.back();
     }

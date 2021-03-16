@@ -5,6 +5,7 @@ import {
     PoButtonModule,
     PoContainerModule,
     PoFieldModule,
+    PoLoadingModule,
     PoStepperModule,
 } from '@po-ui/ng-components';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -19,6 +20,7 @@ import { InvalidFeedbackModule } from '../invalid-feedback/invalid-feedback.modu
         InvalidFeedbackModule,
         PoButtonModule,
         PoContainerModule,
+        PoLoadingModule,
     ],
     declarations: [EmployeeFormComponent],
     exports: [EmployeeFormComponent],

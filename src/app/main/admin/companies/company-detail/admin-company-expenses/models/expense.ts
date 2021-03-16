@@ -7,4 +7,5 @@ export interface Expense {
     value: number;
     date: string;
     description: string;
+    proofOfPaymentUrl: string;
 }

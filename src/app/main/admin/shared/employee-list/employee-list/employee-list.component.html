@@ -9,14 +9,122 @@
 ></app-page-datatable>
 
 <po-modal
+    #modalEmployeeHired
+    p-title="Ficha do Funcionário"
+    [p-primary-action]="modalEmployee?.status !== 'PENDING_HIRED' ? closeModalHired : acceptAction"
+    [p-secondary-action]="modalEmployee?.status !== 'PENDING_HIRED' ? '' : refuseAction"
+>
+    <div
+        class="po-row"
+        *ngIf="modalEmployee"
+    >
+        <div class="po-md-6">
+            <div class="img-modal">
+                <ng-container *ngIf="!isPdf; else elseBlock">
+                    <img
+                        [src]="modalEmployee.admissionFileUrl"
+                        alt="Ficha admissional"
+                    />
+                </ng-container>
+                <po-button
+                    (p-click)="download(modalEmployee.admissionFileUrl)"
+                    p-icon="po-icon po-icon-download"
+                ></po-button>
+            </div>
+        </div>
+        <div class="po-md-6 text-modal">
+            <div class="po-row">
+                <div class="po-md-12">
+                    <h1 class="po-mb-3">
+                        {{modalEmployee?.status === 'PENDING_HIRED' ? 'Confirmar Contratação' : 'Dados do Funcionário'
+                        }}
+                    </h1>
+                </div>
+                <div class="po-md-12 po-mb-2">
+                    <h2>
+                        <span>Nome do Funcionário</span>
+                        {{ modalEmployee.name }}
+                    </h2>
+                </div>
+                <div class="po-md-12 po-mb-2">
+                    <h3>
+                        <span>Situação</span>
+                        {{ modalEmployee.statusText }}
+                    </h3>
+                </div>
+                <div class="po-md-12 po-mb-2">
+                    <h3>
+                        <span>Empresa</span>
+                        {{ modalEmployee.companyFantasyName }}
+                    </h3>
+                </div>
+                <div class="po-md-12 po-mb-2">
+                    <h3>
+                        <span>Cargo</span>
+                        {{ modalEmployee.category }}
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</po-modal>
+
+<po-modal
     #modalEmployeeFired
     p-title="Confirmar Demissão"
-    [p-primary-action]="primaryAction"
 >
-    <p *ngIf="modalEmployee">
-        Demitir o funcionário <strong>{{ modalEmployee.name }}</strong> da empresa
-        <strong>{{ modalEmployee.companyFantasyName}}</strong>
-    </p>
+    <div
+        class="po-row po-mb-3"
+        *ngIf="modalEmployee"
+    >
+        <div class="po-md-6">
+            <div class="img-modal">
+                <ng-container *ngIf="!isPdf; else elseBlock">
+                    <img
+                        [src]="modalEmployee.admissionFileUrl"
+                        alt="Ficha admissional"
+                    />
+                </ng-container>
+                <po-button
+                    (p-click)="download(modalEmployee.admissionFileUrl)"
+                    p-icon="po-icon po-icon-download"
+                ></po-button>
+            </div>
+        </div>
+        <div class="po-md-6 text-modal">
+            <div class="po-row">
+                <div class="po-md-12">
+                    <h1 class="po-mb-3">
+                        Dados do Funcionário
+                    </h1>
+                </div>
+                <div class="po-md-12 po-mb-2">
+                    <h2>
+                        <span>Nome</span>
+                        {{ modalEmployee.name }}
+                    </h2>
+                </div>
+                <div class="po-md-12 po-mb-2">
+                    <h3>
+                        <span>Situação</span>
+                        {{ modalEmployee.statusText }}
+                    </h3>
+                </div>
+                <div class="po-md-12 po-mb-2">
+                    <h3>
+                        <span>Empresa</span>
+                        {{ modalEmployee.companyFantasyName }}
+                    </h3>
+                </div>
+                <div class="po-md-12 po-mb-2">
+                    <h3>
+                        <span>Cargo</span>
+                        {{ modalEmployee.category }}
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
     <po-upload
         p-drag-drop
         p-label="Anexar Ficha de Demissão"
@@ -27,5 +135,12 @@
         [p-restrictions]="restrictions"
     ></po-upload>
 </po-modal>
+
+<ng-template #elseBlock>
+    <img
+        src="/assets/images/imgPdf.png"
+        alt="Pdf"
+    />
+</ng-template>
 
 <po-loading-overlay [hidden]="isHideLoading"></po-loading-overlay>

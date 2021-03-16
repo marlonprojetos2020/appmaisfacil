@@ -4,6 +4,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '../../../core/auth/auth.interceptor';
 import { CompanyExpenseComponent } from './company-expense/company-expense.component';
 import { CompanyNewExpenseComponent } from './company-new-expense/company-new-expense/company-new-expense.component';
+import { CompanyEditExpenseComponent } from './company-edit-expense/company-edit-expense/company-edit-expense.component';
 
 const routes: Routes = [
     {
@@ -13,6 +14,10 @@ const routes: Routes = [
     {
         path: 'nova-despesa',
         component: CompanyNewExpenseComponent,
+    },
+    {
+        path: 'editar-despesa/:idDespesa',
+        component: CompanyEditExpenseComponent,
     },
 ];
 

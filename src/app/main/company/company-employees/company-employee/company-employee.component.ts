@@ -68,8 +68,7 @@ export class CompanyEmployeeComponent implements OnInit {
                 this.companyEmployee = item as CompanyEmployee;
                 this.funcionario = this.companyEmployee.name;
             },
-            disabled: (item) =>
-                item.status === 'PENDING_FIRED' || item.status === 'FIRED',
+            disabled: (item) => item.status !== 'HIRED',
         },
         {
             label: 'Editar registo',
@@ -82,6 +81,7 @@ export class CompanyEmployeeComponent implements OnInit {
         {
             label: 'Baixar Termo de Contratação',
             action: (item) => window.open(item.admissionFileUrl, '_blank'),
+            disabled: (item) => item.status === 'NOT_FINALIZED',
         },
     ];
     columns: DatatableColumn[] = [

@@ -132,11 +132,7 @@ export class BankStatementListComponent implements OnInit {
 
     prepareModal(extrato: BankStatement): void {
         this.modalBankStatement = extrato;
-        if (this.modalBankStatement.attachmentUrl.indexOf('pdf') < 0) {
-            this.ehPdfPendente = false;
-        } else {
-            this.ehPdfPendente = true;
-        }
+        this.ehPdfPendente = this.modalBankStatement.attachmentUrl.indexOf('pdf') < 0 ? false : true;
         this.poModalExtratoPendente.open();
     }
 

@@ -101,8 +101,14 @@
                 [p-multiple]="false"
                 [p-restrictions]="restrictions"
                 [p-url]="urlUploadDocument"
+                (p-upload)="onLoad()"
                 (p-success)="success()"
             ></po-upload>
         </po-container>
     </po-step>
 </po-stepper>
+
+<po-loading-overlay
+    [p-screen-lock]="true"
+    [hidden]="isHideLoading"
+></po-loading-overlay>

@@ -10,6 +10,7 @@ import { CompanyExpenseComponent } from './company-expense/company-expense.compo
 import { AtentionCardModule } from '../../../shared/components/atention-card/atention-card.module';
 import { PageDatatableModule } from '../../../shared/components/page-datatable/page-datatable.module';
 import { CompanyNewExpenseModule } from './company-new-expense/company-new-expense.module';
+import { CompanyEditExpenseModule } from './company-edit-expense/company-edit-expense.module';
 import { CompanyExpensesRoutingModule } from './company-expenses-routing.module';
 import { HelpPopoverModule } from '../../../shared/directives/help-popover/help-popover.module';
 
@@ -22,6 +23,7 @@ import { HelpPopoverModule } from '../../../shared/directives/help-popover/help-
         PageDatatableModule,
         CompanyExpensesRoutingModule,
         CompanyNewExpenseModule,
+        CompanyEditExpenseModule,
         PoModalModule,
         PoButtonModule,
         HelpPopoverModule,

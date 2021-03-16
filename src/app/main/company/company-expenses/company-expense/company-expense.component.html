@@ -8,58 +8,66 @@
     class="breadcrumb page-with-action"
 ></app-page-datatable>
 
-<po-modal #modalDespesa p-title="Despesa" [p-primary-action]="primaryAction">
-    <div class="po-row">
+<po-modal
+    #modalDespesa
+    p-title="Despesa"
+    [p-primary-action]="primaryAction"
+>
+    <div
+        class="po-row"
+        *ngIf="modalExpense"
+    >
         <div class="po-md-6">
-            <ng-template [ngIf]="ehPdf">
-                <div class="img-modal">
-                    <img src="/assets/images/imgPdf.png" alt="Pdf" />
-                    <po-button
-                        (p-click)="downloadPdf()"
-                        p-icon="po-icon po-icon-download"
-                    ></po-button>
-                </div>
-            </ng-template>
-            <ng-template [ngIf]="!ehPdf">
-                <div class="img-modal">
-                    <img [src]="imagemDespesa" alt="Despesa" />
-                    <po-button
-                        (p-click)="downloadImg()"
-                        p-icon="po-icon po-icon-download"
-                    ></po-button>
-                </div>
-            </ng-template>
+            <div class="img-modal">
+                <ng-container *ngIf="!ehPdf ; elseBlock">
+                    <img
+                        [src]="modalExpense.proofOfPaymentUrl"
+                        alt="Despesa"
+                    />
+                </ng-container>
+                <po-button
+                    (p-click)="download(modalExpense.proofOfPaymentUr)"
+                    p-icon="po-icon po-icon-download"
+                ></po-button>
+            </div>
         </div>
         <div class="po-md-6">
             <div class="po-row text-modal">
                 <div class="po-md-12 po-mb-2">
-                    <h1>{{ tituloDespesa }}</h1>
+                    <h1>{{ modalExpense.description }}</h1>
                 </div>
                 <div class="po-md-12 po-mb-2">
                     <h2>
                         <span>Empresa</span>
-                        {{ nomeEmpresa }}
+                        {{ this.nomeEmpresa }}
                     </h2>
                 </div>
                 <div class="po-md-12 po-mb-2">
                     <h3>
                         <span>Tipo</span>
-                        {{ tipoDespesa }}
+                        {{ modalExpense['type.label']}}
                     </h3>
                 </div>
                 <div class="po-md-12 po-mb-2">
                     <h3>
                         <span>Data</span>
-                        {{ dataDespesa | date: "dd/MM/yy" }}
+                        {{ modalExpense.date | date: "dd/MM/yy" }}
                     </h3>
                 </div>
                 <div class="po-md-12 po-mb-2">
                     <h3>
                         <span>Valor</span>
-                        {{ valorDespesa | currency: "BRL" }}
+                        {{ modalExpense.value | currency: "BRL" }}
                     </h3>
                 </div>
             </div>
         </div>
     </div>
 </po-modal>
+
+<ng-template #elseBlock>
+    <img
+        src="/assets/images/imgPdf.png"
+        alt="Pdf"
+    />
+</ng-template>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { CompanyDetailRoutingModule } from './company-detail-routing.module';
 import { CompanyDetailDashboardModule } from './dashboard/company-detail-dashboard.module';
 import { CompanyEditModule } from '../company-edit/company-edit.module';
@@ -10,9 +11,6 @@ import { AdminCompanyInvoiceModule } from './admin-company-invoices/admin-compan
 import { AdminCompanyCompanyModule } from './admin-company-companies/admin-company-company.module';
 import { AdminCompanyAssociateModule } from './admin-company-associates/admin-company-associate.module';
 import { AdminCompanyEmployeeModule } from './admin-company-employees/admin-company-employee.module';
-// import {AdminCompanyExtraServiceModule} from './admin-company-extra-services/admin-company-extra-service.module';
-// import {AdminCompanyIndicationModule} from './admin-company-indications/admin-company-indication.module';
-// import {AdminCompanyFaqModule} from './admin-company-faq/admin-company-faq.module';
 
 @NgModule({
     declarations: [],
@@ -28,9 +26,6 @@ import { AdminCompanyEmployeeModule } from './admin-company-employees/admin-comp
         AdminCompanyCompanyModule,
         AdminCompanyAssociateModule,
         AdminCompanyEmployeeModule,
-        // AdminCompanyExtraServiceModule,
-        // AdminCompanyIndicationModule,
-        // AdminCompanyFaqModule,
     ],
 })
 export class CompanyDatailModule {

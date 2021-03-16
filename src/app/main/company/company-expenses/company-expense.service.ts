@@ -8,19 +8,22 @@ import { Observable } from 'rxjs';
 export class CompanyExpenseService {
     constructor(private httpClient: HttpClient) {}
 
-    createCompanyExpense(
-        companyExpense: CompanyExpense
-    ): Observable<CompanyExpense> {
-        return this.httpClient.post<CompanyExpense>(
-            `${environment.apiUrl}/company/expense`,
-            companyExpense
-        );
+    createCompanyExpense(companyExpense: CompanyExpense): Observable<CompanyExpense> {
+        return this.httpClient.post<CompanyExpense>(`${environment.apiUrl}/company/expense`, companyExpense);
+    }
+
+    editCompanyExpense(id: number, companyExpense: CompanyExpense): Observable<CompanyExpense> {
+        return this.httpClient.put<CompanyExpense>(`${environment.apiUrl}/company/expense/${id}`, companyExpense);
     }
 
     getTypeExpense(): any {
         return this.httpClient.get(
             `${environment.apiUrl}/company/expense/types`
         );
+    }
+
+    findExpense(id): Observable<any> {
+        return this.httpClient.get(`${environment.apiUrl}/company/expense/${id}`);
     }
 
     getCompanyExpense(): any {

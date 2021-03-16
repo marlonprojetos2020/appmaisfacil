@@ -10,7 +10,6 @@ import { CompanyExpenseFormModule } from '../shared/company-expense-form/company
         CommonModule,
         CompanyExpenseFormModule,
     ],
-    exports: [CompanyEditExpenseComponent],
 })
 
 export class CompanyEditExpenseModule {}

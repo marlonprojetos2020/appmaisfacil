@@ -1,1 +1,4 @@
-<app-company-expense-form></app-company-expense-form>
+<app-company-expense-form
+    *ngIf="editedExpense | async as expense"
+    [editedExpense]="expense"
+></app-company-expense-form>

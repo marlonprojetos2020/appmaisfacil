@@ -16,7 +16,8 @@ const routes: Routes = [
         component: CompanyNewExpenseComponent,
     },
     {
-        path: 'editar-despesa/:idDespesa',
+        path: 'editar-despesa/:id',
+        pathMatch: 'full',
         component: CompanyEditExpenseComponent,
     },
 ];

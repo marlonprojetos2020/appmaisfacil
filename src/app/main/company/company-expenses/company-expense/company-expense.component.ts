@@ -62,7 +62,7 @@ export class CompanyExpenseComponent implements OnInit {
         },
         {
             label: 'Editar',
-            action: (item) => this.router.navigate(['empresa', 'editar-despesa', item.id]),
+            action: (item) => this.router.navigate(['empresa', 'despesas', 'editar-despesa', item.id]),
         },
         // {
         //     label: 'Baixar Despesa',

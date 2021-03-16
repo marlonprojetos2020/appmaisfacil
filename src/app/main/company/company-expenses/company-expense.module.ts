@@ -6,6 +6,7 @@ import {
     PoModalModule,
     PoPageModule,
 } from '@po-ui/ng-components';
+
 import { CompanyExpenseComponent } from './company-expense/company-expense.component';
 import { AtentionCardModule } from '../../../shared/components/atention-card/atention-card.module';
 import { PageDatatableModule } from '../../../shared/components/page-datatable/page-datatable.module';

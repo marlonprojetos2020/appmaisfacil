@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
     PoBreadcrumb,
@@ -18,8 +18,10 @@ import { environment } from 'src/environments/environment';
     templateUrl: './company-expense-form.component.html',
 })
 export class CompanyExpenseFormComponent implements OnInit {
+
+    @Input() editedExpense = null;
+
     formCompanyExpense: FormGroup;
-    newCompanyExpense: CompanyExpense;
     urlUploadDocument: string;
     loading = false;
 
@@ -51,36 +53,37 @@ export class CompanyExpenseFormComponent implements OnInit {
 
     ngOnInit(): void {
 
-        this.formCompanyExpense = this.formBuilder.group({
-            description: ['', Validators.required],
-            type: this.formBuilder.group({
-                id: ['', Validators.required],
-            }),
-            value: ['', Validators.required],
-            date: ['', Validators.required],
-        });
-
-        this.companyExpenseService.getTypeExpense().subscribe((options) =>
+        this.companyExpenseService.getTypeExpense().subscribe((options) => {
             this.options.push(
                 ...options.map((item) => ({
                     label: item.label,
                     value: item.id,
-                }))
-            )
+                })),
+            );
+            this.formCompanyExpense = this.formBuilder.group({
+                description: [this.editedExpense?.description, Validators.required],
+                type: this.formBuilder.group({
+                    id: [this.editedExpense?.type.id, Validators.required],
+                }),
+                value: [this.editedExpense?.value, Validators.required],
+                date: [this.editedExpense?.date, Validators.required],
+            });
+        }
         );
     }
 
     submitForm(): any {
         this.loading = true;
-
-        this.newCompanyExpense = this.formCompanyExpense.getRawValue() as CompanyExpense;
-
-        this.companyExpenseService
-            .createCompanyExpense(this.newCompanyExpense)
-            .pipe(finalize(() => (this.loading = false)))
-            .subscribe((data) => {
-                this.setUrlDocument(data.id);
-            });
+        const newCompanyExpense = this.formCompanyExpense.getRawValue() as CompanyExpense;
+        this.editedExpense ?
+            this.companyExpenseService.editCompanyExpense(this.editedExpense.id, newCompanyExpense)
+                .pipe(finalize(() => this.loading = false))
+                .subscribe(data => this.setUrlDocument(data.id))
+            :
+            this.companyExpenseService
+                .createCompanyExpense(newCompanyExpense)
+                .pipe(finalize(() => this.loading = false))
+                .subscribe(data => this.setUrlDocument(data.id));
     }
 
     nextForm(): void {

@@ -1,9 +1,12 @@
 <po-page-default
-    p-title="Nova Despesas"
+    [p-title]="editedExpense? 'Editar Despesa' : 'Nova Despesa'"
     [p-breadcrumb]="breadcrumb"
     class="breadcrumb"
 >
-    <po-stepper #stepper>
+    <po-stepper
+        #stepper
+        *ngIf='formCompanyExpense'
+    >
         <po-step
             p-label="Dados da Despesa"
             [p-can-active-next-step]="formCompanyExpense.invalid"

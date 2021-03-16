@@ -5,7 +5,7 @@ import {
     PoNotificationService,
     PoUploadFileRestrictions,
 } from '@po-ui/ng-components';
-import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 
 import { CompanyExpense } from '../../../models/company-expense';
@@ -24,6 +24,8 @@ export class CompanyExpenseFormComponent implements OnInit {
     formCompanyExpense: FormGroup;
     urlUploadDocument: string;
     loading = false;
+    isHideLoading = true;
+
 
     options = [];
 
@@ -48,7 +50,7 @@ export class CompanyExpenseFormComponent implements OnInit {
         private formBuilder: FormBuilder,
         private companyExpenseService: CompanyExpenseService,
         private poNotificationService: PoNotificationService,
-        private location: Location,
+        private router: Router,
     ) {}
 
     ngOnInit(): void {
@@ -78,7 +80,7 @@ export class CompanyExpenseFormComponent implements OnInit {
         this.editedExpense ?
             this.companyExpenseService.editCompanyExpense(this.editedExpense.id, newCompanyExpense)
                 .pipe(finalize(() => this.loading = false))
-                .subscribe(data => this.setUrlDocument(data.id))
+                .subscribe(() => this.setUrlDocument(this.editedExpense.id))
             :
             this.companyExpenseService
                 .createCompanyExpense(newCompanyExpense)
@@ -95,10 +97,15 @@ export class CompanyExpenseFormComponent implements OnInit {
         this.nextForm();
     }
 
+    onLoad(): void {
+        this.isHideLoading = false;
+    }
+
     success(): void {
+        this.isHideLoading = true;
         const message = 'Documento carregado com sucesso';
         this.poNotificationService.success(message);
-        this.location.back();
+        this.router.navigate(['empresa', 'despesas']);
     }
 
     dirtyMe(input): void {

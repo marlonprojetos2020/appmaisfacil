@@ -4,6 +4,7 @@ import {
     PoButtonModule,
     PoContainerModule,
     PoFieldModule,
+    PoLoadingModule,
     PoPageModule,
     PoStepperModule,
 } from '@po-ui/ng-components';
@@ -23,6 +24,7 @@ import { CompanyExpenseFormComponent } from './company-expense-form/company-expe
         PoFieldModule,
         PoButtonModule,
         InvalidFeedbackModule,
+        PoLoadingModule,
     ],
     exports: [CompanyExpenseFormComponent]
 

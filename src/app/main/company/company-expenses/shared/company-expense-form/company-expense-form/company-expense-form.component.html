@@ -3,15 +3,9 @@
     [p-breadcrumb]="breadcrumb"
     class="breadcrumb"
 >
-    <po-stepper
-        #stepper
-        *ngIf='formCompanyExpense'
-    >
-        <po-step
-            p-label="Dados da Despesa"
-            [p-can-active-next-step]="formCompanyExpense.invalid"
-        >
-            <po-container>
+    <po-stepper #stepper>
+        <po-step p-label="Dados da Despesa">
+            <po-container *ngIf='formCompanyExpense'>
                 <form [formGroup]="formCompanyExpense">
                     <div class="po-row po-mb-3">
                         <div class="po-md-6">
@@ -114,6 +108,7 @@
                         [p-multiple]="false"
                         [p-restrictions]="restrictions"
                         [p-url]="urlUploadDocument"
+                        (p-upload)="onLoad()"
                         (p-success)="success()"
                     ></po-upload>
                 </div>
@@ -121,3 +116,4 @@
         </po-step>
     </po-stepper>
 </po-page-default>
+<po-loading-overlay [hidden]="isHideLoading"></po-loading-overlay>

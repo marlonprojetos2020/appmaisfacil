@@ -1,5 +1,5 @@
 <po-page-dynamic-search
-    [ngClass]="hasSearch ? '' : 'noSearchBar'"
+    [ngClass]="{'noSearchBar': !hasSearch , 'table-selectable-row': selectable}"
     [p-title]="title"
     [p-actions]="pageActions"
     [p-breadcrumb]="breadcrumb"
@@ -20,9 +20,11 @@
             [p-loading-show-more]="loadingShowMore"
             [p-show-more-disabled]="showMoreDisabled"
             [p-selectable]="selectable"
+            [p-single-select]="selectable"
             [p-sort]="true"
             [p-striped]="true"
             (p-sort-by)="sortBy($event)"
+            (p-selected)="selectedFunction($event)"
             [p-literals]="literals"
         >
             <ng-template

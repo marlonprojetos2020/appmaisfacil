@@ -12,6 +12,7 @@ import { DatatableColumn } from '../../../../../shared/components/page-datatable
     templateUrl: './company-list.component.html',
 })
 export class CompanyListComponent {
+
     breadcrumb: PoBreadcrumb = {
         items: [
             { label: 'Início', link: '/admin' },
@@ -28,18 +29,16 @@ export class CompanyListComponent {
     ];
 
     serviceApi = `${environment.apiUrl}/users/p/search`;
+
     tableActions: PoTableAction[] = [
         {
-            label: 'Visualizar',
-            action: (item) =>
-                this.router.navigateByUrl(`/admin/empresa/${item.id}`),
-        },
-        {
-            label: 'Editar Empresa',
+            label: 'Editar',
+            icon: 'po-icon po-icon-edit',
             action: (item) =>
                 this.router.navigateByUrl(`/admin/empresa/${item.id}/editar`),
         },
     ];
+
     columns: DatatableColumn[] = [
         {
             label: 'Nome Fantasia',
@@ -51,6 +50,8 @@ export class CompanyListComponent {
         },
         { property: 'name', label: 'Usuário' },
     ];
+
+    selecionaEmpresa = (item) => this.router.navigateByUrl(`/admin/empresa/${item.id}`);
 
     constructor(private router: Router) {}
 }

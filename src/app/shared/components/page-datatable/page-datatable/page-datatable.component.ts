@@ -26,9 +26,12 @@ export class PageDatatableComponent implements OnInit {
     @Input() breadcrumb: PoBreadcrumb;
     @Input() pageActions: PoPageAction[];
 
+
     // table props
     @Input() columns: DatatableColumn[];
     @Input() tableActions: PoTableAction[];
+    @Input() selectable = false;
+    @Input() selectedFunction = null;
 
     @Input() size = 10;
 
@@ -41,7 +44,6 @@ export class PageDatatableComponent implements OnInit {
     loading = false;
     loadingShowMore = false;
     showMoreDisabled = false;
-    selectable = false;
     tableColumnSort: PoTableColumnSort;
 
     currentPage: number;

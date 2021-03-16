@@ -31,7 +31,7 @@ export class AdminDashboardComponent implements OnInit {
                 this.cobrancaAnalise = data.countPendingReviewBillings;
                 this.cobrancaPendente = data.countPendingBillings;
                 this.funcionarioDemissao = data.countPendingFiredEmployees;
-                this.funcionarioDemissao = data.countPendingHiredEmployees;
+                this.funcionarioContratacao = data.countPendingHiredEmployees;
                 this.notaFiscalAnalise = data.countProcessingNotaFiscal;
                 this.notaFiscalCancelamento =
                     data.countWaitingCancelementNotaFiscal;

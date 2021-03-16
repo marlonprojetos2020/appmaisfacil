@@ -95,6 +95,7 @@ export class CompanyEmployeeComponent implements OnInit {
                 { value: 'PENDING_HIRED', color: 'color-08', label: 'Pendente' },
                 { value: 'PENDING_FIRED', color: 'color-01', label: 'Pedido Demissão' },
                 { value: 'HIRED', color: 'color-12', label: 'Contratado' },
+                { value: 'REFUSED_HIRED', color: 'color-05', label: 'Recusado' },
             ],
         },
         {

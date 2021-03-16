@@ -20,12 +20,12 @@ import { environment } from 'src/environments/environment';
 export class CompanyExpenseFormComponent implements OnInit {
 
     @Input() editedExpense = null;
+    @Input() breadcrumb = null;
 
     formCompanyExpense: FormGroup;
     urlUploadDocument: string;
     loading = false;
     isHideLoading = true;
-
 
     options = [];
 
@@ -33,14 +33,6 @@ export class CompanyExpenseFormComponent implements OnInit {
         allowedExtensions: ['.txt', '.pdf', '.png', '.jpeg', '.jpg'],
         maxFileSize: 5242880,
         maxFiles: 1,
-    };
-
-    breadcrumb: PoBreadcrumb = {
-        items: [
-            { label: 'Início', link: '/empresa' },
-            { label: 'Minhas Despesas', link: '/empresa/despesas' },
-            { label: 'Nova Despesa', link: '/empresa/despesas/nova-despesa' },
-        ],
     };
 
     @ViewChild('stepper', { static: true }) stepper;

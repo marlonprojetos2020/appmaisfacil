@@ -1,10 +1,10 @@
-import {PoTableColumn} from '@po-ui/ng-components';
-import {PoPageDynamicSearchFilters} from '@po-ui/ng-templates';
+import { PoTableColumn } from '@po-ui/ng-components';
+import { PoPageDynamicSearchFilters } from '@po-ui/ng-templates';
 
 export interface DatatableColumn extends PoTableColumn {
     key?: boolean;
     badgePoColor?: string;
-    customValue?: (value: any) => any[];
+    customValue?: (value: any) => string[];
     poPageDynamicSearchFilters?: PoPageDynamicSearchFilters;
     searchProperty?: string;
     disableSearch?: boolean;

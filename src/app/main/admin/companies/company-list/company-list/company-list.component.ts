@@ -5,8 +5,10 @@ import {
     PoPageAction,
     PoTableAction,
 } from '@po-ui/ng-components';
+
 import { environment } from 'src/environments/environment';
 import { DatatableColumn } from '../../../../../shared/components/page-datatable/datatable-column';
+
 
 @Component({
     templateUrl: './company-list.component.html',

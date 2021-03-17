@@ -117,13 +117,20 @@ export class PageDatatableComponent implements OnInit {
                 this.showMoreDisabled = !result.hasNext;
                 if (result.items) {
                     this.items.push(
-                        ...result.items.map((item) => this.flattenObject(item))
+                        ...result.items.map((item) => {
+                            console.log(item);
+                            item.userCompany?.cnpj ?
+                                (item.userCompany.cnpj = item.userCompany.cnpj.replace(
+                                    /(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/g,
+                                    '$1.$2.$3/$4-$5',
+                                ))
+                                : null;
+                            return this.flattenObject(item);
+                        })
                     );
                 } else {
                     this.items.push(
-                        ...result.map((item) => {
-                            return this.flattenObject(item);
-                        })
+                        ...result.map((item) => this.flattenObject(item)),
                     );
                 }
             });

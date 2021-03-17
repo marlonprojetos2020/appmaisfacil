@@ -13,7 +13,7 @@ import { DatatableColumn } from '../../../../shared/components/page-datatable/da
 export class CompanyAssociateComponent implements OnInit {
 
     pageActions: PoPageAction[] = [];
-
+    serviceApi = `${environment.apiUrl}/company/partners`;
     idCompany: number;
 
     breadcrumb: PoBreadcrumb = {
@@ -23,19 +23,19 @@ export class CompanyAssociateComponent implements OnInit {
         ],
     };
 
-    serviceApi = '';
     tableActions: PoTableAction[] = [];
     columns: DatatableColumn[] = [
         {
             label: 'Nome',
-            property: 'userCompany.fantasyName',
+            property: 'name',
         },
         {
             label: 'CPF',
-            property: 'userCompany.cnpj',
+            property: 'cpf',
         },
         {
             label: 'Participação na Sociedade',
+            property: 'percentageInSociety',
         },
     ];
 
@@ -45,8 +45,5 @@ export class CompanyAssociateComponent implements OnInit {
         const company = JSON.parse(sessionStorage.CREDENTIALS_KEY);
 
         this.idCompany = company.userDetails.id;
-
-        // this.serviceApi = `${environment.apiUrl}/users/${this.idCompany}/company-partners`;
-        this.serviceApi = `${environment.apiUrl}/company/partners`;
     }
 }

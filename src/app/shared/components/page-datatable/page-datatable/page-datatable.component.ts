@@ -118,7 +118,6 @@ export class PageDatatableComponent implements OnInit {
                 if (result.items) {
                     this.items.push(
                         ...result.items.map((item) => {
-                            console.log(item);
                             item.userCompany?.cnpj ?
                                 (item.userCompany.cnpj = item.userCompany.cnpj.replace(
                                     /(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/g,

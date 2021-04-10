@@ -216,6 +216,7 @@
                         class="po-md-12 po-mt-2"
                         name="radioGroupBasic"
                         p-label="Tipo da empresa"
+                        p-columns="3"
                         [p-options]="[
                             {
                                 label: 'Prestadora de Serviço',
@@ -276,19 +277,15 @@
                                 formControlName="zipcode"
                                 p-optional="true"
                             ></po-input>
-                            <app-invalid-feedback
-                                [hasError]="zipcodeError === true"
-                            >
+                            <app-invalid-feedback [hasError]="zipcodeError === true">
                                 CEP não encontrado
                             </app-invalid-feedback>
                         </div>
 
-                        <ng-container
-                            *ngIf="
+                        <ng-container *ngIf="
                                 formDadosEmpresa.get('address.zipcode').valid &&
                                 zipcodeError !== true
-                            "
-                        >
+                            ">
                             <po-input
                                 #streetInput
                                 class="po-md-12 po-mt-2"

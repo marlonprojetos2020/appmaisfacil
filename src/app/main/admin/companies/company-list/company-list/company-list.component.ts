@@ -1,19 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import {
     PoBreadcrumb,
+    PoDialogService,
+    PoNotificationService,
     PoPageAction,
     PoTableAction,
 } from '@po-ui/ng-components';
+import { PageDatatableComponent } from 'src/app/shared/components/page-datatable/page-datatable/page-datatable.component';
 
 import { environment } from 'src/environments/environment';
 import { DatatableColumn } from '../../../../../shared/components/page-datatable/datatable-column';
+import { CompaniesService } from '../../companies.service';
 
 
 @Component({
     templateUrl: './company-list.component.html',
 })
 export class CompanyListComponent {
+
+    @ViewChild(PageDatatableComponent) dataTableComponent: PageDatatableComponent;
 
     breadcrumb: PoBreadcrumb = {
         items: [
@@ -39,6 +45,11 @@ export class CompanyListComponent {
             action: (item) =>
                 this.router.navigateByUrl(`/admin/empresa/${item.id}/editar`),
         },
+        {
+            label: 'Deletar',
+            icon: 'po-icon po-icon-delete',
+            action: (item) => this.deleteCompany(item),
+        },
     ];
 
     columns: DatatableColumn[] = [
@@ -55,5 +66,26 @@ export class CompanyListComponent {
 
     selecionaEmpresa = (item) => this.router.navigateByUrl(`/admin/empresa/${item.id}`);
 
-    constructor(private router: Router) {}
+    constructor(
+        private router: Router,
+        private companiesService: CompaniesService,
+        private poNotification: PoNotificationService,
+        private poDialogService: PoDialogService,
+    ) {}
+
+    refreshTable(): void {
+        this.dataTableComponent.loadItems();
+    }
+
+    deleteCompany(item): void {
+        this.poDialogService.confirm({
+            title: 'Deletar Empresa',
+            message: `Tem certeza que deseja excluir esta empresa?`,
+            confirm: () =>
+                this.companiesService.deleteUser(item.id).subscribe(() => {
+                    this.refreshTable();
+                    this.poNotification.success('Empresa deletada com Sucesso');
+                }),
+        });
+    }
 }

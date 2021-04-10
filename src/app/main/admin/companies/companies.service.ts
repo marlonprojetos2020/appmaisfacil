@@ -59,6 +59,10 @@ export class CompaniesService {
         );
     }
 
+    deleteUser(id: string): Observable<any> {
+        return this.httpClient.delete(`${environment.apiUrl}/users/${id}`);
+    }
+
     getUserCompany(id: number): Observable<User> {
         return this.httpClient.get<User>(`${environment.apiUrl}/users/${id}`);
     }

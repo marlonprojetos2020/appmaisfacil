@@ -55,16 +55,18 @@
     >
         <div class="po-md-6">
             <div class="img-modal">
-                <ng-container *ngIf="!isPdfCobranca; else elseBlock">
-                    <img
-                        [src]="modalCharge.billingFileUrl"
-                        alt="Cobrança"
-                    />
+                <ng-container *ngIf="modalCharge.proofOfPaymentUrl; else elseBlock2">
+                    <ng-container *ngIf="!isPdfCobranca; else elseBlock">
+                        <img
+                            [src]="modalCharge.billingFileUrl"
+                            alt="Cobrança"
+                        />
+                    </ng-container>
+                    <po-button
+                        (p-click)="download(modalCharge.billingFileUrl)"
+                        p-icon="po-icon po-icon-download"
+                    ></po-button>
                 </ng-container>
-                <po-button
-                    (p-click)="download(modalCharge.billingFileUrl)"
-                    p-icon="po-icon po-icon-download"
-                ></po-button>
             </div>
         </div>
         <ng-container *ngTemplateOutlet="greet"></ng-container>
@@ -117,6 +119,12 @@
 <ng-template #elseBlock>
     <img
         src="/assets/images/imgPdf.png"
+        alt="Pdf"
+    />
+</ng-template>
+<ng-template #elseBlock2>
+    <img
+        src="/assets/images/noImage.png"
         alt="Pdf"
     />
 </ng-template>

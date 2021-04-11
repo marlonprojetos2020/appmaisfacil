@@ -195,7 +195,7 @@ export class ChargeListComponent implements OnInit {
     openModalCobranca(charge: Charge = null): void {
         if (charge) {
             this.modalCharge = charge;
-            this.modalCharge.billingFileUrl.indexOf('pdf') < 0 ? this.isPdfCobranca = false : this.isPdfCobranca = true;
+            this.modalCharge.billingFileUrl?.indexOf('pdf') < 0 ? this.isPdfCobranca = false : this.isPdfCobranca = true;
         }
         this.poModalCobranca.open();
     }

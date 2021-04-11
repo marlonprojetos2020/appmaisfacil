@@ -101,6 +101,10 @@ export class ChargeFormComponent implements OnInit {
     success(): void {
         const message = 'Documento carregado com sucesso';
         this.poNotificationService.success(message);
+        this.returToListing();
+    }
+
+    returToListing(): void {
         this.location.back();
     }
 

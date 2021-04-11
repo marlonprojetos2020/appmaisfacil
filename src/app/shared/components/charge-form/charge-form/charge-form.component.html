@@ -30,7 +30,10 @@
                     </div>
                 </div>
                 <div class="po-row po-mb-4">
-                    <div class="po-md-4" formGroupName="type">
+                    <div
+                        class="po-md-4"
+                        formGroupName="type"
+                    >
                         <po-select
                             p-label="Tipo"
                             [p-options]="options"
@@ -98,15 +101,22 @@
     <po-step p-label="Arquivo da Cobrança">
         <po-container>
             <div class="po-mt-3 po-mb-4">
-                <po-upload
-                    p-label="Anexe o Arquivo da Cobrança"
-                    p-drag-drop
-                    [p-auto-upload]="true"
-                    [p-multiple]="false"
-                    [p-restrictions]="restrictions"
-                    [p-url]="urlUploadDocument"
-                    (p-success)="success()"
-                ></po-upload>
+                <div class="po-row po-mb-4">
+                    <po-upload
+                        p-label="Anexe o Arquivo da Cobrança"
+                        class="po-md-12 po-mt-2"
+                        p-drag-drop
+                        [p-auto-upload]="true"
+                        [p-multiple]="false"
+                        [p-restrictions]="restrictions"
+                        [p-url]="urlUploadDocument"
+                        (p-success)="success()"
+                    ></po-upload>
+                </div>
+                <po-button
+                    (p-click)="returToListing()"
+                    p-label="Pular"
+                ></po-button>
             </div>
         </po-container>
     </po-step>

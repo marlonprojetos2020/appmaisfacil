@@ -487,6 +487,11 @@ po-upload {
 }
 
 .button-extra-service {
+    button{
+        height: 48px !important;
+        width: auto !important;
+
+    }
     .po-button.po-text-ellipsis.po-button-primary {
         width: 100%;
         height: 100%;

@@ -99,7 +99,7 @@
                             p-label="Titulo de Eleitor"
                             formControlName="voterTitle"
                             name="voterTitle"
-                            p-required="true"
+                            [p-optional]="true"
                             p-clean="true"
                             p-placeholder="0000 0000 00 00"
                             p-mask="9999 9999 99 99"
@@ -107,16 +107,6 @@
                             p-error-pattern="Digite um Título de Eleitor válido"
                             (p-blur)="dirtyMe('voterTitle')"
                         ></po-input>
-                        <app-invalid-feedback
-                            [formCtrl]="formAssociate.get('voterTitle')"
-                            [hasError]="
-                                formAssociate.get('voterTitle').errors
-                                    ?.required &&
-                                formAssociate.get('voterTitle').dirty
-                            "
-                        >
-                            Este campo é obrigatório
-                        </app-invalid-feedback>
                     </div>
                 </div>
                 <div class="po-row">
@@ -180,7 +170,10 @@
                     (p-success)="success($event)"
                 ></po-upload>
             </div>
-            <po-button (p-click)="nextForm()" p-label="Pular"></po-button>
+            <po-button
+                (p-click)="nextForm()"
+                p-label="Pular"
+            ></po-button>
         </div>
     </po-step>
     <po-step p-label="CPF">
@@ -198,7 +191,10 @@
                     (p-success)="success($event)"
                 ></po-upload>
             </div>
-            <po-button (p-click)="nextForm()" p-label="Pular"></po-button>
+            <po-button
+                (p-click)="nextForm()"
+                p-label="Pular"
+            ></po-button>
         </div>
     </po-step>
     <po-step p-label="Ttitulo de Eleitor">
@@ -215,7 +211,10 @@
                     (p-success)="success($event)"
                 ></po-upload>
             </div>
-            <po-button (p-click)="nextForm()" p-label="Pular"></po-button>
+            <po-button
+                (p-click)="nextForm()"
+                p-label="Pular"
+            ></po-button>
         </div>
     </po-step>
     <po-step p-label="Comporovante de Moradia">

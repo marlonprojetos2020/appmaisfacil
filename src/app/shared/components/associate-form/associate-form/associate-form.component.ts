@@ -51,7 +51,7 @@ export class AssociateFormComponent implements OnInit {
                 this.editedAssociate?.cpf,
                 [Validators.required, cpfValidator],
             ],
-            voterTitle: [this.editedAssociate?.voterTitle, Validators.required],
+            voterTitle: [this.editedAssociate?.voterTitle],
             percentageInSociety: [
                 this.editedAssociate?.percentageInSociety,
                 Validators.required,
@@ -76,18 +76,18 @@ export class AssociateFormComponent implements OnInit {
         // se estiver recebendo um associado editado faz o uso de update, senão cria um novo;
         this.editedAssociate
             ? this.associateFormService
-                  .updateAssociate(
-                      this.newAssociate,
-                      this.idCompany,
-                      this.editedAssociate.id
-                  )
-                  .subscribe((data) => this.nextForm())
+                .updateAssociate(
+                    this.newAssociate,
+                    this.idCompany,
+                    this.editedAssociate.id
+                )
+                .subscribe((data) => this.nextForm())
             : this.associateFormService
-                  .createAssociate(this.newAssociate, this.idCompany)
-                  .subscribe((data) => {
-                      this.setRequestsUrl(data.id);
-                      this.nextForm();
-                  });
+                .createAssociate(this.newAssociate, this.idCompany)
+                .subscribe((data) => {
+                    this.setRequestsUrl(data.id);
+                    this.nextForm();
+                });
     }
 
     setRequestsUrl(idAssociate: number): void {

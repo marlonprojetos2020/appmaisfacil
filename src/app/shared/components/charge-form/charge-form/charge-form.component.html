@@ -29,7 +29,10 @@
                         </app-invalid-feedback>
                     </div>
                 </div>
-                <div class="po-row po-mb-4">
+                <div
+                    class="po-row po-mb-4"
+                    style="align-items: flex-end;"
+                >
                     <div
                         class="po-md-4"
                         formGroupName="type"
@@ -41,6 +44,16 @@
                             p-required="true"
                             p-placeholder="Selecione"
                         ></po-select>
+                    </div>
+                    <div
+                        class="po-md-2"
+                        style="margin-bottom: 8px"
+                    >
+                        <po-button
+                            (p-click)="modalNovoTipo.open()"
+                            p-label="Novo tipo"
+                        >
+                        </po-button>
                     </div>
                 </div>
                 <div class="po-row po-mb-4">
@@ -121,3 +134,20 @@
         </po-container>
     </po-step>
 </po-stepper>
+
+<po-modal
+    #modalNovoTipo
+    p-title="Novo Tipo"
+    [p-primary-action]="modalPrimaryAction"
+    [p-secondary-action]="modalSecondaryAction"
+>
+    <form [formGroup]="formNewType">
+        <po-input
+            p-label="Nome do tipo"
+            formControlName="typeName"
+            p-auto-focus
+            p-clean="true"
+        >
+        </po-input>
+    </form>
+</po-modal>

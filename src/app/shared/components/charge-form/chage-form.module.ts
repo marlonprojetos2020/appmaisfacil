@@ -6,6 +6,7 @@ import {
     PoButtonModule,
     PoContainerModule,
     PoFieldModule,
+    PoModalModule,
     PoStepperModule,
 } from '@po-ui/ng-components';
 import { ChargeFormService } from './charge-form.service';
@@ -21,6 +22,7 @@ import { InvalidFeedbackModule } from '../invalid-feedback/invalid-feedback.modu
         PoContainerModule,
         PoButtonModule,
         PoStepperModule,
+        PoModalModule,
     ],
     providers: [ChargeFormService],
     exports: [ChargeFormComponent],

@@ -33,4 +33,8 @@ export class ChargeFormService {
             file
         );
     }
+
+    createBillingType(name) {
+        return this.httpClient.post(`${environment.apiUrl}/billing/types`, { name })
+    }
 }

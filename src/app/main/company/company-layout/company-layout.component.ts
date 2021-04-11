@@ -19,7 +19,7 @@ export class CompanyLayoutComponent {
             url: 'empresa/minha-conta',
         },
         {
-            icon: 'po-icon-lock',
+            icon: 'po-icon-finance',
             label: 'Meu Plano',
             url: '/empresa/meu-plano',
         },

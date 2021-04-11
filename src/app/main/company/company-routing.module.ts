@@ -12,6 +12,7 @@ import { CompanyExtraServiceComponent } from './company-extra-services/company-e
 import { CompanyIndicationComponent } from './company-indications/company-indication/company-indication.component';
 import { CompanyFaqComponent } from './company-faq/company-faq/company-faq.component';
 import { CompanyBankAccountComponent } from './company-bank-accounts/company-bank-account/company-bank-account.component';
+import { CompanyMyPlanComponent } from './company-my-plan/company-my-plan/company-my-plan.component';
 
 const routes: Routes = [
     {
@@ -34,6 +35,10 @@ const routes: Routes = [
             {
                 path: 'minha-conta',
                 component: CompanyMyAccountComponent,
+            },
+            {
+                path: 'meu-plano',
+                component: CompanyMyPlanComponent,
             },
             {
                 path: 'despesas',

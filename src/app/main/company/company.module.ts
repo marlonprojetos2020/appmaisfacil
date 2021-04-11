@@ -17,6 +17,7 @@ import { CompanyExtraServiceModule } from './company-extra-services/company-extr
 import { CompanyIndicationModule } from './company-indications/company-indication.module';
 import { CompanyFaqModule } from './company-faq/company-faq.module';
 import { CompanyBankAccountModule } from './company-bank-accounts/company-bank-account.module';
+import { CompanyMyPlanModule } from './company-my-plan/company-my-plan.module';
 
 @NgModule({
     declarations: [CompanyLayoutComponent, NeedHelpComponent],
@@ -38,6 +39,7 @@ import { CompanyBankAccountModule } from './company-bank-accounts/company-bank-a
         CompanyExtraServiceModule,
         CompanyIndicationModule,
         CompanyFaqModule,
+        CompanyMyPlanModule,
     ],
     exports: [],
     providers: [],

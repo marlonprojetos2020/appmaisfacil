@@ -74,58 +74,6 @@
 
     <div class="po-row po-mb-2 po-pt-2">
         <div class="po-md-12">
-            <h2>Incrições Municipal e Estadual</h2>
-        </div>
-    </div>
-    <div class="po-row po-mb-4">
-        <div class="po-md-6">
-            <po-input
-                p-label="Inscrição Municipal (IM)"
-                formControlName="municipalInscription"
-                p-clean="true"
-                p-placeholder="Digite o documento"
-                p-minlength="6"
-                p-maxlength="100"
-                p-required="true"
-                p-error-pattern="Digite um documento válido"
-                (p-blur)="dirtyMe('municipalInscription')"
-            ></po-input>
-            <app-invalid-feedback
-                [formCtrl]="formClient.get('municipalInscription')"
-                [hasError]="
-                    formClient.get('municipalInscription').errors?.required &&
-                    formClient.get('municipalInscription').dirty
-                "
-            >
-                Este campo é obrigatório
-            </app-invalid-feedback>
-        </div>
-        <div class="po-md-6">
-            <po-input
-                p-label="Inscrição Estadual (IE)"
-                formControlName="stateInscription"
-                p-clean="true"
-                p-placeholder="Digite o documento"
-                p-minlength="6"
-                p-maxlength="100"
-                p-required="true"
-                p-error-pattern="Digite um documento válido"
-                (p-blur)="dirtyMe('stateInscription')"
-            ></po-input>
-            <app-invalid-feedback
-                [formCtrl]="formClient.get('stateInscription')"
-                [hasError]="
-                    formClient.get('stateInscription').errors?.required &&
-                    formClient.get('stateInscription').dirty
-                "
-            >
-                Este campo é obrigatório
-            </app-invalid-feedback>
-        </div>
-    </div>
-
-    <div class="po-row po-mb-2 po-pt-2">
-        <div class="po-md-12">
             <h2>Endereço</h2>
         </div>
     </div>

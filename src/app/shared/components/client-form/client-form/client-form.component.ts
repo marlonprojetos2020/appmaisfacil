@@ -177,8 +177,6 @@ export class ClientFormComponent implements OnInit {
             document: [this.editedClient?.document, [Validators.required, cpfAndcnpjValidator]],
             phone: [this.editedClient?.phone, Validators.required],
             contactName: [this.editedClient?.contactName, Validators.required],
-            municipalInscription: [this.editedClient?.municipalInscription, Validators.required],
-            stateInscription: [this.editedClient?.stateInscription, Validators.required],
             address: this.formBuilder.group({
                 zipcode: [this.editedClient?.address.zipcode, Validators.required],
                 street: [this.editedClient?.address.street, Validators.required],

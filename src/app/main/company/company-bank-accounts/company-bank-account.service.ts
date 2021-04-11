@@ -7,12 +7,12 @@ import { environment } from 'src/environments/environment';
 @Injectable({
     providedIn: 'root'
 })
-export class adminCompanyBankAccountService {
+export class CompanyBankAccountService {
     constructor(private httpClient: HttpClient) {}
 
-    toggleAccount(userId: string, bankId: number): Observable<any> {
+    toggleAccount(bankId: number): Observable<any> {
         return this.httpClient.put<any>(
-            `${environment.apiUrl}/users/${userId}/bank-accounts/${bankId}/toggle-enabled`,
+            `${environment.apiUrl}/company/bank-account/${bankId}/toggle-enabled`,
             null
         );
     }

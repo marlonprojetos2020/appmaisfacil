@@ -60,7 +60,7 @@ const routes: Routes = [
             },
             {
                 path: 'contas-bancarias',
-                component: CompanyBankAccountComponent,
+                loadChildren: () => import('./company-bank-accounts/company-bank-account.module').then((m) => m.CompanyBankAccountModule),
             },
             {
                 path: 'extrato',

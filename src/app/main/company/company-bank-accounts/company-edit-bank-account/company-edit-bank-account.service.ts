@@ -7,11 +7,11 @@ import { Observable } from 'rxjs';
     providedIn: 'root',
 })
 
-export class AdminCompanyEditBankAccountService {
+export class CompanyEditBankAccountService {
 
     constructor(private httpClient: HttpClient) {}
 
-    findBank(userId: string, bankAccountId: number): Observable<any> {
-        return this.httpClient.get(`${environment.apiUrl}/users/${userId}/bank-accounts/${bankAccountId}`);
+    findBank(bankAccountId: number): Observable<any> {
+        return this.httpClient.get(`${environment.apiUrl}/company/bank-account/${bankAccountId}`);
     }
 }

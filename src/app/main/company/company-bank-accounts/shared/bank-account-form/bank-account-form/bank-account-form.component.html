@@ -69,9 +69,8 @@
                     formControlName="accountNumber"
                     p-label="Conta (sem traços)"
                     (p-blur)="dirtyMe('accountNumber')"
-                    p-placeholder="00000000-0"
                     p-clean
-                    p-maxlength="5"
+                    p-maxlength="10"
                 >
                 </po-number>
                 <app-invalid-feedback

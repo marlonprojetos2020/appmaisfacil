@@ -7,25 +7,25 @@ import { BankAccount } from './model/BankAccount';
 @Injectable({
     providedIn: 'root'
 })
-export class AdminBankAccountFormService {
+export class BankAccountFormService {
     constructor(private httpClient: HttpClient) {}
 
-    listBankAccounts(id: string): Observable<any> {
+    listBankAccounts(): Observable<any> {
         return this.httpClient.get(
-            `${environment.apiUrl}/users/${id}/bank-accounts`
+            `${environment.apiUrl}/company/bank-account`
         );
     }
 
-    newAccount(id: string, bankAccount: BankAccount): Observable<any> {
+    newAccount(bankAccount: BankAccount): Observable<any> {
         return this.httpClient.post<any>(
-            `${environment.apiUrl}/users/${id}/bank-accounts`,
+            `${environment.apiUrl}/company/bank-account`,
             bankAccount
         );
     }
 
-    editAccount(userId: string, bankId: number, bankAccount: BankAccount): Observable<any> {
+    editAccount(bankId: number, bankAccount: BankAccount): Observable<any> {
         return this.httpClient.put<any>(
-            `${environment.apiUrl}/users/${userId}/bank-accounts/${bankId}`,
+            `${environment.apiUrl}/company/bank-account/${bankId}`,
             bankAccount
         );
     }

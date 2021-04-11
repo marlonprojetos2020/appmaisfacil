@@ -1,16 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import {
     PoBreadcrumb,
-    PoNotificationService,
-    PoPageAction,
     PoTableAction,
 } from '@po-ui/ng-components';
 import { environment } from '../../../../../../../../environments/environment';
 import { DatatableColumn } from '../../../../../../../shared/components/page-datatable/datatable-column';
 import { User } from '../../../../model/user';
 import { CompaniesService } from '../../../../companies.service';
-import { adminCompanyBankAccountService } from '../admin-company-bank-account.service'
 
 @Component({
     templateUrl: './admin-company-bank-account.component.html',
@@ -19,12 +16,6 @@ export class AdminCompanyBankAccountComponent implements OnInit {
 
     id = this.activatedRoute.snapshot.paramMap.get('id');
     serviceApi = `${environment.apiUrl}/users/${this.id}/bank-accounts/p/search`;
-
-    pageActions: PoPageAction[] = [{
-        label: 'Nova Conta',
-        icon: 'po-icon-plus-circle',
-        url: `/admin/empresa/${this.id}/contas-bancarias/nova-conta`,
-    }];
 
     columns: DatatableColumn[] = [
         {
@@ -69,27 +60,7 @@ export class AdminCompanyBankAccountComponent implements OnInit {
         },
     ];
 
-    tableActions: PoTableAction[] = [{
-        label: 'Editar Conta',
-        action: (item) => {
-            this.router.navigate(['editar-conta', item.id], { relativeTo: this.activatedRoute });
-        },
-        disabled: (item) => item.enabled === false,
-    },
-    {
-        label: 'Desativar Conta',
-        action: (item) => {
-            this.bankService.toggleAccount(this.id, item.id).subscribe(() => item.enabled = false);
-        },
-        disabled: (item) => !item.enabled,
-    },
-    {
-        label: 'Ativar Conta',
-        action: (item) => {
-            this.bankService.toggleAccount(this.id, item.id).subscribe(() => item.enabled = true);
-        },
-        disabled: (item) => item.enabled,
-    }];
+    tableActions: PoTableAction[] = [];
 
     breadcrumb: PoBreadcrumb = {
         items: [],
@@ -98,8 +69,6 @@ export class AdminCompanyBankAccountComponent implements OnInit {
     constructor(
         private activatedRoute: ActivatedRoute,
         private companiesService: CompaniesService,
-        private bankService: adminCompanyBankAccountService,
-        private router: Router,
     ) {}
 
     ngOnInit(): void {

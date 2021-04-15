@@ -3,9 +3,14 @@
     [p-actions]="actions"
     [p-breadcrumb]="breadcrumb"
     class="breadcrumb"
+    appHelpPopOver
+    helpText="Aqui estão todas as informações da sua empresa, abaixo pode ser encontrado o Contrato Social e Cartão CNPJ"
 >
     <po-container class="form">
-        <form *ngIf="formCompany" [formGroup]="formCompany">
+        <form
+            *ngIf="formCompany"
+            [formGroup]="formCompany"
+        >
             <div class="po-row po-mb-4">
                 <div class="po-md-12">
                     <h3 class="po-mb-4">Empresa</h3>
@@ -132,7 +137,10 @@
                             p-placeholder="Informar o Bairro"
                         ></po-input>
                     </div>
-                    <div class="po-md-8" formGroupName="city">
+                    <div
+                        class="po-md-8"
+                        formGroupName="city"
+                    >
                         <div class="po-md-6">
                             <po-input
                                 p-label="Cidade"

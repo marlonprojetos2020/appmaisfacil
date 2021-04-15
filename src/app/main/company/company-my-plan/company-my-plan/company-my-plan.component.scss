@@ -30,6 +30,8 @@ table.table1{
 
 .table1 tr th{
     padding: 30px;
+    background: var(--color-primary) ;
+    color: #fff;
 }
 
 .table1 thead th:empty{
@@ -45,7 +47,7 @@ table.table1{
     text-shadow:1px 1px 1px #444;
 }
 .table1 tfoot th{
-    color:#666;
+    color:#fff;
 }
 
 .table1 tbody td{

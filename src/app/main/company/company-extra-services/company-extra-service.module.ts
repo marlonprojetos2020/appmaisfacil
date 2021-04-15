@@ -7,6 +7,7 @@ import {
 } from '@po-ui/ng-components';
 import { CompanyExtraServiceComponent } from './company-extra-service/company-extra-service.component';
 import { CardExtraServiceModule } from '../../../shared/components/card-extra-service/card-extra-service.module';
+import { HelpPopoverModule } from 'src/app/shared/directives/help-popover/help-popover.module';
 
 @NgModule({
     imports: [
@@ -15,6 +16,7 @@ import { CardExtraServiceModule } from '../../../shared/components/card-extra-se
         PoContainerModule,
         CardExtraServiceModule,
         PoButtonModule,
+        HelpPopoverModule
     ],
     declarations: [CompanyExtraServiceComponent],
 })

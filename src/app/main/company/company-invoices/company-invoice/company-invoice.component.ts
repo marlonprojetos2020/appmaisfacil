@@ -16,6 +16,9 @@ import { PageDatatableComponent } from '../../../../shared/components/page-datat
     templateUrl: './company-invoice.component.html',
 })
 export class CompanyInvoiceComponent {
+
+    helpText = `Para solicitar uma nota Fiscal clique em “Solicitar Nota Fiscal”, em seguida escolha um cliente ou cadastre um novo. Após a escolha do cliente, adicione o produto e clique em próximo. Depois basta aguardar a emissão pelo escritório.`
+
     @ViewChild(PageDatatableComponent)
     dataTableComponent: PageDatatableComponent;
 

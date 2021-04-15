@@ -28,6 +28,7 @@ export class HelpPopoverDirective implements AfterViewInit {
     ngAfterViewInit(): void {
         this.pageHeaderElement = this.el.nativeElement
             .querySelector('.po-page-header-title');
+        this.pageHeaderElement.classList.add('help-popover-title');
         this.title = this.pageHeaderElement.textContent;
         this.pageHeaderElement.addEventListener('click', this.showPopover.bind(this));
     }

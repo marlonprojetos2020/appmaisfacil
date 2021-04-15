@@ -8,6 +8,7 @@ import {
 } from '@po-ui/ng-components';
 import { CompanyCompanyComponent } from './company-company/company-company.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HelpPopoverModule } from 'src/app/shared/directives/help-popover/help-popover.module';
 
 @NgModule({
     imports: [
@@ -17,6 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
         PoContainerModule,
         PoButtonModule,
         ReactiveFormsModule,
+        HelpPopoverModule,
     ],
     declarations: [CompanyCompanyComponent],
 })

@@ -4,6 +4,7 @@ import { CompanyInvoiceComponent } from './company-invoice/company-invoice.compo
 import { PageDatatableModule } from '../../../shared/components/page-datatable/page-datatable.module';
 import { CompanyInvoiceRoutingModule } from './company-invoice-routing.module';
 import { CompanyNewInvoiceModule } from './company-new-invoice/company-new-invoice.module';
+import { HelpPopoverModule } from 'src/app/shared/directives/help-popover/help-popover.module';
 
 @NgModule({
     imports: [
@@ -11,6 +12,7 @@ import { CompanyNewInvoiceModule } from './company-new-invoice/company-new-invoi
         PageDatatableModule,
         CompanyInvoiceRoutingModule,
         CompanyNewInvoiceModule,
+        HelpPopoverModule
     ],
     declarations: [CompanyInvoiceComponent],
 })

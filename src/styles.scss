@@ -245,6 +245,9 @@ body,
     font-size: 2.3rem;
     font-family: "roboto";
     font-weight: bold;
+}
+
+.help-popover-title {
     position: relative;
     &:after {
         font-family: PoIcon !important;
@@ -257,7 +260,6 @@ body,
     }
     cursor: pointer;
 }
-
 .company-detail-dashboard {
     .po-container {
         background-color: var(--color-backgorund);

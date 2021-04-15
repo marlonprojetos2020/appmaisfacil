@@ -7,6 +7,7 @@ import { CompanyBankAccountComponent } from './company-bank-account/company-bank
 import { CompanyNewBankAccountModule } from './company-new-bank-account/company-new-bank-account.module'
 import { CompanyEditBankAccountModule } from './company-edit-bank-account/company-edit-bank-account.module'
 import { PageDatatableModule } from '../../../shared/components/page-datatable/page-datatable.module';
+import { HelpPopoverModule } from 'src/app/shared/directives/help-popover/help-popover.module';
 
 @NgModule({
     declarations: [CompanyBankAccountComponent],
@@ -17,6 +18,7 @@ import { PageDatatableModule } from '../../../shared/components/page-datatable/p
         CompanyEditBankAccountModule,
         PoPageModule,
         PageDatatableModule,
+        HelpPopoverModule,
     ],
 })
 export class CompanyBankAccountModule {}

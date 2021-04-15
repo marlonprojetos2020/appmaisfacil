@@ -10,6 +10,7 @@ import { PageDatatableModule } from '../../../shared/components/page-datatable/p
 import { CompanyNewEmployeeModule } from './company-new-employee/company-new-employee.module';
 import { CompanyEmployeeRoutingModule } from './company-employee-routing.module';
 import { CompanyEditEmployeeModule } from './company-edit-employee/company-edit-employee.module';
+import { HelpPopoverModule } from 'src/app/shared/directives/help-popover/help-popover.module';
 
 @NgModule({
     // tslint:disable-next-line:max-line-length
@@ -22,6 +23,7 @@ import { CompanyEditEmployeeModule } from './company-edit-employee/company-edit-
         CompanyEmployeeRoutingModule,
         PoModalModule,
         CompanyEditEmployeeModule,
+        HelpPopoverModule,
     ],
     declarations: [CompanyEmployeeComponent],
 })

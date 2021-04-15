@@ -67,6 +67,10 @@ export class CompaniesService {
         return this.httpClient.get<User>(`${environment.apiUrl}/users/${id}`);
     }
 
+    getPlanOptions(): Observable<any> {
+        return this.httpClient.get<any>(`${environment.apiUrl}/users/company/plans`);
+    }
+
     getUserCompanyBreadcrumb(id: number): Observable<User> {
         return this.httpClient.get<User>(
             `${environment.apiUrl}/users/p/search?search=${id}&searchBy=id&sort=id,desc`

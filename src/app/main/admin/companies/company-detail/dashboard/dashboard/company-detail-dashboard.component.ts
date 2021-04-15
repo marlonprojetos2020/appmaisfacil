@@ -176,12 +176,12 @@ export class CompanyDetailDashboardComponent implements OnInit {
                     data.items.map((statements) => {
                         this.statementsPending.push(
                             'Banco:' +
-                                ' ' +
-                                statements.bankAccount.bankName +
-                                ' - ' +
-                                'Mês Referente:' +
-                                ' ' +
-                                statements.monthText
+                            ' ' +
+                            statements.bankAccount.bankName +
+                            ' - ' +
+                            'Mês Referente:' +
+                            ' ' +
+                            statements.monthText
                         );
                         this.statementsPendingOk = true;
                         this.statementsPendingText =
@@ -200,12 +200,12 @@ export class CompanyDetailDashboardComponent implements OnInit {
                     data.items.map((statements) => {
                         this.statementsPendingReview.push(
                             'Banco:' +
-                                ' ' +
-                                statements.bankAccount.bankName +
-                                ' - ' +
-                                'Mês Referente:' +
-                                ' ' +
-                                statements.monthText
+                            ' ' +
+                            statements.bankAccount.bankName +
+                            ' - ' +
+                            'Mês Referente:' +
+                            ' ' +
+                            statements.monthText
                         );
                         this.statementsPendingReviewOk = true;
                         this.statementsPendingReviewText =
@@ -240,13 +240,13 @@ export class CompanyDetailDashboardComponent implements OnInit {
                     data.items.map((nota) => {
                         this.notaFiscalProcessando.push(
                             nota.client.name +
-                                ' ' +
-                                'total' +
-                                ' ' +
-                                this.currencyPipe.transform(
-                                    nota.totalAmount,
-                                    'BRL'
-                                )
+                            ' ' +
+                            'total' +
+                            ' ' +
+                            this.currencyPipe.transform(
+                                nota.totalAmount,
+                                'BRL'
+                            )
                         );
                         this.notaFiscalProcessandoText =
                             'Você tem notas fiscais em analise :';

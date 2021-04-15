@@ -6,7 +6,7 @@ import {
     PoNotificationService,
     PoSelectOption,
 } from '@po-ui/ng-components';
-import { filter, finalize, tap } from 'rxjs/operators';
+import { filter, finalize, tap, timestamp } from 'rxjs/operators';
 import { Company } from '../../../model/company';
 import { User } from '../../../model/user';
 import { CompaniesService } from '../../../companies.service';
@@ -35,6 +35,7 @@ export class CompanyFormComponent implements OnInit {
     @ViewChild('streetInput', { static: true }) streetInput: HTMLInputElement;
     @ViewChild('numberInput', { static: true }) numberInput: HTMLInputElement;
 
+    radioPlannOptions: PoSelectOption[] = null;
     options: PoSelectOption[] = [
         {
             label: 'Acre',
@@ -149,7 +150,6 @@ export class CompanyFormComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private companiesService: CompaniesService,
-        private notificationService: PoNotificationService,
         private router: Router
     ) {}
 
@@ -201,7 +201,10 @@ export class CompanyFormComponent implements OnInit {
             }),
             email: [this.editedUser?.userCompany?.email],
             phone: [this.editedUser?.userCompany?.phone],
+            plan: [this.editedUser?.plan?.value, Validators.required],
         });
+
+        this.companiesService.getPlanOptions().subscribe(data => this.radioPlannOptions = data);
 
         this.formDadosEmpresa
             .get('address.zipcode')
@@ -268,27 +271,13 @@ export class CompanyFormComponent implements OnInit {
             this.companiesService
                 .createUser(this.newCompany)
                 .pipe(finalize(() => (this.loading = false)))
-                .subscribe(() => {
-                    this.notificationService.success(
-                        `Usuário adicionado com sucesso`
-                    );
-                    this.router.navigate(['/admin', 'empresas']);
-                });
+                .subscribe(() => this.router.navigate(['/admin', 'empresas']));
         } else {
             this.newCompany.version = this.editedUser.version;
             this.companiesService
                 .editUser(this.newCompany, this.editedUser.id)
                 .pipe(finalize(() => (this.loading = false)))
-                .subscribe(() => {
-                    this.notificationService.success(
-                        `Usuário editado com sucesso`
-                    );
-                    this.router.navigate([
-                        '/admin',
-                        'empresa',
-                        this.editedUser.id,
-                    ]);
-                });
+                .subscribe(() => this.router.navigate(['/admin', 'empresa', this.editedUser.id,]));
         }
     }
 

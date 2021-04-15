@@ -8,5 +8,15 @@ export interface User extends UserDetails {
         phone: string;
         cpf: string;
     };
+    plan: {
+        label: string
+        value: string
+    }
     version: number;
+}
+
+
+export enum PlanEnum {
+    PREMIUM = 'PREMIUM',
+    BASIC = 'BASIC',
 }

@@ -160,6 +160,21 @@
             <po-container>
                 <h2 class="po-mb-3 po-ml-1">Dados da Empresa</h2>
                 <form [formGroup]="formDadosEmpresa">
+                    <div
+                        class="po-mt-2"
+                        *ngIf="radioPlannOptions"
+                    >
+                        <po-radio-group
+                            class="po-md-12 po-mt-2"
+                            name="plan"
+                            p-label="Plano"
+                            p-columns="2"
+                            [p-options]="radioPlannOptions"
+                            formControlName="plan"
+                            p-required
+                        >
+                        </po-radio-group>
+                    </div>
                     <po-input
                         class="po-sm-3"
                         p-clean="true"
@@ -173,19 +188,6 @@
                         p-optional="true"
                     >
                     </po-input>
-                    <!--                        (p-blur)="dirtyMe('userCompany.cnpj')"-->
-
-                    <!--                    <app-invalid-feedback-->
-                    <!--                        [formCtrl]="formDadosPessoais.get('userCompany.cnpj')"-->
-                    <!--                        [hasError]="-->
-                    <!--                            formDadosPessoais.get('userCompany.cnpj').value-->
-                    <!--                                ?.cnpjInvalido &&-->
-                    <!--                            formDadosPessoais.get('userCompany.cnpj').dirty-->
-                    <!--                        "-->
-                    <!--                    >-->
-                    <!--                        Este CNPJ não existe-->
-                    <!--                    </app-invalid-feedback>-->
-
                     <po-input
                         class="po-sm-12 po-mt-2"
                         p-clean="true"

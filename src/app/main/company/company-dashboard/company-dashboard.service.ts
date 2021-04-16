@@ -31,4 +31,8 @@ export class CompanyDashboardService {
             `${environment.apiUrl}/company/nota-fiscal/p/search?status=${status}`
         );
     }
+
+    getProfile(): any {
+        return this.httpClient.get(`${environment.apiUrl}/profile`);
+    }
 }

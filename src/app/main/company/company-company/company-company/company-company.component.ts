@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { PoBreadcrumb, PoPageAction } from '@po-ui/ng-components';
+import { PoBreadcrumb, PoPageAction, PoSelectOption } from '@po-ui/ng-components';
+import { CompaniesService } from 'src/app/main/admin/companies/companies.service';
 import { Company } from '../../../admin/companies/model/company';
 import { User } from '../../../admin/companies/model/user';
 import { CompanyCompanyService } from '../company-company.service';
@@ -14,6 +15,16 @@ export class CompanyCompanyComponent implements OnInit {
     formCompany: FormGroup;
     actions: PoPageAction[] = [];
 
+    radioAddressOptions: PoSelectOption[] = [
+        {
+            label: 'Residencial',
+            value: 'RESIDENTIAL',
+        },
+        {
+            label: 'Comercial',
+            value: 'COMERCIAL',
+        },
+    ];
 
     breadcrumb: PoBreadcrumb = {
         items: [
@@ -27,7 +38,7 @@ export class CompanyCompanyComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private activetedRoute: ActivatedRoute,
-        private companyService: CompanyCompanyService
+        private companyService: CompanyCompanyService,
     ) {}
 
     ngOnInit(): void {
@@ -47,6 +58,7 @@ export class CompanyCompanyComponent implements OnInit {
 
             cnae: [company?.cnae, Validators.required],
             address: this.formBuilder.group({
+                addressType: [company?.address?.addressType?.value],
                 street: [company?.address?.street, Validators.required],
                 number: [company?.address?.number, Validators.required],
                 neighborhood: [

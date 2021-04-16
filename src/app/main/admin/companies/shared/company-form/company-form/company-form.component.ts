@@ -206,7 +206,6 @@ export class CompanyFormComponent implements OnInit {
             phone: [this.editedUser?.userCompany?.phone],
         });
 
-        console.log(this.editedUser);
         this.companiesService.getPlanOptions().subscribe(data => this.radioPlannOptions = data);
         this.companiesService.getAddressOptions().subscribe(data => this.radioAddressOptions = data);
 

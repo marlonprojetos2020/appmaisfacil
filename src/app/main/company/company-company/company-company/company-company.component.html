@@ -89,6 +89,15 @@
             </div>
             <div formGroupName="address">
                 <div class="po-row po-mb-4">
+                    <po-radio-group
+                        *ngIf="radioAddressOptions"
+                        class="po-md-12 po-mb-3"
+                        name="radioGroupBasic2"
+                        p-label="Tipo de Endereço"
+                        [p-options]="radioAddressOptions"
+                        p-readonly="true"
+                        formControlName="addressType"
+                    ></po-radio-group>
                     <div class="po-md-3">
                         <po-input
                             p-label="CEP"

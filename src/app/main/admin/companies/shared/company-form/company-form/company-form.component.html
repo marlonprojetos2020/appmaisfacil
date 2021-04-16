@@ -255,19 +255,17 @@
                     <div class="po-row po-ml-1">
                         <h2>Endereço</h2>
                     </div>
-
-                    <po-radio-group
-                        class="po-md-12 po-mt-3"
-                        name="radioGroupBasic2"
-                        p-label="Tipo de Endereço"
-                        [p-options]="[
-                            { label: 'Comercial', value: 'comercio' },
-                            { label: 'Residencial', value: 'redidencial' }
-                        ]"
-                        p-optional="true"
-                    >
-                    </po-radio-group>
                     <ng-container formGroupName="address">
+                        <po-radio-group
+                            *ngIf="radioAddressOptions"
+                            class="po-md-12 po-mt-3"
+                            name="radioGroupBasic2"
+                            p-label="Tipo de Endereço"
+                            [p-options]="radioAddressOptions"
+                            p-optional="true"
+                            formControlName="addressType"
+                        >
+                        </po-radio-group>
                         <div class="po-md-3 po-mt-2">
                             <po-input
                                 p-label="CEP"

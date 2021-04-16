@@ -11,4 +11,8 @@ export interface Company {
     phone: number;
     email: string;
     address: Address;
+    plan: {
+        label: string,
+        value: string,
+    };
 }

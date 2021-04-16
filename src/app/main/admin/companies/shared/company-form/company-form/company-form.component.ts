@@ -21,6 +21,7 @@ import { cnpjValidator } from '../../../../../../shared/validators/cnpjValidator
 })
 export class CompanyFormComponent implements OnInit {
     @Input() breadcrumb: PoBreadcrumb;
+    @Input() editedUser: User;
 
     formDadosPessoais: FormGroup;
     formDadosEmpresa: FormGroup;
@@ -29,13 +30,13 @@ export class CompanyFormComponent implements OnInit {
     zipcodeError = false;
     loading = false;
 
-    @Input() editedUser: User;
 
     @ViewChild('stepper', { static: true }) stepper;
     @ViewChild('streetInput', { static: true }) streetInput: HTMLInputElement;
     @ViewChild('numberInput', { static: true }) numberInput: HTMLInputElement;
 
     radioPlannOptions: PoSelectOption[] = null;
+    radioAddressOptions: PoSelectOption[] = null;
     options: PoSelectOption[] = [
         {
             label: 'Acre',
@@ -174,6 +175,7 @@ export class CompanyFormComponent implements OnInit {
         });
 
         this.formDadosEmpresa = this.formBuilder.group({
+            plan: [this.editedUser?.userCompany?.plan?.value, Validators.required],
             cnpj: [
                 this.editedUser?.userCompany?.cnpj,
                 [Validators.required, cnpjValidator],
@@ -184,6 +186,7 @@ export class CompanyFormComponent implements OnInit {
             lineOfBusiness: [this.editedUser?.userCompany?.lineOfBusiness],
             cnae: [this.editedUser?.userCompany?.cnae],
             address: this.formBuilder.group({
+                addressType: [this.editedUser?.userCompany?.address?.addressType?.value],
                 complement: [this.editedUser?.userCompany?.address?.complement],
                 zipcode: [this.editedUser?.userCompany?.address?.zipcode],
                 street: [this.editedUser?.userCompany?.address?.street],
@@ -201,10 +204,11 @@ export class CompanyFormComponent implements OnInit {
             }),
             email: [this.editedUser?.userCompany?.email],
             phone: [this.editedUser?.userCompany?.phone],
-            plan: [this.editedUser?.plan?.value, Validators.required],
         });
 
+        console.log(this.editedUser);
         this.companiesService.getPlanOptions().subscribe(data => this.radioPlannOptions = data);
+        this.companiesService.getAddressOptions().subscribe(data => this.radioAddressOptions = data);
 
         this.formDadosEmpresa
             .get('address.zipcode')

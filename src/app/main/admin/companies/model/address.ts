@@ -1,4 +1,8 @@
 export interface Address {
+    addressType: {
+        label: string,
+        value: string,
+    };
     street: string;
     zipcode: string;
     complement: string;

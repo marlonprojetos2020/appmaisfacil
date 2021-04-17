@@ -46,6 +46,18 @@ export class CompanyListComponent {
                 this.router.navigateByUrl(`/admin/empresa/${item.id}/editar`),
         },
         {
+            label: 'Baixar Cartão CNPJ',
+            icon: 'po-icon po-icon-debit-payment',
+            action: (item) => window.open(item['userCompany.cnpjUrl'], '_blank'),
+            disabled: (item) => !item['userCompany.cnpjUrl'],
+        },
+        {
+            label: 'Baixar Contrato Social',
+            icon: 'po-icon po-icon-document-filled',
+            action: (item) => window.open(item['userCompany.socialContractUrl'], '_blank'),
+            disabled: (item) => !item['userCompany.socialContractUrl'],
+        },
+        {
             label: 'Deletar',
             icon: 'po-icon po-icon-delete',
             action: (item) => this.deleteCompany(item),

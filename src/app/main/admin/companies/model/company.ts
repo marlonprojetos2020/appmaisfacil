@@ -7,6 +7,8 @@ export interface Company {
     cnpj: number;
     type: CompanyType;
     lineOfBusiness: string;
+    socialContractUrl: string;
+    cnpjUrl: string;
     cnae: string;
     phone: number;
     email: string;

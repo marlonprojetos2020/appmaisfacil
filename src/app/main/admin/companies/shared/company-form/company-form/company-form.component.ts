@@ -5,6 +5,7 @@ import {
     PoBreadcrumb,
     PoNotificationService,
     PoSelectOption,
+    PoUploadFileRestrictions,
 } from '@po-ui/ng-components';
 import { filter, finalize, tap, timestamp } from 'rxjs/operators';
 import { Company } from '../../../model/company';
@@ -14,6 +15,7 @@ import { AddressApiResponse } from '../../../model/address-api-response';
 import { RoleType } from 'src/app/core/auth/model/role-type';
 import { cpfValidator } from 'src/app/shared/validators/cpfValidator.validator';
 import { cnpjValidator } from '../../../../../../shared/validators/cnpjValidator.validator';
+import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'app-company-form',
@@ -23,18 +25,26 @@ export class CompanyFormComponent implements OnInit {
     @Input() breadcrumb: PoBreadcrumb;
     @Input() editedUser: User;
 
+    @ViewChild('stepper', { static: true }) stepper;
+    @ViewChild('streetInput', { static: true }) streetInput: HTMLInputElement;
+    @ViewChild('numberInput', { static: true }) numberInput: HTMLInputElement;
+
+
     formDadosPessoais: FormGroup;
     formDadosEmpresa: FormGroup;
     newCompany: User;
     latestZipCode = '';
     zipcodeError = false;
     loading = false;
+    urlUploadContract = '';
+    urlUploadCNPJ = '';
+    isHideLoading = true;
 
-
-    @ViewChild('stepper', { static: true }) stepper;
-    @ViewChild('streetInput', { static: true }) streetInput: HTMLInputElement;
-    @ViewChild('numberInput', { static: true }) numberInput: HTMLInputElement;
-
+    restrictions: PoUploadFileRestrictions = {
+        allowedExtensions: ['.txt', '.pdf', '.png', '.jpeg', '.jpg'],
+        maxFileSize: 5242880,
+        maxFiles: 1,
+    };
     radioPlannOptions: PoSelectOption[] = null;
     radioAddressOptions: PoSelectOption[] = null;
     options: PoSelectOption[] = [
@@ -151,10 +161,14 @@ export class CompanyFormComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private companiesService: CompaniesService,
-        private router: Router
+        private router: Router,
+        private poNotificationService: PoNotificationService,
     ) {}
 
     ngOnInit(): void {
+
+        this.editedUser && this.settiingUploadUrl(this.editedUser.id);
+
         this.formDadosPessoais = this.formBuilder.group({
             name: [this.editedUser?.name, Validators.required],
             email: [
@@ -274,14 +288,48 @@ export class CompanyFormComponent implements OnInit {
             this.companiesService
                 .createUser(this.newCompany)
                 .pipe(finalize(() => (this.loading = false)))
-                .subscribe(() => this.router.navigate(['/admin', 'empresas']));
+                .subscribe(user => {
+                    this.settiingUploadUrl(user.id);
+                    this.stepper.next();
+                });
         } else {
             this.newCompany.version = this.editedUser.version;
             this.companiesService
                 .editUser(this.newCompany, this.editedUser.id)
                 .pipe(finalize(() => (this.loading = false)))
-                .subscribe(() => this.router.navigate(['/admin', 'empresa', this.editedUser.id,]));
+                .subscribe(user => this.stepper.next());
         }
+    }
+
+
+    settiingUploadUrl(id: number): void {
+        this.urlUploadContract = `${environment.apiUrl}/users/company/${id}/social-contract-file`;
+        this.urlUploadCNPJ = `${environment.apiUrl}/users/company/${id}/cnpj-file`;
+    }
+
+    onLoad(): void {
+        this.isHideLoading = false;
+    }
+
+    contractSuccess(): void {
+        this.stepper.next();
+        this.isHideLoading = true;
+        this.poNotificationService.success('Contrato Social cadastrado com sucesso');
+    }
+
+    CNPJSucess(): void {
+        this.isHideLoading = true;
+        this.finish();
+        this.poNotificationService.success('Contrato Social cadastrado com sucesso');
+    }
+
+    finish(): void {
+        if (this.editedUser) {
+            this.router.navigate(['/admin', 'empresa', this.editedUser.id]);
+        } else {
+            this.router.navigate(['/admin', 'empresas']);
+        }
+        this.isHideLoading = true;
     }
 
     dirtyMe(input): void {

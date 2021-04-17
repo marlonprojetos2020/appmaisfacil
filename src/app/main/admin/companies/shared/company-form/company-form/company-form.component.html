@@ -257,6 +257,7 @@
                     </div>
                     <ng-container formGroupName="address">
                         <po-radio-group
+                            *ngIf="radioAddressOptions"
                             class="po-md-12 po-mt-3"
                             name="radioGroupBasic2"
                             p-label="Tipo de Endereço"
@@ -373,7 +374,7 @@
                     ></po-input>
                     <div class="po-row po-ml-1">
                         <po-button
-                            p-label="Finalizar"
+                            p-label="Próximo"
                             p-type="primary"
                             (p-click)="submitForm()"
                         ></po-button>
@@ -381,5 +382,54 @@
                 </form>
             </po-container>
         </po-step>
+        <po-step
+            p-label="Contrato"
+            [p-can-active-next-step]="formDadosEmpresa.invalid"
+        >
+            <po-container>
+                <h2 class="po-mb-3 po-ml-1">Contrato Social </h2>
+                <po-upload
+                    p-drag-drop
+                    p-label="Anexar Contrato Social"
+                    [p-url]="urlUploadContract"
+                    (p-upload)="onLoad()"
+                    (p-success)="contractSuccess()"
+                    p-auto-upload="true"
+                    [p-restrictions]="restrictions"
+                ></po-upload>
+                <div class="po-row po-mt-1">
+                    <po-button
+                        p-label="Próximo"
+                        p-type="primary"
+                        (p-click)="this.stepper.next(); isHideLoading = true;"
+                    ></po-button>
+                </div>
+            </po-container>
+        </po-step>
+        <po-step
+            p-label="Cartão CNPJ"
+            [p-can-active-next-step]="formDadosEmpresa.invalid"
+        >
+            <po-container>
+                <h2 class="po-mb-3 po-ml-1">Cartão CNPJ</h2>
+                <po-upload
+                    p-drag-drop
+                    p-label="Anexar Cartão CNPJ"
+                    [p-url]="urlUploadCNPJ"
+                    (p-upload)="onLoad()"
+                    (p-success)="CNPJSucess()"
+                    p-auto-upload="true"
+                    [p-restrictions]="restrictions"
+                ></po-upload>
+                <div class="po-row po-mt-1">
+                    <po-button
+                        p-label="Próximo"
+                        p-type="primary"
+                        (p-click)="finish()"
+                    ></po-button>
+                </div>
+            </po-container>
+        </po-step>
     </po-stepper>
 </po-page-edit>
+<po-loading-overlay [hidden]="isHideLoading"></po-loading-overlay>

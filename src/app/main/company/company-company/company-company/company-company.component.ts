@@ -37,14 +37,24 @@ export class CompanyCompanyComponent implements OnInit {
 
     constructor(
         private formBuilder: FormBuilder,
-        private activetedRoute: ActivatedRoute,
         private companyService: CompanyCompanyService,
     ) {}
 
     ngOnInit(): void {
-
         this.companyService.getUserCompany().subscribe((data) => {
             this.setFields(data.userCompany);
+            this.actions = [
+                {
+                    label: 'Baixar Contrato',
+                    action: () => window.open(data?.userCompany?.socialContractUrl, '_blank'),
+                    disabled: () => !data.userCompany.socialContractUrl
+                },
+                {
+                    label: 'Baixar CNPJ',
+                    action: () => window.open(data?.userCompany?.cnpjUrl, '_blank'),
+                    disabled: () => !data.userCompany.cnpjUrl,
+                },
+            ];
         });
     }
 

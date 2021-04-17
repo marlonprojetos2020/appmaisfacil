@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { PoContainerModule, PoFieldModule, PoPageModule } from '@po-ui/ng-components';
+import { PoContainerModule, PoFieldModule, PoLoadingModule, PoPageModule } from '@po-ui/ng-components';
 import { PoStepperModule } from '@po-ui/ng-components';
 import { PoButtonModule } from '@po-ui/ng-components';
 import { CompanyFormComponent } from './company-form/company-form.component';
@@ -18,6 +18,7 @@ import { InvalidFeedbackModule } from 'src/app/shared/components/invalid-feedbac
         PoFieldModule,
         PoButtonModule,
         InvalidFeedbackModule,
+        PoLoadingModule,
     ],
     exports: [CompanyFormComponent],
 

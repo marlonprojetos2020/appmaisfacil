@@ -74,6 +74,7 @@ export class CompanyListComponent {
             property: 'userCompany.cnpj',
         },
         { property: 'name', label: 'Usuário' },
+        { property: 'userCompany.plan.label', label: 'Plano' },
     ];
 
     selecionaEmpresa = (item) => this.router.navigateByUrl(`/admin/empresa/${item.id}`);

@@ -124,6 +124,12 @@ body,
     .po-toolbar {
         box-shadow: 0px 1px 24px -12px rgba(0, 0, 0, 0.75);
         width: 100%;
+        margin-left: 0;
+        @media (max-width: 1200px) {
+            padding-right: 36px;
+            margin-left: 36px;
+        }
+
 
         span.po-icon.po-icon-lock.po-popup-icon-item {
             color: var(--color-primary) !important;

@@ -1,9 +1,0 @@
-<po-page-edit
-    p-title="Editar Conta Bancária"
-    [p-breadcrumb]="breadcrumb"
-    class="breadcrumb"
->
-    <ng-container *ngIf="(bank$ | async ) as bank">
-        <app-bank-account-form [editedAccount]="bank"></app-bank-account-form>
-    </ng-container>
-</po-page-edit>

@@ -1,0 +1,7 @@
+<div class="po-field-container-bottom"
+     *ngIf="hasError || (this.formCtrl?.hasError(this.errorCode))">
+    <span class="po-field-container-bottom-text-error">
+        <span class="po-icon po-icon-warning po-field-container-icon-error"></span>
+        <ng-content></ng-content>
+    </span>
+</div>

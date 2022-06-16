@@ -1,0 +1,92 @@
+<app-page-datatable
+    title="Cobranças"
+    [serviceApi]="serviceApi"
+    [columns]="columns"
+    [tableActions]="tableActions"
+    class="page-no-action breadcrumb"
+    [breadcrumb]="breadcrumb"
+    appHelpPopOver
+    helpText="Cobranças serão cadastradas pelo escritório e irão aparecer aqui"
+></app-page-datatable>
+
+<po-modal
+    class="modal-button"
+    #modalCobranca
+    p-title="Pagar Cobrança"
+    [p-primary-action]="closeAction"
+>
+    <div
+        class="po-row"
+        *ngIf="modalCharge"
+    >
+        <div class="po-md-6">
+            <div class="img-modal">
+                <ng-container *ngIf="!isPdfCobranca; else elseBlock">
+                    <img
+                        [src]="modalCharge.billingFileUrl"
+                        alt="Cobrança"
+                    />
+                </ng-container>
+                <po-button
+                    (p-click)="download(modalCharge.billingFileUrl)"
+                    p-icon="po-icon po-icon-download"
+                ></po-button>
+            </div>
+        </div>
+        <div class="po-md-6 text-modal">
+            <div class="po-row">
+                <div class="po-md-12">
+                    <h1>{{ modalCharge.description }}</h1>
+                </div>
+                <div class="po-md-12">
+                    <h2 class="po-mb-2">
+                        <span>Empresa</span>
+                        {{ modalCharge.companyFantasyName? modalCharge.companyFantasyName : modalCharge.companyName
+                        }}
+                    </h2>
+                </div>
+                <div class="po-md-6 po-mb-2">
+                    <h3>
+                        <span>Status</span>
+                        {{ modalCharge.statusText }}
+                    </h3>
+                </div>
+                <div class="po-md-6 po-mb-2">
+                    <h3>
+                        <span>Tipo</span>
+                        {{ modalCharge['type.label']}}
+                    </h3>
+                </div>
+            </div>
+            <div class="po-row">
+                <div class="po-md-6 po-mb-2">
+                    <h3>
+                        <span>Vencimento</span>
+                        {{ modalCharge.dueDate | date: "dd/MM/yy" }}
+                    </h3>
+                </div>
+                <div class="po-md-6 po-mb-2">
+                    <h3>
+                        <span>Valor</span>
+                        {{ modalCharge.value | currency: "BRL" }}
+                    </h3>
+                </div>
+                <div class="po-md-12">
+                    <po-upload
+                        p-label="Anexar Comprovante de Pagamento"
+                        [p-url]="urlUploadDocument"
+                        (p-success)="success()"
+                        [p-restrictions]="restrictions"
+                        p-auto-upload="true"
+                    ></po-upload>
+                </div>
+            </div>
+        </div>
+    </div>
+</po-modal>
+<ng-template #elseBlock>
+    <img
+        src="/assets/images/imgPdf.png"
+        alt="Pdf"
+    />
+</ng-template>

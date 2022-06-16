@@ -1,0 +1,45 @@
+.title-row {
+    padding: 0 18px;
+
+    h6 {
+        font-size: 12px;
+        color: var(--color-secondary);
+        font-weight: 500;
+    }
+}
+
+
+.service-card {
+
+    padding: 25px 18px;
+}
+
+.div-text {
+    max-width: 700px;
+    h2 {
+        margin-bottom: 11px;
+        font-size: 18px;
+    }
+}
+
+.centralize {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.price {
+    font-weight: 700;
+    color: var(--color-primary);
+    font-size: 18px;
+}
+
+.extra-services {
+    color: #FFFFFF;
+    background-color: var(--color-secondary);
+    text-transform: uppercase;
+    padding: 25px 20px;
+    border-radius: 10PX;
+    border: none;
+}

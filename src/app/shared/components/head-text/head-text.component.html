@@ -1,0 +1,11 @@
+<h1 class="page-title">
+    <ng-content></ng-content>
+    <span #buttonHover class="po-icon po-icon-help icon-title"></span>
+</h1>
+<po-popover
+  p-trigger="hover"
+  p-position="right"
+  [p-target]="buttonHoverRef"
+>
+  {{ helpText }}
+</po-popover>

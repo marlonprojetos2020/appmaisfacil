@@ -1,0 +1,91 @@
+<po-page-default
+    p-title="Serviços Disponíveis"
+    [p-breadcrumb]="breadcrumb"
+    class="breadcrumb extra-service"
+    appHelpPopOver
+    helpText="Aqui você pode realizar a contratação de serviços extras"
+>
+    <po-container>
+        <div class="po-row title-row po-mb-1">
+            <div class="po-md-9">
+                <h6>Serviços</h6>
+            </div>
+            <div class="po-md-2 centralize">
+                <h6>Prazo</h6>
+            </div>
+            <div class="po-md-1 centralize">
+                <h6>Preço</h6>
+            </div>
+        </div>
+
+        <div class="bg">
+            <a
+                href="https://api.whatsapp.com/send?phone=5517981571626&text=Ol%C3%A1%2C%20gostaria%20de%20contratar%20o%20servi%C3%A7os%20alteracao%20contratual!"
+                target="_blank"
+                rel="noreferrer noopener"
+            >
+                <app-card-service
+                    title="Alteração Contratual"
+                    description="Qualquer alteração no contrato social como: quadro societário, endereço, outros"
+                    deadline="-"
+                    price="R$359,90"
+                >
+                </app-card-service>
+            </a>
+        </div>
+
+        <a
+            href="https://api.whatsapp.com/send?phone=5517981571626&text=Ol%C3%A1,%20quero%20saber%20mais%20sobre%20o%20servi%C3%A7o%20'imposto%20de%20renda'"
+            target="_blank"
+            rel="noreferrer noopener"
+        >
+            <app-card-service
+                title="Imposto de Renda Pessoa Física"
+                description="Declaração de Imposto de renda Pessoa Física, consultar com nossos especialistas."
+                deadline="-"
+                price="consultar"
+            >
+            </app-card-service>
+        </a>
+        <div class="bg">
+            <a
+                href="https://api.whatsapp.com/send?phone=5517981571626&text=Ol%C3%A1,%20quero%20saber%20mais%20sobre%20o%20servi%C3%A7o%20'Assessoria%20de%20Investimento'"
+                target="_blank"
+                rel="noreferrer noopener"
+            >
+                <app-card-service
+                    title="Assessoria de Investimento"
+                    description="Contamos com parceria com alguns corretores de investimento, para mais detalhes entrar em contato com nossos especialistas."
+                    deadline="-"
+                    price="consultar"
+                >
+                </app-card-service>
+            </a>
+        </div>
+
+        <div class="po-row service-card">
+            <div class="po-md-10">
+                <div class="div-text">
+                    <h2>Outros Serviços</h2>
+                    <p>
+                        Precisa de um serviço customizado?! Entre em contato
+                        para fazer um orçamento.
+                    </p>
+                </div>
+            </div>
+            <div class="po-md-2">
+                <a
+                    href="https://api.whatsapp.com/send?phone=5517981571626&text=Ol%C3%A1%2C%20gostaria%20de%20contratar%20alguns%20servi%C3%A7os%20extra%20!"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                >
+                    <po-button
+                        class="button-extra-service"
+                        p-label="Solicitar Orçamento"
+                        p-type="primary"
+                    ></po-button>
+                </a>
+            </div>
+        </div>
+    </po-container>
+</po-page-default>

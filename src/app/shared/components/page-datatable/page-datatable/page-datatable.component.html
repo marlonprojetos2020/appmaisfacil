@@ -1,0 +1,48 @@
+<po-page-dynamic-search
+    [ngClass]="{'noSearchBar': !hasSearch , 'table-selectable-row': selectable}"
+    [p-title]="title"
+    [p-actions]="pageActions"
+    [p-breadcrumb]="breadcrumb"
+    [p-concat-filters]="true"
+    [p-filters]="filters"
+    [p-keep-filters]="true"
+    (p-quick-search)="handleQuickSearch($event)"
+    (p-advanced-search)="handleAdvancedSearch($event)"
+    (p-change-disclaimers)="handleChangeDisclaimers($event)"
+>
+    <po-container>
+        <po-table
+            [p-columns]="columns"
+            [p-actions]="tableActions"
+            [p-items]="items"
+            (p-show-more)="showMore($event)"
+            [p-loading]="loading"
+            [p-loading-show-more]="loadingShowMore"
+            [p-show-more-disabled]="showMoreDisabled"
+            [p-selectable]="selectable"
+            [p-single-select]="selectable"
+            [p-sort]="true"
+            [p-striped]="true"
+            (p-sort-by)="sortBy($event)"
+            (p-selected)="selectedFunction($event)"
+            [p-literals]="literals"
+        >
+            <ng-template
+                *ngFor="let column of customColumns()"
+                p-table-column-template
+                [p-property]="column.property"
+                let-value
+            >
+                <ng-container *ngFor="let item of column.customValue(value)">
+                    <app-badge
+                        *ngIf="column.badgePoColor"
+                        [poColor]="column.badgePoColor"
+                        [value]="item"
+                    >
+                    </app-badge>
+                    <span *ngIf="!column.badgePoColor">{{ item }}</span>
+                </ng-container>
+            </ng-template>
+        </po-table>
+    </po-container>
+</po-page-dynamic-search>

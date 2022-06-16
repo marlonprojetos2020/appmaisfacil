@@ -1,0 +1,13 @@
+<div class="po-wrapper">
+    <po-toolbar
+        p-title=" "
+        [p-profile]="pProfile"
+        [p-profile-actions]="profileActions"
+        class="custom-toolbar"
+    >
+    </po-toolbar>
+    <po-menu [p-menus]="menus" p-logo="/assets/images/white-logo.svg">
+    </po-menu>
+    <router-outlet></router-outlet>
+    <app-need-help></app-need-help>
+</div>

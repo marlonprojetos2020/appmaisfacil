@@ -1,0 +1,84 @@
+<po-page-default
+    p-title="Painel de Controle"
+    [p-breadcrumb]="breadcrumb"
+    class="breadcrumb"
+    appHelpPopOver
+    helpText="Um resumo de ações a serem tomadas, você pode clicar em cima caso o status “Pendente” e verificar a pendência"
+>
+    <div class="po-row po-mb-3 po-mt-2">
+        <div class="po-md-6">
+            <app-dashboard-accordion
+                [isPending]="billingPendingOk"
+                title="Cobranças Pendentes"
+                [text]="billingPendingText"
+                [items]="billingPending"
+                routerLink="/empresa/cobrancas"
+            >
+            </app-dashboard-accordion>
+
+            <app-dashboard-accordion
+                [isPending]="billingRefusedOk"
+                title="Cobranças Recusadas"
+                [text]="billingRefusedText"
+                [items]="billingRefused"
+                routerLink="/empresa/cobrancas/REFUSED"
+            >
+            </app-dashboard-accordion>
+
+            <app-dashboard-accordion
+                [isPending]="billingPendingReviewOk"
+                title="Cobranças em Analise"
+                [text]="billingPendingReviewText"
+                [items]="billingPendingReview"
+                routerLink="/empresa/cobrancas/PENDING"
+            >
+            </app-dashboard-accordion>
+
+            <app-dashboard-accordion
+                [isPending]="statementsPendingOk"
+                title="Extratos Pendentes"
+                [text]="statementsPendingText"
+                [items]="statementsPending"
+                routerLink="/empresa/extrato"
+            >
+            </app-dashboard-accordion>
+        </div>
+        <div class="po-md-6">
+            <app-dashboard-accordion
+                [isPending]="statementsPendingReviewOk"
+                title="Extratos em Analise"
+                [text]="statementsPendingReviewText"
+                [items]="statementsPendingReview"
+                routerLink="/empresa/extrato"
+            >
+            </app-dashboard-accordion>
+
+            <app-dashboard-accordion
+                [isPending]="employeePendingFiredOk"
+                title="Demissões Solicitadas"
+                [text]="employeePendingFiredText"
+                [items]="employeePendingFired"
+                routerLink="/empresa/funcionarios"
+            >
+            </app-dashboard-accordion>
+
+            <app-dashboard-accordion
+                [isPending]="notaFiscalCanceladaOk"
+                title="Nota Fiscal em cancelamento"
+                [text]="notaFiscalCanceladaText"
+                [items]="notaFiscalCancelada"
+                routerLink="/empresa/nota-fiscal"
+            >
+            </app-dashboard-accordion>
+
+            <app-dashboard-accordion
+                [isPending]="notaFiscalProcessandoOk"
+                title="Nota Fiscal pendente"
+                [text]="notaFiscalProcessandoText"
+                [items]="notaFiscalProcessando"
+                routerLink="/empresa/nota-fiscal"
+            >
+            </app-dashboard-accordion>
+        </div>
+    </div>
+</po-page-default>

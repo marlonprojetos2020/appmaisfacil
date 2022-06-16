@@ -1,0 +1,68 @@
+<app-page-datatable
+    title="Despesas"
+    [serviceApi]="serviceApi"
+    [columns]="columns"
+    [tableActions]="tableActions"
+    [breadcrumb]="breadcrumb"
+    class="breadcrumb page-no-action"
+></app-page-datatable>
+
+<po-modal
+    #modalDespesa
+    p-title="Despesa"
+    [p-primary-action]="primaryAction"
+>
+    <div class="po-row">
+        <div class="po-md-6">
+            <ng-template [ngIf]="ehPdf">
+                <div class="img-modal">
+                    <img
+                        src="/assets/images/imgPdf.png"
+                        alt="Pdf"
+                    />
+                    <po-button
+                        (p-click)="downloadPdf()"
+                        p-icon="po-icon po-icon-download"
+                    ></po-button>
+                </div>
+            </ng-template>
+            <ng-template [ngIf]="!ehPdf">
+                <div class="img-modal">
+                    <img
+                        [src]="imagemDespesa"
+                        alt="Despesa"
+                    />
+                    <po-button
+                        (p-click)="downloadImg()"
+                        p-icon="po-icon po-icon-download"
+                    ></po-button>
+                </div>
+            </ng-template>
+        </div>
+        <div class="po-md-6">
+            <div class="po-row text-modal">
+                <div class="po-md-12 po-mb-2">
+                    <h1>{{ tipoDespesa }}</h1>
+                </div>
+                <div class="po-md-12 po-mb-2">
+                    <h2>
+                        <span>Empresa</span>
+                        {{ nomeEmpresa }}
+                    </h2>
+                </div>
+                <div class="po-md-12 po-mb-2">
+                    <h3>
+                        <span>Data</span>
+                        {{ dataDespesa | date: "dd/MM/yy" }}
+                    </h3>
+                </div>
+                <div class="po-md-12">
+                    <h3>
+                        <span>Valor</span>
+                        {{ valorDespesa | currency: "BRL" }}
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</po-modal>

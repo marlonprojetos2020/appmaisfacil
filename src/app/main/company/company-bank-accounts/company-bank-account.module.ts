@@ -1,0 +1,24 @@
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { PoPageModule } from '@po-ui/ng-components';
+
+import { CompanyBankAccountRoutingModule } from './company-bank-account-routing.module';
+import { CompanyBankAccountComponent } from './company-bank-account/company-bank-account.component';
+import { CompanyNewBankAccountModule } from './company-new-bank-account/company-new-bank-account.module'
+import { CompanyEditBankAccountModule } from './company-edit-bank-account/company-edit-bank-account.module'
+import { PageDatatableModule } from '../../../shared/components/page-datatable/page-datatable.module';
+import { HelpPopoverModule } from 'src/app/shared/directives/help-popover/help-popover.module';
+
+@NgModule({
+    declarations: [CompanyBankAccountComponent],
+    imports: [
+        CommonModule,
+        CompanyBankAccountRoutingModule,
+        CompanyNewBankAccountModule,
+        CompanyEditBankAccountModule,
+        PoPageModule,
+        PageDatatableModule,
+        HelpPopoverModule,
+    ],
+})
+export class CompanyBankAccountModule {}

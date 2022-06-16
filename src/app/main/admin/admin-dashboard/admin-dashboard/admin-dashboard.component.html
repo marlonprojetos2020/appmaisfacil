@@ -1,0 +1,100 @@
+<po-page-default
+    p-title="Painel de Controle"
+    [p-breadcrumb]="breadcrumb"
+    class="breadcrumb"
+>
+
+    <div class="po-row po-mb-5">
+        <div class="po-col po-lg-12">
+            <a routerLink="/admin/empresas">
+                <div class="users">
+                    <span class="po-icon po-icon po-icon-company po-mr-2"></span>
+                    <h3>Empresas Cadastradas</h3>
+                    <span class="number-users">{{ totalUsers }}</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="po-row po-mb-5">
+        <div class="po-col po-lg-6 po-mb-2">
+            <app-card-dashboard
+                routerLink="/admin/cobrancas/PENDING"
+                text="Cobranças Pendentes"
+                icon="po-icon po-icon-exclamation"
+                [quantity]="cobrancaPendente"
+                pendente="true"
+            ></app-card-dashboard>
+        </div>
+        <div class="po-col po-lg-6 po-mb-2">
+            <app-card-dashboard
+                routerLink="/admin/cobrancas/PENDING_REVIEW"
+                text="Cobranças em Análise"
+                icon="po-icon po-icon-clock"
+                [quantity]="cobrancaAnalise"
+                analise="true"
+            ></app-card-dashboard>
+        </div>
+    </div>
+
+    <div class="po-row po-mb-5">
+        <div class="po-col po-lg-6 po-mb-2">
+            <app-card-dashboard
+                routerLink="/admin/extratos/PENDING"
+                text="Extratos Pendente"
+                icon="po-icon po-icon-exclamation"
+                [quantity]="extratoPendente"
+                pendente="true"
+            ></app-card-dashboard>
+        </div>
+        <div class="po-col po-lg-6 po-mb-2">
+            <app-card-dashboard
+                routerLink="/admin/extratos/PENDING_REVIEW"
+                text="Extrato Análise"
+                icon="po-icon po-icon-clock"
+                [quantity]="extratoAnalise"
+                analise="true"
+            ></app-card-dashboard>
+        </div>
+    </div>
+    <div class="po-row po-mb-5">
+        <div class="po-col po-lg-6 po-mb-2">
+            <app-card-dashboard
+                routerLink="/admin/nota-fiscal/WAITING_CANCELEMENT"
+                text="Notas Fiscais em Cancelamento"
+                icon="po-icon po-icon-exclamation"
+                [quantity]="notaFiscalCancelamento"
+                cancelamento="true"
+            ></app-card-dashboard>
+        </div>
+        <div class="po-col po-lg-6 po-mb-2">
+            <app-card-dashboard
+                routerLink="/admin/nota-fiscal/PROCESSING"
+                text="Notas Fiscais em Análise"
+                icon="po-icon po-icon-clock"
+                [quantity]="notaFiscalAnalise"
+                analise="true"
+            ></app-card-dashboard>
+        </div>
+    </div>
+    <div class="po-row po-mb-5">
+        <div class="po-col po-lg-6 po-mb-2">
+            <app-card-dashboard
+                routerLink="/admin/funcionarios/PENDING_FIRED"
+                text="Demissões Pendentes"
+                icon="po-icon po-icon-exclamation"
+                [quantity]="funcionarioDemissao"
+                cancelamento="true"
+            ></app-card-dashboard>
+        </div>
+        <div class="po-col po-lg-6 po-mb-2">
+            <app-card-dashboard
+                routerLink="/admin/funcionarios/PENDING_HIRED"
+                text="Contratações Pendentes"
+                icon="po-icon po-icon-clock"
+                [quantity]="funcionarioContratacao"
+                analise="true"
+            ></app-card-dashboard>
+        </div>
+    </div>
+</po-page-default>

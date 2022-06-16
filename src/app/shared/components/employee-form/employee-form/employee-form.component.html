@@ -1,0 +1,114 @@
+<po-stepper #stepper>
+    <po-step
+        p-label="Dados do Funcionário"
+        [p-can-active-next-step]=" this.editedEmployee
+                ? null
+                : canActiveNextStep.bind(this, formCompanyEmployee)"
+    >
+        <div class="po-container po-mt-5">
+            <form [formGroup]="formCompanyEmployee">
+                <div class="po-row po-mb-4 po-mt-4">
+                    <div class="po-md-12 po-mb-4">
+                        <po-input
+                            p-label="Nome Completo"
+                            formControlName="name"
+                            p-required="true"
+                            (p-blur)="dirtyMe('name')"
+                            p-error-pattern="Nome inválido"
+                            p-placeholder="Nome..."
+                        ></po-input>
+                        <app-invalid-feedback
+                            [formCtrl]="formCompanyEmployee.get('name')"
+                            [hasError]="
+                                formCompanyEmployee.get('name').errors
+                                    ?.required &&
+                                formCompanyEmployee.get('name').dirty
+                            "
+                        >
+                            Este campo é obrigatório
+                        </app-invalid-feedback>
+                    </div>
+                    <div class="po-md-4">
+                        <po-datepicker
+                            p-label="Admissão"
+                            formControlName="admissionAt"
+                            p-required="true"
+                            p-placeholder="Selecionar"
+                        ></po-datepicker>
+                        <app-invalid-feedback
+                            [formCtrl]="formCompanyEmployee.get('admissionAt')"
+                            [hasError]="
+                                formCompanyEmployee.get('admissionAt').errors
+                                    ?.required &&
+                                formCompanyEmployee.get('admissionAt').dirty
+                            "
+                        >
+                            Este campo é obrigatório
+                        </app-invalid-feedback>
+                    </div>
+                    <div class="po-md-4">
+                        <po-input
+                            p-label="Cargo"
+                            formControlName="category"
+                            p-required="true"
+                            (p-blur)="dirtyMe('category')"
+                            p-error-pattern="Cargo  inválido"
+                            p-placeholder="Cargo..."
+                        ></po-input>
+                        <app-invalid-feedback
+                            [formCtrl]="formCompanyEmployee.get('category')"
+                            [hasError]="
+                                formCompanyEmployee.get('category').errors
+                                    ?.required &&
+                                formCompanyEmployee.get('category').dirty
+                            "
+                        >
+                            Este campo é obrigatório
+                        </app-invalid-feedback>
+                    </div>
+                    <div class="po-row po-mt-4">
+                        <div class="po-md-3">
+                            <po-button
+                                p-label="Próximo"
+                                p-type="primary"
+                                (p-click)="submitForm()"
+                                [p-disabled]="formCompanyEmployee.invalid"
+                                [p-loading]="loading"
+                            ></po-button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </po-step>
+    <po-step p-label="Anexo Ficha de Registro">
+        <po-container class="po-mt-5">
+            <div class="po-row po-mb-4">
+                <div class="po-md-12 po-mt-4">
+                    <p>
+                        Para concluir o cadastro do funcionário é necessário
+                        preencher a
+                        <strong>Ficha para Registro de Trabalhador</strong>
+                        e<br />
+                        anexa-la junto com as cópias dos documento
+                        complementares.
+                    </p>
+                </div>
+            </div>
+            <po-upload
+                p-drag-drop
+                [p-auto-upload]="true"
+                [p-multiple]="false"
+                [p-restrictions]="restrictions"
+                [p-url]="urlUploadDocument"
+                (p-upload)="onLoad()"
+                (p-success)="success()"
+            ></po-upload>
+        </po-container>
+    </po-step>
+</po-stepper>
+
+<po-loading-overlay
+    [p-screen-lock]="true"
+    [hidden]="isHideLoading"
+></po-loading-overlay>

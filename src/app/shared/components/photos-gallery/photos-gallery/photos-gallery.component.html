@@ -1,0 +1,27 @@
+<po-divider p-label="Galeria"></po-divider>
+<ul class="po-row">
+    <li
+        *ngFor="let productPhoto of photos"
+        class="po-md-6 po-lg-4 po-xl-2"
+    >
+        <div class="image-container">
+            <img
+                class="po-slide-image"
+                [src]="productPhoto.url"
+                alt="Foto do produto"
+            >
+            <po-button
+                class="delete-button"
+                p-label="Remover"
+                (click)="deleteProductPhoto(productPhoto)"
+                p-icon="po-icon-close"
+                [p-small]="true"
+                p-type="link"
+            ></po-button>
+        </div>
+    </li>
+</ul>
+
+<app-invalid-feedback *ngIf="photos.length === 0">
+    É obrigatório cadastrar ao menos uma foto!
+</app-invalid-feedback>

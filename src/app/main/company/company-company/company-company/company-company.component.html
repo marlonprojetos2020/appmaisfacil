@@ -1,0 +1,199 @@
+<po-page-default
+    p-title="Minha Empresa"
+    [p-actions]="actions"
+    [p-breadcrumb]="breadcrumb"
+    class="breadcrumb no-secondary-button"
+    appHelpPopOver
+    helpText="Aqui estão todas as informações da sua empresa, abaixo pode ser encontrado o Contrato Social e Cartão CNPJ"
+>
+    <po-container class="form">
+        <form
+            *ngIf="formCompany"
+            [formGroup]="formCompany"
+        >
+            <div class="po-row po-mb-4">
+                <div class="po-md-12">
+                    <h3 class="po-mb-4">Empresa</h3>
+                </div>
+                <div class="po-md-12">
+                    <po-input
+                        p-label="CNPJ"
+                        formControlName="cnpj"
+                        p-readonly="true"
+                        p-placeholder="Informar CNPJ"
+                    >
+                    </po-input>
+                </div>
+            </div>
+            <div class="po-row po-mb-4">
+                <div class="po-md-12">
+                    <po-input
+                        p-label="Razão Social"
+                        formControlName="socialReason"
+                        p-readonly="true"
+                        p-placeholder="Informar Razão Social"
+                    ></po-input>
+                </div>
+            </div>
+            <div class="po-row po-mb-4">
+                <div class="po-md-12">
+                    <po-input
+                        p-label="Nome Fantasia"
+                        formControlName="fantasyName"
+                        p-readonly="true"
+                        p-placeholder="Informar Nome Fantasia"
+                    ></po-input>
+                </div>
+            </div>
+            <div class="po-row po-mb-4">
+                <div class="po-md-12">
+                    <po-radio-group
+                        formControlName="type"
+                        name="radioGroupBasic"
+                        p-label="Tipo da Empresa"
+                        p-columns="3"
+                        p-disabled
+                        [p-options]="[
+                            {
+                                label: 'Prestadora de Serviço',
+                                value: 'SERVICE'
+                            },
+                            { label: 'Comércio', value: 'COMMERCE' },
+                            { label: 'Industria', value: 'INDUSTRY' }
+                        ]"
+                    >
+                    </po-radio-group>
+                </div>
+            </div>
+            <div class="po-row po-mb-4">
+                <div class="po-md-4">
+                    <po-input
+                        p-label="Ramo"
+                        formControlName="lineOfBusiness"
+                        p-readonly="true"
+                        p-placeholder="Informar Ramo de Atuação"
+                    ></po-input>
+                </div>
+                <div class="po-md-8">
+                    <po-input
+                        p-label="CNAE"
+                        formControlName="cnae"
+                        p-readonly="true"
+                        p-placeholder="Informar CNAE"
+                    ></po-input>
+                </div>
+            </div>
+            <div class="po-row po-mb-4">
+                <div class="po-md-12"></div>
+                <h3>Endereço</h3>
+            </div>
+            <div formGroupName="address">
+                <div class="po-row po-mb-4">
+                    <po-radio-group
+                        *ngIf="radioAddressOptions"
+                        class="po-md-12 po-mb-3"
+                        name="radioGroupBasic2"
+                        p-label="Tipo de Endereço"
+                        [p-options]="radioAddressOptions"
+                        p-readonly="true"
+                        formControlName="addressType"
+                    ></po-radio-group>
+                    <div class="po-md-3">
+                        <po-input
+                            p-label="CEP"
+                            formControlName="zipcode"
+                            p-readonly="true"
+                            p-placeholder="Informar o CEP"
+                        ></po-input>
+                    </div>
+                </div>
+                <div class="po-row po-mb-4">
+                    <div class="po-md-12">
+                        <po-input
+                            p-label="Endereço"
+                            formControlName="street"
+                            p-readonly="true"
+                            p-placeholder="Informar a Rua"
+                        ></po-input>
+                    </div>
+                </div>
+                <div class="po-row po-mb-4">
+                    <div class="po-md-3">
+                        <po-input
+                            p-label="Número"
+                            formControlName="number"
+                            p-readonly="true"
+                            p-placeholder="Informar o Número"
+                        ></po-input>
+                    </div>
+
+                    <div class="po-md-9">
+                        <po-input
+                            p-label="Complemento"
+                            formControlName="complement"
+                            p-readonly="true"
+                            p-placeholder="Informar o Complemento"
+                        ></po-input>
+                    </div>
+                </div>
+
+                <div class="po-row po-mb-4">
+                    <div class="po-md-4">
+                        <po-input
+                            p-label="Bairro"
+                            formControlName="neighborhood"
+                            p-readonly="true"
+                            p-placeholder="Informar o Bairro"
+                        ></po-input>
+                    </div>
+                    <div
+                        class="po-md-8"
+                        formGroupName="city"
+                    >
+                        <div class="po-md-6">
+                            <po-input
+                                p-label="Cidade"
+                                formControlName="name"
+                                p-readonly="true"
+                                p-placeholder="Informar a Cidade"
+                            ></po-input>
+                        </div>
+                        <div class="po-md-6">
+                            <po-input
+                                p-label="Estado"
+                                formControlName="stateProvince"
+                                p-readonly="true"
+                                p-placeholder="Informar o Estado"
+                            ></po-input>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="po-row po-mb-4">
+                <div class="po-md-12">
+                    <h3>Contato da Empresa</h3>
+                </div>
+            </div>
+            <div class="po-row po-mb-4">
+                <div class="po-md-4">
+                    <po-input
+                        p-label="E-mail"
+                        formControlName="email"
+                        p-readonly="true"
+                        p-placeholder="Informar o E-mail"
+                    ></po-input>
+                </div>
+            </div>
+            <div class="po-row po-mb-4">
+                <div class="po-md-4">
+                    <po-input
+                        p-label="Telefone"
+                        formControlName="phone"
+                        p-readonly="true"
+                        p-placeholder="Informar o Telefone"
+                    ></po-input>
+                </div>
+            </div>
+        </form>
+    </po-container>
+</po-page-default>
